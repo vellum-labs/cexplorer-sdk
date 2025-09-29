@@ -17,58 +17,182 @@ import {LoadingSkeleton} from "@/ui/LoadingSkeleton";
 import { Funnel } from "lucide-react";
 import { FunnelFilter } from "@/ui/FunnelFilter";
 
-export type Column<T> = {
-  key: string;
-  title: React.ReactNode;
-  standByRanking?: boolean;
-  render: (item: T) => React.ReactNode | null;
-  extraContent?: React.ReactNode;
-  widthPx?: number;
-  visible?: boolean;
-  rankingStart?: "asc" | "desc";
-  className?: string;
-  filter?: {
-    filterOpen?: boolean;
-    activeFunnel?: boolean;
-    filterContent?: ReactNode;
-    filterButtonDisabled?: boolean;
-    anchorRef: RefObject<any>;
-    width?: string;
-    onShow?: MouseEventHandler<SVGSVGElement>;
-    onReset?: () => void;
-    onFilter?: () => void;
-  };
-};
+/**
+ * Filter configuration for table columns
+ */
+export interface ColumnFilter {
+  /** Whether the filter dropdown is currently open */
+  filterOpen?: boolean;
+  /** Whether the filter is currently active/applied */
+  activeFunnel?: boolean;
+  /** Content to display in the filter dropdown */
+  filterContent?: ReactNode;
+  /** Whether the filter button should be disabled */
+  filterButtonDisabled?: boolean;
+  /** Reference to the anchor element for positioning the filter dropdown */
+  anchorRef: RefObject<HTMLElement>;
+  /** Width of the filter dropdown */
+  width?: string;
+  /** Handler for showing the filter dropdown */
+  onShow?: MouseEventHandler<SVGSVGElement>;
+  /** Handler for resetting the filter */
+  onReset?: () => void;
+  /** Handler for applying the filter */
+  onFilter?: () => void;
+}
 
-type PropsBase<T> = {
-  items: T[] | undefined;
-  columns: Column<T>[];
-  scrollable?: boolean;
-  totalItems?: number;
-  itemsPerPage?: number;
+/**
+ * Configuration for a table column
+ * @template T The type of data items in the table
+ */
+export interface Column<T> {
+  /** Unique identifier for the column */
+  key: string;
+  /** Column header content */
+  title: React.ReactNode;
+  /** Whether this column shows auto-generated ranking numbers */
   standByRanking?: boolean;
-  onOrderChange?: (columns: any[]) => void;
+  /** Function to render cell content for this column */
+  render: (item: T) => React.ReactNode | null;
+  /** Additional content to display in the header */
+  extraContent?: React.ReactNode;
+  /** Fixed width in pixels */
+  widthPx?: number;
+  /** Whether the column is visible */
+  visible?: boolean;
+  /** Direction for ranking numbers (asc = descending numbers, desc = ascending) */
+  rankingStart?: "asc" | "desc";
+  /** Additional CSS classes for table cells */
+  className?: string;
+  /** Filter configuration for this column */
+  filter?: ColumnFilter;
+}
+
+/**
+ * Base props shared between all table variants
+ * @template T The type of data items in the table
+ */
+interface PropsBase<T> {
+  /** Array of data items to display */
+  items: T[] | undefined;
+  /** Column configuration array */
+  columns: Column<T>[];
+  /** Whether the table should be horizontally scrollable */
+  scrollable?: boolean;
+  /** Total number of items (for pagination calculations) */
+  totalItems?: number;
+  /** Number of items to show per page */
+  itemsPerPage?: number;
+  /** Whether to show ranking numbers */
+  standByRanking?: boolean;
+  /** Callback when column order changes via drag & drop */
+  onOrderChange?: (columnKeys: string[]) => void;
+  /** Minimum content width in pixels */
   minContentWidth?: number;
+  /** Whether to disable column drag & drop */
   disableDrag?: boolean;
+  /** Height of each table row in pixels */
   rowHeight?: number;
+  /** Whether to enable infinite scrolling */
   infiniteScrolling?: boolean;
-};
+}
+/**
+ * Props for infinite scrolling table variant
+ * @template T The type of data items in the table
+ */
 interface InfiniteQueryProps<T> extends PropsBase<T> {
+  /** Table type identifier */
   type: "infinite";
+  /** Whether data is currently loading */
   isLoading?: boolean;
+  /** Whether the next page is being fetched */
   isFetchingNextPage?: boolean;
+  /** Function to fetch the next page of data */
   onFetchNextPage?: () => void;
+  /** Current page number */
   currentPage: number;
 }
 
+/**
+ * Props for standard table variant
+ * @template T The type of data items in the table
+ */
 interface QueryProps<T> extends PropsBase<T> {
+  /** Table type identifier */
   type: "default";
+  /** Whether data is currently loading */
   isLoading?: boolean;
+  /** Whether to enable built-in pagination */
   pagination?: boolean;
 }
 
+/**
+ * Union type of all possible table props
+ * @template T The type of data items in the table
+ */
 type Props<T> = InfiniteQueryProps<T> | QueryProps<T>;
 
+/**
+ * A comprehensive table component with support for infinite scrolling, pagination,
+ * sorting, filtering, and drag-and-drop column reordering.
+ *
+ * @template T The type of data items in the table (must extend Record<string, any>)
+ * @param props - Table configuration props
+ * @returns JSX element representing the table
+ *
+ * @example
+ * ```tsx
+ * // Basic table
+ * const columns: Column<User>[] = [
+ *   {
+ *     key: 'name',
+ *     title: 'Name',
+ *     render: (user) => user.name,
+ *     visible: true,
+ *     widthPx: 200
+ *   },
+ *   {
+ *     key: 'email',
+ *     title: 'Email',
+ *     render: (user) => user.email,
+ *     visible: true,
+ *     widthPx: 250
+ *   }
+ * ];
+ *
+ * <GlobalTable
+ *   type="default"
+ *   items={users}
+ *   columns={columns}
+ *   totalItems={users.length}
+ *   isLoading={loading}
+ * />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Infinite scrolling table
+ * <GlobalTable
+ *   type="infinite"
+ *   items={items}
+ *   columns={columns}
+ *   totalItems={totalCount}
+ *   currentPage={1}
+ *   infiniteScrolling={true}
+ *   isLoading={loading}
+ *   isFetchingNextPage={fetchingNext}
+ *   onFetchNextPage={handleFetchNext}
+ * />
+ * ```
+ *
+ * @remarks
+ * - Supports both infinite scrolling and traditional pagination
+ * - Includes drag-and-drop column reordering on desktop
+ * - Mobile-friendly with touch interactions
+ * - Automatic loading states and skeleton placeholders
+ * - Built-in filtering system with custom filter content
+ * - Responsive design with horizontal scrolling when needed
+ */
 export const GlobalTable = <T extends Record<string, any>>({
   items: baseItems,
   columns: initialColumns,

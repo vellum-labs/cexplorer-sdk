@@ -1,26 +1,78 @@
-import type { ReactNode } from "react";
+import type { ReactNode, ButtonHTMLAttributes } from "react";
 
+/**
+ * Available button sizes
+ */
+export type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
 
-interface ButtonProps {
-  size: "xs" | "sm" | "md" | "lg" | "xl";
-  variant: "primary" | "secondary" | "tertiary" | "purple" | "red" | "discord";
+/**
+ * Available button visual variants
+ */
+export type ButtonVariant = "primary" | "secondary" | "tertiary" | "purple" | "red" | "discord";
+
+/**
+ * Props for the Button component
+ */
+export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
+  /** Button size affecting padding and text size */
+  size: ButtonSize;
+  /** Visual variant determining colors and styling */
+  variant: ButtonVariant;
+  /** Button text or content */
   label?: ReactNode;
-  rightIcon?: React.ReactNode;
-  leftIcon?: React.ReactNode;
+  /** Icon displayed to the right of the label */
+  rightIcon?: ReactNode;
+  /** Icon displayed to the left of the label */
+  leftIcon?: ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** Whether the button is disabled */
   disabled?: boolean;
+  /** Click handler function */
   onClick?: () => void;
 };
 
-const Button = ({
+/**
+ * A flexible button component with multiple sizes and variants.
+ * Supports icons, custom styling, and all standard button HTML attributes.
+ *
+ * @param props - Button component props
+ * @returns JSX element representing the button
+ *
+ * @example
+ * ```tsx
+ * // Basic button
+ * <Button size="md" variant="primary" label="Click me" />
+ *
+ * // Button with icons
+ * <Button
+ *   size="lg"
+ *   variant="secondary"
+ *   label="Save"
+ *   leftIcon={<SaveIcon />}
+ *   rightIcon={<ArrowIcon />}
+ * />
+ *
+ * // Disabled button with custom styling
+ * <Button
+ *   size="sm"
+ *   variant="tertiary"
+ *   label="Disabled"
+ *   disabled
+ *   className="my-custom-class"
+ * />
+ * ```
+ */
+export const Button = ({
   size,
   variant,
   label,
   rightIcon,
   leftIcon,
-  className,
+  className = "",
   disabled,
   onClick,
+  ...restProps
 }: ButtonProps) => {
   const sizeClasses = {
     xs: "py-1 px-1 text-[12px]",
@@ -51,14 +103,20 @@ const Button = ({
       onClick={onClick}
       className={`${commonClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       disabled={disabled}
+      {...restProps}
     >
-      <span className={`${leftIcon && label && "-ml-1 mr-2"}`}>{leftIcon}</span>
+      {leftIcon && (
+        <span className={leftIcon && label ? "-ml-1 mr-2" : ""}>
+          {leftIcon}
+        </span>
+      )}
       {label && <span>{label}</span>}
       {rightIcon && (
-        <span className={`${rightIcon && "ml-2"}`}>{rightIcon}</span>
+        <span className="ml-2">
+          {rightIcon}
+        </span>
       )}
     </button>
   );
 };
 
-export default Button;

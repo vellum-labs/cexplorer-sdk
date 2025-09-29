@@ -9,28 +9,83 @@ import {
 } from "./components/PaginationRaw"
 import { useEffect, useState } from "react";
 
+/**
+ * Navigation callback interface
+ */
 interface NavigationProps {
+  /** Callback function called when page changes */
   onNavigate?: (page: number) => void;
 }
 
-type RealPaginationProps = {
+/**
+ * Props for pagination with external page state management
+ */
+type ExternalPaginationProps = {
+  /** Current active page number */
   currentPage: number;
+  /** Total number of pages */
   totalPages: number;
+  /** Must not be provided - use onNavigate instead */
   setCurrentPage?: never;
 } & NavigationProps;
 
-type FakePaginationProps = {
+/**
+ * Props for pagination with internal page state management
+ */
+type InternalPaginationProps = {
+  /** Current active page number */
   currentPage: number;
+  /** Total number of pages */
   totalPages: number;
+  /** Function to update the current page */
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 } & NavigationProps;
 
+/**
+ * Union type of all pagination props
+ */
+export type PaginationProps = ExternalPaginationProps | InternalPaginationProps;
+
+/**
+ * A flexible pagination component that supports both controlled and uncontrolled modes.
+ * Features page jumping with input validation and keyboard navigation.
+ *
+ * @param props - Pagination component props
+ * @returns JSX element representing the pagination controls
+ *
+ * @example
+ * ```tsx
+ * // Controlled pagination (external state)
+ * <Pagination
+ *   currentPage={page}
+ *   totalPages={Math.ceil(totalItems / itemsPerPage)}
+ *   onNavigate={(newPage) => setPage(newPage)}
+ * />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Uncontrolled pagination (internal state)
+ * const [currentPage, setCurrentPage] = useState(1);
+ * <Pagination
+ *   currentPage={currentPage}
+ *   setCurrentPage={setCurrentPage}
+ *   totalPages={totalPages}
+ * />
+ * ```
+ *
+ * @remarks
+ * - Supports direct page input with validation
+ * - Automatically handles edge cases (first/last page)
+ * - Shows ellipsis for large page ranges
+ * - Keyboard accessible (Enter to jump to page)
+ */
 export const Pagination = ({
   currentPage,
   totalPages,
   setCurrentPage,
   onNavigate,
-}: RealPaginationProps | FakePaginationProps) => {
+}: PaginationProps) => {
 
   const [pageJumpValue, setPageJumpValue] = useState("");
 
@@ -142,14 +197,34 @@ export const Pagination = ({
   );
 };
 
+/**
+ * Props for the PageJump input component
+ */
 interface PageJumpProps {
+  /** Optional state setter for internal pagination mode */
   setCurrentPage?: React.Dispatch<React.SetStateAction<number>>;
+  /** Optional callback for external pagination mode */
   onNavigate?: (page: number) => void;
+  /** Current value in the page input field */
   pageJumpValue: string;
+  /** Function to update the page input field value */
   setPageJumpValue: React.Dispatch<React.SetStateAction<string>>;
+  /** Maximum page number for validation */
   totalPages: number;
 }
 
+/**
+ * Internal component for direct page number input with validation.
+ * Supports both keyboard (Enter) and blur events for page changes.
+ *
+ * @param props - PageJump component props
+ * @returns JSX element representing the page input field
+ *
+ * @remarks
+ * - Validates input to ensure it's within valid page range (1 to totalPages)
+ * - Automatically corrects invalid values
+ * - Updates page on Enter key or when input loses focus
+ */
 const PageJump = ({
   setCurrentPage,
   onNavigate,
