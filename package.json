@@ -36,7 +36,6 @@
     "LICENSE"
   ],
   "dependencies": {
-    "@radix-ui/react-slot": "^1.2.3",
     "lucide-react": "^0.544.0",
     "tailwindcss-animate": "^1.0.7"
   },

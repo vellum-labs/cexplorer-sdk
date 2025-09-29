@@ -2,7 +2,7 @@ import { forwardRef, type ComponentProps } from "react";
 
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
 import { cn } from "@/utils/cn";
-import { ButtonProps } from "@/types/button";
+import { PaginationProps } from "@/types/pagination";
 import { buttonVariants } from "@/constants/buttonVariants";
 
 
@@ -38,7 +38,7 @@ PaginationItem.displayName = "PaginationItem";
 
 type PaginationLinkProps = {
   isActive?: boolean;
-} & Pick<ButtonProps, "size"> &
+} & Pick<PaginationProps, "size"> &
   ComponentProps<"button">;
 
 const PaginationLink = ({
