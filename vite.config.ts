@@ -1,15 +1,17 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
-import { terser } from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
 import { resolve } from "path";
 
 export default defineConfig({
   plugins: [
     react(),
     dts({
-      insertTypesEntry: true,
-      copyDtsFiles: false,
+      outDir: "dist",
+      entryRoot: "src",
+      staticImport: true,
+      rollupTypes: true,
     }),
   ],
   resolve: {
