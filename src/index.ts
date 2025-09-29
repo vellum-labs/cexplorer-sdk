@@ -1,3 +1,3 @@
 import "./styles/globals.css";
 
-export * from "./stores";
+export * from "./stores/theme";
