@@ -164,7 +164,7 @@ export const WithPagination = {
     ];
 
     return (
-      <div className='p-6'>
+      <div className='flex flex-col items-center justify-center p-6'>
         <Table
           type='default'
           items={paginatedData}
@@ -279,7 +279,7 @@ export const WithFilters = {
     ];
 
     return (
-      <div className='p-6'>
+      <div className='flex flex-col items-center justify-center p-6'>
         <Table
           type='default'
           items={items}
@@ -449,7 +449,7 @@ export const InfiniteScrolling = {
     ];
 
     return (
-      <div className='max-h-screen p-6'>
+      <div className='flex max-h-screen flex-col items-center justify-center p-6'>
         <Table
           type='infinite'
           items={items}

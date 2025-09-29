@@ -69,9 +69,19 @@ const preview: Preview = {
   decorators: [
     (Story, context) => {
       const theme = context.globals.theme || "light";
+      const backgroundColor = theme === "dark" ? "#1a1a1a" : "#ffffff";
+
       return (
         <ThemeProvider defaultTheme={theme}>
-          <div style={{ padding: "20px" }}>
+          <div
+            style={{
+              padding: "20px",
+              backgroundColor,
+              width: "100%",
+              height: "100%",
+              color: theme === "dark" ? "#ffffff" : "#000000",
+            }}
+          >
             <Story />
           </div>
         </ThemeProvider>
