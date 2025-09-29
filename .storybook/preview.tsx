@@ -49,14 +49,34 @@ const preview: Preview = {
     },
   },
 
+  globalTypes: {
+    theme: {
+      description: "Global theme for components",
+      defaultValue: "light",
+      toolbar: {
+        title: "Theme",
+        icon: "circlehollow",
+        items: [
+          { value: "light", icon: "circlehollow", title: "Light" },
+          { value: "dark", icon: "circle", title: "Dark" },
+        ],
+        showName: true,
+        dynamicTitle: true,
+      },
+    },
+  },
+
   decorators: [
-    Story => (
-      <ThemeProvider defaultTheme='dark'>
-        <div style={{ padding: "20px" }}>
-          <Story />
-        </div>
-      </ThemeProvider>
-    ),
+    (Story, context) => {
+      const theme = context.globals.theme || "light";
+      return (
+        <ThemeProvider defaultTheme={theme}>
+          <div style={{ padding: "20px" }}>
+            <Story />
+          </div>
+        </ThemeProvider>
+      );
+    },
   ],
 };
 
