@@ -1,7 +1,7 @@
 import type { ReactNode, RefObject } from "react";
 import { createPortal } from "react-dom";
 import { useLayoutEffect, useState } from "react";
-import Button from "../Button";
+import { Button } from "../Button";
 
 /**
  * Props for the FunnelFilter component
