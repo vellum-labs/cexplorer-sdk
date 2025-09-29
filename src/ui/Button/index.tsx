@@ -1,4 +1,5 @@
-import type { ReactNode, ButtonHTMLAttributes } from "react";
+import type { ReactNode, ButtonHTMLAttributes, FC } from "react";
+import { forwardRef } from "react";
 
 /**
  * Available button sizes
@@ -8,12 +9,19 @@ export type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl";
 /**
  * Available button visual variants
  */
-export type ButtonVariant = "primary" | "secondary" | "tertiary" | "purple" | "red" | "discord";
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "purple"
+  | "red"
+  | "discord";
 
 /**
  * Props for the Button component
  */
-export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
+export interface ButtonProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> {
   /** Button size affecting padding and text size */
   size: ButtonSize;
   /** Visual variant determining colors and styling */
@@ -30,7 +38,7 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   disabled?: boolean;
   /** Click handler function */
   onClick?: () => void;
-};
+}
 
 /**
  * A flexible button component with multiple sizes and variants.
@@ -63,7 +71,7 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
  * />
  * ```
  */
-export const Button = ({
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   size,
   variant,
   label,
@@ -73,7 +81,7 @@ export const Button = ({
   disabled,
   onClick,
   ...restProps
-}: ButtonProps) => {
+}, ref) => {
   const sizeClasses = {
     xs: "py-1 px-1 text-[12px]",
     sm: "py-2 px-3 text-[13px]",
@@ -96,10 +104,9 @@ export const Button = ({
   const commonClasses =
     "flex box-border max-w-fit justify-center min-w-fit items-center rounded-[8px] font-medium duration-150 hover:scale-[101%] active:scale-[98%] disabled:cursor-not-allowed disabled:opacity-50";
 
-
-
   return (
     <button
+      ref={ref}
       onClick={onClick}
       className={`${commonClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       disabled={disabled}
@@ -111,12 +118,9 @@ export const Button = ({
         </span>
       )}
       {label && <span>{label}</span>}
-      {rightIcon && (
-        <span className="ml-2">
-          {rightIcon}
-        </span>
-      )}
+      {rightIcon && <span className='ml-2'>{rightIcon}</span>}
     </button>
   );
-};
+});
 
+Button.displayName = "Button";

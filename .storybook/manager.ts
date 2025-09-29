@@ -9,29 +9,44 @@ const theme = create({
   brandImage: "./logo.svg",
   brandTarget: "_self",
 
-  colorPrimary: "#3b82f6",
-  colorSecondary: "#64748b",
+  colorPrimary: "#0094d4",
+  colorSecondary: "#546175",
 
-  appBg: "#ffffff",
+  appBg: "#fdfdfd",
   appContentBg: "#ffffff",
-  appBorderColor: "#e2e8f0",
-  appBorderRadius: 6,
+  appPreviewBg: "#ffffff",
+  appBorderColor: "#d0d5dd",
+  appBorderRadius: 8,
 
-  textColor: "#1e293b",
-  textInverseColor: "#ffffff",
+  textColor: "#101828",
+  textInverseColor: "#fdfdfd",
+  textMutedColor: "#3e4959",
 
-  barTextColor: "#64748b",
-  barSelectedColor: "#3b82f6",
-  barBg: "#f8fafc",
+  barTextColor: "#546175",
+  barSelectedColor: "#0094d4",
+  barBg: "#ffffff",
+  barHoverColor: "#f8f9fc",
 
   inputBg: "#ffffff",
-  inputBorder: "#d1d5db",
-  inputTextColor: "#374151",
-  inputBorderRadius: 4,
+  inputBorder: "#d0d5dd",
+  inputTextColor: "#101828",
+  inputBorderRadius: 6,
+
+  buttonBg: "#0094d4",
+  buttonBorder: "#0094d4",
+
+  booleanBg: "#f8f9fc",
+  booleanSelectedBg: "#0094d4",
 });
 
 addons.setConfig({
   theme,
   panelPosition: "right",
   selectedPanel: "controls",
+  showPanel: true,
+  showNav: true,
+  sidebar: {
+    showRoots: false,
+    collapsedRoots: ["other"],
+  },
 });

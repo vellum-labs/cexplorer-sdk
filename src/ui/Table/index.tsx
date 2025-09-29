@@ -1,5 +1,5 @@
 import {
-  Table,
+  Table as TableRaw,
   TableBody,
   TableCell,
   TableHead,
@@ -13,7 +13,7 @@ import type { MouseEventHandler, ReactNode, RefObject } from "react";
 import React, { useEffect, useRef, useState } from "react";
 import { NoResultsFound } from "@/ui/NoResultsFound";
 import { Pagination } from "@/ui/Pagination";
-import {LoadingSkeleton} from "@/ui/LoadingSkeleton";
+import { LoadingSkeleton } from "@/ui/LoadingSkeleton";
 import { Funnel } from "lucide-react";
 import { FunnelFilter } from "@/ui/FunnelFilter";
 
@@ -160,7 +160,7 @@ type Props<T> = InfiniteQueryProps<T> | QueryProps<T>;
  *   }
  * ];
  *
- * <GlobalTable
+ * <Table
  *   type="default"
  *   items={users}
  *   columns={columns}
@@ -172,7 +172,7 @@ type Props<T> = InfiniteQueryProps<T> | QueryProps<T>;
  * @example
  * ```tsx
  * // Infinite scrolling table
- * <GlobalTable
+ * <Table
  *   type="infinite"
  *   items={items}
  *   columns={columns}
@@ -193,7 +193,7 @@ type Props<T> = InfiniteQueryProps<T> | QueryProps<T>;
  * - Built-in filtering system with custom filter content
  * - Responsive design with horizontal scrolling when needed
  */
-export const GlobalTable = <T extends Record<string, any>>({
+export const Table = <T extends Record<string, any>>({
   items: baseItems,
   columns: initialColumns,
   scrollable,
@@ -230,7 +230,8 @@ export const GlobalTable = <T extends Record<string, any>>({
   const [scrolled, setScrolled] = useState(false);
   const isEmpty = items?.length === 0 || !items || totalItems === 0;
   const isLoading = "isLoading" in props ? props.isLoading : false;
-  const onFetchNextPage = "onFetchNextPage" in props ? props.onFetchNextPage : undefined;
+  const onFetchNextPage =
+    "onFetchNextPage" in props ? props.onFetchNextPage : undefined;
   const targetRef = useRef<HTMLTableElement>(null);
   const headerRef = useRef<HTMLTableSectionElement>(null);
 
@@ -385,7 +386,7 @@ export const GlobalTable = <T extends Record<string, any>>({
           transform: "rotateX(180deg)",
         }}
       >
-        <Table
+        <TableRaw
           style={{
             transform: "rotateX(180deg)",
             minWidth: `${minContentWidth}px`,
@@ -581,7 +582,7 @@ export const GlobalTable = <T extends Record<string, any>>({
               </>
             )}
           </TableBody>
-        </Table>
+        </TableRaw>
       </div>
       {!isLoading && !items?.length && <NoResultsFound />}
 
@@ -614,4 +615,3 @@ export const GlobalTable = <T extends Record<string, any>>({
     </>
   );
 };
-
