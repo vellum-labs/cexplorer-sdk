@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react";
 import { ThemeProvider } from "../src/stores/theme";
+import { useEffect } from "react";
 import "../src/styles/globals.css";
 
 const preview: Preview = {
@@ -71,19 +72,28 @@ const preview: Preview = {
       const theme = context.globals.theme || "light";
       const backgroundColor = theme === "dark" ? "#1a1a1a" : "#ffffff";
 
-      return (
-        <ThemeProvider defaultTheme={theme}>
+      const ThemeWrapper = () => {
+        useEffect(() => {
+          document.documentElement.setAttribute("data-theme", theme);
+        }, [theme]);
+
+        return (
           <div
             style={{
               padding: "20px",
               backgroundColor,
               width: "100%",
               height: "100%",
-              color: theme === "dark" ? "#ffffff" : "#000000",
             }}
           >
             <Story />
           </div>
+        );
+      };
+
+      return (
+        <ThemeProvider defaultTheme={theme} key={theme}>
+          <ThemeWrapper />
         </ThemeProvider>
       );
     },
