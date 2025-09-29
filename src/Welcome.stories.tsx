@@ -35,9 +35,9 @@ const Welcome = () => {
             }}
           >
             <img
-              src='./logo-icon.svg'
+              src='./logo-icon.png'
               alt='Cexplorer'
-              style={{ width: "80px", height: "80px", filter: "brightness(0)" }}
+              style={{ width: "80px", height: "80px" }}
             />
             <div>
               <h1
@@ -194,7 +194,7 @@ const Welcome = () => {
               }}
             >
               <img
-                src='./vellum-labs-logo.svg'
+                src='./vellum-labs.jpg'
                 alt='Vellum Labs'
                 style={{ width: "48px", height: "48px" }}
               />
