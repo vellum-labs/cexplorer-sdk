@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 const Welcome = () => {
   return (
-    <div
+    <section
       style={{
         maxWidth: "1200px",
         margin: "0 auto",
@@ -321,147 +321,443 @@ const Welcome = () => {
         </div>
       </div>
 
-      {/* Installation */}
-      <section style={{ marginBottom: "48px" }}>
-        <h2
+      {/* Installation Section */}
+      <section style={{ marginBottom: "80px" }}>
+        <div style={{ textAlign: "center", marginBottom: "48px" }}>
+          <h2
+            style={{
+              fontSize: "2.5rem",
+              fontWeight: "700",
+              color: "#0f172a",
+              marginBottom: "16px",
+            }}
+          >
+            🚀 Quick Installation
+          </h2>
+          <p style={{ fontSize: "1.2rem", color: "#64748b" }}>
+            Get started with Cexplorer SDK in seconds
+          </p>
+        </div>
+
+        <div
           style={{
-            fontSize: "2rem",
-            fontWeight: "600",
-            color: "#333",
-            marginBottom: "24px",
-            borderBottom: "2px solid #0094d4",
-            paddingBottom: "8px",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "24px",
+            marginBottom: "48px",
           }}
         >
-          Installation
-        </h2>
-        <p style={{ fontSize: "1rem", color: "#555", marginBottom: "24px" }}>
-          Install the library using your preferred package manager:
-        </p>
-
-        <div style={{ marginBottom: "24px" }}>
-          <h4
-            style={{
-              fontSize: "1.1rem",
-              fontWeight: "600",
-              color: "#333",
-              marginBottom: "8px",
-            }}
-          >
-            NPM
-          </h4>
-          <pre
-            style={{
-              backgroundColor: "#f8f9fa",
-              padding: "16px",
-              borderRadius: "8px",
-              border: "1px solid #e9ecef",
-              overflow: "auto",
-              fontSize: "0.9rem",
-              fontFamily: "Monaco, Consolas, monospace",
-            }}
-          >
-            npm install @vellumlabs/cexplorer-sdk
-          </pre>
-        </div>
-
-        <div style={{ marginBottom: "24px" }}>
-          <h4
-            style={{
-              fontSize: "1.1rem",
-              fontWeight: "600",
-              color: "#333",
-              marginBottom: "8px",
-            }}
-          >
-            Yarn
-          </h4>
-          <pre
-            style={{
-              backgroundColor: "#f8f9fa",
-              padding: "16px",
-              borderRadius: "8px",
-              border: "1px solid #e9ecef",
-              overflow: "auto",
-              fontSize: "0.9rem",
-              fontFamily: "Monaco, Consolas, monospace",
-            }}
-          >
-            yarn add @vellumlabs/cexplorer-sdk
-          </pre>
-        </div>
-
-        <div style={{ marginBottom: "24px" }}>
-          <h4
-            style={{
-              fontSize: "1.1rem",
-              fontWeight: "600",
-              color: "#333",
-              marginBottom: "8px",
-            }}
-          >
-            PNPM
-          </h4>
-          <pre
-            style={{
-              backgroundColor: "#f8f9fa",
-              padding: "16px",
-              borderRadius: "8px",
-              border: "1px solid #e9ecef",
-              overflow: "auto",
-              fontSize: "0.9rem",
-              fontFamily: "Monaco, Consolas, monospace",
-            }}
-          >
-            pnpm add @vellumlabs/cexplorer-sdk
-          </pre>
+          {[
+            {
+              manager: "npm",
+              command: "npm install @vellumlabs/cexplorer-sdk",
+              icon: "📦",
+              color: "#cb3837",
+            },
+            {
+              manager: "yarn",
+              command: "yarn add @vellumlabs/cexplorer-sdk",
+              icon: "🧶",
+              color: "#2c8ebb",
+            },
+            {
+              manager: "pnpm",
+              command: "pnpm add @vellumlabs/cexplorer-sdk",
+              icon: "⚡",
+              color: "#f69220",
+            },
+          ].map((pkg, index) => (
+            <div
+              key={index}
+              style={{
+                background: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
+                padding: "24px",
+                borderRadius: "12px",
+                border: "1px solid #475569",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  marginBottom: "16px",
+                }}
+              >
+                <span style={{ fontSize: "1.2rem" }}>{pkg.icon}</span>
+                <h4
+                  style={{
+                    color: "#f1f5f9",
+                    fontSize: "1.1rem",
+                    fontWeight: "600",
+                    margin: "0",
+                  }}
+                >
+                  {pkg.manager.toUpperCase()}
+                </h4>
+                <div
+                  style={{
+                    marginLeft: "auto",
+                    width: "8px",
+                    height: "8px",
+                    backgroundColor: pkg.color,
+                    borderRadius: "50%",
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  background: "rgba(15, 23, 42, 0.8)",
+                  padding: "12px 16px",
+                  borderRadius: "8px",
+                  border: "1px solid #475569",
+                }}
+              >
+                <code
+                  style={{
+                    color: "#22d3ee",
+                    fontSize: "0.95rem",
+                    fontFamily: "Monaco, Consolas, monospace",
+                    fontWeight: "500",
+                  }}
+                >
+                  {pkg.command}
+                </code>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Quick Start */}
-      <section style={{ marginBottom: "48px" }}>
-        <h2
+      {/* Quick Start Code */}
+      <div
+        style={{
+          background: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
+          padding: "32px",
+          borderRadius: "16px",
+          border: "1px solid #475569",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
           style={{
-            fontSize: "2rem",
-            fontWeight: "600",
-            color: "#333",
-            marginBottom: "24px",
-            borderBottom: "2px solid #0094d4",
-            paddingBottom: "8px",
+            position: "absolute",
+            top: "16px",
+            right: "16px",
+            display: "flex",
+            gap: "6px",
           }}
         >
-          Quick Start
-        </h2>
-        <p style={{ fontSize: "1rem", color: "#555", marginBottom: "16px" }}>
-          Import the components you need and start building:
-        </p>
-        <pre
+          <div
+            style={{
+              width: "12px",
+              height: "12px",
+              backgroundColor: "#ef4444",
+              borderRadius: "50%",
+            }}
+          />
+          <div
+            style={{
+              width: "12px",
+              height: "12px",
+              backgroundColor: "#f59e0b",
+              borderRadius: "50%",
+            }}
+          />
+          <div
+            style={{
+              width: "12px",
+              height: "12px",
+              backgroundColor: "#10b981",
+              borderRadius: "50%",
+            }}
+          />
+        </div>
+        <h3
           style={{
-            backgroundColor: "#f8f9fa",
+            color: "#f1f5f9",
+            fontSize: "1.3rem",
+            fontWeight: "600",
+            marginBottom: "20px",
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+          }}
+        >
+          <span>⚡</span> Quick Start Example
+        </h3>
+        <div
+          style={{
+            background: "rgba(15, 23, 42, 0.8)",
             padding: "20px",
             borderRadius: "8px",
-            border: "1px solid #e9ecef",
-            overflow: "auto",
-            fontSize: "0.9rem",
-            fontFamily: "Monaco, Consolas, monospace",
-            lineHeight: "1.5",
+            border: "1px solid #475569",
           }}
         >
-          {`import { Button, Table, ThemeProvider } from '@vellumlabs/cexplorer-sdk';
-import '@vellumlabs/cexplorer-sdk/dist/styles.css';
+          <pre
+            style={{
+              color: "#e2e8f0",
+              fontSize: "0.9rem",
+              fontFamily: "Monaco, Consolas, monospace",
+              lineHeight: "1.6",
+              margin: "0",
+              overflow: "auto",
+            }}
+          >
+            <code>
+              <span style={{ color: "#c084fc" }}>import</span>{" "}
+              <span style={{ color: "#a78bfa" }}>{"{"}</span>{" "}
+              <span style={{ color: "#22d3ee" }}>Button</span>,{" "}
+              <span style={{ color: "#22d3ee" }}>Table</span>,{" "}
+              <span style={{ color: "#22d3ee" }}>ThemeProvider</span>{" "}
+              <span style={{ color: "#a78bfa" }}>{"}"}</span>{" "}
+              <span style={{ color: "#c084fc" }}>from</span>{" "}
+              <span style={{ color: "#34d399" }}>
+                '@vellumlabs/cexplorer-sdk'
+              </span>
+              ;{"\n"}
+              <span style={{ color: "#c084fc" }}>import</span>{" "}
+              <span style={{ color: "#34d399" }}>
+                '@vellumlabs/cexplorer-sdk/dist/styles.css'
+              </span>
+              ;{"\n\n"}
+              <span style={{ color: "#c084fc" }}>function</span>{" "}
+              <span style={{ color: "#fbbf24" }}>App</span>
+              <span style={{ color: "#a78bfa" }}>()</span>{" "}
+              <span style={{ color: "#a78bfa" }}>{"{"}</span>
+              {"\n"}
+              {"  "}
+              <span style={{ color: "#c084fc" }}>return</span>{" "}
+              <span style={{ color: "#a78bfa" }}>(</span>
+              {"\n"}
+              {"    "}
+              <span style={{ color: "#a78bfa" }}>{"<"}</span>
+              <span style={{ color: "#22d3ee" }}>ThemeProvider</span>{" "}
+              <span style={{ color: "#fbbf24" }}>defaultTheme</span>
+              <span style={{ color: "#a78bfa" }}>=</span>
+              <span style={{ color: "#34d399" }}>"light"</span>
+              <span style={{ color: "#a78bfa" }}>{">"}</span>
+              {"\n"}
+              {"      "}
+              <span style={{ color: "#a78bfa" }}>{"<"}</span>
+              <span style={{ color: "#22d3ee" }}>Button</span>
+              {"\n"}
+              {"        "}
+              <span style={{ color: "#fbbf24" }}>variant</span>
+              <span style={{ color: "#a78bfa" }}>=</span>
+              <span style={{ color: "#34d399" }}>"primary"</span>
+              {"\n"}
+              {"        "}
+              <span style={{ color: "#fbbf24" }}>size</span>
+              <span style={{ color: "#a78bfa" }}>=</span>
+              <span style={{ color: "#34d399" }}>"md"</span>
+              {"\n"}
+              {"        "}
+              <span style={{ color: "#fbbf24" }}>label</span>
+              <span style={{ color: "#a78bfa" }}>=</span>
+              <span style={{ color: "#34d399" }}>"Get Started"</span>
+              {"\n"}
+              {"      "}
+              <span style={{ color: "#a78bfa" }}>{"/"}</span>
+              <span style={{ color: "#a78bfa" }}>{">"}</span>
+              {"\n"}
+              {"    "}
+              <span style={{ color: "#a78bfa" }}>{"</"}</span>
+              <span style={{ color: "#22d3ee" }}>ThemeProvider</span>
+              <span style={{ color: "#a78bfa" }}>{">"}</span>
+              {"\n"}
+              {"  "}
+              <span style={{ color: "#a78bfa" }}>)</span>;{"\n"}
+              <span style={{ color: "#a78bfa" }}>{"}"}</span>
+            </code>
+          </pre>
+        </div>
+      </div>
 
-function App() {
-  return (
-    <ThemeProvider defaultTheme="light">
-      <Button
-        variant="primary"
-        size="md"
-        label="Get Started"
-      />
-    </ThemeProvider>
-  );
-}`}
-        </pre>
+      {/* Components Table */}
+      <section style={{ marginBottom: "80px" }}>
+        <div style={{ textAlign: "center", marginBottom: "48px" }}>
+          <h2
+            style={{
+              fontSize: "2.5rem",
+              fontWeight: "700",
+              color: "#0f172a",
+              marginBottom: "16px",
+            }}
+          >
+            🧩 Available Components
+          </h2>
+          <p style={{ fontSize: "1.2rem", color: "#64748b" }}>
+            Explore our comprehensive component library
+          </p>
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+            gap: "24px",
+          }}
+        >
+          {[
+            {
+              name: "Button",
+              category: "Core",
+              description:
+                "Interactive buttons with multiple variants and sizes for user actions",
+              link: "/?path=/docs/core-button--docs",
+              icon: "🔘",
+              color: "#3b82f6",
+            },
+            {
+              name: "Table",
+              category: "Data Display",
+              description:
+                "Advanced data tables with filtering, pagination and infinite scroll",
+              link: "/?path=/docs/data-display-table--docs",
+              icon: "📊",
+              color: "#10b981",
+            },
+            {
+              name: "Pagination",
+              category: "Navigation",
+              description:
+                "Navigate through large data sets with elegant pagination controls",
+              link: "/?path=/docs/navigation-pagination--docs",
+              icon: "📄",
+              color: "#f59e0b",
+            },
+            {
+              name: "LoadingSkeleton",
+              category: "Feedback",
+              description:
+                "Beautiful loading state placeholders for smooth content transitions",
+              link: "/?path=/docs/feedback-loadingskeleton--docs",
+              icon: "⏳",
+              color: "#8b5cf6",
+            },
+            {
+              name: "NoResultsFound",
+              category: "Feedback",
+              description:
+                "Elegant empty state messaging for better user experience",
+              link: "/?path=/docs/feedback-noresultsfound--docs",
+              icon: "🔍",
+              color: "#06b6d4",
+            },
+            {
+              name: "FunnelFilter",
+              category: "Overlays",
+              description:
+                "Advanced filtering interface with custom content support",
+              link: "/?path=/docs/overlays-funnelfilter--docs",
+              icon: "🔽",
+              color: "#ef4444",
+            },
+          ].map((component, index) => (
+            <a
+              key={index}
+              href={component.link}
+              style={{ textDecoration: "none" }}
+            >
+              <div
+                style={{
+                  background:
+                    "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)",
+                  padding: "24px",
+                  borderRadius: "16px",
+                  border: "1px solid #e2e8f0",
+                  boxShadow: "0 4px 15px rgba(0, 0, 0, 0.05)",
+                  transition: "all 0.3s ease",
+                  cursor: "pointer",
+                  height: "100%",
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.boxShadow = `0 8px 25px ${component.color}33`;
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.borderColor = component.color + "40";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 15px rgba(0, 0, 0, 0.05)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.borderColor = "#e2e8f0";
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "-20px",
+                    right: "-20px",
+                    width: "60px",
+                    height: "60px",
+                    background: `${component.color}10`,
+                    borderRadius: "50%",
+                  }}
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                    marginBottom: "16px",
+                  }}
+                >
+                  <div
+                    style={{
+                      background: `${component.color}15`,
+                      padding: "8px",
+                      borderRadius: "10px",
+                      border: `1px solid ${component.color}30`,
+                    }}
+                  >
+                    <span style={{ fontSize: "1.2rem" }}>{component.icon}</span>
+                  </div>
+                  <div>
+                    <h3
+                      style={{
+                        color: "#0f172a",
+                        fontSize: "1.2rem",
+                        fontWeight: "600",
+                        margin: "0",
+                      }}
+                    >
+                      {component.name}
+                    </h3>
+                    <span
+                      style={{
+                        fontSize: "0.8rem",
+                        color: component.color,
+                        fontWeight: "500",
+                        background: `${component.color}15`,
+                        padding: "2px 8px",
+                        borderRadius: "6px",
+                        border: `1px solid ${component.color}30`,
+                      }}
+                    >
+                      {component.category}
+                    </span>
+                  </div>
+                </div>
+                <p
+                  style={{
+                    color: "#64748b",
+                    fontSize: "0.95rem",
+                    lineHeight: "1.5",
+                    margin: "0",
+                  }}
+                >
+                  {component.description}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
       </section>
 
       {/* Resources & Links */}
@@ -658,7 +954,7 @@ function App() {
           © 2024 Cexplorer. Licensed under Apache-2.0.
         </p>
       </footer>
-    </div>
+    </section>
   );
 };
 
@@ -669,8 +965,20 @@ const meta = {
     layout: "fullscreen",
     controls: { disable: true },
     actions: { disable: true },
+    docs: { disable: true },
     options: {
       showPanel: false,
+      showToolbar: false,
+      showTabs: false,
+    },
+    toolbar: {
+      title: { hidden: true },
+      zoom: { hidden: true },
+      eject: { hidden: true },
+      copy: { hidden: true },
+      fullscreen: { hidden: true },
+      "storybook/background": { hidden: true },
+      "storybook/viewport": { hidden: true },
     },
   },
 } satisfies Meta<typeof Welcome>;
