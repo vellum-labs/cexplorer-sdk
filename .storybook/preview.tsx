@@ -82,8 +82,6 @@ const preview: Preview = {
             style={{
               padding: "20px",
               backgroundColor,
-              width: "100%",
-              height: "100%",
             }}
           >
             <Story />

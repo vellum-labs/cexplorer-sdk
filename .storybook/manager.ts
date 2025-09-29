@@ -22,6 +22,7 @@ addons.setConfig({
   selectedPanel: "controls",
   showPanel: true,
   showNav: true,
+  initialActive: "getting-started--getting-started",
   sidebar: {
     showRoots: true,
     collapsedRoots: [],
