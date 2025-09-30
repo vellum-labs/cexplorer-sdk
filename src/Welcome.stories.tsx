@@ -161,7 +161,7 @@ const Welcome = () => {
             <strong>Cexplorer SDK</strong> is a comprehensive React component
             library designed specifically for blockchain and cryptocurrency
             applications. Built with TypeScript by the team behind Cexplorer -
-            the biggest and most featured blockchain explorer.
+            one of the biggest and most featured blockchain explorer.
           </p>
           <p
             style={{
@@ -968,17 +968,8 @@ const meta = {
     docs: { disable: true },
     options: {
       showPanel: false,
-      showToolbar: false,
+      showToolbar: true,
       showTabs: false,
-    },
-    toolbar: {
-      title: { hidden: true },
-      zoom: { hidden: true },
-      eject: { hidden: true },
-      copy: { hidden: true },
-      fullscreen: { hidden: true },
-      "storybook/background": { hidden: true },
-      "storybook/viewport": { hidden: true },
     },
   },
 } satisfies Meta<typeof Welcome>;
