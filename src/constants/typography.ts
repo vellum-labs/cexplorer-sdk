@@ -1,3 +1,30 @@
+/**
+ * Typography system constants that map to CSS custom properties.
+ * Provides a complete set of font sizes, weights, line heights, and letter spacing values.
+ *
+ * @example
+ * ```tsx
+ * import { typography } from '@vellumlabs/cexplorer-sdk';
+ *
+ * // Using font weights
+ * <p style={{ fontWeight: typography["Font/Weight"].semibold }}>Semibold text</p>
+ *
+ * // Using font sizes with all properties
+ * <h1 style={typography["Font/Size"]["Display/2xl"]}>Large heading</h1>
+ * ```
+ *
+ * @remarks
+ * All typography values use CSS custom properties (--variable-name) defined in
+ * src/styles/variables/typography.css and work seamlessly with Tailwind CSS classes.
+ *
+ * Font Weights: regular (400), medium (500), semibold (600), bold (700)
+ *
+ * Display Sizes: 2xl, xl, lg, md (with -2% letter spacing), sm, xs
+ * - Designed for large headings and hero sections
+ *
+ * Text Sizes: xl, lg, md, sm, xs
+ * - Optimized for body content and UI elements
+ */
 export const typography = {
   "Font/Weight": {
     regular: "var(--font-weight-regular)",
