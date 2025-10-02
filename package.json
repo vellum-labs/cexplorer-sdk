@@ -36,8 +36,7 @@
     "LICENSE"
   ],
   "dependencies": {
-    "lucide-react": "^0.544.0",
-    "tailwindcss-animate": "^1.0.7"
+    "lucide-react": "^0.544.0"
   },
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
