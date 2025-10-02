@@ -11,7 +11,11 @@ const Typography: FC = () => {
     document.body.appendChild(el);
     const value = getComputedStyle(el)[property as any];
     document.body.removeChild(el);
-    return value;
+
+    const pxValue = parseFloat(value);
+    const remValue = (pxValue / 16).toFixed(3).replace(/\.?0+$/, "");
+
+    return `${pxValue}px (${remValue}rem)`;
   };
 
   return (
