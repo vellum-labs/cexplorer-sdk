@@ -632,12 +632,27 @@ const Welcome = () => {
                   {"\n"}
                   {"    "}
                   <span style={{ color: "#34d399" }}>
-                    './src/**/*.{"{"}js,jsx,ts,tsx{"}"}',
+                    './pages/**/*.{"{"}ts,tsx{"}"}',
                   </span>
                   {"\n"}
                   {"    "}
                   <span style={{ color: "#34d399" }}>
-                    './node_modules/@vellumlabs/cexplorer-sdk/dist/**/*.js'
+                    './components/**/*.{"{"}ts,tsx{"}"}',
+                  </span>
+                  {"\n"}
+                  {"    "}
+                  <span style={{ color: "#34d399" }}>
+                    './app/**/*.{"{"}ts,tsx{"}"}',
+                  </span>
+                  {"\n"}
+                  {"    "}
+                  <span style={{ color: "#34d399" }}>
+                    './src/**/*.{"{"}ts,tsx{"}"}',
+                  </span>
+                  {"\n"}
+                  {"    "}
+                  <span style={{ color: "#34d399" }}>
+                    './node_modules/@vellumlabs/cexplorer-sdk/**/*.{"{"}js,ts,tsx,mjs,cjs{"}"}'
                   </span>
                   {"\n"}
                   {"  "}
