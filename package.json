@@ -1,18 +1,26 @@
 {
   "name": "@vellumlabs/cexplorer-sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Cexplorer UI Component Library with theme system",
   "author": "Vellum Labs",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/index.d.ts"
+      ]
+    }
+  },
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
       "require": "./dist/index.umd.js",
       "types": "./dist/index.d.ts"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/style.css",
+    "./tailwind.config": "./tailwind.config.js"
   },
   "scripts": {
     "build": "vite build",
@@ -32,6 +40,7 @@
   "packageManager": "pnpm@10.15.0",
   "files": [
     "dist",
+    "tailwind.config.js",
     "README.md",
     "LICENSE"
   ],
