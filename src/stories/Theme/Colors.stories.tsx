@@ -2,7 +2,6 @@ import type { Meta } from "@storybook/react";
 import type { FC } from "react";
 
 import { colors } from "../../constants/colors";
-import { useState } from "react";
 
 const Colors: FC = () => {
   const colorsArray = Object.entries(colors).map(
