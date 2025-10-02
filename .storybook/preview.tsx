@@ -3,6 +3,12 @@ import "../src/styles/globals.css";
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        method: "alphabetical",
+        order: ["Getting Started", "*"],
+      },
+    },
     actions: { argTypesRegex: "^on[A-Z].*" },
 
     controls: {
