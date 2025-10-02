@@ -63,6 +63,7 @@ const Colors: FC = () => {
                 className='h-[160px] w-[160px] cursor-pointer rounded-xl'
                 style={{
                   border: "1px solid rgba(0,0,0,0.1)",
+                  boxShadow: " 0px 12px 16px -4px #10182814",
                 }}
                 onClick={() => {
                   navigator.clipboard.writeText(getResolvedColor(value));
