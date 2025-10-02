@@ -12,7 +12,7 @@
       "require": "./dist/index.umd.js",
       "types": "./dist/index.d.ts"
     },
-    "./styles": "./dist/style.css"
+    "./style.css": "./dist/style.css"
   },
   "scripts": {
     "build": "vite build",
