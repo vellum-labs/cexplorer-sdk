@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 import terser from "@rollup/plugin-terser";
 import { resolve } from "path";
+import { readFileSync, writeFileSync, mkdirSync } from "fs";
 
 export default defineConfig({
   plugins: [
@@ -13,14 +14,34 @@ export default defineConfig({
       staticImport: true,
       rollupTypes: true,
     }),
+    {
+      name: "copy-css",
+      closeBundle() {
+        mkdirSync("dist", { recursive: true });
+        let css = readFileSync("src/styles/style.css", "utf-8");
+
+        css = css.replace(/@import\s+['"](.+)['"]\s*;/g, (match, path) => {
+          const filePath = resolve(__dirname, "src/styles", path);
+          try {
+            return readFileSync(filePath, "utf-8");
+          } catch (e) {
+            console.warn(`Could not read ${filePath}`);
+            return match;
+          }
+        });
+
+        const minified = css
+          .replace(/\s+/g, " ")
+          .replace(/\s*([{}:;,])\s*/g, "$1")
+          .trim();
+        writeFileSync("dist/style.css", minified);
+      },
+    },
   ],
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),
     },
-  },
-  css: {
-    postcss: "./postcss.config.js",
   },
   build: {
     minify: false,

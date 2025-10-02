@@ -6,8 +6,6 @@
  *
  */
 
-import "./styles/style.css";
-
 // Constants
 export * from "./constants/colors";
 export * from "./constants/typography";
