@@ -431,149 +431,365 @@ const Welcome = () => {
         </div>
       </section>
 
-      {/* Quick Start Code */}
-      <div
-        style={{
-          background: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
-          padding: "32px",
-          borderRadius: "16px",
-          border: "1px solid #475569",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: "16px",
-            right: "16px",
-            display: "flex",
-            gap: "6px",
-          }}
-        >
-          <div
-            style={{
-              width: "12px",
-              height: "12px",
-              backgroundColor: "#ef4444",
-              borderRadius: "50%",
-            }}
-          />
-          <div
-            style={{
-              width: "12px",
-              height: "12px",
-              backgroundColor: "#f59e0b",
-              borderRadius: "50%",
-            }}
-          />
-          <div
-            style={{
-              width: "12px",
-              height: "12px",
-              backgroundColor: "#10b981",
-              borderRadius: "50%",
-            }}
-          />
-        </div>
+      {/* Setup Steps */}
+      <div style={{ marginBottom: "48px" }}>
         <h3
           style={{
-            color: "#f1f5f9",
-            fontSize: "1.3rem",
+            fontSize: "1.8rem",
             fontWeight: "600",
-            marginBottom: "20px",
+            color: "#0f172a",
+            marginBottom: "32px",
             display: "flex",
             alignItems: "center",
-            gap: "8px",
+            gap: "12px",
           }}
         >
-          <span>⚡</span> Quick Start Example
+          <span>📋</span> Setup Steps
         </h3>
-        <div
-          style={{
-            background: "rgba(15, 23, 42, 0.8)",
-            padding: "20px",
-            borderRadius: "8px",
-            border: "1px solid #475569",
-          }}
-        >
-          <pre
+
+        <div style={{ display: "grid", gap: "24px" }}>
+          {/* Step 1: Import Styles */}
+          <div
             style={{
-              color: "#e2e8f0",
-              fontSize: "0.9rem",
-              fontFamily: "Monaco, Consolas, monospace",
-              lineHeight: "1.6",
-              margin: "0",
-              overflow: "auto",
+              background: "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)",
+              padding: "24px",
+              borderRadius: "16px",
+              border: "1px solid #e2e8f0",
+              boxShadow: "0 4px 15px rgba(0, 0, 0, 0.05)",
             }}
           >
-            <code>
-              <span style={{ color: "#c084fc" }}>import</span>{" "}
-              <span style={{ color: "#a78bfa" }}>{"{"}</span>{" "}
-              <span style={{ color: "#22d3ee" }}>Button</span>,{" "}
-              <span style={{ color: "#22d3ee" }}>Table</span>,{" "}
-              <span style={{ color: "#22d3ee" }}>ThemeProvider</span>{" "}
-              <span style={{ color: "#a78bfa" }}>{"}"}</span>{" "}
-              <span style={{ color: "#c084fc" }}>from</span>{" "}
-              <span style={{ color: "#34d399" }}>
-                '@vellumlabs/cexplorer-sdk'
-              </span>
-              ;{"\n"}
-              <span style={{ color: "#c084fc" }}>import</span>{" "}
-              <span style={{ color: "#34d399" }}>
-                '@vellumlabs/cexplorer-sdk/styles.css'
-              </span>
-              ;{"\n\n"}
-              <span style={{ color: "#c084fc" }}>function</span>{" "}
-              <span style={{ color: "#fbbf24" }}>App</span>
-              <span style={{ color: "#a78bfa" }}>()</span>{" "}
-              <span style={{ color: "#a78bfa" }}>{"{"}</span>
-              {"\n"}
-              {"  "}
-              <span style={{ color: "#c084fc" }}>return</span>{" "}
-              <span style={{ color: "#a78bfa" }}>(</span>
-              {"\n"}
-              {"    "}
-              <span style={{ color: "#a78bfa" }}>{"<"}</span>
-              <span style={{ color: "#22d3ee" }}>ThemeProvider</span>{" "}
-              <span style={{ color: "#fbbf24" }}>defaultTheme</span>
-              <span style={{ color: "#a78bfa" }}>=</span>
-              <span style={{ color: "#34d399" }}>"light"</span>
-              <span style={{ color: "#a78bfa" }}>{">"}</span>
-              {"\n"}
-              {"      "}
-              <span style={{ color: "#a78bfa" }}>{"<"}</span>
-              <span style={{ color: "#22d3ee" }}>Button</span>
-              {"\n"}
-              {"        "}
-              <span style={{ color: "#fbbf24" }}>variant</span>
-              <span style={{ color: "#a78bfa" }}>=</span>
-              <span style={{ color: "#34d399" }}>"primary"</span>
-              {"\n"}
-              {"        "}
-              <span style={{ color: "#fbbf24" }}>size</span>
-              <span style={{ color: "#a78bfa" }}>=</span>
-              <span style={{ color: "#34d399" }}>"md"</span>
-              {"\n"}
-              {"        "}
-              <span style={{ color: "#fbbf24" }}>label</span>
-              <span style={{ color: "#a78bfa" }}>=</span>
-              <span style={{ color: "#34d399" }}>"Get Started"</span>
-              {"\n"}
-              {"      "}
-              <span style={{ color: "#a78bfa" }}>{"/"}</span>
-              <span style={{ color: "#a78bfa" }}>{">"}</span>
-              {"\n"}
-              {"    "}
-              <span style={{ color: "#a78bfa" }}>{"</"}</span>
-              <span style={{ color: "#22d3ee" }}>ThemeProvider</span>
-              <span style={{ color: "#a78bfa" }}>{">"}</span>
-              {"\n"}
-              {"  "}
-              <span style={{ color: "#a78bfa" }}>)</span>;{"\n"}
-              <span style={{ color: "#a78bfa" }}>{"}"}</span>
-            </code>
-          </pre>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                marginBottom: "16px",
+              }}
+            >
+              <div
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  borderRadius: "50%",
+                  background:
+                    "linear-gradient(135deg, #0094d4 0%, #0284c7 100%)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "white",
+                  fontWeight: "700",
+                  fontSize: "1rem",
+                }}
+              >
+                1
+              </div>
+              <h4
+                style={{
+                  fontSize: "1.2rem",
+                  fontWeight: "600",
+                  color: "#0f172a",
+                  margin: 0,
+                }}
+              >
+                Import Styles
+              </h4>
+            </div>
+            <p
+              style={{
+                color: "#64748b",
+                marginBottom: "16px",
+                fontSize: "1rem",
+              }}
+            >
+              Add the CSS import to your app's entry point:
+            </p>
+            <div
+              style={{
+                background: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
+                padding: "16px",
+                borderRadius: "8px",
+                border: "1px solid #475569",
+              }}
+            >
+              <code
+                style={{
+                  color: "#22d3ee",
+                  fontSize: "0.95rem",
+                  fontFamily: "Monaco, Consolas, monospace",
+                }}
+              >
+                <span style={{ color: "#c084fc" }}>import</span>{" "}
+                <span style={{ color: "#34d399" }}>
+                  '@vellumlabs/cexplorer-sdk/style.css'
+                </span>
+                ;
+              </code>
+            </div>
+          </div>
+
+          {/* Step 2: Configure Tailwind */}
+          <div
+            style={{
+              background: "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)",
+              padding: "24px",
+              borderRadius: "16px",
+              border: "1px solid #e2e8f0",
+              boxShadow: "0 4px 15px rgba(0, 0, 0, 0.05)",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                marginBottom: "16px",
+              }}
+            >
+              <div
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  borderRadius: "50%",
+                  background:
+                    "linear-gradient(135deg, #0094d4 0%, #0284c7 100%)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "white",
+                  fontWeight: "700",
+                  fontSize: "1rem",
+                }}
+              >
+                2
+              </div>
+              <h4
+                style={{
+                  fontSize: "1.2rem",
+                  fontWeight: "600",
+                  color: "#0f172a",
+                  margin: 0,
+                }}
+              >
+                Configure Tailwind CSS
+              </h4>
+            </div>
+            <p
+              style={{
+                color: "#64748b",
+                marginBottom: "16px",
+                fontSize: "1rem",
+              }}
+            >
+              Create or update your <code style={{background: "#f1f5f9", padding: "2px 6px", borderRadius: "4px", color: "#0f172a"}}>tailwind.config.js</code>:
+            </p>
+            <div
+              style={{
+                background: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
+                padding: "20px",
+                borderRadius: "8px",
+                border: "1px solid #475569",
+              }}
+            >
+              <pre
+                style={{
+                  color: "#e2e8f0",
+                  fontSize: "0.9rem",
+                  fontFamily: "Monaco, Consolas, monospace",
+                  lineHeight: "1.6",
+                  margin: "0",
+                  overflow: "auto",
+                }}
+              >
+                <code>
+                  <span style={{ color: "#94a3b8" }}>
+                    {"/** @type {import('tailwindcss').Config} */"}
+                  </span>
+                  {"\n"}
+                  <span style={{ color: "#fbbf24" }}>module</span>.
+                  <span style={{ color: "#22d3ee" }}>exports</span>{" "}
+                  <span style={{ color: "#a78bfa" }}>=</span>{" "}
+                  <span style={{ color: "#a78bfa" }}>{"{"}</span>
+                  {"\n"}
+                  {"  "}
+                  <span style={{ color: "#22d3ee" }}>presets</span>
+                  <span style={{ color: "#a78bfa" }}>:</span>{" "}
+                  <span style={{ color: "#a78bfa" }}>[</span>
+                  {"\n"}
+                  {"    "}
+                  <span style={{ color: "#fbbf24" }}>require</span>
+                  <span style={{ color: "#a78bfa" }}>(</span>
+                  <span style={{ color: "#34d399" }}>
+                    '@vellumlabs/cexplorer-sdk/tailwind.config'
+                  </span>
+                  <span style={{ color: "#a78bfa" }}>)</span>
+                  {"\n"}
+                  {"  "}
+                  <span style={{ color: "#a78bfa" }}>{"]"}</span>,{"\n"}
+                  {"  "}
+                  <span style={{ color: "#22d3ee" }}>content</span>
+                  <span style={{ color: "#a78bfa" }}>:</span>{" "}
+                  <span style={{ color: "#a78bfa" }}>[</span>
+                  {"\n"}
+                  {"    "}
+                  <span style={{ color: "#34d399" }}>
+                    './src/**/*.{"{"}js,jsx,ts,tsx{"}"}',
+                  </span>
+                  {"\n"}
+                  {"    "}
+                  <span style={{ color: "#34d399" }}>
+                    './node_modules/@vellumlabs/cexplorer-sdk/dist/**/*.js'
+                  </span>
+                  {"\n"}
+                  {"  "}
+                  <span style={{ color: "#a78bfa" }}>{"]"}</span>
+                  {"\n"}
+                  <span style={{ color: "#a78bfa" }}>{"}"}</span>
+                </code>
+              </pre>
+            </div>
+            <p
+              style={{
+                color: "#64748b",
+                marginTop: "16px",
+                fontSize: "0.9rem",
+                fontStyle: "italic",
+              }}
+            >
+              💡 Or use <code style={{background: "#f1f5f9", padding: "2px 6px", borderRadius: "4px", color: "#0f172a"}}>import</code> syntax for ES modules (tailwind.config.mjs)
+            </p>
+          </div>
+
+          {/* Step 3: Start Using */}
+          <div
+            style={{
+              background: "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)",
+              padding: "24px",
+              borderRadius: "16px",
+              border: "1px solid #e2e8f0",
+              boxShadow: "0 4px 15px rgba(0, 0, 0, 0.05)",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                marginBottom: "16px",
+              }}
+            >
+              <div
+                style={{
+                  width: "32px",
+                  height: "32px",
+                  borderRadius: "50%",
+                  background:
+                    "linear-gradient(135deg, #0094d4 0%, #0284c7 100%)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "white",
+                  fontWeight: "700",
+                  fontSize: "1rem",
+                }}
+              >
+                3
+              </div>
+              <h4
+                style={{
+                  fontSize: "1.2rem",
+                  fontWeight: "600",
+                  color: "#0f172a",
+                  margin: 0,
+                }}
+              >
+                Start Using Components
+              </h4>
+            </div>
+            <p
+              style={{
+                color: "#64748b",
+                marginBottom: "16px",
+                fontSize: "1rem",
+              }}
+            >
+              Import and use components in your React app:
+            </p>
+            <div
+              style={{
+                background: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
+                padding: "20px",
+                borderRadius: "8px",
+                border: "1px solid #475569",
+              }}
+            >
+              <pre
+                style={{
+                  color: "#e2e8f0",
+                  fontSize: "0.9rem",
+                  fontFamily: "Monaco, Consolas, monospace",
+                  lineHeight: "1.6",
+                  margin: "0",
+                  overflow: "auto",
+                }}
+              >
+                <code>
+                  <span style={{ color: "#c084fc" }}>import</span>{" "}
+                  <span style={{ color: "#a78bfa" }}>{"{"}</span>{" "}
+                  <span style={{ color: "#22d3ee" }}>Button</span>,{" "}
+                  <span style={{ color: "#22d3ee" }}>ThemeProvider</span>{" "}
+                  <span style={{ color: "#a78bfa" }}>{"}"}</span>{" "}
+                  <span style={{ color: "#c084fc" }}>from</span>{" "}
+                  <span style={{ color: "#34d399" }}>
+                    '@vellumlabs/cexplorer-sdk'
+                  </span>
+                  ;{"\n\n"}
+                  <span style={{ color: "#c084fc" }}>function</span>{" "}
+                  <span style={{ color: "#fbbf24" }}>App</span>
+                  <span style={{ color: "#a78bfa" }}>()</span>{" "}
+                  <span style={{ color: "#a78bfa" }}>{"{"}</span>
+                  {"\n"}
+                  {"  "}
+                  <span style={{ color: "#c084fc" }}>return</span>{" "}
+                  <span style={{ color: "#a78bfa" }}>(</span>
+                  {"\n"}
+                  {"    "}
+                  <span style={{ color: "#a78bfa" }}>{"<"}</span>
+                  <span style={{ color: "#22d3ee" }}>ThemeProvider</span>{" "}
+                  <span style={{ color: "#fbbf24" }}>defaultTheme</span>
+                  <span style={{ color: "#a78bfa" }}>=</span>
+                  <span style={{ color: "#34d399" }}>"light"</span>
+                  <span style={{ color: "#a78bfa" }}>{">"}</span>
+                  {"\n"}
+                  {"      "}
+                  <span style={{ color: "#a78bfa" }}>{"<"}</span>
+                  <span style={{ color: "#22d3ee" }}>Button</span>
+                  {"\n"}
+                  {"        "}
+                  <span style={{ color: "#fbbf24" }}>variant</span>
+                  <span style={{ color: "#a78bfa" }}>=</span>
+                  <span style={{ color: "#34d399" }}>"primary"</span>
+                  {"\n"}
+                  {"        "}
+                  <span style={{ color: "#fbbf24" }}>label</span>
+                  <span style={{ color: "#a78bfa" }}>=</span>
+                  <span style={{ color: "#34d399" }}>"Get Started"</span>
+                  {"\n"}
+                  {"      "}
+                  <span style={{ color: "#a78bfa" }}>{"/"}</span>
+                  <span style={{ color: "#a78bfa" }}>{">"}</span>
+                  {"\n"}
+                  {"    "}
+                  <span style={{ color: "#a78bfa" }}>{"</"}</span>
+                  <span style={{ color: "#22d3ee" }}>ThemeProvider</span>
+                  <span style={{ color: "#a78bfa" }}>{">"}</span>
+                  {"\n"}
+                  {"  "}
+                  <span style={{ color: "#a78bfa" }}>)</span>;{"\n"}
+                  <span style={{ color: "#a78bfa" }}>{"}"}</span>
+                </code>
+              </pre>
+            </div>
+          </div>
         </div>
       </div>
 
