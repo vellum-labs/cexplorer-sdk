@@ -521,7 +521,7 @@ const Welcome = () => {
               ;{"\n"}
               <span style={{ color: "#c084fc" }}>import</span>{" "}
               <span style={{ color: "#34d399" }}>
-                '@vellumlabs/cexplorer-sdk/dist/styles.css'
+                '@vellumlabs/cexplorer-sdk/styles'
               </span>
               ;{"\n\n"}
               <span style={{ color: "#c084fc" }}>function</span>{" "}
