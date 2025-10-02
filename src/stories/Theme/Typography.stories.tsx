@@ -5,8 +5,14 @@ import { typography } from "../../constants/typography";
 import { FontVisualisation } from "./components/FontVisualisation";
 
 const Typography: FC = () => {
-  const typographyArray = Object.entries(typography);
-  console.log("🚀 ~ Typography ~ typographyArray:", typographyArray);
+  const getResolvedCSSValue = (property: string, cssVar: string) => {
+    const el = document.createElement("div");
+    (el.style as any)[property] = cssVar;
+    document.body.appendChild(el);
+    const value = getComputedStyle(el)[property as any];
+    document.body.removeChild(el);
+    return value;
+  };
 
   return (
     <section className='flex max-w-[1250px] flex-col gap-5 p-5'>
@@ -113,9 +119,12 @@ const Typography: FC = () => {
                 <div>
                   <p className='text-sm font-semibold'>{name}</p>
                   <p className='text-xs text-gray-600'>
-                    {styles.fontSize} / {styles.lineHeight}
+                    Font size:{" "}
+                    {getResolvedCSSValue("fontSize", styles.fontSize)} / Line
+                    height:{" "}
+                    {getResolvedCSSValue("lineHeight", styles.lineHeight)}
                     {(styles as any)?.letterSpacing &&
-                      ` / ${(styles as any).letterSpacing}`}
+                      ` / Letter spacing: ${getResolvedCSSValue("letterSpacing", (styles as any).letterSpacing)}`}
                   </p>
                 </div>
               </div>
