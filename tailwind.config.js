@@ -144,17 +144,17 @@ module.exports = {
 
       // Indigo colors
       "indigo-25": "var(--indigo-25)",
-      "indigo-50": "var(--indigo-25)",
-      "indigo-100": "var(--indigo-25)",
-      "indigo-200": "var(--indigo-25)",
-      "indigo-300": "var(--indigo-25)",
-      "indigo-400": "var(--indigo-25)",
-      "indigo-500": "var(--indigo-25)",
-      "indigo-600": "var(--indigo-25)",
-      "indigo-700": "var(--indigo-25)",
-      "indigo-800": "var(--indigo-25)",
-      "indigo-900": "var(--indigo-25)",
-      "indigo-950": "var(--indigo-25)",
+      "indigo-50": "var(--indigo-50)",
+      "indigo-100": "var(--indigo-100)",
+      "indigo-200": "var(--indigo-200)",
+      "indigo-300": "var(--indigo-300)",
+      "indigo-400": "var(--indigo-400)",
+      "indigo-500": "var(--indigo-500)",
+      "indigo-600": "var(--indigo-600)",
+      "indigo-700": "var(--indigo-700)",
+      "indigo-800": "var(--indigo-800)",
+      "indigo-900": "var(--indigo-900)",
+      "indigo-950": "var(--indigo-950)",
 
       // Purple colors
       "purple-25": "var(--purple-25)",
