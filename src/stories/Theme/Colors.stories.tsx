@@ -36,10 +36,10 @@ const Colors: FC = () => {
   };
 
   return (
-    <section className='flex flex-col gap-5 p-5'>
+    <section className='flex max-w-[1250px] flex-col gap-5 p-5'>
       <div>
-        <h2 className='pb-1 text-2xl font-semibold text-gray-900'>Colors</h2>
-        <p className='text-sm font-medium leading-6 text-gray-700'>
+        <h1 className='pb-1 text-2xl font-semibold text-gray-900'>Colors</h1>
+        <p className='text-text-sm text-gray-700'>
           Our color palette is built on CSS custom properties for consistency
           and flexibility. All colors are defined in globals.css and available
           throughout the app via Tailwind classes or the colors constant from
@@ -59,10 +59,9 @@ const Colors: FC = () => {
             {(colorValues as any[]).map(([name, value]) => (
               <div
                 key={`${name}_${value}`}
-                className='h-[160px] w-[160px] cursor-pointer rounded-xl'
+                className='h-[160px] w-[160px] cursor-pointer rounded-xl shadow-[0px_12px_16px_-4px_rgba(16,24,40,0.08)] transition-shadow duration-300 hover:shadow-[0px_20px_24px_-4px_rgba(16,24,40,0.18)]'
                 style={{
                   border: "1px solid rgba(0,0,0,0.1)",
-                  boxShadow: " 0px 12px 16px -4px #10182814",
                 }}
                 onClick={() => {
                   navigator.clipboard.writeText(getResolvedColor(value));
