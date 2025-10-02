@@ -6,7 +6,7 @@
  *
  */
 
-import "./styles/globals.css";
+import "./styles/style.css";
 
 // Utility functions
 export * from "./utils/cn";
@@ -15,3 +15,4 @@ export * from "./utils/paginateArray";
 
 // Constants
 export * from "./constants/colors";
+export * from "./constants/typography";

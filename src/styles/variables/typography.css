@@ -1,0 +1,58 @@
+@layer base {
+    :root {
+        /* Font weights */
+        --font-weight-regular: 400;
+        --font-weight-medium: 500;
+        --font-weight-semibold: 600;
+        --font-weight-bold: 700;
+
+
+        /* Display 2xl */
+        --font-size-display-2xl: 4.5rem;
+        --line-height-display-2xl: 5.625rem;
+        --letter-spacing-display-2xl: -0.02em;
+
+        /* Display xl */
+        --font-size-display-xl: 3.75rem;
+        --line-height-display-xl: 4.5rem;
+        --letter-spacing-display-xl: -0.02em;
+        
+        /* Display lg */
+        --font-size-display-lg: 3rem;
+        --line-height-display-lg: 3.75rem;
+        --letter-spacing-display-lg: -0.02em;
+                
+        /* Display md */
+        --font-size-display-md: 2.25rem;
+        --line-height-display-md: 2.75rem;
+        --letter-spacing-display-md: -0.02em;
+
+        /* Display sm */
+        --font-size-display-sm: 1.875rem;
+        --line-height-display-sm: 2.375rem;
+        
+        /* Display xs */
+        --font-size-display-xs: 1.5rem;
+        --line-height-display-xs: 2rem;
+                
+        /* Text xl */
+        --font-size-text-xl: 1.25rem;
+        --line-height-text-xl: 1.875rem;
+
+        /* Text lg */
+        --font-size-text-lg: 1.125rem;
+        --line-height-text-lg: 1.75rem;
+        
+        /* Text md */
+        --font-size-text-md: 1rem;
+        --line-height-text-md: 1.5rem;
+                
+        /* Text sm */
+        --font-size-text-sm: 0.875rem;
+        --line-height-text-sm: 1.25rem;
+                        
+        /* Text xs */
+        --font-size-text-xs: 0.75rem;
+        --line-height-text-xs: 1.125rem;
+    }
+}

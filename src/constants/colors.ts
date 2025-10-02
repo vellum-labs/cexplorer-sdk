@@ -4,16 +4,20 @@
  *
  * @example
  * ```tsx
- * import { colors } from '@/constants/colors';
+ * import { colors } from '@vellumlabs/cexplorer-sdk';
  *
- * <div style={{ color: colors.primary, backgroundColor: colors.cardBg }}>
+ * <div style={{ color: colors.Brand[500], backgroundColor: colors.Gray[50] }}>
  *   Content with themed colors
  * </div>
  * ```
  *
  * @remarks
  * All color values use CSS custom properties (--variable-name) which are
- * defined in the global CSS and change based on the current theme.
+ * defined in src/styles/variables/colors.css and automatically work with Tailwind CSS classes.
+ *
+ * Available color scales: White, Black, Gray, Brand, Error, Warning, Success, Green,
+ * Gray Blue, Blue Light, Blue, Indigo, Purple, Yellow, Orange.
+ * Each scale (except White/Black) has shades from 25 to 950.
  */
 export const colors = {
   White: "var(--white)",

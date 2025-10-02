@@ -1,9 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer base {
-  :root {
+    :root {
     --white: #FFFFFF;
     --black: #000000;
 
@@ -190,7 +186,6 @@
     --orange-950: #511C10;
   }
 
-
   :root[data-theme="dark"] {
    
   }
@@ -198,6 +193,4 @@
   :root[data-theme="light"] {
    
   }
-
-
 }
