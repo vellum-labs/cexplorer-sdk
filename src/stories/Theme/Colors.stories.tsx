@@ -73,7 +73,8 @@ const Colors: FC = () => {
                   className='h-[80px] rounded-t-xl'
                   style={{
                     backgroundColor: value,
-                    borderBottom: "1px solid rgba(0,0,0,0.1)",
+                    borderBottom:
+                      name === "White" ? "1px solid rgba(0,0,0,0.1)" : "none",
                   }}
                 ></div>
                 <div className='h-[80px] p-3'>
