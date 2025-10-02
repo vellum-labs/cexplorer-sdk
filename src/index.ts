@@ -25,15 +25,10 @@ import "./styles/globals.css";
 export * from "./stores/theme";
 export type { Theme } from "./stores/theme";
 
-// UI Components
-export * from './ui';
-
 // Utility functions
-export * from './utils/cn';
-export * from './utils/createVariants';
-export * from './utils/isMobileDevice';
-export * from './utils/paginateArray';
-export type { VariantConfig, VariantProps } from './utils/createVariants';
+export * from "./utils/cn";
+export * from "./utils/isMobileDevice";
+export * from "./utils/paginateArray";
 
 // Constants
-export * from './constants/colors';
+export * from "./constants/colors";

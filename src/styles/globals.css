@@ -3,262 +3,198 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Gray colors */
+    --gray-25: #FCFCFD;
+    --gray-50: #F9FAFB;
+    --gray-100: #F2F4F7;
+    --gray-200: #E4E7EC;
+    --gray-300: #D0D5DD;
+    --gray-400: #98A2B3;
+    --gray-500: #667085;
+    --gray-600: #475467;
+    --gray-700: #344054;
+    --gray-800: #182230;
+    --gray-900: #101828;
+    --gray-950: #0C111D;
+
+    /* Brand colors */
+    --brand-25: #F7FCFF;
+    --brand-50: #EFFAFF;
+    --brand-100: #DEF4FF;
+    --brand-200: #B6EBFF;
+    --brand-300: #75DEFF;
+    --brand-400: #2CCEFF;
+    --brand-500: #00A9E3;
+    --brand-600: #0094D4;
+    --brand-700: #0075AB;
+    --brand-800: #00638D;
+    --brand-900: #065274;
+    --brand-950: #04344D;
+
+    /* Error colors */
+    --error-25: #FFFBFA;
+    --error-50: #FEF3F2;
+    --error-100: #FEE4E2;
+    --error-200: #FECDCA;
+    --error-300: #FDA29B;
+    --error-400: #F97066;
+    --error-500: #F04438;
+    --error-600: #D92D20;
+    --error-700: #B42318;
+    --error-800: #912018;
+    --error-900: #7A271A;
+    --error-950: #55160C;
+
+    /* Warning colors */
+    --warning-25: #FFFCF5;
+    --warning-50: #FFFAEB;
+    --warning-100: #FEF0C7;
+    --warning-200: #FEDF89;
+    --warning-300: #FEC84B;
+    --warning-400: #FDB022;
+    --warning-500: #F79009;
+    --warning-600: #DC6803;
+    --warning-700: #B54708;
+    --warning-800: #93370D;
+    --warning-900: #7A2E0E;
+    --warning-950: #4E1D09;
+    
+    /* Success colors */
+    --success-25: #F6FEF9;
+    --success-50: #ECFDF3;
+    --success-100: #DCFAE6;
+    --success-200: #A9EFC5;
+    --success-300: #75E0A7;
+    --success-400: #47CD89;
+    --success-500: #17B26A;
+    --success-600: #079455;
+    --success-700: #067647;
+    --success-800: #085D3A;
+    --success-900: #074D31;
+    --success-950: #053321;
+        
+    /* Green colors */
+    --green-25: #F6FEF9;
+    --green-50: #EDFCF2;
+    --green-100: #D3F8DF;
+    --green-200: #AAF0C4;
+    --green-300: #73E2A3;
+    --green-400: #3CCB7F;
+    --green-500: #16B364;
+    --green-600: #099250;
+    --green-700: #087443;
+    --green-800: #095C37;
+    --green-900: #084C2E;
+    --green-950: #052E1C;
+
+    /* Gray blue colors */
+    --gray-blue-25: #FCFCFD;
+    --gray-blue-50: #F8F9FC;
+    --gray-blue-100: #EAECF5;
+    --gray-blue-200: #D5D9EB;
+    --gray-blue-300: #B3B8DB;
+    --gray-blue-400: #717BBC;
+    --gray-blue-500: #4E5BA6;
+    --gray-blue-600: #3E4784;
+    --gray-blue-700: #363F72;
+    --gray-blue-800: #293056;
+    --gray-blue-900: #101323;
+    --gray-blue-950: #0D0F1C;
+
+    /* Blue light colors */
+    --blue-light-25: #F5FBFF;
+    --blue-light-50: #F0F9FF;
+    --blue-light-100: #E0F2FE;
+    --blue-light-200: #B9E6FE;
+    --blue-light-300: #7CD4FD;
+    --blue-light-400: #36BFFA;
+    --blue-light-500: #0BA5EC;
+    --blue-light-600: #0086C9;
+    --blue-light-700: #026AA2;
+    --blue-light-800: #065986;
+    --blue-light-900: #0B4A6F;
+    --blue-light-950: #062C41;
+
+    /* Blue colors */
+    --blue-25: #F5FAFF;
+    --blue-50: #EFF8FF;
+    --blue-100: #D1E9FF;
+    --blue-200: #B2DDFF;
+    --blue-300: #84CAFF;
+    --blue-400: #53B1FD;
+    --blue-500: #2E90FA;
+    --blue-600: #1570EF;
+    --blue-700: #175CD3;
+    --blue-800: #1849A9;
+    --blue-900: #194185;
+    --blue-950: #102A56;
+
+    /* Indigo colors */
+    --indigo-25: #F5F8FF;
+    --indigo-50: #EEF4FF;
+    --indigo-100: #E0EAFF;
+    --indigo-200: #C7D7FE;
+    --indigo-300: #A4BCFD;
+    --indigo-400: #8098F9;
+    --indigo-500: #6172F3;
+    --indigo-600: #444CE7;
+    --indigo-700: #3538CD;
+    --indigo-800: #2D31A6;
+    --indigo-900: #2D3282;
+    --indigo-950: #1F235B;
+    
+    /* Purple colors */
+    --purple-25: #FAFAFF;
+    --purple-50: #F4F3FF;
+    --purple-100: #EBE9FE;
+    --purple-200: #D9D6FE;
+    --purple-300: #BDB4FE;
+    --purple-400: #9B8AFB;
+    --purple-500: #7A5AF8;
+    --purple-600: #6938EF;
+    --purple-700: #5925DC;
+    --purple-800: #4A1FB8;
+    --purple-900: #3E1C96;
+    --purple-950: #27115F;
+
+    /* Yellow colors */
+    --yellow-25: #FEFDF0;
+    --yellow-50: #FEFBE8;
+    --yellow-100: #FEF7C3;
+    --yellow-200: #FEEE95;
+    --yellow-300: #FDE272;
+    --yellow-400: #FAC515;
+    --yellow-500: #EAAA08;
+    --yellow-600: #CA8504;
+    --yellow-700: #A15C07;
+    --yellow-800: #854A0E;
+    --yellow-900: #713B12;
+    --yellow-950: #542C0D;
+
+    /* Orange colors */
+    --orange-25: #FEFAF5;
+    --orange-50: #FEF6EE;
+    --orange-100: #FDEAD7;
+    --orange-200: #F9DBAF;
+    --orange-300: #F7B27A;
+    --orange-400: #F38744;
+    --orange-500: #EF6820;
+    --orange-600: #E04F16;
+    --orange-700: #B93815;
+    --orange-800: #932F19;
+    --orange-900: #772917;
+    --orange-950: #511C10;
+  }
+
+
   :root[data-theme="dark"] {
-    --text: #fff;
-    --background: #1f242a;
-    --cardBg: #232930;
-    --darker: #20252b;
-    --primary: #79defd;
-    --darkBlue: #1ba3e0;
-    --secondaryText: #b0dff4;
-    --secondaryBg: #b0def412;
-    --border: #424951;
-    --borderDarker: #4d555e;
-    --borderFaded: #374048;
-    --grayTextPrimary: #e9ecef;
-    --grayTextSecondary: #b0b7c3;
-    --scrollbar: #ffffff87;
-    --shimmer: #ffffff0d;
-    --completed: #079455;
-    --inProgress: #fdb022;
-    --notStarted: #f04438;
-    --all: #667085;
-    --bannerGradient: #1f242a;
-    --purpleText: #9f70f7;
-    --redText: #f04438;
-    --yellowText: #f8b942;
-    --greenText: #18c852;
-    --hoverHighlight: #2a2f36;
-    --highlightBorder: #fac415b2;
-    --tableHover: #242a31;
+   
   }
 
   :root[data-theme="light"] {
-    --text: #101828;
-    --background: #fdfdfd;
-    --cardBg: #ffffff;
-    --darker: #f8f9fc;
-    --primary: #0094d4;
-    --darkBlue: #0094d4;
-    --secondaryText: #0094d4;
-    --secondaryBg: #effaff;
-    --borderFaded: #e2e1e1;
-    --border: #d0d5dd;
-    --borderDarker: #c0c5cc;
-    --grayTextPrimary: #3e4959;
-    --grayTextSecondary: #546175;
-    --scrollbar: #13294a91;
-    --shimmer: #2828280d;
-    --completed: #abefc6;
-    --inProgress: #fedf89;
-    --notStarted: #fecdca;
-    --all: #e4e7ec;
-    --bannerGradient: #f0f0f6;
-    --purpleText: #7d41ed;
-    --redText: #f04438;
-    --yellowText: #fdb022;
-    --greenText: #0cae34;
-    --hoverHighlight: #fef7c3;
-    --highlightBorder: #fac515;
-    --tableHover: #edf0f5;
+   
   }
 
-  @layer loader {
-    .loader {
-      border-radius: 50%;
-      animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
-    }
 
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-  }
-
-  body,
-  html {
-    background: var(--background);
-    color: var(--text);
-    font-family: Inter;
-  }
-
-  pre {
-    background: transparent !important;
-  }
-
-  a {
-    &:hover {
-      color: var(--secondaryText);
-    }
-  }
-
-  h1 {
-    @media screen and (min-width: 768px) {
-      font-size: 34px;
-    }
-    font-size: 26px;
-    font-weight: 600;
-  }
-
-  h2 {
-    @media screen and (min-width: 768px) {
-      font-size: 24px;
-    }
-    font-size: 20px;
-    font-weight: 600;
-  }
-
-  h3 {
-    @media screen and (min-width: 768px) {
-      font-size: 18px;
-    }
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
-  .thin-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar) transparent;
-
-    ::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: transparent;
-      border-radius: 10px;
-      margin-block: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--scrollbar);
-      opacity: 0.5;
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--scrollbar);
-    }
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes shimmer {
-    from {
-      background-position: 200% 0;
-    }
-    to {
-      background-position: -200% 0;
-    }
-  }
-
-  .shimmer {
-    animation:
-      fadeIn 500ms ease-out forwards,
-      shimmer 2s linear infinite;
-    animation-delay: 0s, 500ms;
-    background: linear-gradient(
-      to right,
-      transparent 0%,
-      var(--shimmer) 25%,
-      transparent 50%
-    );
-    background-size: 200% 100%;
-  }
-
-  .shimmer-no-fade {
-    animation: shimmer 3s linear infinite;
-    background: linear-gradient(
-      to right,
-      transparent 0%,
-      var(--shimmer) 25%,
-      transparent 50%
-    );
-    background-size: 200% 100%;
-  }
-
-  .gold-shimmer {
-    animation: shimmer 6s linear infinite;
-    background: linear-gradient(
-      to right,
-      transparent 0%,
-      #f8e65fcd 20%,
-      transparent 5%
-    );
-    background-size: 200% 100%;
-  }
-}
-
-.react-flow__handle {
-  opacity: 0;
-}
-
-[data-sonner-toast][data-styled="true"] [data-button] {
-  background: transparent !important;
-}
-
-.react-syntax-highlighter-line-number {
-  padding-right: 10px !important;
-  min-width: 20px !important;
-}
-
-.sso-button {
-  background-color: white;
-  width: 100%;
-  margin-bottom: 10px;
-  border: 1px solid var(--grey10);
-  border-radius: 10px;
-}
-
-.AccordionTrigger[data-state="open"] > .AccordionChevron {
-  transform: rotate(180deg);
-}
-
-.react-flow__attribution {
-  display: none !important;
-}
-
-::-webkit-calendar-picker-indicator {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23bbbbbb" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
-}
-
-.react-grid-placeholder {
-  border-radius: 8px;
-  background-color: var(--primary) !important;
-}
-
-.react-grid-item.cssTransforms {
-  transition-property: none !important;
-}
-
-.customize-grid .react-grid-item.cssTransforms {
-  transition-property: transform !important;
-}
-
-@keyframes loading-dots {
-  0% {
-    opacity: 0.2;
-  }
-  100% {
-    opacity: 1;
-  }
 }
