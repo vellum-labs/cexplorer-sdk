@@ -1,6 +1,4 @@
 import type { Preview } from "@storybook/react";
-import { ThemeProvider } from "../src/stores/theme";
-import { useEffect } from "react";
 import "../src/styles/globals.css";
 
 const preview: Preview = {
@@ -49,53 +47,6 @@ const preview: Preview = {
       },
     },
   },
-
-  globalTypes: {
-    theme: {
-      description: "Global theme for components",
-      defaultValue: "light",
-      toolbar: {
-        title: "Theme",
-        icon: "circlehollow",
-        items: [
-          { value: "light", icon: "circlehollow", title: "Light" },
-          { value: "dark", icon: "circle", title: "Dark" },
-        ],
-        showName: true,
-        dynamicTitle: true,
-      },
-    },
-  },
-
-  decorators: [
-    (Story, context) => {
-      const theme = context.globals.theme || "light";
-      const backgroundColor = theme === "dark" ? "#1a1a1a" : "#ffffff";
-
-      const ThemeWrapper = () => {
-        useEffect(() => {
-          document.documentElement.setAttribute("data-theme", theme);
-        }, [theme]);
-
-        return (
-          <div
-            style={{
-              padding: "20px",
-              backgroundColor,
-            }}
-          >
-            <Story />
-          </div>
-        );
-      };
-
-      return (
-        <ThemeProvider defaultTheme={theme} key={theme}>
-          <ThemeWrapper />
-        </ThemeProvider>
-      );
-    },
-  ],
 };
 
 export default preview;
