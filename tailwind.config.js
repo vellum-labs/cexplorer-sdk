@@ -12,9 +12,9 @@ module.exports = {
       // Common colors
       transparent: "transparent",
       current: "currentColor",
-      black: "#000",
-      white: "#fff",
       inherit: "inherit",
+      black: "var(--black)",
+      white: "var(--white)",
 
       // Gray colors
       "gray-25": "var(--gray-25)",

@@ -4,6 +4,9 @@
 
 @layer base {
   :root {
+    --white: #FFFFFF;
+    --black: #000000;
+
     /* Gray colors */
     --gray-25: #FCFCFD;
     --gray-50: #F9FAFB;

@@ -16,6 +16,8 @@
  * defined in the global CSS and change based on the current theme.
  */
 export const colors = {
+  White: "var(--white)",
+  Black: "var(--black)",
   Gray: {
     "25": "var(--gray-25)",
     "50": "var(--gray-50)",
@@ -100,7 +102,7 @@ export const colors = {
     "900": "var(--green-900)",
     "950": "var(--green-950)",
   },
-  GrayBlue: {
+  "Gray Blue": {
     "25": "var(--gray-blue-25)",
     "50": "var(--gray-blue-50)",
     "100": "var(--gray-blue-100)",
@@ -114,7 +116,7 @@ export const colors = {
     "900": "var(--gray-blue-900)",
     "950": "var(--gray-blue-950)",
   },
-  BlueLight: {
+  "Blue Light": {
     "25": "var(--blue-light-25)",
     "50": "var(--blue-light-50)",
     "100": "var(--blue-light-100)",
