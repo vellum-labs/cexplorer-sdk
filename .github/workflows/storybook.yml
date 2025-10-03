@@ -1,0 +1,82 @@
+name: "storybook"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read # Minimal permissions for checkout
+
+jobs:
+  CheckUser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if user is allowed to run this workflow
+        run: |
+          echo "Triggered by: ${{ github.actor }}"
+          if [ "${{ github.actor }}" != "josef0xb" ] && [ "${{ github.actor }}" != "dshamsani" ]; then
+            echo "❌ You are not allowed to run this workflow."
+            exit 1
+          fi
+
+  DeployToServer:
+    needs: CheckUser
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.event_name }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Set up WireGuard
+        env:
+          WG_CONFIG: ${{ secrets.WG_CONFIG }}
+        run: |
+          sudo apt update
+          sudo apt install -y wireguard
+          echo "$WG_CONFIG" | sudo tee /etc/wireguard/wg0.conf
+          sudo wg-quick up wg0
+
+      - uses: actions/checkout@v5
+
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H -t ecdsa,ed25519,rsa 10.0.0.1 >> ~/.ssh/known_hosts
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.15.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: |
+           echo "pnpm install ..."
+           time pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm type-check
+        
+      - name: Build package
+        run: |
+          echo "📘 Building Storybook..."
+          time pnpm build-storybook
+          echo "✅ Storybook build complete"
+
+      - name: Copy Storybook to server
+        env:
+          SERVER: 10.0.0.1
+        run: |
+          rsync -azv -e "ssh -o UserKnownHostsFile=~/.ssh/known_hosts -o HostKeyAlgorithms=ecdsa-sha2-nistp256,ssh-ed25519,rsa-sha2-512" \
+            --omit-dir-times --no-perms --no-owner --no-group --delete \
+            ./storybook-static/ job@$SERVER:/var/www/cexplorer_docs/
