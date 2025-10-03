@@ -1,0 +1,81 @@
+name: "storybook"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read # Minimal permissions for checkout
+
+jobs:
+  CheckUser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if user is allowed to run this workflow
+        run: |
+          echo "Triggered by: ${{ github.actor }}"
+          if [ "${{ github.actor }}" != "josef0xb" ] && [ "${{ github.actor }}" != "dshamsani" ]; then
+            echo "❌ You are not allowed to run this workflow."
+            exit 1
+          fi
+
+  DeployToServer:
+    needs: CheckUser
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.event_name }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Set up WireGuard
+        env:
+          WG_CONFIG: ${{ secrets.WG_CONFIG }}
+        run: |
+          sudo apt update
+          sudo apt install -y wireguard
+          echo "$WG_CONFIG" | sudo tee /etc/wireguard/wg0.conf
+          sudo wg-quick up wg0
+
+      - uses: actions/checkout@v5
+
+      - name: Set up SSH agent
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H -t ecdsa,ed25519,rsa 10.0.0.1 >> ~/.ssh/known_hosts
+
+      - name: Set Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22.19.0
+          cache: 'pnpm'
+          cache-dependency-path: 'pnpm-lock.yaml'
+
+      - name: Install pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+
+      - name: Install dependencies and build Storybook
+        env:
+          VITE_APP_VERSION: ${{ github.run_number }}
+          VITE_APP_CONFIG: x
+        run: |
+          echo "📦 Installing dependencies with pnpm..."
+          time pnpm install
+
+          echo "📘 Building Storybook..."
+          time pnpm build-storybook
+
+          echo "✅ Storybook build complete"
+
+      - name: Copy Storybook to server
+        env:
+          SERVER: 10.0.0.1
+        run: |
+          rsync -azv -e "ssh -o UserKnownHostsFile=~/.ssh/known_hosts -o HostKeyAlgorithms=ecdsa-sha2-nistp256,ssh-ed25519,rsa-sha2-512" \
+            --omit-dir-times --no-perms --no-owner --no-group --delete \
+            ./storybook-static/ job@$SERVER:/var/www/cexplorer_docs/
