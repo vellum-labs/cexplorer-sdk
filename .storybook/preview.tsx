@@ -1,7 +1,39 @@
-import type { Preview } from "@storybook/react";
+import type { Preview, Decorator } from "@storybook/react";
 import "../src/styles/style.css";
+import { ThemeProvider } from "../src/providers/ThemeProvider";
+import { useEffect } from "react";
+
+const withTheme: Decorator = (Story, context) => {
+  const theme = context.globals.theme || "light";
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  return (
+    <ThemeProvider defaultTheme={theme}>
+      <Story />
+    </ThemeProvider>
+  );
+};
 
 const preview: Preview = {
+  decorators: [withTheme],
+  globalTypes: {
+    theme: {
+      description: "Global theme for components",
+      defaultValue: "light",
+      toolbar: {
+        title: "Theme",
+        icon: "circlehollow",
+        items: [
+          { value: "light", icon: "sun", title: "Light" },
+          { value: "dark", icon: "moon", title: "Dark" },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
   parameters: {
     options: {
       storySort: {

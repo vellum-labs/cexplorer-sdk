@@ -17,6 +17,7 @@ export const spacing = {
   "1/4": "var(--spacing-0_25)",
   "1/2": "var(--spacing-0_5)",
   1: "var(--spacing-1)",
+  1.5: "var(--spacing-1_5)",
   2: "var(--spacing-2)",
   3: "var(--spacing-3)",
   4: "var(--spacing-4)",
