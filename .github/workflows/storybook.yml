@@ -47,30 +47,30 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H -t ecdsa,ed25519,rsa 10.0.0.1 >> ~/.ssh/known_hosts
 
-      - name: Set Node.js
-        uses: actions/setup-node@v5
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: 22.19.0
-          cache: 'pnpm'
-          cache-dependency-path: 'pnpm-lock.yaml'
+          version: 10.15.0
 
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          version: 9.15.9
+          node-version: "20"
+          cache: "pnpm"
+          registry-url: "https://registry.npmjs.org"
 
-
-      - name: Install dependencies and build Storybook
-        env:
-          VITE_APP_VERSION: ${{ github.run_number }}
-          VITE_APP_CONFIG: x
+      - name: Install dependencies
         run: |
-          echo "📦 Installing dependencies with pnpm..."
-          time pnpm install
+           echo "pnpm install ..."
+           time pnpm install --frozen-lockfile
 
+      - name: Type check
+        run: pnpm type-check
+        
+      - name: Build package
+        run: |
           echo "📘 Building Storybook..."
           time pnpm build-storybook
-
           echo "✅ Storybook build complete"
 
       - name: Copy Storybook to server
