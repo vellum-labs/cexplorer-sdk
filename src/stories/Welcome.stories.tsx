@@ -580,7 +580,18 @@ const Welcome = () => {
                 fontSize: "1rem",
               }}
             >
-              Create or update your <code style={{background: "#f1f5f9", padding: "2px 6px", borderRadius: "4px", color: "#0f172a"}}>tailwind.config.js</code>:
+              Create or update your{" "}
+              <code
+                style={{
+                  background: "#f1f5f9",
+                  padding: "2px 6px",
+                  borderRadius: "4px",
+                  color: "#0f172a",
+                }}
+              >
+                tailwind.config.js
+              </code>
+              :
             </p>
             <div
               style={{
@@ -652,7 +663,8 @@ const Welcome = () => {
                   {"\n"}
                   {"    "}
                   <span style={{ color: "#34d399" }}>
-                    './node_modules/@vellumlabs/cexplorer-sdk/**/*.{"{"}js,ts,tsx,mjs,cjs{"}"}'
+                    './node_modules/@vellumlabs/cexplorer-sdk/**/*.{"{"}
+                    js,ts,tsx,mjs,cjs{"}"}'
                   </span>
                   {"\n"}
                   {"  "}
@@ -670,7 +682,18 @@ const Welcome = () => {
                 fontStyle: "italic",
               }}
             >
-              💡 Or use <code style={{background: "#f1f5f9", padding: "2px 6px", borderRadius: "4px", color: "#0f172a"}}>import</code> syntax for ES modules (tailwind.config.mjs)
+              💡 Or use{" "}
+              <code
+                style={{
+                  background: "#f1f5f9",
+                  padding: "2px 6px",
+                  borderRadius: "4px",
+                  color: "#0f172a",
+                }}
+              >
+                import
+              </code>{" "}
+              syntax for ES modules (tailwind.config.mjs)
             </p>
           </div>
 
@@ -999,7 +1022,8 @@ const Welcome = () => {
           Built with ❤️ by the Cexplorer team
         </p>
         <p style={{ fontSize: "0.8rem" }}>
-          © 2024 Cexplorer. Licensed under Apache-2.0.
+          © 2024 Cexplorer. Restricted: Read-only access. No usage or
+          modifications allowed..
         </p>
       </footer>
     </section>
