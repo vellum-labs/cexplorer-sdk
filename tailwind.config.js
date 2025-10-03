@@ -275,6 +275,15 @@ module.exports = {
         },
       ],
     },
+    boxShadow: {
+      xs: "var(--shadow-xs)",
+      sm: "var(--shadow-sm)",
+      md: "var(--shadow-md)",
+      lg: "var(--shadow-lg)",
+      xl: "var(--shadow-xl)",
+      "2xl": "var(--shadow-2xl)",
+      "3xl": "var(--shadow-3xl)",
+    },
     extend: {
       fontFamily: {
         inter: ["Inter", "sans-serif"],

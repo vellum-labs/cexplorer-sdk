@@ -9,3 +9,4 @@
 // Constants
 export * from "./constants/colors";
 export * from "./constants/typography";
+export * from "./constants/shadows";
