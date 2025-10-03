@@ -21,15 +21,15 @@ const Shadows: FC = () => {
           need to stand out from the content layer.
         </p>
       </div>
-      <div className='flex flex-wrap items-center gap-16'>
+      <div className='flex flex-wrap items-center gap-4'>
         {Object.entries(shadows).map(([name, value]) => (
           <div
-            className='min-h-[180px] min-w-[200px] rounded-xl border border-gray-300 bg-white p-6'
+            className='min-h-[90px] min-w-[192px] rounded-xl border border-gray-300 bg-white p-6'
             style={{
               boxShadow: value,
             }}
           >
-            <span className='text-text-lg font-medium text-gray-900'>
+            <span className='text-text-sm font-medium text-gray-900'>
               shadow-{name}
             </span>
           </div>
