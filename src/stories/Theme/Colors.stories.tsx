@@ -59,7 +59,7 @@ const Colors: FC = () => {
             {(colorValues as any[]).map(([name, value]) => (
               <div
                 key={`${name}_${value}`}
-                className='h-[160px] w-[160px] cursor-pointer rounded-xl shadow-lg transition-shadow duration-300 hover:shadow-xl'
+                className='rounded-m h-[160px] w-[160px] cursor-pointer shadow-lg transition-shadow duration-300 hover:shadow-xl'
                 style={{
                   border: "1px solid rgba(0,0,0,0.1)",
                 }}
@@ -69,7 +69,7 @@ const Colors: FC = () => {
                 }}
               >
                 <div
-                  className='h-[80px] rounded-t-xl'
+                  className='rounded-t-m h-[80px]'
                   style={{
                     backgroundColor: value,
                     borderBottom:

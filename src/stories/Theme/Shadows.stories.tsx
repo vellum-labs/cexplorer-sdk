@@ -24,7 +24,7 @@ const Shadows: FC = () => {
       <div className='flex flex-wrap items-center gap-4'>
         {Object.entries(shadows).map(([name, value]) => (
           <div
-            className='min-h-[90px] min-w-[192px] rounded-xl border border-gray-300 bg-white p-1'
+            className='rounded-m flex min-h-[90px] min-w-[192px] items-center justify-center border border-gray-300 bg-white p-1'
             style={{
               boxShadow: value,
             }}

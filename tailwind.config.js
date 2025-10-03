@@ -275,6 +275,9 @@ module.exports = {
         },
       ],
     },
+    fontFamily: {
+      inter: ["Inter", "sans-serif"],
+    },
     boxShadow: {
       xs: "var(--shadow-xs)",
       sm: "var(--shadow-sm)",
@@ -305,10 +308,14 @@ module.exports = {
       15: "var(--spacing-15)",
       16: "var(--spacing-16)",
     },
-    extend: {
-      fontFamily: {
-        inter: ["Inter", "sans-serif"],
-      },
+    borderRadius: {
+      none: "var(--radius-none)",
+      xs: "var(--radius-xs)",
+      s: "var(--radius-s)",
+      m: "var(--radius-m)",
+      l: "var(--radius-l)",
+      xl: "var(--radius-xl)",
+      max: "var(--radius-max)",
     },
   },
 };

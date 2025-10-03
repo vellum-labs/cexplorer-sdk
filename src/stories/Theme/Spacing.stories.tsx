@@ -38,9 +38,9 @@ const Spacing: FC = () => {
           .sort(([a], [b]) => parseFloat(b) - parseFloat(a))
           .map(([name, value]) => (
             <div key={name} className='flex flex-col items-center gap-2'>
-              <div className='flex h-[180px] w-[180px] items-center justify-center rounded-xl border border-gray-300 bg-white'>
+              <div className='rounded-m flex h-[180px] w-[180px] items-center justify-center border border-gray-300 bg-white'>
                 <div
-                  className='flex items-center justify-center rounded-lg border-2 border-brand-500 bg-brand-100'
+                  className='rounded-s flex items-center justify-center border-2 border-brand-500 bg-brand-100'
                   style={{
                     width: value,
                     height: value,
