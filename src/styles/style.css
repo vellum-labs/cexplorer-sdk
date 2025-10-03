@@ -1,6 +1,7 @@
 @import './variables/colors.css';
 @import './variables/typography.css';
 @import './variables/shadows.css';
+@import './variables/spacing.css';
 
 @tailwind base;
 @tailwind components;

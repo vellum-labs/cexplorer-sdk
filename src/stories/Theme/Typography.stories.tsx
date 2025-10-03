@@ -19,9 +19,9 @@ const Typography: FC = () => {
   };
 
   return (
-    <section className='flex max-w-[1250px] flex-col gap-5 p-5'>
+    <section className='flex max-w-[1250px] flex-col gap-5 p-2'>
       <div>
-        <h1 className='pb-1 text-2xl font-semibold text-gray-900'>
+        <h1 className='text-2xl pb-1 font-semibold text-gray-900'>
           Typography
         </h1>
         <p className='text-text-sm text-gray-700'>
@@ -36,10 +36,10 @@ const Typography: FC = () => {
         </p>
       </div>
       <div>
-        <h2 className='pb-1 text-lg font-semibold text-gray-900'>
+        <h2 className='text-lg pb-1 font-semibold text-gray-900'>
           Font Family
         </h2>
-        <p className='text-text-sm pb-3 text-gray-700'>
+        <p className='pb-2 text-text-sm text-gray-700'>
           We use Inter as our primary typeface across the entire design system.
           Inter is a carefully crafted variable font designed for user
           interfaces with excellent readability at all sizes. Designed by{" "}
@@ -60,10 +60,10 @@ const Typography: FC = () => {
         />
       </div>
       <div>
-        <h2 className='pb-1 text-lg font-semibold text-gray-900'>
+        <h2 className='text-lg pb-1 font-semibold text-gray-900'>
           Font Weights
         </h2>
-        <p className='text-text-sm pb-3 text-gray-700'>
+        <p className='pb-1 text-text-sm text-gray-700'>
           We use four carefully selected font weights to create clear visual
           hierarchy and emphasis. Regular (400) serves as the default weight for
           body text, Medium (500) adds subtle emphasis for labels and secondary
@@ -71,7 +71,7 @@ const Typography: FC = () => {
           and important UI elements, and Bold (700) is reserved for primary
           headings and high-impact text that demands attention.
         </p>
-        <div className='flex flex-wrap items-center justify-between gap-5 py-1'>
+        <div className='flex flex-wrap items-center justify-between gap-1 py-1'>
           <FontVisualisation
             description='Font weight: 400'
             title='Regular'
@@ -95,8 +95,8 @@ const Typography: FC = () => {
         </div>
       </div>
       <div>
-        <h2 className='pb-1 text-lg font-semibold text-gray-900'>Font Sizes</h2>
-        <p className='text-text-sm pb-3 text-gray-700'>
+        <h2 className='text-lg pb-1 font-semibold text-gray-900'>Font Sizes</h2>
+        <p className='pb-1 text-text-sm text-gray-700'>
           We provide a comprehensive scale of font sizes optimized for different
           use cases. Display sizes (2xl through xs) are designed for large,
           attention-grabbing headings and hero sections, featuring tighter
@@ -105,13 +105,13 @@ const Typography: FC = () => {
           smaller text elements, with carefully tuned line heights that ensure
           optimal readability across different screen sizes and contexts.
         </p>
-        <div className='flex flex-col gap-3'>
+        <div className='flex flex-col gap-1'>
           {Object.entries(typography["Font/Size"]).map(([name, styles]) => (
             <div
               key={name}
-              className='flex items-center justify-between border-b pb-3'
+              className='flex items-center justify-between border-b pb-1'
             >
-              <div className='flex items-baseline gap-4'>
+              <div className='flex items-baseline gap-1'>
                 <p
                   className='w-[100px] font-semibold'
                   style={{

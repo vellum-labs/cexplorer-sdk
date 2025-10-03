@@ -5,7 +5,7 @@ import { shadows } from "../../constants/shadows";
 
 const Shadows: FC = () => {
   return (
-    <section className='flex max-w-[1250px] flex-col gap-5 p-5'>
+    <section className='flex max-w-[1250px] flex-col gap-5 p-2'>
       <div>
         <h1 className='text-2xl pb-1 font-semibold text-gray-900'>Shadows</h1>
         <p className='text-text-sm text-gray-700'>
@@ -24,7 +24,7 @@ const Shadows: FC = () => {
       <div className='flex flex-wrap items-center gap-4'>
         {Object.entries(shadows).map(([name, value]) => (
           <div
-            className='min-h-[90px] min-w-[192px] rounded-xl border border-gray-300 bg-white p-6'
+            className='min-h-[90px] min-w-[192px] rounded-xl border border-gray-300 bg-white p-1'
             style={{
               boxShadow: value,
             }}

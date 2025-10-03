@@ -36,7 +36,7 @@ const Colors: FC = () => {
   };
 
   return (
-    <section className='flex max-w-[1250px] flex-col gap-5 p-5'>
+    <section className='flex max-w-[1250px] flex-col gap-5 p-2'>
       <div>
         <h1 className='text-2xl pb-1 font-semibold text-gray-900'>Colors</h1>
         <p className='text-text-sm text-gray-700'>
@@ -51,11 +51,11 @@ const Colors: FC = () => {
         </p>
       </div>
       {colorsArray.map(([colorGroup, colorValues], i) => (
-        <div key={i} className='flex flex-col gap-3'>
+        <div key={i} className='flex flex-col gap-2'>
           <h2 className='text-lg font-semibold leading-[18px] text-gray-900'>
             {colorGroup}
           </h2>
-          <div className='flex flex-wrap gap-8'>
+          <div className='flex flex-wrap gap-4'>
             {(colorValues as any[]).map(([name, value]) => (
               <div
                 key={`${name}_${value}`}
