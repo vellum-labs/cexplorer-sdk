@@ -3,6 +3,14 @@
     --white: #FFFFFF;
     --black: #000000;
 
+    /* CexDark */
+    --cexdark-500: #424951;
+    --cexdark-600: #374048;
+    --cexdark-700: #2A2F36;
+    --cexdark-800: #232930;
+    --cexdark-900: #20252B;
+    --cexdark-950: #1F242A;
+
     /* Gray colors */
     --gray-25: #FCFCFD;
     --gray-50: #F9FAFB;

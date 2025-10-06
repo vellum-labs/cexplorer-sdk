@@ -22,6 +22,14 @@
 export const colors = {
   White: "var(--white)",
   Black: "var(--black)",
+  CexDark: {
+    "500": "var(--cexdark-500)",
+    "600": "var(--cexdark-600)",
+    "700": "var(--cexdark-700)",
+    "800": "var(--cexdark-800)",
+    "900": "var(--cexdark-900)",
+    "950": "var(--cexdark-950)",
+  },
   Gray: {
     "25": "var(--gray-25)",
     "50": "var(--gray-50)",

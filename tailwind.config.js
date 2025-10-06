@@ -15,6 +15,14 @@ module.exports = {
       black: "var(--black)",
       white: "var(--white)",
 
+      // CexDark:
+      "cexdark-500": "var(--cexdark-500)",
+      "cexdark-600": "var(--cexdark-600)",
+      "cexdark-700": "var(--cexdark-700)",
+      "cexdark-800": "var(--cexdark-800)",
+      "cexdark-900": "var(--cexdark-900)",
+      "cexdark-950": "var(--cexdark-950)",
+
       // Gray colors
       "gray-25": "var(--gray-25)",
       "gray-50": "var(--gray-50)",
