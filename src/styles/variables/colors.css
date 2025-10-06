@@ -199,16 +199,16 @@
     --background: var(--cexdark-950);
     --cardBg: var(--cexdark-800);
     --darker: var(--cexdark-900);
-    --primary: var(brand-300);
+    --primary: var(--brand-300);
     --darkBlue: #1ba3e0;
     --secondaryText: #b0dff4;
     --secondaryBg: #b0def412;
-    --borderDarker: #4d555e;
     --border: var(--cexdark-500);
+    --borderDarker: #4d555e;
     --borderFaded: var(--cexdark-600);
     --grayTextPrimary: var(--gray-200);
     --grayTextSecondary: var(--gray-400);
-    --scrollbar: var(--gray-400);
+    --scrollbar: #ffffff87;
     --shimmer: #ffffff0d;
     --completed: #079455;
     --inProgress: #fdb022;
@@ -217,28 +217,28 @@
     --bannerGradient: #1f242a;
     --purpleText: #9f70f7;
     --redText: var(--error-500);
-    --yellowText: var(--warning-500);
+    --yellowText: var(--warning-300);
     --greenText: var(--green-500);
     --hoverHighlight: var(--cexdark-700);
-    --highlightBorder: var(--yellow-400);
+    --hoverHighlight: var(--yellow-400);
     --tableHover: #242a31;
   }
 
   :root[data-theme="light"] {
     --text: var(--gray-900);
     --background: var(--gray-25);
-    --cardBg: var(--white)
+    --cardBg: var(--white);
     --darker: var(--gray-100);
     --primary: var(--brand-600);
     --darkBlue: #0094d4;
     --secondaryText: #0094d4;
     --secondaryBg: #effaff;
     --borderFaded: var(--gray-200);
-    --borderFaded: var(--gray-300);
+    --border: var(--gray-300);
     --borderDarker: #c0c5cc;
     --grayTextPrimary: var(--gray-600);
     --grayTextSecondary: var(--gray-500);
-    --scrollbar: var(--gray-500);
+    --scrollbar: #13294a91;
     --shimmer: #2828280d;
     --completed: #abefc6;
     --inProgress: #fedf89;
@@ -249,8 +249,8 @@
     --redText: var(--error-500);
     --yellowText: var(--warning-300);
     --greenText: var(--green-500);
-    --hoverHighlight: var(--gray-600);
-    --highlightBorder: var(--yellow-400);
-    --tableHover: #edf0f5;
+    --hoverHighlight: var(--yellow-400);
+    --highlightBorder: var(--yellow-500);
+    --tableHover: #EDF0F5;
   }
 }
