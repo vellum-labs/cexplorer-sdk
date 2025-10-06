@@ -8,51 +8,51 @@
 
 
         /* Display 2xl */
-        --font-size-display-2xl: 4.5rem;
-        --line-height-display-2xl: 5.625rem;
+        --font-size-display-2xl: 72px;
+        --line-height-display-2xl: 90px;
         --letter-spacing-display-2xl: -0.02em;
 
         /* Display xl */
-        --font-size-display-xl: 3.75rem;
-        --line-height-display-xl: 4.5rem;
+        --font-size-display-xl: 60px;
+        --line-height-display-xl: 72px;
         --letter-spacing-display-xl: -0.02em;
         
         /* Display lg */
-        --font-size-display-lg: 3rem;
-        --line-height-display-lg: 3.75rem;
+        --font-size-display-lg: 48px;
+        --line-height-display-lg: 60px;
         --letter-spacing-display-lg: -0.02em;
                 
         /* Display md */
-        --font-size-display-md: 2.25rem;
-        --line-height-display-md: 2.75rem;
+        --font-size-display-md: 36px;
+        --line-height-display-md: 44px;
         --letter-spacing-display-md: -0.02em;
 
         /* Display sm */
-        --font-size-display-sm: 1.875rem;
-        --line-height-display-sm: 2.375rem;
+        --font-size-display-sm: 30px;
+        --line-height-display-sm: 38px;
         
         /* Display xs */
-        --font-size-display-xs: 1.5rem;
-        --line-height-display-xs: 2rem;
+        --font-size-display-xs: 24px;
+        --line-height-display-xs: 32px;
                 
         /* Text xl */
-        --font-size-text-xl: 1.25rem;
-        --line-height-text-xl: 1.875rem;
+        --font-size-text-xl: 20px;
+        --line-height-text-xl: 30px;
 
         /* Text lg */
-        --font-size-text-lg: 1.125rem;
-        --line-height-text-lg: 1.75rem;
+        --font-size-text-lg: 18px;
+        --line-height-text-lg: 28px;
         
         /* Text md */
-        --font-size-text-md: 1rem;
-        --line-height-text-md: 1.5rem;
+        --font-size-text-md: 16px;
+        --line-height-text-md: 24px;
                 
         /* Text sm */
-        --font-size-text-sm: 0.875rem;
-        --line-height-text-sm: 1.25rem;
+        --font-size-text-sm: 14px;
+        --line-height-text-sm: 20px;
                         
         /* Text xs */
-        --font-size-text-xs: 0.75rem;
-        --line-height-text-xs: 1.125rem;
+        --font-size-text-xs: 12px;
+        --line-height-text-xs: 18px;
     }
 }

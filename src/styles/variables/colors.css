@@ -228,7 +228,7 @@
     --text: var(--gray-900);
     --background: var(--gray-25);
     --cardBg: var(--white);
-    --darker: var(--gray-100);
+    --darker: var(--gray-50);
     --primary: var(--brand-600);
     --darkBlue: #0094d4;
     --secondaryText: #0094d4;
