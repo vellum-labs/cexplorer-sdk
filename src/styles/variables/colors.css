@@ -195,19 +195,19 @@
   }
 
   :root[data-theme="dark"] {
-    --text: #fff;
-    --background: #1f242a;
-    --cardBg: #232930;
-    --darker: #20252b;
-    --primary: #79defd;
+    --text: var(--white);
+    --background: var(--cexdark-950);
+    --cardBg: var(--cexdark-800);
+    --darker: var(--cexdark-900);
+    --primary: var(brand-300);
     --darkBlue: #1ba3e0;
     --secondaryText: #b0dff4;
     --secondaryBg: #b0def412;
-    --border: #424951;
     --borderDarker: #4d555e;
-    --borderFaded: #374048;
-    --grayTextPrimary: #e9ecef;
-    --grayTextSecondary: #b0b7c3;
+    --border: var(--cexdark-500);
+    --borderFaded: var(--cexdark-600);
+    --grayTextPrimary: var(--gray-200);
+    --grayTextSecondary: var(--gray-400);
     --scrollbar: var(--gray-400);
     --shimmer: #ffffff0d;
     --completed: #079455;
@@ -216,11 +216,11 @@
     --all: #667085;
     --bannerGradient: #1f242a;
     --purpleText: #9f70f7;
-    --redText: #f04438;
-    --yellowText: #f8b942;
-    --greenText: #18c852;
-    --hoverHighlight: #2a2f36;
-    --highlightBorder: #fac415b2;
+    --redText: var(--error-500);
+    --yellowText: var(--warning-500);
+    --greenText: var(--green-500);
+    --hoverHighlight: var(--cexdark-700);
+    --highlightBorder: var(--yellow-400);
     --tableHover: #242a31;
   }
 
