@@ -225,19 +225,19 @@
   }
 
   :root[data-theme="light"] {
-    --text: #101828;
-    --background: #fdfdfd;
-    --cardBg: #ffffff;
-    --darker: #f8f9fc;
-    --primary: #0094d4;
+    --text: var(--gray-900);
+    --background: var(--gray-25);
+    --cardBg: var(--white)
+    --darker: var(--gray-100);
+    --primary: var(--brand-600);
     --darkBlue: #0094d4;
     --secondaryText: #0094d4;
     --secondaryBg: #effaff;
-    --borderFaded: #e2e1e1;
-    --border: #d0d5dd;
+    --borderFaded: var(--gray-200);
+    --borderFaded: var(--gray-300);
     --borderDarker: #c0c5cc;
-    --grayTextPrimary: #3e4959;
-    --grayTextSecondary: #546175;
+    --grayTextPrimary: var(--gray-600);
+    --grayTextSecondary: var(--gray-500);
     --scrollbar: var(--gray-500);
     --shimmer: #2828280d;
     --completed: #abefc6;
@@ -246,11 +246,11 @@
     --all: #e4e7ec;
     --bannerGradient: #f0f0f6;
     --purpleText: #7d41ed;
-    --redText: #f04438;
-    --yellowText: #fdb022;
-    --greenText: #0cae34;
-    --hoverHighlight: #fef7c3;
-    --highlightBorder: #fac515;
+    --redText: var(--error-500);
+    --yellowText: var(--warning-300);
+    --greenText: var(--green-500);
+    --hoverHighlight: var(--gray-600);
+    --highlightBorder: var(--yellow-400);
     --tableHover: #edf0f5;
   }
 }
