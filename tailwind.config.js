@@ -7,6 +7,13 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1440px",
+      },
+    },
     colors: {
       // Common colors
       transparent: "transparent",
@@ -344,6 +351,7 @@ module.exports = {
       15: "var(--spacing-15)",
       16: "var(--spacing-16)",
       desktop: "1440px",
+      minHeight: "calc(100vh - 386px)",
     },
     borderRadius: {
       none: "var(--radius-none)",
