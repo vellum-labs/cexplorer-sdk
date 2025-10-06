@@ -41,6 +41,30 @@
     }
   }
 
+    h1 {
+    @media screen and (min-width: 768px) {
+      font-size: 34px;
+    }
+    font-size: 26px;
+    font-weight: 600;
+  }
+
+  h2 {
+    @media screen and (min-width: 768px) {
+      font-size: 24px;
+    }
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  h3 {
+    @media screen and (min-width: 768px) {
+      font-size: 18px;
+    }
+    font-size: 16px;
+    font-weight: 600;
+  }
+
   .hide-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
