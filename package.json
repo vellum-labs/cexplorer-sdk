@@ -1,6 +1,6 @@
 {
   "name": "@vellumlabs/cexplorer-sdk",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Cexplorer UI Component Library with theme system",
   "author": "Vellum Labs",
   "main": "dist/index.umd.js",
