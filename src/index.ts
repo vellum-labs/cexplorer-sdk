@@ -40,3 +40,7 @@ export * from "./lib/handleCreateStore";
 export * from "@/types/commonTypes";
 export * from "@/types/miscTypes";
 export * from "@/types/navigationTypes";
+
+// Resources
+export * from "@/resources/Facebook";
+export * from "@/resources/Twitter";
