@@ -13,7 +13,8 @@ export { Dropdown } from "./dropdown";
 export type { DropdownProps } from "./dropdown";
 
 // Form components
-export {} from "./globalSearch";
+export { GlobalSearch } from "./globalSearch";
+export { GlobalSearchProps } from "./globalSearch";
 
 // Global components
 export { AdaWithTooltip } from "./global/AdaWithTooltip";

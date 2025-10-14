@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { Tooltip } from "../global/Tooltip";
 
 import { lovelaceToAda } from "@/utils/lovelaceToAda";
-import Copy from "./Copy";
+import { Copy } from "./Copy";
 
 interface AdaWithTooltipProps {
   data: number;
