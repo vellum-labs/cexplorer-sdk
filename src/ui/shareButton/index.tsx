@@ -3,6 +3,7 @@ import { Twitter } from "@/resources/Twitter";
 import { Copy, Share2, X } from "lucide-react";
 import { toast } from "sonner";
 import { Dropdown } from "../dropdown";
+import { useThemeStore } from "@/providers/ThemeProvider";
 
 /**
  * Props for the ShareButton component.
@@ -69,6 +70,8 @@ interface ShareButtonProps {
  * @returns {JSX.Element} Share button with dropdown menu
  */
 export const ShareButton = ({ isHeader = false }: ShareButtonProps) => {
+  const { theme } = useThemeStore();
+
   const options = [
     {
       label: (
@@ -106,18 +109,19 @@ export const ShareButton = ({ isHeader = false }: ShareButtonProps) => {
       href: `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`,
     },
   ];
+
   return (
     <Dropdown
       id='share'
       hideChevron
       closeOnSelect
-      label={<Share2 size={isHeader ? 15 : 17} className='' />}
+      label={<Share2 size={isHeader ? 10 : 10} className='' />}
       disableHover
       options={options as any}
       triggerClassName={
         isHeader
-          ? "!justify-center h-6 w-6 rounded-s border border-border bg-transparent hover:bg-darker"
-          : "!justify-center h-10 w-10 rounded-s border border-border bg-transparent hover:bg-darker"
+          ? `!justify-center h-[20px] w-[20px] rounded-[4px] border shadow-xs border-border hover:bg-darker ${theme === "light" ? "bg-white" : "bg-cexdark-800"}`
+          : `!justify-center h-10 w-10 rounded-s border border-border hover:bg-darker  ${theme === "light" ? "bg-white" : "bg-cexdark-800"}`
       }
       forceHorizontalPosition={isHeader ? "left" : undefined}
       wrapperClassname='z-0'

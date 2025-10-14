@@ -2,6 +2,7 @@ import type { NavigationOptions } from "@/types/navigationTypes";
 import type dynamicIconImports from "lucide-react/dynamicIconImports";
 import Icon from "../icon";
 import { Dropdown } from "../dropdown";
+import { useThemeStore } from "@/providers/ThemeProvider";
 
 /**
  * Props for the AdDropdown component.
@@ -100,19 +101,21 @@ interface Props {
  * @returns {JSX.Element} Styled dropdown with icon and label
  */
 export const AdDropdown = ({ label, options, icon }: Props) => {
+  const { theme } = useThemeStore();
+
   return (
     <div className='flex justify-end rounded-s border border-border'>
       <Dropdown
         id={label}
         width='200px'
         label={
-          <div className='group flex h-[40px] w-full shrink grow items-center justify-between gap-1 rounded-s border-border bg-background px-1.5 py-1.5'>
+          <div className='group flex h-[36px] w-[86px] shrink grow items-center justify-center gap-1 rounded-s border-border bg-background py-1.5'>
             <Icon name={icon} size={18} />
             <span>{label}</span>
           </div>
         }
         options={options}
-        triggerClassName='pr-1.5 bg-background rounded-s'
+        triggerClassName={`pr-1.5 rounded-s ${theme === "light" ? "bg-white" : "bg-background"}`}
       />
     </div>
   );
