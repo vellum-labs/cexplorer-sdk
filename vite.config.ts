@@ -12,7 +12,6 @@ export default defineConfig({
       outDir: "dist",
       entryRoot: "src",
       staticImport: true,
-      rollupTypes: true,
     }),
     {
       name: "copy-css",
