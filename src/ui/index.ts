@@ -23,3 +23,4 @@ export { Button } from "./button";
 export { Copy } from "./copy";
 export { DateCell } from "./dateCell";
 export { Tooltip } from "./tooltip";
+export { LoadingSkeleton } from "./loadingSkeleton";
