@@ -3,21 +3,146 @@ import type { FC, ReactNode } from "react";
 import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 
+/**
+ * Offset configuration for tooltip positioning.
+ *
+ * @interface Offset
+ */
 interface Offset {
+  /**
+   * Horizontal offset in pixels.
+   *
+   * @optional
+   * @example 10
+   */
   x?: number;
+  /**
+   * Vertical offset in pixels.
+   *
+   * @optional
+   * @example 10
+   */
   y?: number;
 }
 
+/**
+ * Props for the Tooltip component.
+ *
+ * @interface TooltipProps
+ */
 interface TooltipProps {
+  /**
+   * Trigger element that shows the tooltip on hover.
+   *
+   * @example <span>Hover me</span>
+   * @example <Button label="Info" />
+   */
   children: ReactNode;
+  /**
+   * Content to display inside the tooltip.
+   *
+   * @example "Transaction hash"
+   * @example <div>Pool ID: pool1xxx...</div>
+   */
   content: ReactNode;
+  /**
+   * Delay in milliseconds before hiding the tooltip after mouse leaves.
+   *
+   * @optional
+   * @default 150
+   * @example 300
+   */
   delay?: number;
+  /**
+   * Force the tooltip to appear in a specific direction.
+   * If not set, direction is calculated automatically based on available space.
+   *
+   * @optional
+   * @example "top"
+   * @example "bottom"
+   * @example "left"
+   * @example "right"
+   */
   forceDirection?: "top" | "bottom" | "left" | "right";
+  /**
+   * Prevent the tooltip from displaying.
+   *
+   * @optional
+   * @default false
+   */
   hide?: boolean;
+  /**
+   * Reference to an element whose width should be used for the tooltip width.
+   *
+   * @optional
+   * @example useRef<HTMLDivElement>(null)
+   */
   widthRef?: React.RefObject<HTMLElement>;
+  /**
+   * Distance in pixels between the trigger and tooltip.
+   * Can be a number (applied to both x and y) or an object with separate x and y values.
+   *
+   * @optional
+   * @default 8
+   * @example 12
+   * @example { x: 10, y: 5 }
+   */
   offset?: number | Offset;
 }
 
+/**
+ * Tooltip component with smart positioning and customizable appearance.
+ *
+ * Features:
+ * - Automatic positioning to avoid viewport overflow
+ * - Manual direction control with forceDirection prop
+ * - Customizable offset distance
+ * - Hover and touch support
+ * - Portal rendering for correct z-index stacking
+ * - Delayed hide for better UX
+ * - Dynamic width matching via widthRef
+ * - Empty content auto-hiding
+ *
+ * Positioning Logic:
+ * 1. Prefers top position if space available (60px)
+ * 2. Falls back to bottom, right, or left based on space
+ * 3. Can be forced to specific direction via forceDirection prop
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic tooltip with address
+ * <Tooltip content="Copy address to clipboard">
+ *   <Copy copyText="addr1q9xyz..." />
+ * </Tooltip>
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Tooltip with forced bottom position
+ * <Tooltip
+ *   content="Pool details"
+ *   forceDirection="bottom"
+ *   delay={300}
+ * >
+ *   <span>ACME Pool</span>
+ * </Tooltip>
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Tooltip with custom offset
+ * <Tooltip
+ *   content="Transaction hash: 0x123..."
+ *   offset={{ x: 15, y: 10 }}
+ * >
+ *   <InfoIcon size={16} />
+ * </Tooltip>
+ * ```
+ *
+ * @param {TooltipProps} props - Component props
+ * @returns {JSX.Element} Rendered tooltip wrapper with trigger element
+ */
 export const Tooltip: FC<TooltipProps> = ({
   children,
   content,

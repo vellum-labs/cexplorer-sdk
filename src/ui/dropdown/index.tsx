@@ -11,22 +11,166 @@ import {
   useState,
 } from "react";
 
+/**
+ * Props for the Dropdown component.
+ *
+ * @interface DropdownProps
+ */
 export interface DropdownProps {
+  /**
+   * Unique identifier for the dropdown instance.
+   * Used to manage open/close state across multiple dropdowns.
+   *
+   * @example "main-menu"
+   */
   id: string;
+  /**
+   * Array of navigation options to display in the dropdown menu.
+   * Can include links, click handlers, nested options, and dividers.
+   *
+   * @example
+   * ```tsx
+   * [
+   *   { label: "Profile", onClick: () => navigate("/profile") },
+   *   { label: "Settings", href: "/settings" },
+   *   { label: "Logout", onClick: handleLogout, divider: true }
+   * ]
+   * ```
+   */
   options: NavigationOptions;
+  /**
+   * Width of the dropdown menu.
+   *
+   * @optional
+   * @default "190px"
+   * @example "250px"
+   */
   width?: string;
+  /**
+   * Content to display as the dropdown trigger/label.
+   * Can be text, icon, or any React node.
+   *
+   * @example "Menu"
+   * @example <><Icon /> Settings</>
+   */
   label: ReactNode;
+  /**
+   * Hide the chevron icon next to the label.
+   *
+   * @optional
+   * @default false
+   */
   hideChevron?: boolean;
+  /**
+   * Additional CSS classes for the trigger button.
+   *
+   * @optional
+   * @example "text-primary font-bold"
+   */
   triggerClassName?: string;
+  /**
+   * Disable hover-to-open behavior. Dropdown will only open on click.
+   *
+   * @optional
+   * @default false
+   */
   disableHover?: boolean;
+  /**
+   * Automatically close the dropdown when an option is selected.
+   *
+   * @optional
+   * @default false
+   */
   closeOnSelect?: boolean;
+  /**
+   * Force the dropdown to open in a specific vertical direction.
+   * If not set, position is calculated automatically.
+   *
+   * @optional
+   * @example "down"
+   * @example "up"
+   */
   forceVerticalPosition?: "down" | "up";
+  /**
+   * Force the dropdown to align in a specific horizontal direction.
+   * If not set, position is calculated automatically.
+   *
+   * @optional
+   * @example "left"
+   * @example "right"
+   */
   forceHorizontalPosition?: "left" | "right";
+  /**
+   * Additional CSS classes for the dropdown popover container.
+   *
+   * @optional
+   * @example "shadow-xl rounded-lg"
+   */
   poppoverClassname?: string;
+  /**
+   * Additional CSS classes for the outer wrapper element.
+   *
+   * @optional
+   * @example "ml-4"
+   */
   wrapperClassname?: string;
+  /**
+   * Show border around the dropdown menu.
+   *
+   * @optional
+   * @default false
+   */
   withBorder?: boolean;
 }
 
+/**
+ * Dropdown menu component with support for nested options, keyboard navigation, and smart positioning.
+ *
+ * Features:
+ * - Hover and click interactions
+ * - Keyboard navigation (Arrow keys, Enter, Escape)
+ * - Automatic positioning to avoid viewport overflow
+ * - Support for internal and external links
+ * - Nested submenus
+ * - Customizable styling
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic dropdown
+ * <Dropdown
+ *   id="user-menu"
+ *   label="Account"
+ *   options={[
+ *     { label: "Profile", onClick: () => console.log("Profile") },
+ *     { label: "Settings", href: "/settings" },
+ *     { label: "Logout", onClick: handleLogout }
+ *   ]}
+ * />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Dropdown with nested options
+ * <Dropdown
+ *   id="tools-menu"
+ *   label="Tools"
+ *   width="220px"
+ *   options={[
+ *     {
+ *       label: "Development",
+ *       nestedOptions: [
+ *         { label: "VS Code", href: "/tools/vscode" },
+ *         { label: "Git", href: "/tools/git" }
+ *       ]
+ *     }
+ *   ]}
+ * />
+ * ```
+ *
+ * @param {DropdownProps} props - Component props
+ * @returns {JSX.Element} Rendered dropdown component
+ */
 export const Dropdown: FC<DropdownProps> = ({
   id,
   label,

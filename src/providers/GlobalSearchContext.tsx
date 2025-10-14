@@ -8,6 +8,11 @@ import { getCategories } from "@/utils/search/getCategories";
 import { UseQueryResult } from "@tanstack/react-query";
 import { Locales } from "@/types/commonTypes";
 
+/**
+ * Available search categories for Cardano blockchain entities.
+ *
+ * @typedef {string} Category
+ */
 export type Category =
   | "all"
   | "tx"
@@ -23,6 +28,11 @@ export type Category =
   | "page"
   | "gov_action_proposal";
 
+/**
+ * Global search context value type.
+ *
+ * @interface GlobalSearchContextProps
+ */
 interface GlobalSearchContextProps {
   focused: boolean;
   categoriesOverflow: boolean;
@@ -48,8 +58,25 @@ const GlobalSearchContext = createContext<GlobalSearchContextProps | null>(
   null,
 );
 
+/**
+ * Props for GlobalSearchProvider component.
+ *
+ * @interface GlobalSearchProviderProps
+ */
 interface GlobalSearchProviderProps {
+  /**
+   * Child components that can access global search context.
+   */
   children: ReactNode;
+  /**
+   * React Query hook for fetching search results.
+   * Should return search data based on query, category, and locale.
+   *
+   * @param {string | undefined} query - Search query string
+   * @param {string} [category] - Optional category filter
+   * @param {Locales} [locale] - Locale for search results
+   * @returns {UseQueryResult} React Query result with search data
+   */
   useFetchMiscSearch: (
     query: string | undefined,
     category?: string,
@@ -60,9 +87,62 @@ interface GlobalSearchProviderProps {
     },
     unknown
   >;
+  /**
+   * Current locale for search results.
+   *
+   * @example "en"
+   * @example "es"
+   */
   locale: Locales;
 }
 
+/**
+ * Provider component for global blockchain search functionality.
+ *
+ * Features:
+ * - Real-time debounced search across blockchain entities
+ * - Category filtering and counts
+ * - Recent searches with localStorage persistence
+ * - Focus/blur state management
+ * - Horizontal scroll for category overflow
+ * - Click-outside to close behavior
+ *
+ * @component
+ * @example
+ * ```tsx
+ * import { useFetchMiscSearch } from "./api/hooks";
+ *
+ * <GlobalSearchProvider
+ *   useFetchMiscSearch={useFetchMiscSearch}
+ *   locale="en"
+ * >
+ *   <App />
+ * </GlobalSearchProvider>
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Access search state in child component
+ * function SearchComponent() {
+ *   const {
+ *     search,
+ *     handleSearchChange,
+ *     data,
+ *     categories
+ *   } = useGlobalSearch();
+ *
+ *   return (
+ *     <input
+ *       value={search}
+ *       onChange={e => handleSearchChange(e.target.value)}
+ *     />
+ *   );
+ * }
+ * ```
+ *
+ * @param {GlobalSearchProviderProps} props - Component props
+ * @returns {JSX.Element} Search provider wrapper
+ */
 export const GlobalSearchProvider: React.FC<GlobalSearchProviderProps> = ({
   children,
   useFetchMiscSearch,
@@ -208,6 +288,40 @@ export const GlobalSearchProvider: React.FC<GlobalSearchProviderProps> = ({
   );
 };
 
+/**
+ * Hook to access global search state and actions.
+ *
+ * Must be used within a GlobalSearchProvider component.
+ * Provides search state, handlers, and data for building search UIs.
+ *
+ * @throws {Error} If used outside of GlobalSearchProvider
+ * @returns {GlobalSearchContextProps} Global search context with state and handlers
+ *
+ * @example
+ * ```tsx
+ * function SearchInput() {
+ *   const {
+ *     search,
+ *     handleSearchChange,
+ *     data,
+ *     isLoading,
+ *     categories
+ *   } = useGlobalSearch();
+ *
+ *   return (
+ *     <div>
+ *       <input
+ *         value={search}
+ *         onChange={e => handleSearchChange(e.target.value)}
+ *       />
+ *       {isLoading && <Spinner />}
+ *       {categories && <CategoryTabs categories={categories} />}
+ *       <ResultsList results={data} />
+ *     </div>
+ *   );
+ * }
+ * ```
+ */
 export const useGlobalSearch = (): GlobalSearchContextProps => {
   const context = useContext(GlobalSearchContext);
   if (!context) {

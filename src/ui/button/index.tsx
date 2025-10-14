@@ -3,19 +3,143 @@ import type { ReactNode } from "react";
 import type { FileRoutesByPath } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 
+/**
+ * Props for the Button component.
+ *
+ * @interface Props
+ */
 type Props = {
+  /**
+   * Size of the button, controlling padding and font size.
+   *
+   * @example "xs" // Extra small
+   * @example "sm" // Small
+   * @example "md" // Medium
+   * @example "lg" // Large
+   * @example "xl" // Extra large
+   */
   size: "xs" | "sm" | "md" | "lg" | "xl";
+  /**
+   * Visual style variant of the button.
+   *
+   * @example "primary" // Dark blue background
+   * @example "secondary" // Secondary color background
+   * @example "tertiary" // Card background with border
+   * @example "purple" // Purple gradient
+   * @example "red" // Red background
+   * @example "discord" // Discord blue color
+   */
   variant: "primary" | "secondary" | "tertiary" | "purple" | "red" | "discord";
+  /**
+   * Text or content to display in the button.
+   *
+   * @optional
+   * @example "Click me"
+   * @example <>Submit Transaction</>
+   */
   label?: ReactNode;
+  /**
+   * Internal route path for navigation. When provided, button renders as a Link.
+   *
+   * @optional
+   * @example "/transaction/$hash"
+   * @example "/pool/$id"
+   */
   href?: FileRoutesByPath[keyof FileRoutesByPath]["path"];
+  /**
+   * Open link in a new tab when href is provided.
+   *
+   * @optional
+   * @default false
+   */
   targetBlank?: boolean;
+  /**
+   * Icon to display on the right side of the label.
+   *
+   * @optional
+   * @example <ArrowRight size={16} />
+   */
   rightIcon?: React.ReactNode;
+  /**
+   * Icon to display on the left side of the label.
+   *
+   * @optional
+   * @example <Search size={16} />
+   */
   leftIcon?: React.ReactNode;
+  /**
+   * Additional CSS classes to apply to the button.
+   *
+   * @optional
+   * @example "w-full mt-4"
+   */
   className?: string;
+  /**
+   * Disable the button interaction and apply disabled styling.
+   *
+   * @optional
+   * @default false
+   */
   disabled?: boolean;
+  /**
+   * Callback function called when button is clicked.
+   *
+   * @optional
+   * @example () => handleSubmit()
+   */
   onClick?: () => void;
 };
 
+/**
+ * Button component with multiple size and variant options, supporting both button and link modes.
+ *
+ * Features:
+ * - 5 size options (xs, sm, md, lg, xl)
+ * - 6 visual variants (primary, secondary, tertiary, purple, red, discord)
+ * - Support for left and right icons
+ * - Automatic Link rendering when href is provided
+ * - Disabled state with visual feedback
+ * - Hover and active state animations
+ * - Type-safe routing with TanStack Router
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Basic button
+ * <Button
+ *   size="md"
+ *   variant="primary"
+ *   label="View Transaction"
+ *   onClick={() => console.log("Clicked")}
+ * />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Link button with icon
+ * <Button
+ *   size="lg"
+ *   variant="secondary"
+ *   label="Explore Pool"
+ *   href="/pool/$id"
+ *   rightIcon={<ArrowRight size={16} />}
+ * />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Icon-only button
+ * <Button
+ *   size="sm"
+ *   variant="tertiary"
+ *   leftIcon={<Search size={16} />}
+ *   onClick={handleSearch}
+ * />
+ * ```
+ *
+ * @param {Props} props - Component props
+ * @returns {JSX.Element} Rendered button or link component
+ */
 export const Button = ({
   size,
   variant,

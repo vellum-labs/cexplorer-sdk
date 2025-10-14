@@ -2,6 +2,28 @@ import { Tooltip } from "@/ui/tooltip";
 import { TZDate } from "@date-fns/tz";
 import { format } from "date-fns";
 
+/**
+ * Truncates long strings with ellipsis for display purposes.
+ *
+ * Commonly used for blockchain hashes, addresses, and other long identifiers.
+ *
+ * @param {string | null | undefined} text - Text to format
+ * @param {"short" | "long" | "shorter" | "longer"} type - Truncation length variant
+ * @param {number} [startIndex=0] - Starting position for the slice
+ * @returns {string | undefined} Truncated string with ellipsis, or undefined if text is falsy
+ *
+ * @example
+ * ```tsx
+ * formatString("addr1q9xyztabcdefghijklmnopqrstuvwxyz123456", "short")
+ * // Returns: "addr1...23456"
+ * ```
+ *
+ * @example
+ * ```tsx
+ * formatString("0a1b2c3d4e5f6789abcdefghijklmnop", "shorter")
+ * // Returns: "0a1b...mnop"
+ * ```
+ */
 export const formatString = (
   text: string | null | undefined,
   type: "short" | "long" | "shorter" | "longer",
@@ -25,12 +47,42 @@ export const formatString = (
   return `${text.slice(0 + startFromIndex, 8 + startFromIndex)}...${text.slice(-8)}`;
 };
 
+/**
+ * Formats numbers with thousand separators (commas).
+ *
+ * @param {number | string | undefined} number - Number to format
+ * @returns {string} Formatted number string with commas, or "-" if undefined
+ *
+ * @example
+ * ```tsx
+ * formatNumber(1234567)
+ * // Returns: "1,234,567"
+ * ```
+ *
+ * @example
+ * ```tsx
+ * formatNumber("1000000")
+ * // Returns: "1,000,000"
+ * ```
+ */
 export const formatNumber = (number: number | string | undefined): string => {
   if (number === undefined) return "-";
 
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
+/**
+ * Converts UTC datetime string to local timezone format.
+ *
+ * @param {string} utcDateString - UTC datetime string (without Z suffix)
+ * @returns {string} Local datetime in "YYYY-MM-DD HH:mm:ss" format
+ *
+ * @example
+ * ```tsx
+ * convertUtcToLocal("2024-01-15 10:30:00")
+ * // Returns: "2024-01-15 13:30:00" (if local timezone is UTC+3)
+ * ```
+ */
 export function convertUtcToLocal(utcDateString: string): string {
   const date = new Date(utcDateString + "Z");
 
@@ -44,6 +96,32 @@ export function convertUtcToLocal(utcDateString: string): string {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
+/**
+ * Formats large numbers with suffixes (k, M, B).
+ *
+ * @param {number} num - Number to format
+ * @param {boolean} [removeUnusedZeroes=false] - Remove decimal places for numbers < 1000
+ * @param {number} [numberOfDecimals=2] - Number of decimal places
+ * @returns {string} Formatted number with suffix
+ *
+ * @example
+ * ```tsx
+ * formatNumberWithSuffix(1500)
+ * // Returns: "1.50k"
+ * ```
+ *
+ * @example
+ * ```tsx
+ * formatNumberWithSuffix(45000000)
+ * // Returns: "45.00M"
+ * ```
+ *
+ * @example
+ * ```tsx
+ * formatNumberWithSuffix(5000000000)
+ * // Returns: "5.00B"
+ * ```
+ */
 export const formatNumberWithSuffix = (
   num: number,
   removeUnusedZeroes?: boolean,
@@ -61,6 +139,20 @@ export const formatNumberWithSuffix = (
   }
 };
 
+/**
+ * Converts various input types to UTC Date object.
+ *
+ * Automatically adds 'Z' suffix to strings without timezone information.
+ *
+ * @param {string | Date | number} input - Date input (ISO string, Date object, or timestamp)
+ * @returns {Date} UTC Date object
+ *
+ * @example
+ * ```tsx
+ * toUtcDate("2024-01-15T10:30:00")
+ * // Returns: Date object in UTC
+ * ```
+ */
 export const toUtcDate = (input: string | Date | number): Date => {
   if (input instanceof Date) return input;
   if (typeof input === "string") {
@@ -70,6 +162,28 @@ export const toUtcDate = (input: string | Date | number): Date => {
   return new Date(input);
 };
 
+/**
+ * Formats date with timezone conversion and tooltip.
+ *
+ * Returns either a React element with Tooltip or ISO string.
+ *
+ * @param {string | Date | number} [input] - Date to format
+ * @param {boolean} [hideTime=false] - Hide time portion, show only date
+ * @param {boolean} [returnString=false] - Return ISO string instead of JSX
+ * @returns {JSX.Element | string} Formatted date with tooltip or ISO string
+ *
+ * @example
+ * ```tsx
+ * formatDate("2024-01-15T10:30:00Z")
+ * // Returns: <Tooltip>Jan 15 2024, 13:30 GMT+3</Tooltip>
+ * ```
+ *
+ * @example
+ * ```tsx
+ * formatDate("2024-01-15T10:30:00Z", true)
+ * // Returns: <Tooltip>Jan 15 2024</Tooltip>
+ * ```
+ */
 export const formatDate = (
   input?: string | Date | number,
   hideTime?: boolean,
@@ -93,6 +207,25 @@ export const formatDate = (
   );
 };
 
+/**
+ * Formats future timestamp as relative time ("in X time").
+ *
+ * @param {string} timestamp - Future timestamp string
+ * @returns {string} Relative time string
+ *
+ * @example
+ * ```tsx
+ * // If current time is 10:00
+ * formatTimeIn("10:05:00")
+ * // Returns: "in 5m"
+ * ```
+ *
+ * @example
+ * ```tsx
+ * formatTimeIn("12:30:00") // 2.5 hours later
+ * // Returns: "in 2h 30m"
+ * ```
+ */
 export const formatTimeIn = (timestamp: string) => {
   const now = new Date();
   const date = new Date(timestamp);
@@ -122,6 +255,31 @@ export const formatTimeIn = (timestamp: string) => {
   }
 };
 
+/**
+ * Formats past timestamp as relative time ("X time ago").
+ *
+ * @param {string} timestamp - Past timestamp string
+ * @returns {string} Relative time string
+ *
+ * @example
+ * ```tsx
+ * // If current time is 10:00
+ * formatTimeAgo("09:55:00")
+ * // Returns: "5m ago"
+ * ```
+ *
+ * @example
+ * ```tsx
+ * formatTimeAgo("08:30:00") // 1.5 hours ago
+ * // Returns: "1h 30m ago"
+ * ```
+ *
+ * @example
+ * ```tsx
+ * formatTimeAgo("2024-01-10T10:00:00") // 5 days ago
+ * // Returns: "5d ago"
+ * ```
+ */
 export const formatTimeAgo = (timestamp: string) => {
   const now = new Date();
   const date = new Date(timestamp);

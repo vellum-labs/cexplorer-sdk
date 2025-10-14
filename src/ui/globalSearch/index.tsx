@@ -8,10 +8,60 @@ import { GlobalSearchRecent } from "./components/GlobalSearchRecent";
 import { GlobalSearchCell } from "./components/GlobalSearchCell";
 import { TextInput } from "../textInput";
 
+/**
+ * Props for the GlobalSearch component.
+ *
+ * @interface GlobalSearchProps
+ */
 export interface GlobalSearchProps {
+  /**
+   * Enable homepage variant with different styling.
+   * Homepage variant uses a different layout optimized for landing pages.
+   *
+   * @optional
+   * @default false
+   */
   isHomepage?: boolean;
 }
 
+/**
+ * Global search component for Cardano blockchain entities with real-time results and category filtering.
+ *
+ * Features:
+ * - Real-time search across multiple blockchain entity types
+ * - Category filtering (transactions, blocks, addresses, pools, tokens, etc.)
+ * - Recent searches history (stored in localStorage)
+ * - Keyboard navigation support
+ * - Loading states and empty state handling
+ * - Smart positioning to avoid viewport overflow
+ *
+ * Supported search categories:
+ * - Transactions
+ * - Blocks
+ * - Addresses
+ * - Stake addresses
+ * - Pools
+ * - Assets/Tokens
+ * - Policies
+ * - ADA Handles
+ * - Governance actions
+ *
+ * @component
+ * @example
+ * ```tsx
+ * // Standard variant
+ * <GlobalSearch />
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Homepage variant
+ * <GlobalSearch isHomepage={true} />
+ * ```
+ *
+ * @param {GlobalSearchProps} props - Component props
+ * @returns {JSX.Element} Rendered global search component
+ */
 export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
   const { theme } = useThemeStore();
 
