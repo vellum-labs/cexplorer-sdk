@@ -8,6 +8,7 @@ import {
   createRouter,
   RouterProvider,
 } from "@tanstack/react-router";
+import { Toaster } from "sonner";
 
 const withTheme: Decorator = (Story, context) => {
   const theme = context.globals.theme || "light";
@@ -18,6 +19,14 @@ const withTheme: Decorator = (Story, context) => {
 
   return (
     <ThemeProvider defaultTheme={theme}>
+      <Toaster
+        toastOptions={{
+          classNames: {
+            toast: "bg-background text-text border relative border-border",
+            content: "relative",
+          },
+        }}
+      />
       <Story />
     </ThemeProvider>
   );

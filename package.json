@@ -79,7 +79,12 @@
     "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react-helmet": "^6.1.0",
     "clsx": "^2.1.1",
-    "tailwind-merge": "^2.3.0"
+    "tailwind-merge": "^2.3.0",
+    "zustand": "^4.5.2",
+    "immer": "^10.1.1",
+    "@date-fns/tz": "^1.4.1",
+    "date-fns": "^4.1.0",
+    "sonner": "^1.5.0"
   },
   "peerDependenciesMeta": {
     "react": {
@@ -104,6 +109,21 @@
       "optional": false
     },
     "tailwind-merge": {
+      "optional": false
+    },
+    "zustand": {
+      "optional": false
+    },
+    "immer": {
+      "optional": false
+    },
+    "@date-fns/tz": {
+      "optional": false
+    },
+    "date-fns": {
+      "optional": false
+    },
+    "sonner": {
       "optional": false
     }
   },
