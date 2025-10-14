@@ -22,6 +22,8 @@ export * from "./utils/cn";
 export * from "./utils/format";
 export * from "./utils/search/getCategories";
 export * from "./utils/lovelaceToAda";
+export * from "./utils/truncatedText";
+export * from "./utils/getNodeText";
 
 // Providers
 export * from "./providers/GlobalSearchContext";
@@ -29,6 +31,7 @@ export * from "./providers/ThemeProvider";
 
 // Hooks
 export * from "./hooks/useDebounce";
+export * from "./hooks/useWindowDimensions";
 
 // Stores
 export * from "./stores/dropdownState";

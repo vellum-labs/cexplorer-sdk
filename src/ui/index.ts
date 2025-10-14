@@ -26,3 +26,8 @@ export { DateCell } from "./dateCell";
 export { Tooltip } from "./tooltip";
 export { LoadingSkeleton } from "./loadingSkeleton";
 export { ShareButton } from "./shareButton";
+export { TruncatedText } from "./truncatedText";
+
+// Layout
+export { Header } from "./header";
+export type { HeaderProps } from "./header";
