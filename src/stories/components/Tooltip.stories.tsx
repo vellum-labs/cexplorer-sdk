@@ -1,4 +1,4 @@
-import { Tooltip } from "@/ui/global/Tooltip";
+import { Tooltip } from "@/ui/tooltip";
 import { Meta, StoryObj } from "@storybook/react/*";
 import { Info } from "lucide-react";
 
@@ -50,9 +50,7 @@ const Default: Story = {
   args: {
     content: "Transaction hash",
     children: (
-      <span className='cursor-pointer text-primary'>
-        5f20df933584...940ebb
-      </span>
+      <span className='cursor-pointer text-primary'>5f20df933584...940ebb</span>
     ),
   },
 };
@@ -93,9 +91,7 @@ const EpochInfo: Story = {
 const FeeBreakdown: Story = {
   args: {
     content: "0.17 ADA transaction fee",
-    children: (
-      <span className='cursor-pointer text-grayTextPrimary'>Fee</span>
-    ),
+    children: <span className='cursor-pointer text-grayTextPrimary'>Fee</span>,
   },
 };
 
@@ -143,9 +139,7 @@ const LongContent: Story = {
   args: {
     content:
       "This is a very long tooltip content that explains detailed information about the transaction including its inputs, outputs, and metadata",
-    children: (
-      <span className='cursor-pointer text-primary'>Long tooltip</span>
-    ),
+    children: <span className='cursor-pointer text-primary'>Long tooltip</span>,
   },
 };
 

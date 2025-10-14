@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 import { cn } from "@/utils/cn";
 import { useState } from "react";
-import { Button } from "./Button";
+import { Button } from "../button";
 
 interface CopyComponentProps {
   size?: number;

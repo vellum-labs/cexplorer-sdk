@@ -1,13 +1,13 @@
 import type { MiscSearch } from "@/types/miscTypes";
 import type { FC } from "react";
 
-import { DateCell } from "@/ui/global/DateCell";
+import { DateCell } from "@/ui/dateCell";
 
 import { formatString } from "@/utils/format";
 import { Link } from "@tanstack/react-router";
 
 import { useGlobalSearch } from "@/providers/GlobalSearchContext";
-import { AdaWithTooltip } from "@/ui/global/AdaWithTooltip";
+import { AdaWithTooltip } from "@/ui/adaWithTooltip";
 
 interface GlobalSearchCellProps {
   item: MiscSearch;

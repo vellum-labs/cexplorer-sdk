@@ -1,4 +1,4 @@
-import { DateCell } from "@/ui/global/DateCell";
+import { DateCell } from "@/ui/dateCell";
 import { Meta, StoryObj } from "@storybook/react/*";
 
 const meta: Meta<typeof DateCell> = {
@@ -41,7 +41,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const RecentBlock: Story = {
-  render: (args) => {
+  render: args => {
     const time = new Date(Date.now() - 2 * 60 * 1000).toISOString();
     return <DateCell {...args} time={time} withoutConvert={true} />;
   },
@@ -51,7 +51,7 @@ const RecentBlock: Story = {
 };
 
 const FiveMinutesAgo: Story = {
-  render: (args) => {
+  render: args => {
     const time = new Date(Date.now() - 5 * 60 * 1000).toISOString();
     return <DateCell {...args} time={time} withoutConvert={true} />;
   },
@@ -61,7 +61,7 @@ const FiveMinutesAgo: Story = {
 };
 
 const OneHourAgo: Story = {
-  render: (args) => {
+  render: args => {
     const time = new Date(Date.now() - 60 * 60 * 1000).toISOString();
     return <DateCell {...args} time={time} withoutConvert={true} />;
   },
@@ -71,7 +71,7 @@ const OneHourAgo: Story = {
 };
 
 const OneDayAgo: Story = {
-  render: (args) => {
+  render: args => {
     const time = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
     return <DateCell {...args} time={time} withoutConvert={true} />;
   },
@@ -81,7 +81,7 @@ const OneDayAgo: Story = {
 };
 
 const OneWeekAgo: Story = {
-  render: (args) => {
+  render: args => {
     const time = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
     return <DateCell {...args} time={time} withoutConvert={true} />;
   },
@@ -91,7 +91,7 @@ const OneWeekAgo: Story = {
 };
 
 const OneMonthAgo: Story = {
-  render: (args) => {
+  render: args => {
     const time = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
     return <DateCell {...args} time={time} withoutConvert={true} />;
   },
@@ -101,7 +101,7 @@ const OneMonthAgo: Story = {
 };
 
 const TransactionTimestamp: Story = {
-  render: (args) => {
+  render: args => {
     const time = new Date(Date.now() - 15 * 60 * 1000).toISOString();
     return <DateCell {...args} time={time} withoutConvert={true} />;
   },
@@ -112,7 +112,7 @@ const TransactionTimestamp: Story = {
 };
 
 const EpochEndTime: Story = {
-  render: (args) => {
+  render: args => {
     const time = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString();
     return <DateCell {...args} time={time} withoutConvert={true} />;
   },
@@ -122,7 +122,7 @@ const EpochEndTime: Story = {
 };
 
 const WithoutTabularNums: Story = {
-  render: (args) => {
+  render: args => {
     const time = new Date(Date.now() - 10 * 60 * 1000).toISOString();
     return <DateCell {...args} time={time} withoutConvert={true} />;
   },

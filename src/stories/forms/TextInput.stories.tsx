@@ -1,4 +1,4 @@
-import { TextInput } from "@/ui/global/TextInput";
+import { TextInput } from "@/ui/textInput";
 import { Meta, StoryObj } from "@storybook/react/*";
 import { useState } from "react";
 

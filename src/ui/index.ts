@@ -14,11 +14,12 @@ export type { DropdownProps } from "./dropdown";
 
 // Form components
 export { GlobalSearch } from "./globalSearch";
-export { GlobalSearchProps } from "./globalSearch";
+export type { GlobalSearchProps } from "./globalSearch";
+export { TextInput } from "./textInput";
 
 // Global components
-export { AdaWithTooltip } from "./global/AdaWithTooltip";
-export { Button } from "./global/Button";
-export { Copy } from "./global/Copy";
-export { DateCell } from "./global/DateCell";
-export { Tooltip } from "./global/Tooltip";
+export { AdaWithTooltip } from "./adaWithTooltip";
+export { Button } from "./button";
+export { Copy } from "./copy";
+export { DateCell } from "./dateCell";
+export { Tooltip } from "./tooltip";

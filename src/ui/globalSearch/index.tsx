@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { GlobalSearchDropdown } from "./components/GlobalSearchDropdown";
 import { GlobalSearchRecent } from "./components/GlobalSearchRecent";
 import { GlobalSearchCell } from "./components/GlobalSearchCell";
-import { TextInput } from "../global/TextInput";
+import { TextInput } from "../textInput";
 
 export interface GlobalSearchProps {
   isHomepage?: boolean;

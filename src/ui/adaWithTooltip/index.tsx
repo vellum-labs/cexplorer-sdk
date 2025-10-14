@@ -1,9 +1,9 @@
 import { formatNumber } from "@/utils/format";
 import type { FC } from "react";
-import { Tooltip } from "../global/Tooltip";
+import { Tooltip } from "../tooltip";
 
 import { lovelaceToAda } from "@/utils/lovelaceToAda";
-import { Copy } from "./Copy";
+import { Copy } from "../copy";
 
 interface AdaWithTooltipProps {
   data: number;

@@ -1,4 +1,4 @@
-import { Copy } from "@/ui/global/Copy";
+import { Copy } from "@/ui/copy";
 import { Meta, StoryObj } from "@storybook/react/*";
 
 const meta: Meta<typeof Copy> = {
@@ -79,24 +79,21 @@ const PolicyId: Story = {
 
 const SmallSize: Story = {
   args: {
-    copyText:
-      "addr1qxyz123abc456def789ghi012jkl345mno678pqr901stu234",
+    copyText: "addr1qxyz123abc456def789ghi012jkl345mno678pqr901stu234",
     size: 13,
   },
 };
 
 const LargeSize: Story = {
   args: {
-    copyText:
-      "addr1qxyz123abc456def789ghi012jkl345mno678pqr901stu234",
+    copyText: "addr1qxyz123abc456def789ghi012jkl345mno678pqr901stu234",
     size: 20,
   },
 };
 
 const WithButtonText: Story = {
   args: {
-    copyText:
-      "addr1qxyz123abc456def789ghi012jkl345mno678pqr901stu234",
+    copyText: "addr1qxyz123abc456def789ghi012jkl345mno678pqr901stu234",
     showText: "Copy Address",
   },
 };

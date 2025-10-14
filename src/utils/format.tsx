@@ -1,4 +1,4 @@
-import { Tooltip } from "@/ui/global/Tooltip";
+import { Tooltip } from "@/ui/tooltip";
 import { TZDate } from "@date-fns/tz";
 import { format } from "date-fns";
 
