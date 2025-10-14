@@ -47,31 +47,19 @@ const mockSearchResults = {
   ],
 };
 
-const mockUseFetchMiscSearch = () => ({
-  data: mockSearchResults,
-  isLoading: false,
-  isFetching: false,
-  error: null,
-  refetch: () => Promise.resolve({ data: mockSearchResults }),
-});
+const mockUseFetchMiscSearch =
+  (isLoading = false, isEmpty = false) =>
+  () => ({
+    data: isEmpty ? { data: [] } : mockSearchResults,
+    isLoading: isLoading,
+    isFetching: isLoading,
+    error: null,
+    refetch: () => Promise.resolve({ data: mockSearchResults }),
+  });
 
 const meta: Meta<typeof GlobalSearch> = {
   title: "Forms/GlobalSearch",
   component: GlobalSearch,
-  decorators: [
-    Story => (
-      <div className='flex h-[700px] w-full items-start justify-center overflow-hidden bg-background p-10'>
-        <GlobalSearchProvider
-          useFetchMiscSearch={mockUseFetchMiscSearch as any}
-          locale='en'
-        >
-          <div className='w-full max-w-[800px]'>
-            <Story />
-          </div>
-        </GlobalSearchProvider>
-      </div>
-    ),
-  ],
   tags: ["autodocs"],
   argTypes: {
     isHomepage: {
@@ -94,15 +82,127 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const Default: Story = {
+  decorators: [
+    Story => (
+      <div className='flex h-[700px] w-full items-start justify-center overflow-hidden bg-background p-10'>
+        <GlobalSearchProvider
+          useFetchMiscSearch={mockUseFetchMiscSearch(false, false) as any}
+          locale='en'
+        >
+          <div className='w-full max-w-[800px]'>
+            <Story />
+          </div>
+        </GlobalSearchProvider>
+      </div>
+    ),
+  ],
   args: {
     isHomepage: false,
   },
 };
 
 const Homepage: Story = {
+  decorators: [
+    Story => (
+      <div className='flex h-[700px] w-full items-start justify-center overflow-hidden bg-background p-10'>
+        <GlobalSearchProvider
+          useFetchMiscSearch={mockUseFetchMiscSearch(false, false) as any}
+          locale='en'
+        >
+          <div className='w-full max-w-[800px]'>
+            <Story />
+          </div>
+        </GlobalSearchProvider>
+      </div>
+    ),
+  ],
   args: {
     isHomepage: true,
   },
 };
 
-export { Default, Homepage };
+const NoResults: Story = {
+  decorators: [
+    Story => (
+      <div className='flex h-[700px] w-full items-start justify-center overflow-hidden bg-background p-10'>
+        <GlobalSearchProvider
+          useFetchMiscSearch={mockUseFetchMiscSearch(false, true) as any}
+          locale='en'
+        >
+          <div className='w-full max-w-[800px]'>
+            <Story />
+          </div>
+        </GlobalSearchProvider>
+      </div>
+    ),
+  ],
+  args: {
+    isHomepage: false,
+  },
+};
+
+const WithManyResults: Story = {
+  decorators: [
+    Story => {
+      const manyResults = {
+        data: [
+          ...mockSearchResults.data,
+          {
+            title: "OCEAN Pool",
+            ident: "pool1xyz456abc789def012ghi345jkl678mno901pqr234stu567vwx",
+            category: "pool",
+            url: "/pool/pool1xyz456abc789def012ghi345jkl678mno901pqr234stu567vwx",
+            extra: { type: "stake", value: 75000000000 },
+          },
+          {
+            title: "f43a62fdc3965df486de8a0d32fe800963589c41b38946602a0dc535",
+            ident: "f43a62fdc3965df486de8a0d32fe800963589c41b38946602a0dc535",
+            category: "policy",
+            url: "/policy/f43a62fdc3965df486de8a0d32fe800963589c41b38946602a0dc535",
+            extra: { type: "tokens", value: 1250 },
+          },
+          {
+            title:
+              "stake1u8a9qstrmj4rvc3k62k77w7rqmwx0rqrqzxz6pdx5q4zqzqqqqqqq",
+            ident:
+              "stake1u8a9qstrmj4rvc3k62k77w7rqmwx0rqrqzxz6pdx5q4zqzqqqqqqq",
+            category: "stake",
+            url: "/stake/stake1u8a9qstrmj4rvc3k62k77w7rqmwx0rqrqzxz6pdx5q4zqzqqqqqqq",
+            extra: { type: "balance", value: 500000000 },
+          },
+          {
+            title: "HOSKY",
+            ident: "asset1abc123def456ghi789jkl012mno345pqr678stu901vwx234",
+            category: "asset",
+            url: "/asset/asset1abc123def456ghi789jkl012mno345pqr678stu901vwx234",
+            extra: { type: "supply", value: 1000000000000 },
+          },
+        ],
+      };
+      const mockFetch = () => ({
+        data: manyResults,
+        isLoading: false,
+        isFetching: false,
+        error: null,
+        refetch: () => Promise.resolve({ data: manyResults }),
+      });
+      return (
+        <div className='flex h-[700px] w-full items-start justify-center overflow-hidden bg-background p-10'>
+          <GlobalSearchProvider
+            useFetchMiscSearch={mockFetch as any}
+            locale='en'
+          >
+            <div className='w-full max-w-[800px]'>
+              <Story />
+            </div>
+          </GlobalSearchProvider>
+        </div>
+      );
+    },
+  ],
+  args: {
+    isHomepage: false,
+  },
+};
+
+export { Default, Homepage, NoResults, WithManyResults };

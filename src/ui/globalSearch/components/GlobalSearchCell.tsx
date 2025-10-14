@@ -96,6 +96,7 @@ export const GlobalSearchCell: FC<GlobalSearchCellProps> = ({
                 time={rest.extra.value as string}
                 className='text-text-xs'
                 tabularNums={false}
+                withoutConvert
               />
             ) : (
               <span className='text-text-sm text-text'>
