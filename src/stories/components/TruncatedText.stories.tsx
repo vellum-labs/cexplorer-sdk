@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
 import { TruncatedText } from "../../ui/truncatedText";
 
 const meta: Meta<typeof TruncatedText> = {
@@ -26,6 +27,10 @@ const meta: Meta<typeof TruncatedText> = {
       control: "text",
       description: "Optional CSS class name",
     },
+    onHasImageChange: { action: "hasImageChanged" },
+  },
+  args: {
+    onHasImageChange: fn(),
   },
 };
 
