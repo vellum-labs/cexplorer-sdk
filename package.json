@@ -77,7 +77,9 @@
     "lucide-react": "^0.544.0",
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.3.0"
   },
   "peerDependenciesMeta": {
     "react": {
@@ -96,6 +98,12 @@
       "optional": false
     },
     "react-helmet": {
+      "optional": false
+    },
+    "clsx": {
+      "optional": false
+    },
+    "tailwind-merge": {
       "optional": false
     }
   },

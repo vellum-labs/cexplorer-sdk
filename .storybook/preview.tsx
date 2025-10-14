@@ -2,6 +2,12 @@ import type { Preview, Decorator } from "@storybook/react";
 import "../src/styles/style.css";
 import { ThemeProvider } from "../src/providers/ThemeProvider";
 import { useEffect } from "react";
+import {
+  createMemoryHistory,
+  createRootRoute,
+  createRouter,
+  RouterProvider,
+} from "@tanstack/react-router";
 
 const withTheme: Decorator = (Story, context) => {
   const theme = context.globals.theme || "light";
@@ -17,8 +23,23 @@ const withTheme: Decorator = (Story, context) => {
   );
 };
 
+const withRouter: Decorator = Story => {
+  const rootRoute = createRootRoute({
+    component: Story,
+  });
+
+  const router = createRouter({
+    routeTree: rootRoute,
+    history: createMemoryHistory({
+      initialEntries: ["/"],
+    }),
+  });
+
+  return <RouterProvider router={router} />;
+};
+
 const preview: Preview = {
-  decorators: [withTheme],
+  decorators: [withTheme, withRouter],
   globalTypes: {
     theme: {
       description: "Global theme for components",
@@ -38,7 +59,7 @@ const preview: Preview = {
     options: {
       storySort: {
         method: "alphabetical",
-        order: ["Getting Started", "*"],
+        order: ["Getting Started", "Theme", "*"],
       },
     },
     actions: { argTypesRegex: "^on[A-Z].*" },
