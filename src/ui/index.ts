@@ -11,6 +11,7 @@ export type { BreadcrumbProps } from "./breadcrumbs";
 
 export { Dropdown } from "./dropdown";
 export type { DropdownProps } from "./dropdown";
+export { AdDropdown } from "./adDropdown";
 
 // Form components
 export { GlobalSearch } from "./globalSearch";
