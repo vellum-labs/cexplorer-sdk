@@ -56,6 +56,7 @@ const preview: Preview = {
     },
   },
   parameters: {
+    layout: "fullscreen",
     options: {
       storySort: {
         method: "alphabetical",

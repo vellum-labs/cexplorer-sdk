@@ -8,7 +8,7 @@ export const BreadcrumbList = forwardRef<
   <ol
     ref={ref}
     className={cn(
-      "flex flex-wrap items-center gap-1 break-words text-text-sm text-grayTextPrimary",
+      "flex flex-wrap items-center gap-1.5 break-words text-text-sm text-grayTextPrimary",
       className,
     )}
     {...props}

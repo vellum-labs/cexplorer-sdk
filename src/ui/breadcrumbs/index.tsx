@@ -6,6 +6,8 @@ import { BreadcrumbList } from "./components/BreadcrumbList";
 import { BreadcrumbItem } from "./components/BreadcrumbItem";
 import { BreadcrumbPage } from "./components/BreadcrumbPage";
 import { BreadcrumbSeparator } from "./components/BreadcrumbSeparator";
+import { House } from "lucide-react";
+import { useThemeStore } from "@/providers/ThemeProvider";
 
 export interface BreadCrumbItem {
   /**
@@ -122,13 +124,18 @@ export const Breadcrumb: FC<BreadcrumbProps> = ({
   breadcrumbItems,
   breadcrumbSeparator = <BreadcrumbSeparator />,
 }) => {
+  const { theme } = useThemeStore();
+
   return (
     breadcrumbItems && (
       <BreadcrumbRaw className='w-full'>
         <BreadcrumbList className='flex items-center'>
           <BreadcrumbItem>
-            <Link className='underline underline-offset-2' to='/'>
-              Home
+            <Link to='/'>
+              <House
+                size={15}
+                className={`${theme === "light" ? "text-gray-500" : "text-gray-200"}`}
+              />
             </Link>
           </BreadcrumbItem>
           {breadcrumbSeparator}
@@ -138,9 +145,9 @@ export const Breadcrumb: FC<BreadcrumbProps> = ({
                 {link ? (
                   <Link
                     title={ident}
-                    className='underline underline-offset-2'
                     to={link}
                     params={params}
+                    className={`font-semibold ${theme === "light" ? "text-brand-600" : "text-brand-300"}`}
                   >
                     {label}
                   </Link>
@@ -156,3 +163,5 @@ export const Breadcrumb: FC<BreadcrumbProps> = ({
     )
   );
 };
+
+Breadcrumb.displayName = "Breadcrumb";
