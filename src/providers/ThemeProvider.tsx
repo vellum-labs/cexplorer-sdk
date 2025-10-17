@@ -1,5 +1,7 @@
 import {
   createContext,
+  Dispatch,
+  SetStateAction,
   useContext,
   useEffect,
   useState,
@@ -26,7 +28,7 @@ interface ThemeContextType {
    *
    * @param {Theme} theme - New theme to apply
    */
-  setTheme: (theme: Theme) => void;
+  setTheme: Dispatch<SetStateAction<Theme>>;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
