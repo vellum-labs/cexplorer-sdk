@@ -1,4 +1,4 @@
-import { useThemeStore } from "@/providers/ThemeProvider";
+import { useThemeStore } from "@/stores/themeStore";
 import { cn } from "@/utils/cn";
 import { ChevronRight } from "lucide-react";
 

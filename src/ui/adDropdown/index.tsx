@@ -2,7 +2,7 @@ import type { NavigationOptions } from "@/types/navigationTypes";
 import type dynamicIconImports from "lucide-react/dynamicIconImports";
 import Icon from "../icon";
 import { Dropdown } from "../dropdown";
-import { useThemeStore } from "@/providers/ThemeProvider";
+import { useThemeStore } from "@/stores/themeStore";
 
 /**
  * Props for the AdDropdown component.

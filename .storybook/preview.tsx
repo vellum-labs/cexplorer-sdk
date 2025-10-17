@@ -1,7 +1,5 @@
 import type { Preview, Decorator } from "@storybook/react";
 import "../src/styles/style.css";
-import { ThemeProvider } from "../src/providers/ThemeProvider";
-import { useEffect } from "react";
 import {
   createMemoryHistory,
   createRootRoute,
@@ -10,15 +8,9 @@ import {
 } from "@tanstack/react-router";
 import { Toaster } from "sonner";
 
-const withTheme: Decorator = (Story, context) => {
-  const theme = context.globals.theme || "light";
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-
+const withTheme: Decorator = Story => {
   return (
-    <ThemeProvider defaultTheme={theme}>
+    <>
       <Toaster
         toastOptions={{
           classNames: {
@@ -28,7 +20,7 @@ const withTheme: Decorator = (Story, context) => {
         }}
       />
       <Story />
-    </ThemeProvider>
+    </>
   );
 };
 

@@ -3,7 +3,7 @@ import { Twitter } from "@/resources/Twitter";
 import { Copy, Share2, X } from "lucide-react";
 import { toast } from "sonner";
 import { Dropdown } from "../dropdown";
-import { useThemeStore } from "@/providers/ThemeProvider";
+import { useThemeStore } from "@/stores/themeStore";
 
 /**
  * Props for the ShareButton component.

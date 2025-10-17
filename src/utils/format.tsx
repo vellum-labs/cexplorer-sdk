@@ -255,6 +255,30 @@ export const formatTimeIn = (timestamp: string) => {
   }
 };
 
+export const formatSecondsToTime = (seconds: number): string => {
+  const days = Math.floor(seconds / 86400);
+  const hours = Math.floor((seconds % 86400) / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+
+  let timeString = "";
+
+  if (days > 0) {
+    timeString += `${days}d `;
+  }
+  if (hours > 0) {
+    timeString += `${hours}h `;
+  }
+  if (minutes > 0) {
+    timeString += `${minutes}m `;
+  }
+  if (secs > 0 || timeString === "") {
+    timeString += `${secs}s`;
+  }
+
+  return timeString.trim();
+};
+
 /**
  * Formats past timestamp as relative time ("X time ago").
  *

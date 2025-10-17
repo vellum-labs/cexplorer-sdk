@@ -42,7 +42,7 @@ import { useEffect, useState } from "react";
  * // debouncedWidth only updates 300ms after resize stops
  * ```
  */
-function useDebounce<T>(value: T, delay?: number): T {
+export function useDebounce<T>(value: T, delay?: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
@@ -55,5 +55,3 @@ function useDebounce<T>(value: T, delay?: number): T {
 
   return debouncedValue;
 }
-
-export default useDebounce;

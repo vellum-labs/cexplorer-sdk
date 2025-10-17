@@ -7,7 +7,7 @@ import { BreadcrumbItem } from "./components/BreadcrumbItem";
 import { BreadcrumbPage } from "./components/BreadcrumbPage";
 import { BreadcrumbSeparator } from "./components/BreadcrumbSeparator";
 import { House } from "lucide-react";
-import { useThemeStore } from "@/providers/ThemeProvider";
+import { useThemeStore } from "@/stores/themeStore";
 
 export interface BreadCrumbItem {
   /**

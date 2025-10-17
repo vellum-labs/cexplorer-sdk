@@ -1,7 +1,7 @@
 import type { MiscSearch, MiscSearchResponse } from "@/types/miscTypes";
 import type { Dispatch, ReactNode, SetStateAction } from "react";
 
-import useDebounce from "@/hooks/useDebounce";
+import { useDebounce } from "@/hooks/useDebounce";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 import { getCategories } from "@/utils/search/getCategories";

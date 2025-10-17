@@ -1,7 +1,7 @@
 import { useEffect, type FC } from "react";
 
 import { useGlobalSearch } from "@/providers/GlobalSearchContext";
-import { useThemeStore } from "@/providers/ThemeProvider";
+import { useThemeStore } from "@/stores/themeStore";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { GlobalSearchDropdown } from "./components/GlobalSearchDropdown";
 import { GlobalSearchRecent } from "./components/GlobalSearchRecent";

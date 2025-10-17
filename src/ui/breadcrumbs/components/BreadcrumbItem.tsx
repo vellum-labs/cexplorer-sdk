@@ -1,4 +1,4 @@
-import { useThemeStore } from "@/providers/ThemeProvider";
+import { useThemeStore } from "@/stores/themeStore";
 import { ComponentPropsWithoutRef, forwardRef } from "react";
 
 export const BreadcrumbItem = forwardRef<
