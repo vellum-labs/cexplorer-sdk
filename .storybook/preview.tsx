@@ -7,8 +7,15 @@ import {
   RouterProvider,
 } from "@tanstack/react-router";
 import { Toaster } from "sonner";
+import { useEffect } from "react";
 
-const withTheme: Decorator = Story => {
+const withTheme: Decorator = (Story, context) => {
+  const theme = context.globals.theme || "light";
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   return (
     <>
       <Toaster
