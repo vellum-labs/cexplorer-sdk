@@ -24,10 +24,10 @@ export * from "./utils/search/getCategories";
 export * from "./utils/lovelaceToAda";
 export * from "./utils/truncatedText";
 export * from "./utils/getNodeText";
+export * from "./utils/getBrowserTheme";
 
 // Providers
 export * from "./providers/GlobalSearchContext";
-export * from "./providers/ThemeProvider";
 
 // Hooks
 export * from "./hooks/useDebounce";
@@ -35,9 +35,11 @@ export * from "./hooks/useWindowDimensions";
 
 // Stores
 export * from "./stores/dropdownState";
+export * from "./stores/themeStore";
 
 // Lib
 export * from "./lib/handleCreateStore";
+export * from "./lib/handlePersiststore";
 
 // Types
 export * from "@/types/commonTypes";
