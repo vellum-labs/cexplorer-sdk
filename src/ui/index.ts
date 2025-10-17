@@ -7,6 +7,13 @@
 
 // Navigation components
 export { Breadcrumb } from "./breadcrumbs";
+export {
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbRaw,
+  BreadcrumbSeparator,
+} from "./breadcrumbs/components";
 export type { BreadcrumbProps } from "./breadcrumbs";
 
 export { Dropdown } from "./dropdown";
