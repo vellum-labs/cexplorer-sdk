@@ -62,3 +62,7 @@ export { SortArrow, type SortArrowProps } from "./sortArrow";
 export { TextDisplay, type TextDisplayProps } from "./textDisplay";
 
 export { TrendingArrow, type TrendingArrowProps } from "./trendingArrow";
+
+export { Switch, type SwitchProps } from "./switch";
+
+export { Modal, type ModalProps } from "./modal";
