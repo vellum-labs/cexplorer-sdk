@@ -34,15 +34,8 @@ const meta: Meta<typeof ActionTypes> = {
     },
   },
   decorators: [
-    (Story) => (
-      <div
-        style={{
-          padding: "2rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+    Story => (
+      <div className='flex h-[300px] w-full items-center justify-center bg-background'>
         <Story />
       </div>
     ),
@@ -130,39 +123,39 @@ export const AllTypes: Story = {
     >
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         <span style={{ width: "180px", fontWeight: 500 }}>Info Action:</span>
-        <ActionTypes title="InfoAction" />
+        <ActionTypes title='InfoAction' />
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         <span style={{ width: "180px", fontWeight: 500 }}>No Confidence:</span>
-        <ActionTypes title="NoConfidence" />
+        <ActionTypes title='NoConfidence' />
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         <span style={{ width: "180px", fontWeight: 500 }}>
           Parameter Change:
         </span>
-        <ActionTypes title="ParameterChange" />
+        <ActionTypes title='ParameterChange' />
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         <span style={{ width: "180px", fontWeight: 500 }}>New Committee:</span>
-        <ActionTypes title="NewCommittee" />
+        <ActionTypes title='NewCommittee' />
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         <span style={{ width: "180px", fontWeight: 500 }}>
           New Constitution:
         </span>
-        <ActionTypes title="NewConstitution" />
+        <ActionTypes title='NewConstitution' />
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         <span style={{ width: "180px", fontWeight: 500 }}>
           Treasury Withdrawals:
         </span>
-        <ActionTypes title="TreasuryWithdrawals" />
+        <ActionTypes title='TreasuryWithdrawals' />
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         <span style={{ width: "180px", fontWeight: 500 }}>
           Hard Fork Initiation:
         </span>
-        <ActionTypes title="HardForkInitiation" />
+        <ActionTypes title='HardForkInitiation' />
       </div>
     </div>
   ),
@@ -200,7 +193,7 @@ export const InProposalList: Story = {
             Update minimum pool cost parameter
           </div>
         </div>
-        <ActionTypes title="ParameterChange" />
+        <ActionTypes title='ParameterChange' />
       </div>
 
       <div
@@ -221,7 +214,7 @@ export const InProposalList: Story = {
             Elect new constitutional committee members
           </div>
         </div>
-        <ActionTypes title="NewCommittee" />
+        <ActionTypes title='NewCommittee' />
       </div>
 
       <div
@@ -242,7 +235,7 @@ export const InProposalList: Story = {
             Withdraw funds for ecosystem development
           </div>
         </div>
-        <ActionTypes title="TreasuryWithdrawals" />
+        <ActionTypes title='TreasuryWithdrawals' />
       </div>
 
       <div
@@ -263,7 +256,7 @@ export const InProposalList: Story = {
             Initiate hard fork to next protocol version
           </div>
         </div>
-        <ActionTypes title="HardForkInitiation" />
+        <ActionTypes title='HardForkInitiation' />
       </div>
     </div>
   ),

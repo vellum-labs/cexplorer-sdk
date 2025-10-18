@@ -1,4 +1,5 @@
-import { useEffect, type FC } from "react";
+import type { FC } from "react";
+import { useEffect } from "react";
 
 import { useGlobalSearch } from "@/providers/GlobalSearchContext";
 import { useThemeStore } from "@/stores/themeStore";
