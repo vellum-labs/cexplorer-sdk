@@ -1,8 +1,8 @@
+import { useThemeStore } from "@/stores/themeStore";
 import type { NavigationOptions } from "@/types/navigationTypes";
 import type dynamicIconImports from "lucide-react/dynamicIconImports";
-import Icon from "../icon";
 import { Dropdown } from "../dropdown";
-import { useThemeStore } from "@/stores/themeStore";
+import { Icon } from "../icon";
 
 /**
  * Props for the AdDropdown component.

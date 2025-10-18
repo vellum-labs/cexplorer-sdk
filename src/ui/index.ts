@@ -30,6 +30,7 @@ export { Copy } from "./copy";
 export { DateCell } from "./dateCell";
 export { Header } from "./header";
 export type { HeaderProps } from "./header";
+export { Icon, type IconProps } from "./icon";
 export { LoadingSkeleton } from "./loadingSkeleton";
 export { Loading, type LoadingProps } from "./loadingSpinner";
 export { PulseDot, type PulseDotProps } from "./pulseDot";
