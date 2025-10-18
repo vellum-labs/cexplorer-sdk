@@ -1,6 +1,6 @@
-import dynamicIconImports from "lucide-react/dynamicIconImports";
-import { ResponseCore } from "./commonTypes";
-import { Rate } from "./blockTypes";
+import type dynamicIconImports from "lucide-react/dynamicIconImports";
+import type { ResponseCore } from "./commonTypes";
+import type { Rate } from "./blockTypes";
 
 /**
  * Search result item for blockchain entities.

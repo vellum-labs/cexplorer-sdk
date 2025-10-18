@@ -1,5 +1,6 @@
 import { useThemeStore } from "@/stores/themeStore";
-import { ComponentPropsWithoutRef, forwardRef } from "react";
+import type { ComponentPropsWithoutRef} from "react";
+import { forwardRef } from "react";
 
 export const BreadcrumbItem = forwardRef<
   HTMLLIElement,

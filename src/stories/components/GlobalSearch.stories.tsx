@@ -1,5 +1,5 @@
 import { GlobalSearch } from "@/ui/globalSearch";
-import { Meta, StoryObj } from "@storybook/react/*";
+import type { Meta, StoryObj } from "@storybook/react/*";
 import { GlobalSearchProvider } from "@/providers/GlobalSearchContext";
 
 const mockSearchResults = {

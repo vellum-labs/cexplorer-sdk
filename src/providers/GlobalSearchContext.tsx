@@ -5,8 +5,8 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 import { getCategories } from "@/utils/search/getCategories";
-import { UseQueryResult } from "@tanstack/react-query";
-import { Locales } from "@/types/commonTypes";
+import type { UseQueryResult } from "@tanstack/react-query";
+import type { Locales } from "@/types/commonTypes";
 
 /**
  * Available search categories for Cardano blockchain entities.

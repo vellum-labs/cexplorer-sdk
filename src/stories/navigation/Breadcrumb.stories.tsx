@@ -1,7 +1,7 @@
 import { Breadcrumb } from "@/ui";
 import { BreadcrumbSeparator } from "@/ui/breadcrumbs/components/BreadcrumbSeparator";
 import { formatNumber, formatString } from "@/utils/format";
-import { Meta, StoryObj } from "@storybook/react/*";
+import type { Meta, StoryObj } from "@storybook/react/*";
 
 const separatorOptions = {
   default: <BreadcrumbSeparator />,

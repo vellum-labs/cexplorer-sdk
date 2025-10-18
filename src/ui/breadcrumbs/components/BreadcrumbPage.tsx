@@ -1,6 +1,7 @@
 import { useThemeStore } from "@/stores/themeStore";
 import { cn } from "@/utils/cn";
-import { ComponentPropsWithoutRef, forwardRef } from "react";
+import type { ComponentPropsWithoutRef} from "react";
+import { forwardRef } from "react";
 
 export const BreadcrumbPage = forwardRef<
   HTMLSpanElement,

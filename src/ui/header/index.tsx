@@ -1,5 +1,7 @@
-import { ReactNode, useState } from "react";
-import { Breadcrumb, BreadCrumbItem } from "../breadcrumbs";
+import type { ReactNode} from "react";
+import { useState } from "react";
+import type { BreadCrumbItem } from "../breadcrumbs";
+import { Breadcrumb } from "../breadcrumbs";
 import { BreadcrumbSeparator } from "../breadcrumbs/components/BreadcrumbSeparator";
 import type { UseQueryResult } from "@tanstack/react-query";
 import type { MiscBasicResponse, MiscSearchResponse } from "@/types/miscTypes";
@@ -9,7 +11,7 @@ import { ShareButton } from "../shareButton";
 import { LoadingSkeleton } from "../loadingSkeleton";
 import { GlobalSearchProvider } from "@/providers/GlobalSearchContext";
 import { GlobalSearch } from "../globalSearch";
-import { Locales } from "@/types/commonTypes";
+import type { Locales } from "@/types/commonTypes";
 import { AdDropdown } from "../adDropdown";
 
 /**

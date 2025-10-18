@@ -1,5 +1,5 @@
 import { Tooltip } from "@/ui/tooltip";
-import { Meta, StoryObj } from "@storybook/react/*";
+import type { Meta, StoryObj } from "@storybook/react/*";
 import { Info } from "lucide-react";
 
 const meta: Meta<typeof Tooltip> = {

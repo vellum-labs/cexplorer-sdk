@@ -1,5 +1,5 @@
 import { AdaWithTooltip } from "@/ui/adaWithTooltip";
-import { Meta, StoryObj } from "@storybook/react/*";
+import type { Meta, StoryObj } from "@storybook/react/*";
 
 const meta: Meta<typeof AdaWithTooltip> = {
   title: "Components/AdaWithTooltip",

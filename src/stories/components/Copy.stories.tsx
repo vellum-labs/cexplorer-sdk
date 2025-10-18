@@ -1,5 +1,5 @@
 import { Copy } from "@/ui/copy";
-import { Meta, StoryObj } from "@storybook/react/*";
+import type { Meta, StoryObj } from "@storybook/react/*";
 
 const meta: Meta<typeof Copy> = {
   title: "Components/Copy",

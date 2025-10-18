@@ -1,5 +1,5 @@
 import { Button } from "@/ui/button";
-import { Meta, StoryObj } from "@storybook/react/*";
+import type { Meta, StoryObj } from "@storybook/react/*";
 import { ArrowRight, Plus, ExternalLink } from "lucide-react";
 
 const meta: Meta<typeof Button> = {

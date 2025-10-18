@@ -1,5 +1,5 @@
 import { DateCell } from "@/ui/dateCell";
-import { Meta, StoryObj } from "@storybook/react/*";
+import type { Meta, StoryObj } from "@storybook/react/*";
 
 const meta: Meta<typeof DateCell> = {
   title: "Components/DateCell",

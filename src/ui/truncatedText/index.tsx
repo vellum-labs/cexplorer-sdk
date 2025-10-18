@@ -1,6 +1,7 @@
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import { getTruncatedTitle, hasImageInChildren } from "@/utils/truncatedText";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import type { ReactNode} from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Props for the TruncatedText component.

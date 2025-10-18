@@ -1,5 +1,5 @@
 import { TextInput } from "@/ui/textInput";
-import { Meta, StoryObj } from "@storybook/react/*";
+import type { Meta, StoryObj } from "@storybook/react/*";
 import { useState } from "react";
 
 const meta: Meta<typeof TextInput> = {

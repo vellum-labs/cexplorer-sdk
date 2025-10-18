@@ -35,6 +35,8 @@ export { LoadingSkeleton } from "./loadingSkeleton";
 export { ShareButton } from "./shareButton";
 export { TruncatedText } from "./truncatedText";
 
+export { ActionTypes, ActionTypesProps } from "./actionTypes";
+
 // Layout
 export { Header } from "./header";
 export type { HeaderProps } from "./header";

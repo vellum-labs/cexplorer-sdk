@@ -1,4 +1,5 @@
-import { ComponentPropsWithoutRef, forwardRef } from "react";
+import type { ComponentPropsWithoutRef } from "react";
+import { forwardRef } from "react";
 import { cn } from "@/utils/cn";
 
 export const BreadcrumbList = forwardRef<
