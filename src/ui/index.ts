@@ -38,3 +38,18 @@ export { ShareButton } from "./shareButton";
 
 export { Tooltip } from "./tooltip";
 export { TruncatedText } from "./truncatedText";
+
+export {
+  Pagination,
+  type FakePaginationProps,
+  type RealPaginationProps,
+} from "./pagination";
+export {
+  PaginationComponent,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "./pagination/components";

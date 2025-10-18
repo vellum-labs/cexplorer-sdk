@@ -141,5 +141,8 @@
   "homepage": "https://beta.cexplorer.io",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1"
   }
 }
