@@ -57,3 +57,8 @@ export {
 export { EmptyState, type EmptyStateProps } from "./emptyState";
 
 export { ProtocolDot, type ProtocolDotProps } from "./protocolDot";
+
+export { SortArrow, type SortArrowProps } from "./sortArrow";
+export { TextDisplay, type TextDisplayProps } from "./textDisplay";
+
+export { TrendingArrow, type TrendingArrowProps } from "./trendingArrow";
