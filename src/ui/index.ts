@@ -53,3 +53,5 @@ export {
   PaginationNext,
   PaginationPrevious,
 } from "./pagination/components";
+
+export { EmptyState, type EmptyStateProps } from "./emptyState";

@@ -11,7 +11,7 @@ type PaginationLinkProps = {
    * @default false
    */
   isActive?: boolean;
-} & Pick<PaginationProps, "size"> &
+} & Partial<Pick<PaginationProps, "size">> &
   React.ComponentProps<"button">;
 
 /**
