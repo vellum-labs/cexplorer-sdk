@@ -2,7 +2,7 @@ import { Copy } from "@/ui/copy";
 import type { Meta, StoryObj } from "@storybook/react/*";
 
 const meta: Meta<typeof Copy> = {
-  title: "Components/Copy",
+  title: "Data Display/Copy",
   component: Copy,
   decorators: [
     Story => (

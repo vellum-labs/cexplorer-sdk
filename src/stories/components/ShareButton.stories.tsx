@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ShareButton } from "../../ui/shareButton";
 
 const meta: Meta<typeof ShareButton> = {
-  title: "Components/ShareButton",
+  title: "Buttons & Actions/ShareButton",
   component: ShareButton,
   parameters: {
     layout: "fullwidth",

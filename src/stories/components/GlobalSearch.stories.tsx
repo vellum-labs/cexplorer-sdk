@@ -58,7 +58,7 @@ const mockUseFetchMiscSearch =
   });
 
 const meta: Meta<typeof GlobalSearch> = {
-  title: "Forms/GlobalSearch",
+  title: "Forms & Inputs/GlobalSearch",
   component: GlobalSearch,
   tags: ["autodocs"],
   argTypes: {

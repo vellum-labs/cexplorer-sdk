@@ -2,7 +2,7 @@ import { AdaWithTooltip } from "@/ui/adaWithTooltip";
 import type { Meta, StoryObj } from "@storybook/react/*";
 
 const meta: Meta<typeof AdaWithTooltip> = {
-  title: "Components/AdaWithTooltip",
+  title: "Data Display/AdaWithTooltip",
   component: AdaWithTooltip,
   decorators: [
     Story => (

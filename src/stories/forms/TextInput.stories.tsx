@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react/*";
 import { useState } from "react";
 
 const meta: Meta<typeof TextInput> = {
-  title: "Forms/TextInput",
+  title: "Forms & Inputs/TextInput",
   component: TextInput,
   decorators: [
     Story => (

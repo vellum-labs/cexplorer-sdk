@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react/*";
 import { ArrowRight, Plus, ExternalLink } from "lucide-react";
 
 const meta: Meta<typeof Button> = {
-  title: "Components/Button",
+  title: "Buttons & Actions/Button",
   component: Button,
   decorators: [
     Story => (

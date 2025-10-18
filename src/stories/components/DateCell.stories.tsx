@@ -2,7 +2,7 @@ import { DateCell } from "@/ui/dateCell";
 import type { Meta, StoryObj } from "@storybook/react/*";
 
 const meta: Meta<typeof DateCell> = {
-  title: "Components/DateCell",
+  title: "Data Display/DateCell",
   component: DateCell,
   decorators: [
     Story => (

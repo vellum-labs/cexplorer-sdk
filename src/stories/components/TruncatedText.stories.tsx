@@ -3,7 +3,7 @@ import { fn } from "@storybook/test";
 import { TruncatedText } from "../../ui/truncatedText";
 
 const meta: Meta<typeof TruncatedText> = {
-  title: "Components/TruncatedText",
+  title: "Data Display/TruncatedText",
   component: TruncatedText,
   parameters: {
     layout: "fullwidth",

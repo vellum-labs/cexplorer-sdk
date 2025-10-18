@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ActionTypes } from "../../ui/actionTypes";
 
 const meta: Meta<typeof ActionTypes> = {
-  title: "Components/ActionTypes",
+  title: "Data Display/ActionTypes",
   component: ActionTypes,
   tags: ["autodocs"],
   parameters: {

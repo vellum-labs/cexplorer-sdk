@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react/*";
 import { Info } from "lucide-react";
 
 const meta: Meta<typeof Tooltip> = {
-  title: "Components/Tooltip",
+  title: "Feedback/Tooltip",
   component: Tooltip,
   decorators: [
     Story => (

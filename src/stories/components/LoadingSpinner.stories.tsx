@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Loading } from "../../ui/loadingSpinner";
 
 const meta: Meta<typeof Loading> = {
-  title: "Components/LoadingSpinner",
+  title: "Feedback/LoadingSpinner",
   component: Loading,
   tags: ["autodocs"],
   parameters: {

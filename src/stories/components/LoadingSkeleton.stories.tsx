@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { LoadingSkeleton } from "../../ui/loadingSkeleton";
 
 const meta: Meta<typeof LoadingSkeleton> = {
-  title: "Components/LoadingSkeleton",
+  title: "Feedback/LoadingSkeleton",
   component: LoadingSkeleton,
   parameters: {
     layout: "fullwidth",
