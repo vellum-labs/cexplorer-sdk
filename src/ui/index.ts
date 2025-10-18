@@ -55,3 +55,5 @@ export {
 } from "./pagination/components";
 
 export { EmptyState, type EmptyStateProps } from "./emptyState";
+
+export { ProtocolDot, type ProtocolDotProps } from "./protocolDot";
