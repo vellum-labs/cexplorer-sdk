@@ -6,7 +6,6 @@ const meta: Meta<typeof ActionTypes> = {
   component: ActionTypes,
   tags: ["autodocs"],
   parameters: {
-    layout: "centered",
     docs: {
       description: {
         component:

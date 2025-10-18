@@ -37,6 +37,8 @@ export { TruncatedText } from "./truncatedText";
 
 export { ActionTypes, type ActionTypesProps } from "./actionTypes";
 
+export { Loading, type LoadingProps } from "./loadingSpinner";
+
 // Layout
 export { Header } from "./header";
 export type { HeaderProps } from "./header";
