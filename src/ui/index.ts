@@ -67,4 +67,5 @@ export { Switch, type SwitchProps } from "./switch";
 
 export { Modal, type ModalProps } from "./modal";
 
+export { Badge, type BadgeProps } from "./badge";
 export { ActivityBadge, type ActivityBadgeProps } from "./activityBadge";
