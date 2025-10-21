@@ -66,3 +66,5 @@ export { TrendingArrow, type TrendingArrowProps } from "./trendingArrow";
 export { Switch, type SwitchProps } from "./switch";
 
 export { Modal, type ModalProps } from "./modal";
+
+export { ActivityBadge, type ActivityBadgeProps } from "./activityBadge";
