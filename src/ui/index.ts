@@ -68,3 +68,5 @@ export { Switch, type SwitchProps } from "./switch";
 export { Modal, type ModalProps } from "./modal";
 
 export { RangeSlider, type RangeSliderProps } from "./rangeSlider";
+export { Badge, type BadgeProps } from "./badge";
+export { ActivityBadge, type ActivityBadgeProps } from "./activityBadge";
