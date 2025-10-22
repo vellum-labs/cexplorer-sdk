@@ -95,3 +95,5 @@ export {
 } from "./addressTypeInitialsBadge";
 
 export { InfoCard, type InfoCardProps } from "./infoCard";
+
+export { SizeCard, type BlockDetailSizeProps } from "./sizeCard";
