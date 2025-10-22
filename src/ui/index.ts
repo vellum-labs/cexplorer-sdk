@@ -97,3 +97,8 @@ export {
 export { InfoCard, type InfoCardProps } from "./infoCard";
 
 export { SizeCard, type BlockDetailSizeProps } from "./sizeCard";
+
+export {
+  OverviewStatCard,
+  type OverviewStatCardProps,
+} from "./overviewStatCard";
