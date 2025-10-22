@@ -14,6 +14,7 @@ export * from "./constants/radiuses";
 export * from "./constants/shadows";
 export * from "./constants/spacing";
 export * from "./constants/typography";
+export * from "./constants/votes";
 
 // UI
 export * from "./ui";
@@ -26,6 +27,7 @@ export * from "./utils/getNodeText";
 export * from "./utils/lovelaceToAda";
 export * from "./utils/search/getCategories";
 export * from "./utils/truncatedText";
+export * from "./utils/gov/getGovActionStatus";
 
 // Providers
 export * from "./providers/GlobalSearchContext";
