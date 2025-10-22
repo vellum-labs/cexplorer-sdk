@@ -75,3 +75,4 @@ export {
   ExtraLabelBadge,
   type ExtraLabelBadgeProps,
 } from "./labelBadge/components/ExtraLabelBadge";
+export { LabelBadge, type LabelBadgeProps } from "./labelBadge";
