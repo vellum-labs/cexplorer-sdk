@@ -93,3 +93,5 @@ export {
   AddressTypeInitialsBadge,
   type AddressTypeInitialsBadgeProps,
 } from "./addressTypeInitialsBadge";
+
+export { InfoCard, type InfoCardProps } from "./infoCard";
