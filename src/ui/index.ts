@@ -102,3 +102,9 @@ export {
   OverviewStatCard,
   type OverviewStatCardProps,
 } from "./overviewStatCard";
+
+export {
+  OverviewCard,
+  type BlockDetailOverviewProps,
+  type OverviewList,
+} from "./overviewCard";
