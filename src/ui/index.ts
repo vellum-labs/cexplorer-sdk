@@ -70,3 +70,8 @@ export { Modal, type ModalProps } from "./modal";
 export { RangeSlider, type RangeSliderProps } from "./rangeSlider";
 export { Badge, type BadgeProps } from "./badge";
 export { ActivityBadge, type ActivityBadgeProps } from "./activityBadge";
+
+export {
+  ExtraLabelBadge,
+  type ExtraLabelBadgeProps,
+} from "./labelBadge/components/ExtraLabelBadge";
