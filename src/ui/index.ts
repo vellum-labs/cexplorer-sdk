@@ -79,3 +79,5 @@ export { ProBadge } from "./proBadge";
 export { VoterRoleBadge } from "./voterRoleBadge";
 
 export { VoteBadge, type VoteBadgeProps } from "./voteBadge";
+
+export { ScriptBadge, type ScriptBadgeProps } from "./scriptBadge";
