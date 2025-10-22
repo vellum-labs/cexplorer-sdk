@@ -108,3 +108,5 @@ export {
   type BlockDetailOverviewProps,
   type OverviewList,
 } from "./overviewCard";
+
+export { Image, type ImageProps } from "./image";
