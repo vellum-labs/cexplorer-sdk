@@ -3,7 +3,7 @@ import type { ScriptDetailData } from "@/types/scriptTypes";
 import type { Label } from "@/types/txTypes";
 import type { ReactNode } from "react";
 import { Badge } from "@/ui/badge";
-import { ExtraLabelBadge } from "./components/ExtraLabelBadge";
+import { ExtraLabelBadge } from "@/ui/extraLabelBadge";
 
 /**
  * Props for the LabelBadge component

@@ -71,10 +71,7 @@ export { RangeSlider, type RangeSliderProps } from "./rangeSlider";
 export { Badge, type BadgeProps } from "./badge";
 export { ActivityBadge, type ActivityBadgeProps } from "./activityBadge";
 
-export {
-  ExtraLabelBadge,
-  type ExtraLabelBadgeProps,
-} from "./labelBadge/components/ExtraLabelBadge";
+export { ExtraLabelBadge, type ExtraLabelBadgeProps } from "./extraLabelBadge";
 export { LabelBadge, type LabelBadgeProps } from "./labelBadge";
 
 export { ProBadge } from "./proBadge";
