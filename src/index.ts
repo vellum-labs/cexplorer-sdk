@@ -28,6 +28,8 @@ export * from "./utils/lovelaceToAda";
 export * from "./utils/search/getCategories";
 export * from "./utils/truncatedText";
 export * from "./utils/gov/getGovActionStatus";
+export * from "./utils/address/getAddressTypeInitials";
+export * from "./utils/address/parseShelleyAddress";
 
 // Providers
 export * from "./providers/GlobalSearchContext";

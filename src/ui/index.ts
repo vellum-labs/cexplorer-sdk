@@ -88,3 +88,8 @@ export {
   GovernanceStatusBadge,
   type GovernanceStatusBadgeProps,
 } from "./governanceStatusBadge";
+
+export {
+  AddressTypeInitialsBadge,
+  type AddressTypeInitialsBadgeProps,
+} from "./addressTypeInitialsBadge";

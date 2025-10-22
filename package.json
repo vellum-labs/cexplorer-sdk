@@ -143,6 +143,7 @@
     "access": "public"
   },
   "dependencies": {
-    "class-variance-authority": "^0.7.1"
+    "class-variance-authority": "^0.7.1",
+    "bech32": "^2.0.0"
   }
 }
