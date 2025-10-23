@@ -116,3 +116,5 @@ export { PoolCell, type PoolCellProps } from "./poolCell";
 export { SizeCell, type SizeCellProps } from "./sizeCell";
 
 export { StakeCell, type StakeCellProps } from "./stakeCell";
+
+export { TitleSort, type TitleSortProps } from "./titleSort";
