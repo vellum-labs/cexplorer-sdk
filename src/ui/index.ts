@@ -110,3 +110,5 @@ export {
 } from "./overviewCard";
 
 export { Image, type ImageProps } from "./image";
+
+export { PoolCell, type PoolCellProps } from "./poolCell";
