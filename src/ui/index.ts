@@ -118,3 +118,5 @@ export { SizeCell, type SizeCellProps } from "./sizeCell";
 export { StakeCell, type StakeCellProps } from "./stakeCell";
 
 export { TitleSort, type TitleSortProps } from "./titleSort";
+
+export { AdaHandleBadge, type AdaHandleBadgeProps } from "./adaHandleBadge";
