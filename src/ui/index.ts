@@ -114,3 +114,5 @@ export { Image, type ImageProps } from "./image";
 export { PoolCell, type PoolCellProps } from "./poolCell";
 
 export { SizeCell, type SizeCellProps } from "./sizeCell";
+
+export { StakeCell, type StakeCellProps } from "./stakeCell";
