@@ -91,7 +91,8 @@
     "react-helmet": "^6.1.0",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",
-    "zustand": "^4.5.2"
+    "zustand": "^4.5.2",
+    "bech32": "^2.0.0"
   },
   "peerDependenciesMeta": {
     "react": {
@@ -143,7 +144,6 @@
     "access": "public"
   },
   "dependencies": {
-    "class-variance-authority": "^0.7.1",
-    "bech32": "^2.0.0"
+    "class-variance-authority": "^0.7.1"
   }
 }
