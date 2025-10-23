@@ -120,3 +120,8 @@ export { StakeCell, type StakeCellProps } from "./stakeCell";
 export { TitleSort, type TitleSortProps } from "./titleSort";
 
 export { AdaHandleBadge, type AdaHandleBadgeProps } from "./adaHandleBadge";
+
+export {
+  EnvironmentBadge,
+  type EnvironmentBadgeProps,
+} from "./environmentBadge";
