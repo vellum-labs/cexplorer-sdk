@@ -220,6 +220,37 @@ export {
 export { JsonDisplay, type JSONDisplayProps } from "./jsonDisplay";
 
 export {
+  HeaderBannerSubtitle,
+  type BlockDetailSubTitleProps,
+} from "./headerBannerSubtitle";
+
+export { MinMaxRange, type MinMaxRangeProps } from "./minMaxRange";
+
+export {
+  PriceAdaSmallAmount,
+  type PriceAdaSmallAmountProps,
+} from "./priceAdaSmallAmount";
+
+export { SpinningLoader, type SpinningLoaderProps } from "./spinningLoader";
+
+export {
+  TimeDateIndicator,
+  type TimeDateIndicatorProps,
+} from "./timeDateIndicator";
+
+export {
+  TotalSumWithRates,
+  type BlockDetailTransactionsOverviewTotalProps,
+} from "./totalSumWithRates";
+
+export { ViewSwitch } from "./viewSwitch";
+
+export {
+  VotingBreakdownTooltip,
+  type VotingBreakdownTooltipProps,
+} from "./votingBreakdownTooltip";
+
+export {
   Dialog,
   DialogClose,
   DialogContent,

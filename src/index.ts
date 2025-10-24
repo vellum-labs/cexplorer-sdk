@@ -41,6 +41,15 @@ export * from "./utils/lovelaceToAda";
 export * from "./utils/paginateArray";
 export * from "./utils/search/getCategories";
 export * from "./utils/truncatedText";
+export * from "./utils/gov/getGovActionStatus";
+export * from "./utils/address/getAddressTypeInitials";
+export * from "./utils/address/parseShelleyAddress";
+export * from "./utils/getColumnsSortOrder";
+export * from "./utils/asset/encodeAssetName";
+export * from "./utils/asset/getAssetFingerprint";
+export * from "./utils/generateUrlWithParams";
+export * from "./utils/formatSmallValueWithSub";
+export * from "./utils/formatCurrency";
 
 // Providers
 export * from "./providers/GlobalSearchContext";
@@ -55,6 +64,7 @@ export * from "./stores/dropdownState";
 export * from "./stores/infiniteScrollingStore";
 export * from "./stores/localeStore";
 export * from "./stores/themeStore";
+export * from "./stores/viewStore";
 
 // Lib
 export * from "./lib/handleCreateStore";
@@ -69,3 +79,13 @@ export * from "@/types/navigationTypes";
 export * from "@/resources/Facebook";
 export * from "@/resources/icons/Cardano";
 export * from "@/resources/Twitter";
+export { default as DiscordLogo } from "@/resources/images/icons/discord.svg";
+export { default as GithubLogo } from "@/resources/images/icons/github.svg";
+export { default as TelegramLogo } from "@/resources/images/icons/telegram.svg";
+export { default as TwitterLogo } from "@/resources/images/icons/twitter.svg";
+export { default as FacebookLogo } from "@/resources/images/icons/facebook.svg";
+export { default as TwitchLogo } from "@/resources/images/icons/twitch.svg";
+export { default as YoutubeLogo } from "@/resources/images/icons/youtube.svg";
+export { default as DrepFallback } from "@/resources/images/fallbacks/drepFallback.svg";
+export { default as PoolFallback } from "@/resources/images/fallbacks/poolFallback.svg";
+export { default as DollarIcon } from "@/resources/images/dollar.svg";
