@@ -232,3 +232,8 @@ export {
 } from "./priceAdaSmallAmount";
 
 export { SpinningLoader, type SpinningLoaderProps } from "./spinningLoader";
+
+export {
+  TimeDateIndicator,
+  type TimeDateIndicatorProps,
+} from "./timeDateIndicator";
