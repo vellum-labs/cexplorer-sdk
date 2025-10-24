@@ -136,3 +136,5 @@ export {
 } from "./tableSearchInput";
 
 export { FeatureModal, type FeatureModalProps } from "./featureModal";
+
+export { SafetyLinkModal, type SafetyLinkModalProps } from "./safetyLinkModal";
