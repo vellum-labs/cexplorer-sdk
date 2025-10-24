@@ -223,3 +223,5 @@ export {
   HeaderBannerSubtitle,
   type BlockDetailSubTitleProps,
 } from "./headerBannerSubtitle";
+
+export { MinMaxRange, type MinMaxRangeProps } from "./minMaxRange";
