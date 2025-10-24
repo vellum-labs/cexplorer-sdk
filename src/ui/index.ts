@@ -127,3 +127,10 @@ export {
 } from "./environmentBadge";
 
 export { ScreenDropdown, type ScreenDropdownProps } from "./screenDropdown";
+
+export { Input, type InputProps } from "./tableSearchInput/components/input";
+
+export {
+  TableSearchInput,
+  type TableSearchInputProps,
+} from "./tableSearchInput";
