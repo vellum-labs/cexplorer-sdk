@@ -218,3 +218,8 @@ export {
 } from "./exportTableModal";
 
 export { JsonDisplay, type JSONDisplayProps } from "./jsonDisplay";
+
+export {
+  HeaderBannerSubtitle,
+  type BlockDetailSubTitleProps,
+} from "./headerBannerSubtitle";
