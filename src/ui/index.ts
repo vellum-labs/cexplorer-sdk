@@ -123,3 +123,5 @@ export {
 
 export { AdCard } from "./carousel/AdCard";
 export { AdsCarousel, type AdsCarouselProps } from "./carousel/AdsCarousel";
+
+export { FunnelFilter, type FunnelFilterProps } from "./funnelFilter";
