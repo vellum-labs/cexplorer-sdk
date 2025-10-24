@@ -53,6 +53,7 @@ export * from "./hooks/useWindowDimensions";
 export * from "./stores/dropdownState";
 export * from "./stores/localeStore";
 export * from "./stores/themeStore";
+export * from "./stores/viewStore";
 
 // Lib
 export * from "./lib/handleCreateStore";

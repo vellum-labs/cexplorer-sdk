@@ -242,3 +242,5 @@ export {
   TotalSumWithRates,
   type BlockDetailTransactionsOverviewTotalProps,
 } from "./totalSumWithRates";
+
+export { ViewSwitch } from "./viewSwitch";
