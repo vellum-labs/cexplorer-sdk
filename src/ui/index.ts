@@ -225,3 +225,8 @@ export {
 } from "./headerBannerSubtitle";
 
 export { MinMaxRange, type MinMaxRangeProps } from "./minMaxRange";
+
+export {
+  PriceAdaSmallAmount,
+  type PriceAdaSmallAmountProps,
+} from "./priceAdaSmallAmount";

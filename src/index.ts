@@ -39,6 +39,7 @@ export * from "./utils/getColumnsSortOrder";
 export * from "./utils/asset/encodeAssetName";
 export * from "./utils/asset/getAssetFingerprint";
 export * from "./utils/generateUrlWithParams";
+export * from "./utils/formatSmallValueWithSub";
 
 // Providers
 export * from "./providers/GlobalSearchContext";
