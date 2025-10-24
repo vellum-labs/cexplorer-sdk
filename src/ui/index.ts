@@ -141,7 +141,6 @@ export { SafetyLinkModal, type SafetyLinkModalProps } from "./safetyLinkModal";
 
 export { DelegatorsLabel, type DelegatorsLabelProps } from "./delegatorsLabel";
 
-export { NoResultsFound } from "./noResultsFound";
 export {
   Carousel,
   CarouselContent,
@@ -151,6 +150,7 @@ export {
   SingleItemCarousel,
   type SingleItemCarouselProps,
 } from "./carousel/SingleItemCarousel";
+export { NoResultsFound } from "./noResultsFound";
 
 export { AdCard } from "./carousel/AdCard";
 export { AdsCarousel, type AdsCarouselProps } from "./carousel/AdsCarousel";
@@ -218,3 +218,40 @@ export {
 } from "./exportTableModal";
 
 export { JsonDisplay, type JSONDisplayProps } from "./jsonDisplay";
+
+export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+} from "./dialog";
+
+export {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "./command";
+
+export {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  PopoverTrigger,
+} from "./popover";
+
+export {
+  AttributeDropdown,
+  type AttributeDropdownProps,
+} from "./attributeDropdown";
