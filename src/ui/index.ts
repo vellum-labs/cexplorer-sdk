@@ -268,3 +268,8 @@ export {
 } from "./globalTable/components/";
 
 export { GlobalTable } from "./globalTable";
+
+export {
+  AdaPriceIndicator,
+  type AdaPriceIndicatorProps,
+} from "./adaPriceIndicator";

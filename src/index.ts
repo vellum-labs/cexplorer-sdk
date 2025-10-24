@@ -10,6 +10,7 @@
 export * from "./constants/breakpoints";
 export * from "./constants/button";
 export * from "./constants/colors";
+export * from "./constants/currencies";
 export * from "./constants/radiuses";
 export * from "./constants/shadows";
 export * from "./constants/spacing";
@@ -27,6 +28,7 @@ export * from "./utils/asset/getAssetFingerprint";
 export * from "./utils/cn";
 export * from "./utils/convertJSONToCSV";
 export * from "./utils/format";
+export * from "./utils/formatCurrency";
 export * from "./utils/generateUrlWithParams";
 export * from "./utils/getBrowserTheme";
 export * from "./utils/getColumnsSortOrder";
@@ -64,4 +66,5 @@ export * from "@/types/navigationTypes";
 
 // Resources
 export * from "@/resources/Facebook";
+export * from "@/resources/icons/Cardano";
 export * from "@/resources/Twitter";
