@@ -61,6 +61,9 @@ export default defineConfig({
     rollupOptions: {
       external: [
         "react/jsx-runtime",
+        "@tanstack/router-core",
+        "@tanstack/react-store",
+        "@tanstack/history",
         ...Object.keys(packageJson.peerDependencies),
       ],
       output: [
