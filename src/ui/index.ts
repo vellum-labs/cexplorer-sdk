@@ -230,3 +230,5 @@ export {
   PriceAdaSmallAmount,
   type PriceAdaSmallAmountProps,
 } from "./priceAdaSmallAmount";
+
+export { SpinningLoader, type SpinningLoaderProps } from "./spinningLoader";
