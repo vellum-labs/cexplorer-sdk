@@ -134,3 +134,5 @@ export {
   TableSearchInput,
   type TableSearchInputProps,
 } from "./tableSearchInput";
+
+export { FeatureModal, type FeatureModalProps } from "./featureModal";
