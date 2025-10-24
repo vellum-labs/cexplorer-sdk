@@ -244,3 +244,8 @@ export {
 } from "./totalSumWithRates";
 
 export { ViewSwitch } from "./viewSwitch";
+
+export {
+  VotingBreakdownTooltip,
+  type VotingBreakdownTooltipProps,
+} from "./votingBreakdownTooltip";
