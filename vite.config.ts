@@ -6,6 +6,8 @@ import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
+import packageJson from "./package.json";
+
 export default defineConfig({
   plugins: [
     nodePolyfills({
@@ -57,7 +59,13 @@ export default defineConfig({
       fileName: format => `index.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react/jsx-runtime"],
+      external: [
+        "react/jsx-runtime",
+        "@tanstack/router-core",
+        "@tanstack/react-store",
+        "@tanstack/history",
+        ...Object.keys(packageJson.peerDependencies),
+      ],
       output: [
         {
           format: "es",
