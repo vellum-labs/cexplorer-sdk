@@ -153,3 +153,5 @@ export {
   TableSettingsDropdown,
   type TableSettingsDropdownProps,
 } from "./tableSettingsDropdown";
+
+export { MintedByCard, type BlockDetailMintedProps } from "./mintedByCard";
