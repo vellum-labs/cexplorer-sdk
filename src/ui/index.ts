@@ -180,3 +180,5 @@ export {
   MobileMenuAccordionItem,
   type MobileMenuAccordionItemProps,
 } from "./mobileMenuAccordionItem";
+
+export { JsonDisplay, type JSONDisplayProps } from "./jsonDisplay";
