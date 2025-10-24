@@ -181,4 +181,9 @@ export {
   type MobileMenuAccordionItemProps,
 } from "./mobileMenuAccordionItem";
 
+export {
+  ExportTableModal,
+  type ExportTableModalProps,
+} from "./exportTableModal";
+
 export { JsonDisplay, type JSONDisplayProps } from "./jsonDisplay";
