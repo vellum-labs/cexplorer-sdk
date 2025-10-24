@@ -27,6 +27,7 @@ export * from "./utils/asset/encodeAssetName";
 export * from "./utils/asset/getAssetFingerprint";
 export * from "./utils/cn";
 export * from "./utils/convertJSONToCSV";
+export * from "./utils/findLabel";
 export * from "./utils/format";
 export * from "./utils/formatCurrency";
 export * from "./utils/generateUrlWithParams";
