@@ -92,7 +92,10 @@
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",
     "zustand": "^4.5.2",
-    "bech32": "^2.0.0"
+    "bech32": "^2.0.0",
+    "embla-carousel-react": "^8.1.5",
+    "embla-carousel-autoplay": "^8.1.5",
+    "html-react-parser": "^5.1.18"
   },
   "peerDependenciesMeta": {
     "react": {
@@ -132,6 +135,9 @@
       "optional": false
     },
     "sonner": {
+      "optional": false
+    },
+    "embla-carousel-react": {
       "optional": false
     }
   },
