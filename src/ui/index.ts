@@ -255,3 +255,16 @@ export {
   AttributeDropdown,
   type AttributeDropdownProps,
 } from "./attributeDropdown";
+
+export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./globalTable/components/";
+
+export { GlobalTable } from "./globalTable";

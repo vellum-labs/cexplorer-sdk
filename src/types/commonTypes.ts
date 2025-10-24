@@ -39,3 +39,5 @@ export interface ResponseCore<T> {
  * @example "es" // Spanish
  */
 export type Locales = "en" | "cz" | "es";
+
+export type Currencies = "usd" | "eur";
