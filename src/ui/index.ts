@@ -155,3 +155,11 @@ export {
 } from "./tableSettingsDropdown";
 
 export { MintedByCard, type BlockDetailMintedProps } from "./mintedByCard";
+
+export {
+  MobileTabsSelector,
+  type MobileTabsSelectorProps,
+  type TabItem,
+} from "./mobileTabsSelector";
+
+export { Tabs, type TabsProps } from "./tabs";
