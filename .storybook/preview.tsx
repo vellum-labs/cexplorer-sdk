@@ -1,19 +1,25 @@
-import type { Preview, Decorator } from "@storybook/react";
-import "../src/styles/style.css";
+import type { Decorator, Preview } from "@storybook/react";
 import {
   createMemoryHistory,
   createRootRoute,
   createRouter,
   RouterProvider,
 } from "@tanstack/react-router";
-import { Toaster } from "sonner";
 import { useEffect } from "react";
+import { Toaster } from "sonner";
+import { useThemeStore, type Theme } from "../src/stores/themeStore";
+import "../src/styles/style.css";
 
 const withTheme: Decorator = (Story, context) => {
   const theme = context.globals.theme || "light";
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+
+    const currentStoreTheme = useThemeStore.getState().theme;
+    if (currentStoreTheme !== theme) {
+      useThemeStore.setState({ theme: theme as Theme });
+    }
   }, [theme]);
 
   return (

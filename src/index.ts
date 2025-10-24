@@ -10,6 +10,7 @@
 export * from "./constants/breakpoints";
 export * from "./constants/button";
 export * from "./constants/colors";
+export * from "./constants/currencies";
 export * from "./constants/radiuses";
 export * from "./constants/shadows";
 export * from "./constants/spacing";
@@ -22,14 +23,22 @@ export * from "./ui";
 // Utils
 export * from "./utils/address/getAddressTypeInitials";
 export * from "./utils/address/parseShelleyAddress";
+export * from "./utils/asset/encodeAssetName";
+export * from "./utils/asset/getAssetFingerprint";
 export * from "./utils/cn";
 export * from "./utils/convertJSONToCSV";
+export * from "./utils/findLabel";
 export * from "./utils/format";
+export * from "./utils/formatCurrency";
+export * from "./utils/generateUrlWithParams";
 export * from "./utils/getBrowserTheme";
+export * from "./utils/getColumnsSortOrder";
 export * from "./utils/getExportJSON";
 export * from "./utils/getNodeText";
 export * from "./utils/gov/getGovActionStatus";
+export * from "./utils/isMobileDevice";
 export * from "./utils/lovelaceToAda";
+export * from "./utils/paginateArray";
 export * from "./utils/search/getCategories";
 export * from "./utils/truncatedText";
 export * from "./utils/gov/getGovActionStatus";
@@ -50,7 +59,9 @@ export * from "./hooks/useDebounce";
 export * from "./hooks/useWindowDimensions";
 
 // Stores
+export * from "./stores/currencyStore";
 export * from "./stores/dropdownState";
+export * from "./stores/infiniteScrollingStore";
 export * from "./stores/localeStore";
 export * from "./stores/themeStore";
 export * from "./stores/viewStore";
@@ -66,6 +77,7 @@ export * from "@/types/navigationTypes";
 
 // Resources
 export * from "@/resources/Facebook";
+export * from "@/resources/icons/Cardano";
 export * from "@/resources/Twitter";
 export { default as DiscordLogo } from "@/resources/images/icons/discord.svg";
 export { default as GithubLogo } from "@/resources/images/icons/github.svg";
