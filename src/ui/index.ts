@@ -273,3 +273,5 @@ export {
   AdaPriceIndicator,
   type AdaPriceIndicatorProps,
 } from "./adaPriceIndicator";
+
+export { MainLogo, type MainLogoProps } from "./mainLogo";
