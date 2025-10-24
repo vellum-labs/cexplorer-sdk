@@ -2,76 +2,6 @@ import type dynamicIconImports from "lucide-react/dynamicIconImports";
 import type { Rate } from "./blockTypes";
 import type { ResponseCore } from "./commonTypes";
 
-/**
- * Search result item for blockchain entities.
- *
- * @interface MiscSearch
- */
-export interface MiscSearch {
-  /**
-   * URL path to the entity detail page.
-   *
-   * @example "/transaction/0x123abc"
-   * @example "/pool/pool1abc"
-   */
-  url: string;
-  /**
-   * Unique identifier for the entity.
-   *
-   * @example "0x123abc..."
-   * @example "pool1abc..."
-   */
-  ident: string;
-  /**
-   * Display title for the search result.
-   *
-   * @example "Transaction #123"
-   * @example "ACME Stake Pool"
-   */
-  title: string;
-  /**
-   * Category of the blockchain entity.
-   *
-   * @example "transaction"
-   * @example "pool"
-   * @example "address"
-   */
-  category: string;
-  /**
-   * Additional metadata about the search result.
-   */
-  extra: {
-    /**
-     * Icon type to display.
-     */
-    icon: "balance" | "time" | "hot" | "promo";
-    /**
-     * Data type for the value field.
-     */
-    type: "balance" | "time" | "stake";
-    /**
-     * Associated value (balance, timestamp, etc.).
-     *
-     * @example 1000000 // lovelace
-     * @example "2024-01-15T10:30:00Z"
-     */
-    value: number | string;
-    /**
-     * Optional additional identifier.
-     */
-    id?: string;
-  };
-}
-
-/**
- * API response for search queries.
- *
- * Can return either a single result or an array of results.
- *
- * @typedef {ResponseCore<MiscSearch[] | MiscSearch>} MiscSearchResponse
- */
-export type MiscSearchResponse = ResponseCore<MiscSearch[] | MiscSearch>;
-
 export type MiscBasicResponse = {
   code: number;
   data: {
@@ -117,6 +47,18 @@ export type MiscBasicResponse = {
   ex: number;
   debug: boolean;
 };
+
+export interface BasicRate {
+  date: string;
+  adausd: number | null;
+  btcusd: number | null;
+}
+
+export interface MiscRateResponse {
+  code: number;
+  data: { rates: BasicRate[] };
+  tokens: number;
+}
 
 interface MiscConstResponseDataEpoch {
   no: number;
@@ -224,6 +166,11 @@ interface MiscConstResponseDataEpochStatProto {
   min: number;
   max: number;
 }
+
+interface MiscConstResponseDataLoad {
+  "24h"?: number;
+}
+
 interface MiscConstResponseDataEpochStat {
   epoch_no: number;
   spendable_epoch: number;
@@ -244,9 +191,6 @@ interface MiscConstResponseDataEpochStat {
   }[];
 }
 
-interface MiscConstResponseDataLoad {
-  "24h"?: number;
-}
 export interface MiscConstResponseData {
   no: number;
   epoch: MiscConstResponseDataEpoch;
@@ -260,3 +204,42 @@ export interface MiscConstResponseData {
     min_value: number;
   };
 }
+
+interface MiscNew {
+  message: {
+    [key: string]: string;
+  };
+}
+
+export interface MiscSearch {
+  url: string;
+  ident: string;
+  title: string;
+  category: string;
+  extra: {
+    icon: "balance" | "time" | "hot" | "promo";
+    type: "balance" | "time" | "stake";
+    value: number | string;
+    id?: string;
+  };
+}
+
+interface Tier {
+  rq_min: number;
+  rq_day: number;
+  tok_day: number;
+  license: string;
+}
+
+export interface MiscApiData {
+  starter: Tier;
+  basic: Tier;
+  pro: Tier;
+}
+
+export type MiscConstResponse = ResponseCore<MiscConstResponseData>;
+export type MiscNewResponse = ResponseCore<MiscNew>;
+export type MiscSearchResponse = ResponseCore<MiscSearch[] | MiscSearch>;
+export type MiscApiResponse = ResponseCore<{
+  plans: MiscApiData;
+}>;
