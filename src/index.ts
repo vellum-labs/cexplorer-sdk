@@ -32,6 +32,13 @@ export * from "./utils/gov/getGovActionStatus";
 export * from "./utils/lovelaceToAda";
 export * from "./utils/search/getCategories";
 export * from "./utils/truncatedText";
+export * from "./utils/gov/getGovActionStatus";
+export * from "./utils/address/getAddressTypeInitials";
+export * from "./utils/address/parseShelleyAddress";
+export * from "./utils/getColumnsSortOrder";
+export * from "./utils/asset/encodeAssetName";
+export * from "./utils/asset/getAssetFingerprint";
+export * from "./utils/generateUrlWithParams";
 
 // Providers
 export * from "./providers/GlobalSearchContext";

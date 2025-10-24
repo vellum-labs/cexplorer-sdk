@@ -1,12 +1,63 @@
 import { bech32 } from "bech32";
 
+/**
+ * Parsed Shelley address components
+ */
 interface ShelleyAddress {
+  /** Network identifier: "mainnet" or "testnet" */
   network: string;
+  /** Address type: "payment" or "stake" */
   addressType: string;
+  /** Payment part type (e.g., "PaymentKeyHash", "ScriptHash") or null */
   paymentPart: string | null;
+  /** Delegation part type (e.g., "StakeKeyHash", "ScriptHash", "Pointer") or null */
   delegationPart: string | null;
 }
 
+/**
+ * Parses a Cardano Shelley-era address (bech32 format) into its constituent parts.
+ *
+ * Decodes a bech32-encoded Cardano address and extracts information about the network,
+ * address type, payment part, and delegation part. Supports both payment addresses
+ * (starting with "addr1" or "addr_test1") and stake addresses (starting with "stake1" or "stake_test1").
+ *
+ * @param address - The bech32-encoded Cardano address to parse
+ * @returns Parsed address components or null if parsing fails
+ *
+ * @example
+ * ```tsx
+ * // Parse mainnet payment address with payment key and stake key
+ * parseShelleyAddress("addr1qxyz...")
+ * // Returns: {
+ * //   network: "mainnet",
+ * //   addressType: "payment",
+ * //   paymentPart: "PaymentKeyHash",
+ * //   delegationPart: "StakeKeyHash"
+ * // }
+ *
+ * // Parse stake address
+ * parseShelleyAddress("stake1uxyz...")
+ * // Returns: {
+ * //   network: "mainnet",
+ * //   addressType: "stake",
+ * //   paymentPart: null,
+ * //   delegationPart: "StakeKeyHash"
+ * // }
+ *
+ * // Parse testnet address
+ * parseShelleyAddress("addr_test1qxyz...")
+ * // Returns: {
+ * //   network: "testnet",
+ * //   addressType: "payment",
+ * //   paymentPart: "PaymentKeyHash",
+ * //   delegationPart: "StakeKeyHash"
+ * // }
+ *
+ * // Invalid address format
+ * parseShelleyAddress("invalid_address")
+ * // Returns: null
+ * ```
+ */
 export const parseShelleyAddress = (address: string): ShelleyAddress | null => {
   const MAINNET_NETWORK = "addr1";
   const TESTNET_NETWORK = "addr_test1";

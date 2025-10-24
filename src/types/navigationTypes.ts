@@ -1,3 +1,5 @@
+import type { FileRoutesByPath } from "@tanstack/react-router";
+
 /**
  * Navigation menu options configuration for dropdowns and navigation components.
  *
@@ -71,3 +73,11 @@ export type NavigationOptions = {
    */
   divider?: boolean;
 }[];
+
+export type NestedNavigation = {
+  [key: string]: {
+    label: string;
+    labelHref?: FileRoutesByPath[keyof FileRoutesByPath]["path"];
+    options: NavigationOptions;
+  };
+};
