@@ -138,3 +138,5 @@ export {
 export { FeatureModal, type FeatureModalProps } from "./featureModal";
 
 export { SafetyLinkModal, type SafetyLinkModalProps } from "./safetyLinkModal";
+
+export { DelegatorsLabel, type DelegatorsLabelProps } from "./delegatorsLabel";
