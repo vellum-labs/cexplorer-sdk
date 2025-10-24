@@ -237,3 +237,8 @@ export {
   TimeDateIndicator,
   type TimeDateIndicatorProps,
 } from "./timeDateIndicator";
+
+export {
+  TotalSumWithRates,
+  type BlockDetailTransactionsOverviewTotalProps,
+} from "./totalSumWithRates";

@@ -40,6 +40,7 @@ export * from "./utils/asset/encodeAssetName";
 export * from "./utils/asset/getAssetFingerprint";
 export * from "./utils/generateUrlWithParams";
 export * from "./utils/formatSmallValueWithSub";
+export * from "./utils/formatCurrency";
 
 // Providers
 export * from "./providers/GlobalSearchContext";
