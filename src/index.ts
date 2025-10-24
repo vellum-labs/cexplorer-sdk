@@ -20,16 +20,16 @@ export * from "./constants/votes";
 export * from "./ui";
 
 // Utils
+export * from "./utils/address/getAddressTypeInitials";
+export * from "./utils/address/parseShelleyAddress";
 export * from "./utils/cn";
 export * from "./utils/format";
 export * from "./utils/getBrowserTheme";
 export * from "./utils/getNodeText";
+export * from "./utils/gov/getGovActionStatus";
 export * from "./utils/lovelaceToAda";
 export * from "./utils/search/getCategories";
 export * from "./utils/truncatedText";
-export * from "./utils/gov/getGovActionStatus";
-export * from "./utils/address/getAddressTypeInitials";
-export * from "./utils/address/parseShelleyAddress";
 
 // Providers
 export * from "./providers/GlobalSearchContext";
@@ -40,6 +40,7 @@ export * from "./hooks/useWindowDimensions";
 
 // Stores
 export * from "./stores/dropdownState";
+export * from "./stores/localeStore";
 export * from "./stores/themeStore";
 
 // Lib

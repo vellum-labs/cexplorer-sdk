@@ -163,3 +163,8 @@ export {
 } from "./mobileTabsSelector";
 
 export { Tabs, type TabsProps } from "./tabs";
+
+export {
+  DisplayVoteModal,
+  type DisplayVoteModalProps,
+} from "./displayVoteModal";
