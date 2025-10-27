@@ -1,18 +1,18 @@
-import type { ReactNode} from "react";
+import { GlobalSearchProvider } from "@/providers/GlobalSearchContext";
+import type { Locales } from "@/types/commonTypes";
+import type { MiscBasicResponse, MiscSearchResponse } from "@/types/miscTypes";
+import { cn } from "@/utils/cn";
+import type { UseQueryResult } from "@tanstack/react-query";
+import type { ReactNode } from "react";
 import { useState } from "react";
+import { AdDropdown } from "../adDropdown";
 import type { BreadCrumbItem } from "../breadcrumbs";
 import { Breadcrumb } from "../breadcrumbs";
 import { BreadcrumbSeparator } from "../breadcrumbs/components/BreadcrumbSeparator";
-import type { UseQueryResult } from "@tanstack/react-query";
-import type { MiscBasicResponse, MiscSearchResponse } from "@/types/miscTypes";
-import { cn } from "@/utils/cn";
-import { TruncatedText } from "../truncatedText";
-import { ShareButton } from "../shareButton";
-import { LoadingSkeleton } from "../loadingSkeleton";
-import { GlobalSearchProvider } from "@/providers/GlobalSearchContext";
 import { GlobalSearch } from "../globalSearch";
-import type { Locales } from "@/types/commonTypes";
-import { AdDropdown } from "../adDropdown";
+import { LoadingSkeleton } from "../loadingSkeleton";
+import { ShareButton } from "../shareButton";
+import { TruncatedText } from "../truncatedText";
 
 /**
  * Props for the Header component.
@@ -74,6 +74,10 @@ export interface HeaderProps {
    * Current locale.
    */
   locale: Locales;
+  /**
+   * Homepage ad
+   */
+  homepageAd?: ReactNode;
 }
 
 /**
@@ -147,6 +151,7 @@ export const Header = ({
   miscBasic: miscBasicQuery,
   useFetchMiscSearch,
   locale,
+  homepageAd,
 }: HeaderProps) => {
   const [hasImage, setHasImage] = useState(false);
   const headingAd = miscBasicQuery.data?.data.ads.find(
@@ -281,11 +286,14 @@ export const Header = ({
             )}
           </div>
         ) : (
-          <div className='relative h-[110px] w-[320px] rounded-m border border-border bg-black'>
-            <div className='absolute right-2 top-1.5 flex h-[24px] w-[32px] items-center justify-center rounded-xs border border-border bg-background text-text-xs font-medium text-text'>
-              <span>Ad</span>
+          homepageAd && (
+            <div className='relative h-[110px] w-[320px] overflow-hidden rounded-m border border-border bg-cardBg'>
+              {homepageAd}
+              <div className='absolute right-2 top-1.5 flex h-[24px] w-[32px] items-center justify-center rounded-xs border border-border bg-background text-text-xs font-medium text-text'>
+                <span>Ad</span>
+              </div>
             </div>
-          </div>
+          )
         )}
       </div>
     </header>
