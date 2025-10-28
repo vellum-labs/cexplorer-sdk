@@ -4,7 +4,7 @@ import { CircleHelp, GitCompareArrows } from "lucide-react";
 
 import { type MiscConstResponseData } from "@/types/miscTypes";
 import type { PoolInfo } from "@/types/poolTypes";
-import { formatString } from "@/utils/format";
+import { formatNumberWithSuffix, formatString } from "@/utils/format";
 import { Link } from "@tanstack/react-router";
 import { Copy } from "../copy";
 import { Image } from "../image";
@@ -31,6 +31,10 @@ export interface BlockDetailMintedProps {
    * Protocol minor version number
    */
   protoMinor?: number;
+  /**
+   * Optional operational certificate counter
+   */
+  opCounter?: number;
   /**
    * Stake pool information
    */
@@ -122,6 +126,7 @@ export interface BlockDetailMintedProps {
  * @param {string} [props.vrfKey] - VRF key
  * @param {number} [props.protoMajor] - Protocol major version
  * @param {number} [props.protoMinor] - Protocol minor version
+ * @param {number} [props.opCounter] - Operational certificate counter
  * @returns {JSX.Element} Card displaying block minting information
  */
 export const MintedByCard: FC<BlockDetailMintedProps> = ({
@@ -129,13 +134,16 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
   vrfKey,
   protoMajor,
   protoMinor,
+  opCounter,
   poolInfo,
   isGenesisBlock = false,
   miscData,
   generateImageUrl,
 }) => {
   return (
-    <div className='flex max-h-[110px] min-h-[110px] w-full flex-col gap-1/2 rounded-l border border-border bg-cardBg px-2 py-1.5 shadow-md'>
+    <div
+      className={`flex ${opCounter !== undefined ? "max-h-[130px] min-h-[130px]" : "max-h-[110px] min-h-[110px]"} w-full flex-col gap-1/2 rounded-l border border-border bg-cardBg px-2 py-1.5 shadow-md`}
+    >
       <div className='flex w-full items-center gap-1'>
         <div className='rounded-m border border-border p-1/2'>
           <GitCompareArrows size={20} className='text-primary' />
@@ -173,30 +181,40 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
         )}
       </div>
       {vrfKey && (
-        <div className='flex w-full items-center gap-1'>
+        <div className='flex w-full flex-col gap-1/2'>
           {protoMajor && (
+            <div className='flex items-center gap-1'>
+              <span className='flex items-center gap-1 text-text-sm text-grayTextPrimary'>
+                Protocol version
+                <ProtocolDot
+                  miscData={miscData}
+                  protNo={Number(`${protoMajor}.${protoMinor}`)}
+                />
+                {protoMajor}
+                {protoMinor ? `.${protoMinor}` : ""}, VRF Key
+              </span>
+              <Tooltip
+                content={
+                  <div className='inline-block w-[200px] max-w-xs md:w-full xl:flex xl:max-w-full xl:items-center xl:gap-2'>
+                    <span className='break-words pr-1 xl:break-normal xl:pr-0'>
+                      {vrfKey}
+                    </span>
+                    <Copy copyText={vrfKey} className='inline' />
+                  </div>
+                }
+              >
+                <CircleHelp size={12} className='h-full text-grayTextPrimary' />
+              </Tooltip>
+            </div>
+          )}
+          {opCounter !== undefined && (
             <span className='flex items-center gap-1 text-text-sm text-grayTextPrimary'>
-              Protocol version
-              <ProtocolDot
-                miscData={miscData}
-                protNo={Number(`${protoMajor}.${protoMinor}`)}
-              />
-              {protoMajor}
-              {protoMinor ? `.${protoMinor}` : ""}, VRF Key
+              Op Counter:{" "}
+              <Tooltip content={opCounter.toLocaleString()}>
+                <span>{formatNumberWithSuffix(opCounter, true, 2)}</span>
+              </Tooltip>
             </span>
           )}
-          <Tooltip
-            content={
-              <div className='inline-block w-[200px] max-w-xs md:w-full xl:flex xl:max-w-full xl:items-center xl:gap-2'>
-                <span className='break-words pr-1 xl:break-normal xl:pr-0'>
-                  {vrfKey}
-                </span>
-                <Copy copyText={vrfKey} className='inline' />
-              </div>
-            }
-          >
-            <CircleHelp size={12} className='h-full text-grayTextPrimary' />
-          </Tooltip>
         </div>
       )}
     </div>
