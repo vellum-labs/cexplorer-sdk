@@ -43,6 +43,42 @@ const meta: Meta<typeof SizeCard> = {
         type: { summary: "JSX.Element" },
       },
     },
+    isTx: {
+      control: "boolean",
+      description: "Enable transaction mode with memory and CPU steps",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    max_tx_ex_mem: {
+      control: "number",
+      description: "Maximum transaction execution memory (from epoch_param)",
+      table: {
+        type: { summary: "number | undefined" },
+      },
+    },
+    max_tx_ex_steps: {
+      control: "number",
+      description: "Maximum transaction execution steps (from epoch_param)",
+      table: {
+        type: { summary: "number | undefined" },
+      },
+    },
+    tx_ex_mem: {
+      control: "number",
+      description: "Actual transaction execution memory used",
+      table: {
+        type: { summary: "number | undefined" },
+      },
+    },
+    tx_ex_steps: {
+      control: "number",
+      description: "Actual transaction execution steps (CPU) used",
+      table: {
+        type: { summary: "number | undefined" },
+      },
+    },
   },
   decorators: [
     Story => (
@@ -77,6 +113,23 @@ export const TransactionSize: Story = {
     icon: <Icon name='arrow-right-left' size={16} />,
     size: 4096, // 4 KB
     maxSize: 16384, // 16 KB
+  },
+};
+
+/**
+ * Transaction mode with memory and CPU steps metrics
+ */
+export const TransactionWithMetrics: Story = {
+  args: {
+    title: "Transaction size",
+    icon: <Icon name='arrow-right-left' size={16} />,
+    size: 1576, // 1.54 KB
+    maxSize: 16384, // Max tx size
+    isTx: true,
+    tx_ex_mem: 1185384, // Actual memory used
+    max_tx_ex_mem: 14000000, // From epoch_param
+    tx_ex_steps: 267476469, // Actual CPU steps
+    max_tx_ex_steps: 10000000000, // From epoch_param
   },
 };
 
