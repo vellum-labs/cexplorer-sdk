@@ -280,13 +280,9 @@ export const SizeCard: FC<BlockDetailSizeProps> = ({
           <>
             <div className='flex items-center gap-2'>
               {!isNaN(Number(sizeInKB)) ? (
-                <span className='text-display-xs font-semibold text-text'>
-                  {sizeInKB}kB
-                </span>
+                <span className='font-semibold text-text'>{sizeInKB}kB</span>
               ) : (
-                <span className='text-display-xs font-semibold text-text'>
-                  Unknown
-                </span>
+                <span className='font-semibold text-text'>Unknown</span>
               )}
 
               <div className='relative h-[8px] flex-1 overflow-hidden rounded-[4px] bg-[#FEC84B]'>
