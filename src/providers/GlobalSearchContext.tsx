@@ -26,7 +26,28 @@ export type Category =
   | "user"
   | "article"
   | "page"
+  | "drep"
   | "gov_action_proposal";
+
+/**
+ * Detects search category based on input prefix.
+ * Automatically sets category when user types recognized prefixes.
+ *
+ * @param {string} searchValue - The search input value
+ * @returns {Category | null} Detected category or null if no match
+ */
+const detectCategoryFromPrefix = (searchValue: string): Category | null => {
+  const lowerValue = searchValue.toLowerCase().trim();
+
+  if (lowerValue.startsWith("addr")) return "address";
+  if (lowerValue.startsWith("pool")) return "pool";
+  if (lowerValue.startsWith("stake")) return "stake";
+  if (lowerValue.startsWith("asset")) return "asset";
+  if (lowerValue.startsWith("gov_action")) return "gov_action_proposal";
+  if (lowerValue.startsWith("drep")) return "drep";
+
+  return null;
+};
 
 /**
  * Global search context value type.
@@ -172,6 +193,15 @@ export const GlobalSearchProvider: React.FC<GlobalSearchProviderProps> = ({
 
   const handleSearchChange = (value: string) => {
     setSearch(value);
+
+    const detectedCategory = detectCategoryFromPrefix(value);
+    if (detectedCategory) {
+      setSearchCategory(detectedCategory);
+      setActiveTab(detectedCategory);
+    } else if (value.length === 0) {
+      setSearchCategory("all");
+      setActiveTab("all");
+    }
   };
 
   const handleInput = (type: "focus" | "blur") => {
