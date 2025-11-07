@@ -107,6 +107,10 @@ const meta: Meta<typeof Header> = {
       control: "boolean",
       description: "Homepage variant",
     },
+    customPage: {
+      control: "boolean",
+      description: "Custom page variant with centered title and no search",
+    },
   },
 };
 
@@ -170,6 +174,29 @@ export const Homepage: Story = {
   args: {
     title: "Explore Cardano blockchain",
     isHomepage: true,
+    miscBasic: mockMiscBasic,
+    useFetchMiscSearch: mockUseFetchMiscSearch,
+    locale: "en",
+  },
+};
+
+/**
+ * Custom page variant with centered title/subtitle and no search
+ */
+export const CustomPage: Story = {
+  args: {
+    customPage: true,
+    title: "Custom Page Title",
+    subTitle: (
+      <div className='flex flex-col gap-0.5'>
+        <span className='text-text-md text-text'>
+          Pool ID: pool1xyz...abc123def456
+        </span>
+        <span className='text-text-md text-text'>
+          Ticker: STAKE • Margin: 2% • Fixed Cost: 340 ADA
+        </span>
+      </div>
+    ),
     miscBasic: mockMiscBasic,
     useFetchMiscSearch: mockUseFetchMiscSearch,
     locale: "en",
