@@ -97,7 +97,7 @@ export const ShareButton = ({ isHeader = false }: ShareButtonProps) => {
           Share on X
         </div>
       ),
-      href: `https://x.com/intent/tweet?text=${window.location.href}`,
+      href: `https://x.com/intent/tweet?text=${encodeURIComponent(window.location.href)}`,
     },
     {
       label: (
@@ -106,7 +106,7 @@ export const ShareButton = ({ isHeader = false }: ShareButtonProps) => {
           Share on Facebook
         </div>
       ),
-      href: `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`,
+      href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`,
     },
   ];
 
