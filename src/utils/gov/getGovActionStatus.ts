@@ -3,7 +3,12 @@ import type { GovernanceActionDetail } from "@/types/governanceTypes";
 /**
  * Status of a Cardano governance action
  */
-export type GovActionStatus = "Active" | "Ratified" | "Enacted" | "Expired";
+export type GovActionStatus =
+  | "Active"
+  | "Ratified"
+  | "Enacted"
+  | "Expired"
+  | "Dropped";
 
 /**
  * Epoch-related fields from governance action detail
@@ -19,9 +24,10 @@ export type GovernanceEpochs = Pick<
  * The status is determined by comparing the current epoch with various governance
  * action epoch milestones. The function follows a specific priority order:
  * 1. Enacted - if enacted_epoch exists and has passed
- * 2. Expired - if expired_epoch or dropped_epoch has passed
- * 3. Ratified - if ratified but not yet enacted
- * 4. Active - default state for pending actions
+ * 2. Dropped - if dropped_epoch has passed (explicitly withdrawn)
+ * 3. Expired - if expired_epoch has passed (naturally expired)
+ * 4. Ratified - if ratified but not yet enacted
+ * 5. Active - default state for pending actions
  *
  * @param item - Governance action containing epoch milestones
  * @param currentEpoch - The current blockchain epoch number
@@ -55,6 +61,15 @@ export type GovernanceEpochs = Pick<
  *   ratified_epoch: 505
  * }, 515)
  * // Returns: "Enacted"
+ *
+ * // Dropped action
+ * getGovActionStatus({
+ *   dropped_epoch: 508,
+ *   enacted_epoch: null,
+ *   expired_epoch: null,
+ *   ratified_epoch: null
+ * }, 515)
+ * // Returns: "Dropped"
  * ```
  */
 export const getGovActionStatus = (
@@ -68,11 +83,13 @@ export const getGovActionStatus = (
     return "Enacted";
   }
 
-  // Expired: action expired naturally OR was dropped
-  if (
-    (expired_epoch != null && expired_epoch <= currentEpoch) ||
-    (dropped_epoch != null && dropped_epoch <= currentEpoch)
-  ) {
+  // Dropped: action was explicitly dropped
+  if (dropped_epoch != null && dropped_epoch <= currentEpoch) {
+    return "Dropped";
+  }
+
+  // Expired: action expired naturally
+  if (expired_epoch != null && expired_epoch <= currentEpoch) {
     return "Expired";
   }
 

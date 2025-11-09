@@ -53,6 +53,8 @@ const getStatusColor = (status: GovActionStatus): string => {
       return "#886fe2"; // Bright Indigo - Successfully completed
     case "Expired":
       return "#F79009"; // Orange - Failed/expired
+    case "Dropped":
+      return "#EF4444"; // Red - Explicitly dropped/withdrawn
     default:
       return "#10B981"; // Default to Active color
   }
@@ -70,13 +72,15 @@ const getStatusColor = (status: GovActionStatus): string => {
  * - **Active**: Green (#10B981) with animated pulse - Currently in voting period
  * - **Ratified**: Blue (#00A9E3) - Approved by voters, waiting for enactment
  * - **Enacted**: Indigo (#886fe2) - Successfully executed and completed
- * - **Expired**: Orange (#F79009) - Expired or dropped without enactment
+ * - **Expired**: Orange (#F79009) - Expired without enactment
+ * - **Dropped**: Red (#EF4444) - Explicitly dropped/withdrawn
  *
  * **Status Calculation Logic:**
  * 1. **Enacted**: If enacted_epoch exists and current epoch >= enacted_epoch
- * 2. **Expired**: If expired_epoch or dropped_epoch exists and current epoch >= those epochs
- * 3. **Ratified**: If ratified_epoch exists but not yet enacted
- * 4. **Active**: Default state - proposal is open for voting
+ * 2. **Dropped**: If dropped_epoch exists and current epoch >= dropped_epoch
+ * 3. **Expired**: If expired_epoch exists and current epoch >= expired_epoch
+ * 4. **Ratified**: If ratified_epoch exists but not yet enacted
+ * 5. **Active**: Default state - proposal is open for voting
  *
  * **Common Use Cases:**
  * - Display governance proposal status in proposal listings
@@ -127,6 +131,17 @@ const getStatusColor = (status: GovActionStatus): string => {
  *     enacted_epoch: null,
  *     expired_epoch: 449,
  *     dropped_epoch: null
+ *   }}
+ *   currentEpoch={450}
+ * />
+ *
+ * // Dropped proposal (explicitly withdrawn)
+ * <GovernanceStatusBadge
+ *   item={{
+ *     ratified_epoch: null,
+ *     enacted_epoch: null,
+ *     expired_epoch: null,
+ *     dropped_epoch: 448
  *   }}
  *   currentEpoch={450}
  * />
