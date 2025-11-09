@@ -16,13 +16,14 @@ import type {
   UseInfiniteQueryResult,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { Funnel } from "lucide-react";
+import { Funnel, HelpCircle } from "lucide-react";
 import type { MouseEventHandler, ReactNode, RefObject } from "react";
 import React, { useEffect, useRef, useState } from "react";
 import { FunnelFilter } from "../funnelFilter";
 import { LoadingSkeleton } from "../loadingSkeleton";
 import { NoResultsFound } from "../noResultsFound";
 import { Pagination } from "../pagination";
+import { Tooltip } from "../tooltip";
 
 /**
  * Column definition for GlobalTable.
@@ -40,14 +41,21 @@ import { Pagination } from "../pagination";
  *     title: "Transaction Hash",
  *     widthPx: 300,
  *     visible: true,
- *     render: (tx) => <Copy value={tx.hash} />
+ *     render: (tx) => <Copy value={tx.hash} />,
+ *     helper: "Unique identifier for this transaction on the blockchain"
  *   },
  *   {
  *     key: "block",
  *     title: "Block",
  *     widthPx: 120,
  *     visible: true,
- *     render: (tx) => tx.blockHeight
+ *     render: (tx) => tx.blockHeight,
+ *     helper: (
+ *       <div>
+ *         Block height in the blockchain.
+ *         <a href="/blocks" className="text-primary">Learn more</a>
+ *       </div>
+ *     )
  *   }
  * ];
  * ```
@@ -71,6 +79,8 @@ export type Column<T> = {
   rankingStart?: "asc" | "desc";
   /** Additional CSS classes for table cells in this column */
   className?: string;
+  /** Helper text/content to display in a tooltip with question mark icon. Supports HTML and React components. */
+  helper?: React.ReactNode;
   /** Filter configuration for the column */
   filter?: {
     /** Whether filter popover is currently open */
@@ -493,7 +503,7 @@ export const GlobalTable = <T extends Record<string, any>>({
             className={`${infiniteScrolling ? "sticky" : "relative"} ${scrolled && infiniteScrolling ? "shadow-md" : ""} top-0 z-10 ${isEmpty && !isLoading ? "border-none" : ""} ${disableDrag && "pointer-events-none"}`}
           >
             <tr className=''>
-              {columns.map(({ title, widthPx, visible, filter }, index) => (
+              {columns.map(({ title, widthPx, visible, filter, helper }, index) => (
                 <React.Fragment key={index + "head"}>
                   {visible && (
                     <TableHead
@@ -524,6 +534,15 @@ export const GlobalTable = <T extends Record<string, any>>({
                     >
                       <div className='flex items-center gap-1/2'>
                         {title}
+                        {helper && (
+                          <Tooltip content={helper}>
+                            <HelpCircle
+                              size={15}
+                              className='inline min-w-[15px] cursor-help text-grayTextPrimary hover:text-text'
+                              onMouseDown={e => e.stopPropagation()}
+                            />
+                          </Tooltip>
+                        )}
                         {filter && (
                           <Funnel
                             size={15}
