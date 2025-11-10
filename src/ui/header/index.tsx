@@ -287,7 +287,7 @@ export const Header = ({
           </div>
         ) : (
           homepageAd && (
-            <div className='relative h-[110px] w-[320px] overflow-hidden rounded-m border border-border bg-cardBg'>
+            <div className='relative h-[100px] w-[320px] overflow-hidden rounded-m border border-border bg-cardBg'>
               {homepageAd}
               <div className='absolute right-2 top-1.5 flex h-[24px] w-[32px] items-center justify-center rounded-xs border border-border bg-background text-text-xs font-medium text-text'>
                 <span>Ad</span>
