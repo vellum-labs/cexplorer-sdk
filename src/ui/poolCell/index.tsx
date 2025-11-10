@@ -6,6 +6,9 @@ import { CircleEllipsis } from "lucide-react";
 import { Tooltip } from "@/ui/tooltip";
 import { buildSocialIcons } from "@/utils/buildSocialIcons";
 import { formatString } from "@/utils/format";
+import { useState } from "react";
+import { SafetyLinkModal } from "@/ui/safetyLinkModal";
+import WebsiteIcon from "@/resources/images/icons/website.svg";
 
 /**
  * Props for the PoolCell component
@@ -113,8 +116,12 @@ export const PoolCell = ({
   const ticker = poolInfo?.meta?.ticker;
   const name = poolInfo?.meta?.name;
   const extended = poolInfo?.meta?.extended;
+  const homepage = poolInfo?.meta?.homepage;
 
   const socialIcons = buildSocialIcons(extended);
+
+  const [showSafetyModal, setShowSafetyModal] = useState(false);
+  const [selectedUrl, setSelectedUrl] = useState("");
 
   if (!id)
     return (
@@ -154,26 +161,49 @@ export const PoolCell = ({
           </span>
         </Link>
         <div className='flex w-fit items-center gap-1'>
-          {socialIcons.length > 0 && (
+          {socialIcons.length > 0 && !showSafetyModal && (
             <Tooltip
               content={
-                <div className='flex gap-2'>
-                  {socialIcons.map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.url}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      title={social.alt}
+                <div className='flex gap-1.5'>
+                  {homepage && (
+                    <button
+                      onClick={e => {
+                        e.preventDefault();
+                        setSelectedUrl(homepage);
+                        setShowSafetyModal(true);
+                      }}
+                      title='Website'
+                      className='cursor-pointer border-none bg-transparent p-0'
                     >
-                      <img src={social.icon} alt={social.alt} width={20} />
-                    </a>
+                      <img src={WebsiteIcon} alt='Website' width={14} />
+                    </button>
+                  )}
+                  {socialIcons.map((social, index) => (
+                    <button
+                      key={index}
+                      onClick={e => {
+                        e.preventDefault();
+                        setSelectedUrl(social.url);
+                        setShowSafetyModal(true);
+                      }}
+                      title={social.alt}
+                      className='cursor-pointer border-none bg-transparent p-0'
+                    >
+                      <img src={social.icon} alt={social.alt} width={12} />
+                    </button>
                   ))}
                 </div>
               }
             >
-              <CircleEllipsis size={12} className='stroke-grayText' />
+              <div className='flex items-center justify-center rounded-m bg-secondaryBg'>
+                <CircleEllipsis size={12} className='stroke-grayText' />
+              </div>
             </Tooltip>
+          )}
+          {socialIcons.length > 0 && showSafetyModal && (
+            <div className='flex items-center justify-center rounded-m bg-secondaryBg'>
+              <CircleEllipsis size={12} className='stroke-grayText' />
+            </div>
           )}
           <Link
             to='/pool/$id'
@@ -185,6 +215,12 @@ export const PoolCell = ({
           <Copy copyText={poolInfo.id} size={10} className='stroke-grayText' />
         </div>
       </div>
+      {showSafetyModal && (
+        <SafetyLinkModal
+          url={selectedUrl}
+          onClose={() => setShowSafetyModal(false)}
+        />
+      )}
     </div>
   );
 };
