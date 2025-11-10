@@ -9,7 +9,7 @@ const meta: Meta<typeof GovernanceStatusBadge> = {
     docs: {
       description: {
         component:
-          "Badge component displaying the status of Cardano governance actions with colored pulse indicators (Active, Ratified, Enacted, Expired).",
+          "Badge component displaying the status of Cardano governance actions with colored pulse indicators (Active, Ratified, Enacted, Expired, Dropped).",
       },
     },
   },
@@ -103,6 +103,21 @@ export const Expired: Story = {
 };
 
 /**
+ * Dropped status - proposal was explicitly dropped or withdrawn (red)
+ */
+export const Dropped: Story = {
+  args: {
+    item: {
+      ratified_epoch: null,
+      enacted_epoch: null,
+      expired_epoch: null,
+      dropped_epoch: 448,
+    },
+    currentEpoch: 450,
+  },
+};
+
+/**
  * All status types displayed together
  */
 export const AllStatuses: Story = {
@@ -160,6 +175,20 @@ export const AllStatuses: Story = {
         />
         <span className='text-text-sm text-text'>
           Expired without enactment
+        </span>
+      </div>
+      <div className='flex items-center gap-2'>
+        <GovernanceStatusBadge
+          item={{
+            ratified_epoch: null,
+            enacted_epoch: null,
+            expired_epoch: null,
+            dropped_epoch: 448,
+          }}
+          currentEpoch={450}
+        />
+        <span className='text-text-sm text-text'>
+          Explicitly dropped or withdrawn
         </span>
       </div>
     </div>
@@ -233,7 +262,7 @@ export const InProposalList: Story = {
             currentEpoch={450}
           />
         </div>
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center justify-between border-b border-border pb-3'>
           <div className='flex flex-col'>
             <span className='text-text-sm font-medium text-text'>
               Proposal #39: Stake Pool Rewards Adjustment
@@ -248,6 +277,25 @@ export const InProposalList: Story = {
               enacted_epoch: null,
               expired_epoch: 440,
               dropped_epoch: null,
+            }}
+            currentEpoch={450}
+          />
+        </div>
+        <div className='flex items-center justify-between'>
+          <div className='flex flex-col'>
+            <span className='text-text-sm font-medium text-text'>
+              Proposal #38: DRep Voting Rights Extension
+            </span>
+            <span className='text-text-xs text-text-muted'>
+              Submitted: Epoch 428
+            </span>
+          </div>
+          <GovernanceStatusBadge
+            item={{
+              ratified_epoch: null,
+              enacted_epoch: null,
+              expired_epoch: null,
+              dropped_epoch: 432,
             }}
             currentEpoch={450}
           />
@@ -398,7 +446,7 @@ export const InDashboardTimeline: Story = {
  */
 export const InStatsSummary: Story = {
   render: () => (
-    <div className='grid grid-cols-2 gap-4'>
+    <div className='grid grid-cols-3 gap-4'>
       <div className='rounded-lg border border-border p-4'>
         <div className='mb-3 flex items-center justify-between'>
           <h4 className='font-semibold text-text'>Active Proposals</h4>
@@ -465,6 +513,23 @@ export const InStatsSummary: Story = {
         </div>
         <p className='text-text-2xl font-bold text-text'>23</p>
         <p className='text-text-xs text-text-muted'>Not enacted</p>
+      </div>
+
+      <div className='rounded-lg border border-border p-4'>
+        <div className='mb-3 flex items-center justify-between'>
+          <h4 className='font-semibold text-text'>Dropped</h4>
+          <GovernanceStatusBadge
+            item={{
+              ratified_epoch: null,
+              enacted_epoch: null,
+              expired_epoch: null,
+              dropped_epoch: 435,
+            }}
+            currentEpoch={450}
+          />
+        </div>
+        <p className='text-text-2xl font-bold text-text'>7</p>
+        <p className='text-text-xs text-text-muted'>Withdrawn</p>
       </div>
     </div>
   ),
