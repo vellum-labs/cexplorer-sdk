@@ -77,6 +77,10 @@ export interface HeaderProps {
    * Homepage ad
    */
   homepageAd?: ReactNode;
+  /**
+   * Whether this is a custom page variant with centered title and no search.
+   */
+  customPage?: boolean;
 }
 
 /**
@@ -151,6 +155,7 @@ export const Header = ({
   useFetchMiscSearch,
   locale,
   homepageAd,
+  customPage,
 }: HeaderProps) => {
   const [hasImage, setHasImage] = useState(false);
   const headingAd = miscBasicQuery.data?.data.ads.find(
@@ -160,10 +165,10 @@ export const Header = ({
   return (
     <header className='flex min-h-[110px] w-full justify-center bg-gradient-to-b from-bannerGradient to-darker'>
       <div
-        className={`flex w-full max-w-desktop flex-wrap justify-between gap-3 p-mobile md:px-desktop md:py-2 ${isHomepage ? "items-center" : ""}`}
+        className={`flex w-full max-w-desktop flex-wrap justify-between gap-3 p-mobile md:px-desktop md:py-2 ${isHomepage ? "items-center" : ""} ${customPage ? "items-center justify-center" : ""}`}
       >
         <div
-          className={`flex flex-col pt-2 ${isHomepage ? "w-full max-w-[750px]" : ""}`}
+          className={`flex flex-col pt-2 ${isHomepage ? "w-full max-w-[750px]" : ""} ${customPage ? "w-full items-center text-center" : ""}`}
         >
           {breadcrumbItems && (
             <Breadcrumb
@@ -172,7 +177,7 @@ export const Header = ({
             />
           )}
           <div className={cn("flex items-center gap-2 pb-1.5 font-poppins")}>
-            <h1 className={cn("flex items-end")}>
+            <h1 className={cn("flex items-end", customPage && "pl-[28px]")}>
               <TruncatedText
                 onHasImageChange={setHasImage}
                 className='text-display-md'
@@ -189,10 +194,12 @@ export const Header = ({
               </div>
             )}
           </div>
-          <div className={`flex items-center gap-1`}>
+          <div
+            className={`flex items-center gap-1 ${customPage ? "flex-col" : ""}`}
+          >
             {!isHomepage && subTitle && subTitle}
             {!isHomepage && qrCode && qrCode}
-            {isHomepage && (
+            {isHomepage && !customPage && (
               <GlobalSearchProvider
                 useFetchMiscSearch={useFetchMiscSearch}
                 locale={locale}
@@ -222,7 +229,7 @@ export const Header = ({
             </>
           )}
         </div>
-        {!isHomepage ? (
+        {!isHomepage && !customPage ? (
           <div
             className={`flex pt-2 ${homepageAd ? "basis-[385px] flex-col" : "basis-[385px] pt-4"}`}
           >
@@ -244,6 +251,7 @@ export const Header = ({
             )}
           </div>
         ) : (
+          !customPage &&
           homepageAd && (
             <div className='relative h-[100px] w-[320px] overflow-hidden rounded-m border border-border bg-cardBg'>
               {homepageAd}
