@@ -1,7 +1,7 @@
+import { Copy } from "@/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Header } from "../../ui/header";
 import CardanoIcon from "../assets/Cardano.svg";
-import { Copy } from "@/ui";
 
 const mockMiscBasic = {
   data: {
@@ -144,6 +144,7 @@ export const DetailPage: Story = {
     miscBasic: mockMiscBasic,
     useFetchMiscSearch: mockUseFetchMiscSearch,
     locale: "en",
+    homepageAd: true,
   },
 };
 
