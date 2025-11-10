@@ -5,7 +5,6 @@ import { cn } from "@/utils/cn";
 import type { UseQueryResult } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { useState } from "react";
-import { AdDropdown } from "../adDropdown";
 import type { BreadCrumbItem } from "../breadcrumbs";
 import { Breadcrumb } from "../breadcrumbs";
 import { BreadcrumbSeparator } from "../breadcrumbs/components/BreadcrumbSeparator";
@@ -162,23 +161,6 @@ export const Header = ({
   const headingAd = miscBasicQuery.data?.data.ads.find(
     ad => ad.type === "heading_featured",
   );
-  const boxAds = miscBasicQuery.data?.data.ads.filter(ad => ad.type === "box");
-
-  const sortedAds: Record<
-    string,
-    MiscBasicResponse["data"]["ads"][number]["data"][]
-  > = boxAds
-    ? boxAds.reduce(
-        (acc, ad) => {
-          acc[ad.data.title] = [ad.data];
-          return acc;
-        },
-        {} as Record<
-          string,
-          MiscBasicResponse["data"]["ads"][number]["data"][]
-        >,
-      )
-    : {};
 
   return (
     <header className='flex min-h-[110px] w-full justify-center bg-gradient-to-b from-bannerGradient to-darker'>
@@ -249,53 +231,29 @@ export const Header = ({
         </div>
         {!isHomepage && !customPage ? (
           <div
-            className={"flex w-full shrink basis-[385px] flex-col gap-1.5 pt-4"}
+            className={`flex pt-2 ${homepageAd ? "basis-[385px] flex-col" : "basis-[385px] pt-4"}`}
           >
-            <GlobalSearchProvider
-              useFetchMiscSearch={useFetchMiscSearch}
-              locale={locale}
-            >
-              <GlobalSearch />
-            </GlobalSearchProvider>
-
-            {miscBasicQuery.isLoading ? (
-              <div className='flex flex-wrap gap-1'>
-                <LoadingSkeleton width='130px' height='40px' rounded='lg' />
-                <LoadingSkeleton width='130px' height='40px' rounded='lg' />
-                <LoadingSkeleton width='130px' height='40px' rounded='lg' />
-              </div>
-            ) : (
-              <div className='flex flex-wrap gap-1.5'>
-                {Object.entries(sortedAds)?.map(ad => (
-                  <AdDropdown
-                    key={ad[0]}
-                    icon={ad[1][0].icon}
-                    label={ad[1][0].section}
-                    options={ad[1].map(({ title, content, link }) => ({
-                      label: (
-                        <a
-                          href={link}
-                          target='_blank'
-                          className='flex flex-col gap-1'
-                        >
-                          <p>{title}</p>
-                          <p
-                            dangerouslySetInnerHTML={{
-                              __html: content,
-                            }}
-                          ></p>
-                        </a>
-                      ),
-                    }))}
-                  />
-                ))}
+            <div className={"flex w-full shrink flex-col gap-1.5 pb-1.5"}>
+              <GlobalSearchProvider
+                useFetchMiscSearch={useFetchMiscSearch}
+                locale={locale}
+              >
+                <GlobalSearch />
+              </GlobalSearchProvider>
+            </div>
+            {homepageAd && (
+              <div className='relative h-[100px] w-[320px] overflow-hidden rounded-m border border-border bg-cardBg'>
+                {homepageAd}
+                <div className='absolute right-2 top-1.5 flex h-[24px] w-[32px] items-center justify-center rounded-xs border border-border bg-background text-text-xs font-medium text-text'>
+                  <span>Ad</span>
+                </div>
               </div>
             )}
           </div>
         ) : (
           !customPage &&
           homepageAd && (
-            <div className='relative h-[110px] w-[320px] overflow-hidden rounded-m border border-border bg-cardBg'>
+            <div className='relative h-[100px] w-[320px] overflow-hidden rounded-m border border-border bg-cardBg'>
               {homepageAd}
               <div className='absolute right-2 top-1.5 flex h-[24px] w-[32px] items-center justify-center rounded-xs border border-border bg-background text-text-xs font-medium text-text'>
                 <span>Ad</span>
