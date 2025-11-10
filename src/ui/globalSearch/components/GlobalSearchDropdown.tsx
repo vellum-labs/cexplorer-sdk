@@ -94,6 +94,10 @@ export const GlobalSearchDropdown: FC<GlobalSearchDropdownProps> = ({
             label: "Gov",
             onClick: () => setSearchCategory("gov_action_proposal"),
           },
+          {
+            label: "DRep",
+            onClick: () => setSearchCategory("drep"),
+          },
         ]}
       />
     </div>
