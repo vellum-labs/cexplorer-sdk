@@ -337,3 +337,95 @@ const HiddenColumnsTemplate: FC = () => {
 export const HiddenColumns = {
   render: () => <HiddenColumnsTemplate />,
 };
+
+const WithHelpersTemplate: FC = () => {
+  const columnsWithHelpers: Column<Transaction>[] = [
+    {
+      key: "hash",
+      title: "Transaction Hash",
+      widthPx: 300,
+      visible: true,
+      render: tx => (
+        <span className='font-mono text-primary'>{tx.hash.slice(0, 16)}...</span>
+      ),
+      helper: "Unique identifier for this transaction on the Cardano blockchain",
+    },
+    {
+      key: "block",
+      title: "Block",
+      widthPx: 120,
+      visible: true,
+      render: tx => (
+        <span className='font-semibold'>{tx.block.toLocaleString()}</span>
+      ),
+      helper: (
+        <div>
+          Block height in the blockchain.
+          <br />
+          <span className='text-text-xs text-grayTextPrimary'>
+            Higher numbers are newer blocks
+          </span>
+        </div>
+      ),
+    },
+    {
+      key: "age",
+      title: "Age",
+      widthPx: 150,
+      visible: true,
+      render: tx => <span className='text-grayTextPrimary'>{tx.age}</span>,
+    },
+    {
+      key: "amount",
+      title: "Amount",
+      widthPx: 150,
+      visible: true,
+      render: tx => <span className='font-semibold text-text'>{tx.amount}</span>,
+      helper: "Total amount of ADA transferred in this transaction",
+    },
+    {
+      key: "fees",
+      title: "Fees",
+      widthPx: 120,
+      visible: true,
+      render: tx => <span className='text-grayTextPrimary'>{tx.fees}</span>,
+      helper: (
+        <div className='max-w-[200px]'>
+          Transaction fees paid to validators for processing this transaction.
+          <br />
+          <br />
+          <a href='#' className='text-primary hover:underline'>
+            Learn more about fees →
+          </a>
+        </div>
+      ),
+    },
+    {
+      key: "size",
+      title: "Size",
+      widthPx: 100,
+      visible: true,
+      render: tx => <span className='text-grayTextPrimary'>{tx.size} B</span>,
+      helper: "Transaction size in bytes (affects fees)",
+    },
+  ];
+
+  return (
+    <GlobalTable
+      type='default'
+      items={mockTransactions.slice(0, 10)}
+      columns={columnsWithHelpers}
+      query={mockQuery as any}
+      totalItems={50}
+      itemsPerPage={10}
+      pagination={true}
+    />
+  );
+};
+
+/**
+ * Table with helper tooltips on column headers (hover over question marks)
+ */
+export const WithHelpers = {
+  render: () => <WithHelpersTemplate />,
+};
