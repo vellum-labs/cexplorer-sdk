@@ -176,11 +176,13 @@ export const Header = ({
               breadcrumbSeparator={breadcrumbSeparator}
             />
           )}
-          <div className={cn("flex items-center gap-2 pb-1.5 font-poppins")}>
+          <div
+            className={cn("flex items-center gap-2 pb-1.5 pt-1 font-poppins")}
+          >
             <h1 className={cn("flex items-end", customPage && "pl-[28px]")}>
               <TruncatedText
                 onHasImageChange={setHasImage}
-                className='text-display-md'
+                className='text-display-sm'
               >
                 {title}
               </TruncatedText>
