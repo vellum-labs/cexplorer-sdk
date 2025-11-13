@@ -182,7 +182,7 @@ export const Header = ({
             <h1 className={cn("flex items-end", customPage && "pl-[28px]")}>
               <TruncatedText
                 onHasImageChange={setHasImage}
-                className='text-display-sm'
+                className='text-nowrap text-display-sm'
               >
                 {title}
               </TruncatedText>
