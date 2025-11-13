@@ -165,7 +165,7 @@ export const Header = ({
   return (
     <header className='flex min-h-[110px] w-full justify-center bg-gradient-to-b from-bannerGradient to-darker'>
       <div
-        className={`flex w-full max-w-desktop flex-wrap justify-between gap-3 p-mobile md:px-desktop md:py-2 ${isHomepage ? "items-center" : ""} ${customPage ? "items-center justify-center" : ""}`}
+        className={`flex w-full max-w-desktop flex-wrap justify-between gap-3 p-mobile md:px-desktop md:py-0 ${isHomepage ? "items-center" : ""} ${customPage ? "items-center justify-center" : ""}`}
       >
         <div
           className={`flex flex-col pt-2 ${isHomepage ? "w-full max-w-[750px]" : ""} ${customPage ? "w-full items-center text-center" : ""}`}
