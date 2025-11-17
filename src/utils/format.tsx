@@ -170,6 +170,8 @@ export const toUtcDate = (input: string | Date | number): Date => {
  * @param {string | Date | number} [input] - Date to format
  * @param {boolean} [hideTime=false] - Hide time portion, show only date
  * @param {boolean} [returnString=false] - Return ISO string instead of JSX
+ * @param {boolean} [showRelative=false] - Show relative time (e.g., "10 minutes ago") as main text
+ * @param {boolean} [showSecondary=false] - Show secondary date format below main text (small, muted)
  * @returns {JSX.Element | string} Formatted date with tooltip or ISO string
  *
  * @example
@@ -183,11 +185,35 @@ export const toUtcDate = (input: string | Date | number): Date => {
  * formatDate("2024-01-15T10:30:00Z", true)
  * // Returns: <Tooltip>Jan 15 2024</Tooltip>
  * ```
+ *
+ * @example
+ * ```tsx
+ * // Withdrawals: relative time with absolute date below
+ * formatDate("2024-01-15T10:30:00Z", false, false, true, true)
+ * // Returns:
+ * // <div>
+ * //   10 minutes ago
+ * //   <small class="text-muted">15.1.2024, 10:30:45</small>
+ * // </div>
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Rewards: formatted date with alternative format below
+ * formatDate("2024-11-03T10:30:00Z", false, false, false, true)
+ * // Returns:
+ * // <div>
+ * //   Nov 03 2024
+ * //   <small class="text-muted">3.11.2024, 10:30:45</small>
+ * // </div>
+ * ```
  */
 export const formatDate = (
   input?: string | Date | number,
   hideTime?: boolean,
   returnString: boolean = false,
+  showRelative: boolean = false,
+  showSecondary: boolean = false,
 ) => {
   if (!input) return "";
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -200,9 +226,28 @@ export const formatDate = (
 
   const offset = format(zoned, "XXX");
 
+  const mainText = showRelative
+    ? formatTimeAgo(utcDate.toISOString())
+    : format(zoned, hideTime ? "MMM dd yyyy" : "MMM dd yyyy, HH:mm zzz");
+
+  const secondaryText = showSecondary
+    ? format(zoned, "d.M.yyyy, HH:mm:ss")
+    : null;
+
+  if (showSecondary) {
+    return (
+      <Tooltip content={<span>Local timezone UTC {offset}</span>}>
+        <div className='flex flex-col'>
+          <span>{mainText}</span>
+          <small className='text-text-muted text-[11px]'>{secondaryText}</small>
+        </div>
+      </Tooltip>
+    );
+  }
+
   return (
     <Tooltip content={<span>Local timezone UTC {offset}</span>}>
-      {format(zoned, hideTime ? "MMM dd yyyy" : "MMM dd yyyy, HH:mm zzz")}
+      {mainText}
     </Tooltip>
   );
 };
