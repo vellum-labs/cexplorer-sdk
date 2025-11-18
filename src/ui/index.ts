@@ -313,3 +313,5 @@ export {
 export { MainLogo, type MainLogoProps } from "./mainLogo";
 
 export { ConstLabelBadge, type ConstLabelBadgeProps } from "./constLabelBadge";
+
+export { EpochCell, type EpochCellProps } from "./epochCell";
