@@ -1,6 +1,6 @@
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import { getTruncatedTitle, hasImageInChildren } from "@/utils/truncatedText";
-import type { ReactNode} from "react";
+import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 
 /**
@@ -74,6 +74,9 @@ export const TruncatedText = ({
   const { isTruncated, displayTitle, fullText, images } =
     getTruncatedTitle(children);
 
+  const fullTextRef = useRef<HTMLSpanElement | null>(null);
+  const [scrollDistance, setScrollDistance] = useState<number>(0);
+
   useEffect(() => {
     if (onHasImageChange) {
       const hasImage = hasImageInChildren(children);
@@ -86,6 +89,14 @@ export const TruncatedText = ({
       setContainerWidth(textRef.current.offsetWidth);
     }
   }, [isTruncated, containerWidth, isMobile]);
+
+  useEffect(() => {
+    if (isHovered && fullTextRef.current && containerWidth) {
+      const fullTextWidth = fullTextRef.current.scrollWidth;
+      const distance = fullTextWidth - containerWidth;
+      setScrollDistance(distance > 0 ? distance : 0);
+    }
+  }, [isHovered, containerWidth]);
 
   return (
     <>
@@ -111,9 +122,16 @@ export const TruncatedText = ({
             <span className='flex-1 overflow-hidden break-all'>
               <span
                 className='inline-block whitespace-nowrap'
-                style={{
-                  animation: "marquee 10s linear infinite",
-                }}
+                ref={fullTextRef}
+                style={
+                  {
+                    animation:
+                      scrollDistance > 0
+                        ? "marquee 10s ease-in-out infinite"
+                        : "none",
+                    "--scroll-distance": `-${scrollDistance}px`,
+                  } as React.CSSProperties & { "--scroll-distance": string }
+                }
               >
                 {fullText}
               </span>

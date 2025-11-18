@@ -211,8 +211,14 @@ h3 {
   0% {
     transform: translateX(0);
   }
+  45% { 
+    transform: translateX(var(--scroll-distance));
+  }
+  55% { 
+    transform: translateX(var(--scroll-distance));
+  }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(0);
   }
 }
 
