@@ -152,6 +152,11 @@ export {
 } from "./carousel/SingleItemCarousel";
 export { NoResultsFound } from "./noResultsFound";
 
+export {
+  SensitiveContentWarning,
+  type SensitiveContentWarningProps,
+} from "./sensitiveContentWarning";
+
 export { AdCard } from "./carousel/AdCard";
 export { AdsCarousel, type AdsCarouselProps } from "./carousel/AdsCarousel";
 
