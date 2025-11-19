@@ -1,6 +1,27 @@
 import { Link } from "@tanstack/react-router";
 
 /**
+ * Props for the ProBadge component
+ */
+export interface ProBadgeProps {
+  /**
+   * When true, displays "Get PRO" text. When false, displays just "PRO".
+   *
+   * @default false
+   * @example
+   * // Short version
+   * <ProBadge />
+   * // Displays: "PRO"
+   *
+   * @example
+   * // Call-to-action version
+   * <ProBadge get />
+   * // Displays: "Get PRO"
+   */
+  get?: boolean;
+}
+
+/**
  * ProBadge displays a clickable "PRO" badge with gradient styling that links to the Pro subscription page.
  *
  * This component renders a small, eye-catching badge with a blue-to-purple gradient background
@@ -18,6 +39,9 @@ import { Link } from "@tanstack/react-router";
  * ```tsx
  * // Basic usage - displays "PRO" badge with link
  * <ProBadge />
+ *
+ * // Call-to-action version with "Get PRO" text
+ * <ProBadge get />
  *
  * // In a feature list
  * <div className="flex items-center gap-2">
@@ -39,15 +63,17 @@ import { Link } from "@tanstack/react-router";
  * </nav>
  * ```
  *
+ * @param {ProBadgeProps} props - Component props
+ * @param {boolean} [props.get=false] - Show "Get PRO" text instead of just "PRO"
  * @returns {JSX.Element} A clickable badge with gradient background linking to the Pro page
  */
-export const ProBadge = () => {
+export const ProBadge = ({ get = false }: ProBadgeProps) => {
   return (
     <Link
       to='/pro'
-      className={`text-righttext-text-xs rounded-full flex w-fit items-center gap-1 bg-gradient-to-r from-darkBlue to-purple-700 px-2 py-0.5 font-medium text-white hover:text-white`}
+      className={`flex w-fit items-center gap-1 rounded-xl bg-gradient-to-r from-darkBlue to-purple-700 px-2 py-0.5 text-text-xs font-medium text-white hover:text-white`}
     >
-      PRO
+      {get ? "Get PRO" : "PRO"}
     </Link>
   );
 };
