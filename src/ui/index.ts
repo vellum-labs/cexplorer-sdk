@@ -74,7 +74,7 @@ export { RangeSlider, type RangeSliderProps } from "./rangeSlider";
 export { ExtraLabelBadge, type ExtraLabelBadgeProps } from "./extraLabelBadge";
 export { LabelBadge, type LabelBadgeProps } from "./labelBadge";
 
-export { ProBadge } from "./proBadge";
+export { ProBadge, type ProBadgeProps } from "./proBadge";
 
 export { VoterRoleBadge } from "./voterRoleBadge";
 
