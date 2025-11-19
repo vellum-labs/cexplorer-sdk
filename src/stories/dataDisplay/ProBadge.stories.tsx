@@ -13,6 +13,16 @@ const meta: Meta<typeof ProBadge> = {
       },
     },
   },
+  argTypes: {
+    get: {
+      control: "boolean",
+      description: 'Show "Get PRO" text instead of just "PRO"',
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+  },
   decorators: [
     Story => (
       <div className='flex h-[300px] w-full items-center justify-center bg-background p-10'>
@@ -26,9 +36,40 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /**
- * Default PRO badge with gradient styling
+ * Default PRO badge with short text
  */
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    get: false,
+  },
+};
+
+/**
+ * Call-to-action variant with "Get PRO" text
+ */
+export const GetPro: Story = {
+  args: {
+    get: true,
+  },
+};
+
+/**
+ * Comparison of both text variants
+ */
+export const BothVariants: Story = {
+  render: () => (
+    <div className='flex flex-col gap-4'>
+      <div className='flex items-center gap-3'>
+        <span className='w-32 text-text-sm text-text-muted'>Short version:</span>
+        <ProBadge />
+      </div>
+      <div className='flex items-center gap-3'>
+        <span className='w-32 text-text-sm text-text-muted'>CTA version:</span>
+        <ProBadge get />
+      </div>
+    </div>
+  ),
+};
 
 /**
  * PRO badge in a feature list context
@@ -84,7 +125,7 @@ export const WithLockedFeature: Story = {
 };
 
 /**
- * PRO badge in header navigation
+ * PRO badge in header navigation with "Get PRO" call-to-action
  */
 export const InNavigation: Story = {
   render: () => (
@@ -99,7 +140,7 @@ export const InNavigation: Story = {
         Analytics
       </span>
       <div className='ml-auto'>
-        <ProBadge />
+        <ProBadge get />
       </div>
     </nav>
   ),
