@@ -530,7 +530,7 @@ export const GlobalTable = <T extends Record<string, any>>({
                             ? `hue-rotate(${index * 20}deg)`
                             : "none",
                       }}
-                      className={`relative box-border rounded-t-xl border-b border-border bg-darker font-semibold ${isMobileDevice() || !onOrderChange ? "cursor-pointer" : "cursor-move"} last:pr-4 ${firstClickedColumnIndex !== null && firstClickedColumnIndex !== index && `bg-yellow-200/20 border border-dashed border-yellow-400`} table-cell first:pl-4 ${firstClickedColumnIndex !== null && "text-text [&>p]:text-text"} ${firstClickedColumnIndex === index || (isDragging && draggedIndex === index && "border border-dashed border-text text-grayTextPrimary [&>p]:text-grayTextPrimary")} ${overIndex === index && "bg-border"}`}
+                      className={`relative box-border rounded-t-xl ${isEmpty && !isLoading ? "first:rounded-bl-xl last:rounded-br-xl" : "border-b border-border"} bg-darker font-semibold ${isMobileDevice() || !onOrderChange ? "cursor-pointer" : "cursor-move"} last:pr-4 ${firstClickedColumnIndex !== null && firstClickedColumnIndex !== index && `bg-yellow-200/20 border border-dashed border-yellow-400`} table-cell first:pl-4 ${firstClickedColumnIndex !== null && "text-text [&>p]:text-text"} ${firstClickedColumnIndex === index || (isDragging && draggedIndex === index && "border border-dashed border-text text-grayTextPrimary [&>p]:text-grayTextPrimary")} ${overIndex === index && "bg-border"}`}
                     >
                       <div className='flex items-center gap-1/2'>
                         {title}
