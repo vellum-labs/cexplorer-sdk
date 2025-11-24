@@ -55,7 +55,7 @@ export const SizeCell = ({ maxSize, size }: SizeCellProps) => {
   const sizeInKb = (size / 1024).toFixed(1);
   const percent = ((size / maxSize) * 100).toFixed(1);
 
-  if (!size || !maxSize) return <p className='text-left'>Unknown</p>;
+  if (!size || !maxSize) return <p className='text-right'>Unknown</p>;
 
   return (
     <div className='flex flex-col'>
