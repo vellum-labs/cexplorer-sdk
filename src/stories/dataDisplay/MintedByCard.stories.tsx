@@ -185,3 +185,25 @@ export const MinimalInfo: Story = {
     generateImageUrl: mockGenerateImageUrl,
   },
 };
+
+/**
+ * Pool with operational certificate counter
+ */
+export const WithOpCounter: Story = {
+  args: {
+    poolInfo: {
+      id: "pool1z22x50lqsrwent6en0llzzs9e577rx7n3mv9kfw7udwa2rf42fa",
+      meta: {
+        name: "ATAD-2 Stakepool in Austria",
+        ticker: "ATAD2",
+      },
+    },
+    isGenesisBlock: false,
+    vrfKey: "vrf1w8a6rv7v5u5sn7qjz8f8k3pzml9x8qx2pzs7qg3qv7g8j6v4qc5s4d3f2g",
+    protoMajor: 8,
+    protoMinor: 0,
+    opCounter: 3084,
+    miscData: undefined,
+    generateImageUrl: mockGenerateImageUrl,
+  },
+};
