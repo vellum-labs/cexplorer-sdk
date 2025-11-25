@@ -142,7 +142,7 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
 }) => {
   return (
     <div
-      className={`flex ${opCounter !== undefined ? "max-h-[130px] min-h-[130px]" : "max-h-[110px] min-h-[110px]"} w-full flex-col gap-1/2 rounded-l border border-border bg-cardBg px-2 py-1.5 shadow-md`}
+      className='flex max-h-[110px] min-h-[110px] w-full flex-col gap-1/2 rounded-l border border-border bg-cardBg px-2 py-1.5 shadow-md'
     >
       <div className='flex w-full items-center gap-1'>
         <div className='rounded-m border border-border p-1/2'>
@@ -181,17 +181,17 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
         )}
       </div>
       {vrfKey && (
-        <div className='flex w-full flex-col gap-1/2'>
+        <div className='flex w-full flex-wrap items-center gap-1'>
           {protoMajor && (
-            <div className='flex items-center gap-1'>
+            <>
               <span className='flex items-center gap-1 text-text-sm text-grayTextPrimary'>
-                Protocol version
+                Protocol
                 <ProtocolDot
                   miscData={miscData}
                   protNo={Number(`${protoMajor}.${protoMinor}`)}
                 />
                 {protoMajor}
-                {protoMinor ? `.${protoMinor}` : ""}, VRF Key
+                {protoMinor ? `.${protoMinor}` : ""}, VRF
               </span>
               <Tooltip
                 content={
@@ -205,7 +205,7 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
               >
                 <CircleHelp size={12} className='h-full text-grayTextPrimary' />
               </Tooltip>
-            </div>
+            </>
           )}
           {opCounter !== undefined && (
             <span className='flex items-center gap-1 text-text-sm text-grayTextPrimary'>

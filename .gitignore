@@ -1,8 +1,7 @@
 node_modules
 dist
-.env
-.env.*
 
 storybook-static
 .vscode
 claude.md
+config.bat
