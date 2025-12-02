@@ -1,14 +1,15 @@
+import WebsiteIcon from "@/resources/images/icons/website.svg";
 import type { PoolInfo } from "@/types/poolTypes";
-import { Link } from "@tanstack/react-router";
 import { Copy } from "@/ui/copy";
 import { Image } from "@/ui/image";
-import { CircleEllipsis } from "lucide-react";
+import { SafetyLinkModal } from "@/ui/safetyLinkModal";
 import { Tooltip } from "@/ui/tooltip";
 import { buildSocialIcons } from "@/utils/buildSocialIcons";
 import { formatString } from "@/utils/format";
+import { Link } from "@tanstack/react-router";
+import { CircleEllipsis } from "lucide-react";
 import { useState } from "react";
-import { SafetyLinkModal } from "@/ui/safetyLinkModal";
-import WebsiteIcon from "@/resources/images/icons/website.svg";
+import { createPortal } from "react-dom";
 
 /**
  * Props for the PoolCell component
@@ -195,15 +196,10 @@ export const PoolCell = ({
                 </div>
               }
             >
-              <div className='flex items-center justify-center rounded-m bg-secondaryBg'>
-                <CircleEllipsis size={12} className='stroke-grayText' />
+              <div className='flex items-center justify-center rounded-m bg-background text-border'>
+                <CircleEllipsis size={12} />
               </div>
             </Tooltip>
-          )}
-          {socialIcons.length > 0 && showSafetyModal && (
-            <div className='flex items-center justify-center rounded-m bg-secondaryBg'>
-              <CircleEllipsis size={12} className='stroke-grayText' />
-            </div>
           )}
           <Link
             to='/pool/$id'
@@ -215,12 +211,14 @@ export const PoolCell = ({
           <Copy copyText={poolInfo.id} size={10} className='stroke-grayText' />
         </div>
       </div>
-      {showSafetyModal && (
-        <SafetyLinkModal
-          url={selectedUrl}
-          onClose={() => setShowSafetyModal(false)}
-        />
-      )}
+      {showSafetyModal &&
+        createPortal(
+          <SafetyLinkModal
+            url={selectedUrl}
+            onClose={() => setShowSafetyModal(false)}
+          />,
+          document.body,
+        )}
     </div>
   );
 };
