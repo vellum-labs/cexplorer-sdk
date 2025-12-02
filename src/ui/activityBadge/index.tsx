@@ -124,7 +124,7 @@ export const ActivityBadge = ({ percentage }: ActivityBadgeProps) => {
       className={`flex h-[24px] w-fit items-center rounded-xl border px-[8px] py-[2px] ${currentStyle.border} ${currentStyle.bg}`}
     >
       <span
-        className={`text-xs whitespace-nowrap font-medium ${currentStyle.text}`}
+        className={`whitespace-nowrap text-text-xs font-medium ${currentStyle.text}`}
       >
         {percentage.toFixed(2)}%
       </span>
