@@ -65,6 +65,11 @@ h3 {
   font-weight: 600;
 }
 
+li {
+  font-size: var(--font-size-text-sm);
+  line-height: var(--line-height-text-sm);
+}
+
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -211,10 +216,10 @@ h3 {
   0% {
     transform: translateX(0);
   }
-  45% { 
+  45% {
     transform: translateX(var(--scroll-distance));
   }
-  55% { 
+  55% {
     transform: translateX(var(--scroll-distance));
   }
   100% {
