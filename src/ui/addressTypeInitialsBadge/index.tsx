@@ -173,7 +173,7 @@ export const AddressTypeInitialsBadge = ({
   if (paymentPart?.includes("Key") && delegationPart?.includes("Key")) {
     return (
       <Tooltip
-        content={<div className='min-w-[100px] text-center'>KeyHash</div>}
+        content={<div className='min-w-[50px] text-center'>KeyHash</div>}
       >
         <span
           className={`flex w-fit items-center gap-1/2 rounded-xs border ${paymentBgColor} px-1 py-0 text-right text-[10px] font-bold ${paymentTextColor} ${className}`}
@@ -189,7 +189,7 @@ export const AddressTypeInitialsBadge = ({
       {shouldRenderPayment && (
         <Tooltip
           content={
-            <div className='min-w-[100px] text-center'>{paymentPart}</div>
+            <div className='min-w-[50px] text-center'>{paymentPart}</div>
           }
         >
           <span
@@ -202,7 +202,7 @@ export const AddressTypeInitialsBadge = ({
       {shouldRenderDelegation && (
         <Tooltip
           content={
-            <div className='min-w-[100px] text-center'>{delegationPart}</div>
+            <div className='min-w-[50px] text-center'>{delegationPart}</div>
           }
         >
           <span
