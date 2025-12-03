@@ -81,6 +81,10 @@ export interface HeaderProps {
    * Whether this is a custom page variant with centered title and no search.
    */
   customPage?: boolean;
+  /**
+   * Optional icon/image to display on the left of the title.
+   */
+  icon?: ReactNode;
 }
 
 /**
@@ -156,6 +160,7 @@ export const Header = ({
   locale,
   homepageAd,
   customPage,
+  icon,
 }: HeaderProps) => {
   const [hasImage, setHasImage] = useState(false);
   const headingAd = miscBasicQuery.data?.data.ads.find(
@@ -179,7 +184,8 @@ export const Header = ({
           <div
             className={cn("flex items-center gap-2 pb-1.5 pt-1 font-poppins")}
           >
-            <h1 className={cn("flex items-end", customPage && "pl-[28px]")}>
+            <h1 className={cn("flex items-center gap-2", customPage && "pl-[28px]")}>
+              {icon && <span className='flex-shrink-0'>{icon}</span>}
               <TruncatedText
                 onHasImageChange={setHasImage}
                 className='text-nowrap text-display-sm'
