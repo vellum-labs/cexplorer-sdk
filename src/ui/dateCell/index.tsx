@@ -4,6 +4,9 @@ import {
   formatTimeAgo,
   formatTimeIn,
 } from "@/utils/format";
+import { Tooltip } from "@/ui/tooltip";
+import { TZDate } from "@date-fns/tz";
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
 
 /**
@@ -44,6 +47,15 @@ interface DateCellProps {
    * @default false
    */
   withoutConvert?: boolean;
+  /**
+   * Show tooltip with persistent/absolute time on hover.
+   * Displays both absolute time (e.g., "14:43:57 Nov 27 2025")
+   * and relative time (e.g., "4y 5mo ago").
+   *
+   * @optional
+   * @default true
+   */
+  showTooltip?: boolean;
 }
 
 /**
@@ -92,6 +104,15 @@ interface DateCellProps {
  * />
  * ```
  *
+ * @example
+ * ```tsx
+ * // With tooltip disabled
+ * <DateCell
+ *   time="2024-01-15T10:30:00Z"
+ *   showTooltip={false}
+ * />
+ * ```
+ *
  * @param {DateCellProps} props - Component props
  * @returns {JSX.Element} Rendered date cell with relative time
  */
@@ -100,8 +121,8 @@ export const DateCell = ({
   className = "",
   tabularNums = true,
   withoutConvert = false,
+  showTooltip = true,
 }: DateCellProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -119,7 +140,17 @@ export const DateCell = ({
 
   const date = new Date(localTime);
 
-  return (
+  const getTooltipContent = () => {
+    if (!time) return null;
+
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const utcDate = withoutConvert ? new Date(time) : new Date(time + "Z");
+    const zoned = new TZDate(utcDate, timeZone);
+
+    return format(zoned, "HH:mm:ss MMM dd yyyy");
+  };
+
+  const content = (
     <p className={` ${tabularNums ? "tabular-nums" : ""} ${className}`}>
       {time
         ? date > currentTime
@@ -128,4 +159,10 @@ export const DateCell = ({
         : "-"}
     </p>
   );
+
+  if (!showTooltip || !time) {
+    return content;
+  }
+
+  return <Tooltip content={getTooltipContent()}>{content}</Tooltip>;
 };
