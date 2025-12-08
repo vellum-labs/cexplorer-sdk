@@ -4,9 +4,9 @@ import type { Dispatch, ReactNode, SetStateAction } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
+import type { Locales } from "@/types/commonTypes";
 import { getCategories } from "@/utils/search/getCategories";
 import type { UseQueryResult } from "@tanstack/react-query";
-import type { Locales } from "@/types/commonTypes";
 
 /**
  * Available search categories for Cardano blockchain entities.
@@ -184,7 +184,9 @@ export const GlobalSearchProvider: React.FC<GlobalSearchProviderProps> = ({
   const debouncedCategoriesOverflow = useDebounce(categoriesOverflow, 300);
 
   const { data, isLoading, isFetching } = useFetchMiscSearch(
-    debouncedSearch ? debouncedSearch.replace("$", "") : undefined,
+    debouncedSearch && debouncedSearch.length >= 3
+      ? debouncedSearch.replace("$", "")
+      : undefined,
     searchCategory !== "all" ? searchCategory : undefined,
     locale,
   );
