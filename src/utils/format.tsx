@@ -1,3 +1,4 @@
+import { FormatStringComponent } from "@/ui/formatStringComponent";
 import { Tooltip } from "@/ui/tooltip";
 import { TZDate } from "@date-fns/tz";
 import { format } from "date-fns";
@@ -10,41 +11,49 @@ import { format } from "date-fns";
  * @param {string | null | undefined} text - Text to format
  * @param {"short" | "long" | "shorter" | "longer"} type - Truncation length variant
  * @param {number} [startIndex=0] - Starting position for the slice
- * @returns {string | undefined} Truncated string with ellipsis, or undefined if text is falsy
+ * @param {string} [className=""] - Optional CSS classes for styling
+ * @returns {JSX.Element | undefined} Component with truncated text and hover animation, or undefined if text is falsy
  *
  * @example
  * ```tsx
  * formatString("addr1q9xyztabcdefghijklmnopqrstuvwxyz123456", "short")
- * // Returns: "addr1...23456"
+ * // Returns: Component showing "addr1...23456" with full text on hover
  * ```
  *
  * @example
  * ```tsx
- * formatString("0a1b2c3d4e5f6789abcdefghijklmnop", "shorter")
- * // Returns: "0a1b...mnop"
+ * formatString("0a1b2c3d4e5f6789abcdefghijklmnop", "shorter", 0, "text-primary")
+ * // Returns: Component with custom styling
  * ```
  */
 export const formatString = (
   text: string | null | undefined,
   type: "short" | "long" | "shorter" | "longer",
   startIndex?: number,
+  className?: string,
 ) => {
   if (!text) return;
 
   const startFromIndex = startIndex || 0;
+  let truncated: string;
+
   if (type === "short") {
-    return `${text.slice(0 + startFromIndex, 5 + startFromIndex)}...${text.slice(-5)}`;
+    truncated = `${text.slice(0 + startFromIndex, 5 + startFromIndex)}...${text.slice(-5)}`;
+  } else if (type === "shorter") {
+    truncated = `${text.slice(0 + startFromIndex, 4 + startFromIndex)}...${text.slice(-4)}`;
+  } else if (type === "longer") {
+    truncated = `${text.slice(0 + startFromIndex, 11 + startFromIndex)}...${text.slice(-11)}`;
+  } else {
+    truncated = `${text.slice(0 + startFromIndex, 8 + startFromIndex)}...${text.slice(-8)}`;
   }
 
-  if (type === "shorter") {
-    return `${text.slice(0 + startFromIndex, 4 + startFromIndex)}...${text.slice(-4)}`;
-  }
-
-  if (type === "longer") {
-    return `${text.slice(0 + startFromIndex, 11 + startFromIndex)}...${text.slice(-11)}`;
-  }
-
-  return `${text.slice(0 + startFromIndex, 8 + startFromIndex)}...${text.slice(-8)}`;
+  return (
+    <FormatStringComponent
+      text={text}
+      truncated={truncated}
+      className={className}
+    />
+  );
 };
 
 /**
