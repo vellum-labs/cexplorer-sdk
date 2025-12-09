@@ -136,15 +136,19 @@ export const formatNumberWithSuffix = (
   removeUnusedZeroes?: boolean,
   numberOfDecimals?: number,
 ): string => {
+  const isNegative = num < 0;
+  const absNum = Math.abs(num);
+  const prefix = isNegative ? "-" : "";
+
   switch (true) {
-    case num >= 1e9:
-      return (num / 1e9).toFixed(numberOfDecimals ?? 2) + "B";
-    case num >= 1e6:
-      return (num / 1e6).toFixed(numberOfDecimals ?? 2) + "M";
-    case num >= 1e3:
-      return (num / 1e3).toFixed(numberOfDecimals ?? 2) + "k";
+    case absNum >= 1e9:
+      return prefix + (absNum / 1e9).toFixed(numberOfDecimals ?? 2) + "B";
+    case absNum >= 1e6:
+      return prefix + (absNum / 1e6).toFixed(numberOfDecimals ?? 2) + "M";
+    case absNum >= 1e3:
+      return prefix + (absNum / 1e3).toFixed(numberOfDecimals ?? 2) + "k";
     default:
-      return num.toFixed(removeUnusedZeroes ? 0 : 2) + "";
+      return prefix + absNum.toFixed(removeUnusedZeroes ? 0 : 2);
   }
 };
 
