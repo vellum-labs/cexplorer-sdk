@@ -38,6 +38,7 @@ export const FormatStringComponent = ({
       style={{
         display: "inline-block",
         overflow: "hidden",
+        verticalAlign: "middle",
         ...(containerWidth ? { width: `${containerWidth}px` } : {}),
       }}
       onMouseEnter={() => setIsHovered(true)}
