@@ -108,7 +108,7 @@ const preview: Preview = {
       viewports: {
         mobile: {
           name: "Mobile",
-          styles: { width: "375px", height: "667px" },
+          styles: { width: "360px", height: "667px" },
         },
         tablet: {
           name: "Tablet",
