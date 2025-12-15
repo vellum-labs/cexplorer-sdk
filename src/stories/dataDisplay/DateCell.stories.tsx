@@ -25,6 +25,11 @@ const meta: Meta<typeof DateCell> = {
       description: "Skip UTC to local conversion",
       control: "boolean",
     },
+    showTooltip: {
+      description:
+        "Show tooltip with absolute time on hover (default: true)",
+      control: "boolean",
+    },
   },
   parameters: {
     docs: {
@@ -138,6 +143,17 @@ const Undefined: Story = {
   },
 };
 
+const WithoutTooltip: Story = {
+  render: args => {
+    const time = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+    return <DateCell {...args} time={time} withoutConvert={true} />;
+  },
+  args: {
+    tabularNums: true,
+    showTooltip: false,
+  },
+};
+
 export {
   RecentBlock,
   FiveMinutesAgo,
@@ -148,5 +164,6 @@ export {
   TransactionTimestamp,
   EpochEndTime,
   WithoutTabularNums,
+  WithoutTooltip,
   Undefined,
 };

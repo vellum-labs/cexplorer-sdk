@@ -84,6 +84,13 @@ export interface ScreenDropdownProps {
    * @example <div>Featured content</div>
    */
   card?: ReactNode;
+
+  /**
+   * Optional prop to add space for top ad
+   *
+   *
+   */
+  randomTopAd?: boolean;
 }
 
 /**
@@ -166,6 +173,7 @@ export const ScreenDropdown: React.FC<ScreenDropdownProps> = ({
   wrapperClassname,
   disableHover = false,
   closeOnSelect = false,
+  randomTopAd,
   card,
 }) => {
   const { openId, setOpenId } = useDropdownState();
@@ -283,7 +291,7 @@ export const ScreenDropdown: React.FC<ScreenDropdownProps> = ({
       {isOpen && (
         <div
           ref={contentRef}
-          className={`absolute left-1/2 top-[75px] z-20 flex w-full max-w-[1410px] -translate-x-1/2 rounded-b-l border border-border border-t-primary bg-cardBg p-2 text-text-sm shadow-lg`}
+          className={`absolute left-1/2 z-20 flex w-full max-w-[1410px] -translate-x-1/2 rounded-b-l border border-border border-t-primary bg-cardBg p-2 text-text-sm shadow-lg ${randomTopAd ? "top-[150px]" : "top-[75px]"}`}
         >
           {card}
           <section className='flex w-[max(800px,95%)] justify-around gap-1'>

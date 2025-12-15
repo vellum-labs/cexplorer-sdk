@@ -85,6 +85,10 @@ export interface HeaderProps {
    * Optional icon/image to display on the left of the title.
    */
   icon?: ReactNode;
+  /**
+   * Removes search input
+   */
+  withoutSearch?: boolean;
 }
 
 /**
@@ -161,6 +165,7 @@ export const Header = ({
   homepageAd,
   customPage,
   icon,
+  withoutSearch = false,
 }: HeaderProps) => {
   const [hasImage, setHasImage] = useState(false);
   const headingAd = miscBasicQuery.data?.data.ads.find(
@@ -184,7 +189,12 @@ export const Header = ({
           <div
             className={cn("flex items-center gap-2 pb-1.5 pt-1 font-poppins")}
           >
-            <h1 className={cn("flex items-center gap-2", customPage && "pl-[28px]")}>
+            <h1
+              className={cn(
+                "flex items-center gap-2",
+                customPage && "pl-[28px]",
+              )}
+            >
               {icon && <span className='flex-shrink-0'>{icon}</span>}
               <TruncatedText
                 onHasImageChange={setHasImage}
@@ -202,20 +212,22 @@ export const Header = ({
               </div>
             )}
           </div>
-          <div
-            className={`flex items-center gap-1 ${customPage ? "flex-col" : ""}`}
-          >
-            {!isHomepage && subTitle && subTitle}
-            {!isHomepage && qrCode && qrCode}
-            {isHomepage && !customPage && (
-              <GlobalSearchProvider
-                useFetchMiscSearch={useFetchMiscSearch}
-                locale={locale}
-              >
-                <GlobalSearch isHomepage />
-              </GlobalSearchProvider>
-            )}
-          </div>
+          {!withoutSearch && (
+            <div
+              className={`flex items-center gap-1 ${customPage ? "flex-col" : ""}`}
+            >
+              {!isHomepage && subTitle && subTitle}
+              {!isHomepage && qrCode && qrCode}
+              {isHomepage && !customPage && (
+                <GlobalSearchProvider
+                  useFetchMiscSearch={useFetchMiscSearch}
+                  locale={locale}
+                >
+                  <GlobalSearch isHomepage />
+                </GlobalSearchProvider>
+              )}
+            </div>
+          )}
 
           {headingAd && miscBasicQuery.isLoading ? (
             <LoadingSkeleton height='14px' />
@@ -241,14 +253,16 @@ export const Header = ({
           <div
             className={`flex pt-2 ${homepageAd ? "basis-[385px] flex-col" : "basis-[385px] pt-4"}`}
           >
-            <div className={"flex w-full shrink flex-col gap-1.5 pb-1.5"}>
-              <GlobalSearchProvider
-                useFetchMiscSearch={useFetchMiscSearch}
-                locale={locale}
-              >
-                <GlobalSearch />
-              </GlobalSearchProvider>
-            </div>
+            {!withoutSearch && (
+              <div className={"flex w-full shrink flex-col gap-1.5 pb-1.5"}>
+                <GlobalSearchProvider
+                  useFetchMiscSearch={useFetchMiscSearch}
+                  locale={locale}
+                >
+                  <GlobalSearch />
+                </GlobalSearchProvider>
+              </div>
+            )}
             {homepageAd && (
               <div className='relative h-[100px] w-[320px] overflow-hidden rounded-m border border-border bg-cardBg'>
                 {homepageAd}

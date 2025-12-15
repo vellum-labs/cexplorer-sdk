@@ -3,11 +3,12 @@ import { useEffect } from "react";
 
 import { useGlobalSearch } from "@/providers/GlobalSearchContext";
 import { useThemeStore } from "@/stores/themeStore";
+import { useNavigate } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
+import { TextInput } from "../textInput";
+import { GlobalSearchCell } from "./components/GlobalSearchCell";
 import { GlobalSearchDropdown } from "./components/GlobalSearchDropdown";
 import { GlobalSearchRecent } from "./components/GlobalSearchRecent";
-import { GlobalSearchCell } from "./components/GlobalSearchCell";
-import { TextInput } from "../textInput";
 
 /**
  * Props for the GlobalSearch component.
@@ -65,6 +66,8 @@ export interface GlobalSearchProps {
  */
 export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
   const { theme } = useThemeStore();
+
+  const navigate = useNavigate();
 
   const {
     activeTab,
@@ -128,7 +131,17 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
             onFocus={() => handleInput("focus")}
             autoCapitalize='off'
           />
-          <button className='hover:bg-primary/90 absolute right-2 flex h-9 w-9 items-center justify-center rounded-m bg-primary transition-colors'>
+          <button
+            className='hover:bg-primary/90 absolute right-2 flex h-9 w-9 items-center justify-center rounded-m bg-primary transition-colors'
+            onClick={() =>
+              navigate({
+                to: "/search",
+                search: {
+                  query: search,
+                },
+              })
+            }
+          >
             <Search size={16} className='text-background' strokeWidth={2.5} />
           </button>
         </div>

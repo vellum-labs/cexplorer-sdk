@@ -1,3 +1,4 @@
+import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
@@ -106,6 +107,10 @@ export const Pagination = ({
 }: RealPaginationProps | FakePaginationProps) => {
   const navigate = useNavigate();
 
+  const { width } = useWindowDimensions();
+
+  const mobile = width < 500;
+
   const { search } = useLocation();
 
   const [pageJumpValue, setPageJumpValue] = useState("");
@@ -145,7 +150,7 @@ export const Pagination = ({
   };
 
   return (
-    <div className='flex w-full flex-col items-center gap-3'>
+    <div className='flex w-full flex-col items-center md:gap-3'>
       <PaginationComponent className='mt-2'>
         <PaginationContent>
           <PaginationItem>
@@ -154,15 +159,65 @@ export const Pagination = ({
               onClick={handlePrevClick}
             />
           </PaginationItem>
-          {currentPage !== 1 ? (
-            <PaginationItem>
-              <PaginationLink
-                isActive={currentPage === 1}
-                onClick={() => handlePageClick(1)}
-              >
-                1
-              </PaginationLink>
-            </PaginationItem>
+          {!mobile ? (
+            <>
+              {currentPage !== 1 ? (
+                <PaginationItem>
+                  <PaginationLink
+                    isActive={currentPage === 1}
+                    onClick={() => handlePageClick(1)}
+                  >
+                    1
+                  </PaginationLink>
+                </PaginationItem>
+              ) : (
+                <PageJump
+                  setCurrentPage={setCurrentPage}
+                  pageJumpValue={pageJumpValue}
+                  setPageJumpValue={setPageJumpValue}
+                  totalPages={totalPages}
+                />
+              )}
+              {currentPage > 2 && (
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+              )}
+              {currentPage > 1 && currentPage < totalPages && (
+                <PageJump
+                  setCurrentPage={setCurrentPage}
+                  pageJumpValue={pageJumpValue}
+                  setPageJumpValue={setPageJumpValue}
+                  totalPages={totalPages}
+                />
+              )}
+              {currentPage < totalPages - 1 && (
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+              )}
+              {totalPages > 1 && (
+                <>
+                  {currentPage === totalPages ? (
+                    <PageJump
+                      setCurrentPage={setCurrentPage}
+                      pageJumpValue={pageJumpValue}
+                      setPageJumpValue={setPageJumpValue}
+                      totalPages={totalPages}
+                    />
+                  ) : (
+                    <PaginationItem className=''>
+                      <PaginationLink
+                        isActive={currentPage === totalPages}
+                        onClick={() => handlePageClick(totalPages)}
+                      >
+                        {totalPages}
+                      </PaginationLink>
+                    </PaginationItem>
+                  )}
+                </>
+              )}
+            </>
           ) : (
             <PageJump
               setCurrentPage={setCurrentPage}
@@ -170,45 +225,6 @@ export const Pagination = ({
               setPageJumpValue={setPageJumpValue}
               totalPages={totalPages}
             />
-          )}
-          {currentPage > 2 && (
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-          )}
-          {currentPage > 1 && currentPage < totalPages && (
-            <PageJump
-              setCurrentPage={setCurrentPage}
-              pageJumpValue={pageJumpValue}
-              setPageJumpValue={setPageJumpValue}
-              totalPages={totalPages}
-            />
-          )}
-          {currentPage < totalPages - 1 && (
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-          )}
-          {totalPages > 1 && (
-            <>
-              {currentPage === totalPages ? (
-                <PageJump
-                  setCurrentPage={setCurrentPage}
-                  pageJumpValue={pageJumpValue}
-                  setPageJumpValue={setPageJumpValue}
-                  totalPages={totalPages}
-                />
-              ) : (
-                <PaginationItem className=''>
-                  <PaginationLink
-                    isActive={currentPage === totalPages}
-                    onClick={() => handlePageClick(totalPages)}
-                  >
-                    {totalPages}
-                  </PaginationLink>
-                </PaginationItem>
-              )}
-            </>
           )}
           <PaginationItem>
             <PaginationNext

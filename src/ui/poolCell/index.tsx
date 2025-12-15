@@ -136,14 +136,16 @@ export const PoolCell = ({
       className={`relative flex max-h-[75px] w-full items-center gap-1 ${className}`}
     >
       {ticker && poolImageUrl && (
-        <Image
-          key={poolInfo.id}
-          src={poolImageUrl}
-          type='pool'
-          className='h-8 w-8 rounded-max'
-          height={32}
-          width={32}
-        />
+        <Link to='/pool/$id' params={{ id: poolInfo.id }}>
+          <Image
+            key={poolInfo.id}
+            src={poolImageUrl}
+            type='pool'
+            className='h-8 w-8 rounded-max'
+            height={32}
+            width={32}
+          />
+        </Link>
       )}
       <div
         className={`flex ${ticker ? "w-[calc(100%-40px)]" : "w-full"} flex-col`}
@@ -151,15 +153,11 @@ export const PoolCell = ({
         <Link
           to='/pool/$id'
           params={{ id: poolInfo.id }}
-          className='text-primary'
+          title={poolInfo.id}
+          className={`block w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap text-[${fontSize}] leading-[1.1] text-primary hover:text-primaryHover`}
         >
-          <span
-            title={poolInfo.id}
-            className={`block w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap text-[${fontSize}] leading-[1.1] text-primary`}
-          >
-            {ticker && `[${ticker}] `}
-            {name && name}
-          </span>
+          {ticker && `[${ticker}] `}
+          {name && name}
         </Link>
         <div className='flex w-fit items-center gap-1'>
           {socialIcons.length > 0 && !showSafetyModal && (
@@ -196,18 +194,20 @@ export const PoolCell = ({
                 </div>
               }
             >
-              <div className='flex items-center justify-center rounded-m bg-background text-border'>
-                <CircleEllipsis size={12} />
+              <div className='flex items-center justify-center rounded-m bg-background'>
+                <CircleEllipsis size={12} className='stroke-grayText' />
               </div>
             </Tooltip>
           )}
-          <Link
-            to='/pool/$id'
-            params={{ id: poolInfo.id }}
-            className={`overflow-hidden text-ellipsis whitespace-nowrap ${ticker ? "text-text-xs" : "text-[13px]"} text-primary`}
-          >
-            {cropPoolHash ? formatString(poolInfo.id, "long") : poolInfo.id}
-          </Link>
+          <span className={`overflow-hidden text-ellipsis whitespace-nowrap ${ticker ? "text-text-xs" : "text-[13px]"} text-grayText`}>
+            <Link
+              to='/pool/$id'
+              params={{ id: poolInfo.id }}
+              className='!text-inherit hover:!text-inherit'
+            >
+              {cropPoolHash ? formatString(poolInfo.id, "long") : poolInfo.id}
+            </Link>
+          </span>
           <Copy copyText={poolInfo.id} size={10} className='stroke-grayText' />
         </div>
       </div>

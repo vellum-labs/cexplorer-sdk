@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 
 import { Copy } from "@/ui/copy";
 
@@ -18,15 +18,15 @@ export interface BlockDetailSubTitleProps {
   hash: string | undefined;
 
   /**
-   * The hash string to display (can be truncated for UI)
+   * The hash string to display (can be truncated for UI, accepts JSX from formatString)
    *
    * @example
    * <HeaderBannerSubtitle
    *   hash="5f20df933584822601f9e3f8c024eb5eb252fe8cefb24d1317dc3d432e940ebb"
-   *   hashString="5f20df93...e940ebb"
+   *   hashString={formatString(hash, "long")}
    * />
    */
-  hashString: string | undefined;
+  hashString: ReactNode;
 
   /**
    * Optional title label that appears before the hash
@@ -108,8 +108,8 @@ export const HeaderBannerSubtitle: FC<BlockDetailSubTitleProps> = ({
 }) => {
   return (
     <div className={`mb-3 mt-1 flex items-center gap-1.5 ${className}`}>
-      <span className='text-grayTextPrimary'>
-        {title ?? "Hash"}: {hashString}
+      <span className='flex items-center text-grayTextPrimary'>
+        {title ?? "Hash"}:&nbsp;{hashString}
       </span>
       <Copy size={13} copyText={hash ?? ""} />
     </div>
