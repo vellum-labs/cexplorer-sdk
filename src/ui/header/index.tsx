@@ -82,6 +82,10 @@ export interface HeaderProps {
    */
   customPage?: boolean;
   /**
+   * Optional icon/image to display on the left of the title.
+   */
+  icon?: ReactNode;
+  /**
    * Removes search input
    */
   withoutSearch?: boolean;
@@ -160,6 +164,7 @@ export const Header = ({
   locale,
   homepageAd,
   customPage,
+  icon,
   withoutSearch = false,
 }: HeaderProps) => {
   const [hasImage, setHasImage] = useState(false);
@@ -184,7 +189,13 @@ export const Header = ({
           <div
             className={cn("flex items-center gap-2 pb-1.5 pt-1 font-poppins")}
           >
-            <h1 className={cn("flex items-end", customPage && "pl-[28px]")}>
+            <h1
+              className={cn(
+                "flex items-center gap-2",
+                customPage && "pl-[28px]",
+              )}
+            >
+              {icon && <span className='flex-shrink-0'>{icon}</span>}
               <TruncatedText
                 onHasImageChange={setHasImage}
                 className='text-nowrap text-display-sm'
