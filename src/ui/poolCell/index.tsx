@@ -194,8 +194,8 @@ export const PoolCell = ({
                 </div>
               }
             >
-              <div className='flex items-center justify-center rounded-m bg-background text-border'>
-                <CircleEllipsis size={12} />
+              <div className='flex items-center justify-center rounded-m bg-background'>
+                <CircleEllipsis size={12} className='stroke-grayText' />
               </div>
             </Tooltip>
           )}
