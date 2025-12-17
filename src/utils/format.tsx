@@ -35,17 +35,47 @@ export const formatString = (
   if (!text) return;
 
   const startFromIndex = startIndex || 0;
-  let truncated: string;
 
-  if (type === "short") {
-    truncated = `${text.slice(0 + startFromIndex, 5 + startFromIndex)}...${text.slice(-5)}`;
-  } else if (type === "shorter") {
-    truncated = `${text.slice(0 + startFromIndex, 4 + startFromIndex)}...${text.slice(-4)}`;
-  } else if (type === "longer") {
-    truncated = `${text.slice(0 + startFromIndex, 11 + startFromIndex)}...${text.slice(-11)}`;
+  // Prefixes that should be preserved (order matters - longer prefixes first)
+  const prefixes = [
+    "addr_test",
+    "stake_test",
+    "gov_action",
+    "cc_cold",
+    "cc_hot",
+    "asset",
+    "drep",
+    "pool",
+    "addr",
+    "stake",
+  ];
+
+  // Find matching prefix
+  const matchedPrefix = prefixes.find(prefix =>
+    text.toLowerCase().startsWith(prefix),
+  );
+
+  // Default start characters based on type
+  const defaultStartChars =
+    type === "shorter" ? 4 : type === "short" ? 5 : type === "longer" ? 11 : 8;
+
+  // Calculate how many characters to show at start
+  let startChars: number;
+  if (matchedPrefix) {
+    // Use whichever is larger: prefix + 1, or the default for this type
+    startChars = Math.max(matchedPrefix.length + 1, defaultStartChars);
   } else {
-    truncated = `${text.slice(0 + startFromIndex, 8 + startFromIndex)}...${text.slice(-8)}`;
+    startChars = defaultStartChars;
   }
+
+  // End characters based on type
+  let endChars: number;
+  if (type === "shorter") endChars = 4;
+  else if (type === "short") endChars = 5;
+  else if (type === "longer") endChars = 11;
+  else endChars = 8; // "long"
+
+  const truncated = `${text.slice(startFromIndex, startFromIndex + startChars)}...${text.slice(-endChars)}`;
 
   return (
     <FormatStringComponent
