@@ -36,7 +36,6 @@ export const formatString = (
 
   const startFromIndex = startIndex || 0;
 
-  // Prefixes that should be preserved (order matters - longer prefixes first)
   const prefixes = [
     "addr_test",
     "stake_test",
@@ -50,30 +49,25 @@ export const formatString = (
     "stake",
   ];
 
-  // Find matching prefix
   const matchedPrefix = prefixes.find(prefix =>
     text.toLowerCase().startsWith(prefix),
   );
 
-  // Default start characters based on type
   const defaultStartChars =
     type === "shorter" ? 4 : type === "short" ? 5 : type === "longer" ? 11 : 8;
 
-  // Calculate how many characters to show at start
   let startChars: number;
   if (matchedPrefix) {
-    // Use whichever is larger: prefix + 1, or the default for this type
     startChars = Math.max(matchedPrefix.length + 1, defaultStartChars);
   } else {
     startChars = defaultStartChars;
   }
 
-  // End characters based on type
   let endChars: number;
   if (type === "shorter") endChars = 4;
   else if (type === "short") endChars = 5;
   else if (type === "longer") endChars = 11;
-  else endChars = 8; // "long"
+  else endChars = 8;
 
   const truncated = `${text.slice(startFromIndex, startFromIndex + startChars)}...${text.slice(-endChars)}`;
 
