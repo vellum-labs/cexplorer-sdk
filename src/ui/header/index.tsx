@@ -168,7 +168,7 @@ export const Header = ({
   withoutSearch = false,
 }: HeaderProps) => {
   const [hasImage, setHasImage] = useState(false);
-  const headingAd = miscBasicQuery.data?.data.ads.find(
+  const headingAd = miscBasicQuery.data?.data?.ads?.find(
     ad => ad.type === "heading_featured",
   );
 
