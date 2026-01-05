@@ -89,6 +89,10 @@ export interface HeaderProps {
    * Removes search input
    */
   withoutSearch?: boolean;
+  /**
+   * Removes ShareButton
+   */
+  shareButton?: boolean;
 }
 
 /**
@@ -166,6 +170,7 @@ export const Header = ({
   customPage,
   icon,
   withoutSearch = false,
+  shareButton = true,
 }: HeaderProps) => {
   const [hasImage, setHasImage] = useState(false);
   const headingAd = miscBasicQuery
@@ -206,7 +211,7 @@ export const Header = ({
             {!isHomepage && badge && (
               <div className={cn(!hasImage && "mt-[5px]")}>{badge}</div>
             )}
-            {!isHomepage && (
+            {shareButton && !isHomepage && (
               <div className={cn("flex translate-y-[2px] items-center")}>
                 <ShareButton isHeader />
               </div>
