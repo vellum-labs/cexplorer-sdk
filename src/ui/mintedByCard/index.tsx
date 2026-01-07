@@ -141,9 +141,7 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
   generateImageUrl,
 }) => {
   return (
-    <div
-      className='flex max-h-[110px] min-h-[110px] w-full flex-col gap-1/2 rounded-l border border-border bg-cardBg px-2 py-1.5 shadow-md'
-    >
+    <div className='flex max-h-[110px] min-h-[110px] w-full flex-col gap-1/2 rounded-l border border-border bg-cardBg px-2 py-1.5 shadow-md'>
       <div className='flex w-full items-center gap-1'>
         <div className='rounded-m border border-border p-1/2'>
           <GitCompareArrows size={20} className='text-primary' />
@@ -171,7 +169,7 @@ export const MintedByCard: FC<BlockDetailMintedProps> = ({
               className='rounded-max'
             />
             <p
-              className={`block max-h-10 min-h-5 w-full overflow-hidden text-ellipsis whitespace-nowrap break-all text-text-md font-bold hover:text-text`}
+              className={`block max-h-10 min-h-5 w-full overflow-hidden text-ellipsis whitespace-nowrap break-all text-text-md font-bold text-primary hover:text-text`}
             >
               {poolInfo.meta?.name
                 ? `[${poolInfo.meta.ticker}] ${poolInfo.meta?.name}`
