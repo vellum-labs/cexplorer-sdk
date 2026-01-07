@@ -50,7 +50,7 @@ export interface HeaderProps {
   /**
    * Query result for basic data and ads.
    */
-  miscBasic: UseQueryResult<
+  miscBasic?: UseQueryResult<
     MiscBasicResponse & {
       prevOffset: number | undefined;
     },
@@ -59,7 +59,7 @@ export interface HeaderProps {
   /**
    * Search fetch hook for GlobalSearch.
    */
-  useFetchMiscSearch: (
+  useFetchMiscSearch?: (
     query: string | undefined,
     category?: string,
     locale?: Locales,
@@ -72,7 +72,7 @@ export interface HeaderProps {
   /**
    * Current locale.
    */
-  locale: Locales;
+  locale?: Locales;
   /**
    * Homepage ad
    */
@@ -89,6 +89,10 @@ export interface HeaderProps {
    * Removes search input
    */
   withoutSearch?: boolean;
+  /**
+   * Removes ShareButton
+   */
+  shareButton?: boolean;
 }
 
 /**
@@ -166,11 +170,12 @@ export const Header = ({
   customPage,
   icon,
   withoutSearch = false,
+  shareButton = true,
 }: HeaderProps) => {
   const [hasImage, setHasImage] = useState(false);
-  const headingAd = miscBasicQuery.data?.data?.ads?.find(
-    ad => ad.type === "heading_featured",
-  );
+  const headingAd = miscBasicQuery
+    ? miscBasicQuery.data?.data.ads.find(ad => ad.type === "heading_featured")
+    : undefined;
 
   return (
     <header className='flex min-h-[110px] w-full justify-center bg-gradient-to-b from-bannerGradient to-darker'>
@@ -206,7 +211,7 @@ export const Header = ({
             {!isHomepage && badge && (
               <div className={cn(!hasImage && "mt-[5px]")}>{badge}</div>
             )}
-            {!isHomepage && (
+            {shareButton && !isHomepage && (
               <div className={cn("flex translate-y-[2px] items-center")}>
                 <ShareButton isHeader />
               </div>
@@ -218,7 +223,7 @@ export const Header = ({
             >
               {!isHomepage && subTitle && subTitle}
               {!isHomepage && qrCode && qrCode}
-              {isHomepage && !customPage && (
+              {useFetchMiscSearch && locale && isHomepage && !customPage && (
                 <GlobalSearchProvider
                   useFetchMiscSearch={useFetchMiscSearch}
                   locale={locale}
@@ -229,7 +234,7 @@ export const Header = ({
             </div>
           )}
 
-          {headingAd && miscBasicQuery.isLoading ? (
+          {headingAd && miscBasicQuery && miscBasicQuery.isLoading ? (
             <LoadingSkeleton height='14px' />
           ) : (
             <>
@@ -253,7 +258,7 @@ export const Header = ({
           <div
             className={`flex pt-2 ${homepageAd ? "basis-[385px] flex-col" : "basis-[385px] pt-4"}`}
           >
-            {!withoutSearch && (
+            {useFetchMiscSearch && locale && !withoutSearch && (
               <div className={"flex w-full shrink flex-col gap-1.5 pb-1.5"}>
                 <GlobalSearchProvider
                   useFetchMiscSearch={useFetchMiscSearch}
