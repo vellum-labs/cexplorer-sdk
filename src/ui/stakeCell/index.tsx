@@ -20,6 +20,15 @@ export interface StakeCellProps {
    * <StakeCell stake={75000000000} maxStake={100000000000} />
    */
   maxStake: number;
+
+  /**
+   * Text to display when stake or maxStake is not available
+   *
+   * @default "Unknown"
+   * @example
+   * <StakeCell stake={0} maxStake={0} unknownLabel="N/A" />
+   */
+  unknownLabel?: string;
 }
 
 /**
@@ -52,10 +61,16 @@ export interface StakeCellProps {
  * @param {StakeCellProps} props - Component props
  * @param {number} props.stake - Current stake amount in Lovelace (1 ADA = 1,000,000 Lovelace)
  * @param {number} props.maxStake - Maximum stake amount in Lovelace used to calculate percentage
+ * @param {string} [props.unknownLabel="Unknown"] - Text to display when stake data is unavailable
  * @returns {JSX.Element} Stake display in ADA with percentage and visual progress bar
  */
-export const StakeCell = ({ stake, maxStake }: StakeCellProps) => {
-  if (!stake || !maxStake) return <p className='text-left'>Unknown</p>;
+export const StakeCell = ({
+  stake,
+  maxStake,
+  unknownLabel = "Unknown",
+}: StakeCellProps) => {
+  if (!stake || !maxStake)
+    return <p className='text-left'>{unknownLabel}</p>;
 
   const ada = lovelaceToAda(stake);
   const percent = ((stake / maxStake) * 100).toFixed(1);

@@ -12,6 +12,27 @@ import {
 } from "./components";
 
 /**
+ * Labels for pagination navigation elements
+ */
+export interface PaginationLabels {
+  /**
+   * Screen reader label for ellipsis
+   * @default "More pages"
+   */
+  ellipsisSrLabel?: string;
+  /**
+   * Accessible label for next button
+   * @default "Go to next page"
+   */
+  nextAriaLabel?: string;
+  /**
+   * Accessible label for previous button
+   * @default "Go to previous page"
+   */
+  previousAriaLabel?: string;
+}
+
+/**
  * Props for real pagination using TanStack Router navigation.
  *
  * Real pagination automatically updates the URL query parameters
@@ -25,6 +46,8 @@ export type RealPaginationProps = {
   totalPages: number;
   /** Should not be provided for real pagination */
   setCurrentPage?: never;
+  /** Labels for pagination navigation elements */
+  labels?: PaginationLabels;
 };
 
 /**
@@ -40,6 +63,8 @@ export type FakePaginationProps = {
   totalPages: number;
   /** State setter to update current page */
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  /** Labels for pagination navigation elements */
+  labels?: PaginationLabels;
 };
 
 /**
@@ -104,6 +129,7 @@ export const Pagination = ({
   currentPage,
   totalPages,
   setCurrentPage,
+  labels,
 }: RealPaginationProps | FakePaginationProps) => {
   const navigate = useNavigate();
 
@@ -157,6 +183,7 @@ export const Pagination = ({
             <PaginationPrevious
               disabled={currentPage === 1}
               onClick={handlePrevClick}
+              ariaLabel={labels?.previousAriaLabel}
             />
           </PaginationItem>
           {!mobile ? (
@@ -180,7 +207,7 @@ export const Pagination = ({
               )}
               {currentPage > 2 && (
                 <PaginationItem>
-                  <PaginationEllipsis />
+                  <PaginationEllipsis srLabel={labels?.ellipsisSrLabel} />
                 </PaginationItem>
               )}
               {currentPage > 1 && currentPage < totalPages && (
@@ -193,7 +220,7 @@ export const Pagination = ({
               )}
               {currentPage < totalPages - 1 && (
                 <PaginationItem>
-                  <PaginationEllipsis />
+                  <PaginationEllipsis srLabel={labels?.ellipsisSrLabel} />
                 </PaginationItem>
               )}
               {totalPages > 1 && (
@@ -230,6 +257,7 @@ export const Pagination = ({
             <PaginationNext
               disabled={currentPage >= totalPages}
               onClick={handleNextClick}
+              ariaLabel={labels?.nextAriaLabel}
             />
           </PaginationItem>
         </PaginationContent>
