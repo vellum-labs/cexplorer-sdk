@@ -44,6 +44,11 @@ export interface JSONDisplayProps {
    * Optional callback to close the JSON display
    */
   onClose?: () => void;
+  /**
+   * Message displayed when there is an error or no data
+   * @default "No data found"
+   */
+  noDataLabel?: string;
 }
 
 /**
@@ -127,6 +132,7 @@ export const JsonDisplay: FC<JSONDisplayProps> = ({
   search,
   iconsRight = "24px",
   onClose,
+  noDataLabel = "No data found",
 }) => {
   const { theme } = useThemeStore();
   const [filteredData, setFilteredData] = useState(data);
@@ -412,7 +418,7 @@ export const JsonDisplay: FC<JSONDisplayProps> = ({
               </SyntaxHighlighter>
             )
           ) : (
-            <span className='pl-[10px]'>No data found</span>
+            <span className='pl-[10px]'>{noDataLabel}</span>
           )}
         </code>
       </pre>

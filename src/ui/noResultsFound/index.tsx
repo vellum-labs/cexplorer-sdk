@@ -1,4 +1,16 @@
+import type { FC } from "react";
 import { Search } from "lucide-react";
+
+/**
+ * Props for the NoResultsFound component
+ */
+export interface NoResultsFoundProps {
+  /**
+   * Message displayed when no results are found
+   * @default "No results found"
+   */
+  label?: string;
+}
 
 /**
  * NoResultsFound displays a simple feedback message when search or filter operations return no results.
@@ -18,6 +30,9 @@ import { Search } from "lucide-react";
  * // Basic usage in a table
  * {data.length === 0 && <NoResultsFound />}
  *
+ * // With custom label
+ * <NoResultsFound label="Nothing to show" />
+ *
  * // In a search results container
  * <div className="search-results">
  *   {results.length > 0 ? (
@@ -28,15 +43,19 @@ import { Search } from "lucide-react";
  * </div>
  * ```
  *
+ * @param {NoResultsFoundProps} props - Component props
+ * @param {string} [props.label="No results found"] - Message to display
  * @returns {JSX.Element} A centered feedback component with search icon and "No results found" text
  */
-export const NoResultsFound = () => {
+export const NoResultsFound: FC<NoResultsFoundProps> = ({
+  label = "No results found",
+}) => {
   return (
     <div className='my-4 flex w-full flex-col items-center gap-1 text-center font-medium'>
       <div className='rounded-s border border-border p-1/2'>
         <Search size={17} style={{ color: "var(--grayTextPrimary)" }} />
       </div>
-      No results found
+      {label}
     </div>
   );
 };

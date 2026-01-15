@@ -60,6 +60,11 @@ export type TableSettingsDropdownProps = {
    * Custom inline styles for the dropdown panel
    */
   customStyles?: CSSProperties;
+  /**
+   * Custom label for "Rows:" text (for i18n)
+   * @default "Rows:"
+   */
+  rowsLabel?: string;
 };
 
 /**
@@ -136,6 +141,7 @@ export const TableSettingsDropdown: FC<TableSettingsDropdownProps> = ({
   visibleRows = true,
   customContent,
   customStyles,
+  rowsLabel = "Rows:",
 }) => {
   columnsOptions = columnsOptions.filter(
     item => typeof item.isVisible !== "undefined",
@@ -174,7 +180,7 @@ export const TableSettingsDropdown: FC<TableSettingsDropdownProps> = ({
               >
                 {visibleRows && (
                   <div className='flex h-14 w-full items-center justify-between border-b border-border px-1.5'>
-                    <span>Rows:</span>
+                    <span>{rowsLabel}</span>
                     <SelectTrigger className='w-[60px]'>
                       <SelectValue
                         placeholder={
