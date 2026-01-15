@@ -40,6 +40,16 @@ export interface FunnelFilterProps {
    * @default "250px"
    */
   width?: string;
+  /**
+   * Reset button label
+   * @default "Reset"
+   */
+  resetLabel?: string;
+  /**
+   * Filter button label
+   * @default "Filter"
+   */
+  filterLabel?: string;
 }
 
 /**
@@ -117,6 +127,8 @@ export const FunnelFilter = ({
   width = "250px",
   onFilter,
   onReset,
+  resetLabel = "Reset",
+  filterLabel = "Filter",
 }: FunnelFilterProps) => {
   const [position, setPosition] = useState({ top: 0, left: 0 });
 
@@ -166,14 +178,14 @@ export const FunnelFilter = ({
           size='xs'
           className='cursor-pointer px-1'
           variant='tertiary'
-          label='Reset'
+          label={resetLabel}
           onClick={onReset}
         />
         <Button
           size='xs'
           className='cursor-pointer px-1'
           variant='primary'
-          label='Filter'
+          label={filterLabel}
           disabled={disabled}
           onClick={onFilter}
         />

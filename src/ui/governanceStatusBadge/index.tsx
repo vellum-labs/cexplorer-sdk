@@ -35,6 +35,25 @@ export interface GovernanceStatusBadgeProps {
    * <GovernanceStatusBadge item={action} currentEpoch={455} />
    */
   currentEpoch: number;
+
+  /**
+   * Optional labels for status text (for i18n). Maps status keys to translated strings.
+   * Falls back to English status names if not provided.
+   *
+   * @example
+   * <GovernanceStatusBadge
+   *   item={action}
+   *   currentEpoch={455}
+   *   labels={{
+   *     Active: t("governance.status.active"),
+   *     Ratified: t("governance.status.ratified"),
+   *     Enacted: t("governance.status.enacted"),
+   *     Expired: t("governance.status.expired"),
+   *     Dropped: t("governance.status.dropped"),
+   *   }}
+   * />
+   */
+  labels?: Partial<Record<GovActionStatus, string>>;
 }
 
 /**
@@ -176,6 +195,7 @@ const getStatusColor = (status: GovActionStatus): string => {
 export const GovernanceStatusBadge: FC<GovernanceStatusBadgeProps> = ({
   item,
   currentEpoch,
+  labels,
 }) => {
   const status = getGovActionStatus(item, currentEpoch);
   const statusColor = getStatusColor(status);
@@ -183,7 +203,7 @@ export const GovernanceStatusBadge: FC<GovernanceStatusBadgeProps> = ({
   return (
     <div className='relative flex h-[24px] w-fit items-center justify-end gap-1 rounded-m border border-border px-[10px]'>
       <PulseDot color={statusColor} animate={status === "Active"} />
-      <span className='text-text-xs font-medium'>{status}</span>
+      <span className='text-text-xs font-medium'>{labels?.[status] ?? status}</span>
     </div>
   );
 };

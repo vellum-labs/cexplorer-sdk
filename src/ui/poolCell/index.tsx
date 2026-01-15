@@ -154,7 +154,7 @@ export const PoolCell = ({
           to='/pool/$id'
           params={{ id: poolInfo.id }}
           title={poolInfo.id}
-          className={`block w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap text-[${fontSize}] leading-[1.1] text-primary hover:text-primaryHover`}
+          className={`block w-full cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap text-[${fontSize}] text-primary hover:text-primaryHover`}
         >
           {ticker && `[${ticker}] `}
           {name && name}
@@ -199,7 +199,7 @@ export const PoolCell = ({
               </div>
             </Tooltip>
           )}
-          <span className={`overflow-hidden text-ellipsis whitespace-nowrap ${ticker ? "text-text-xs" : "text-[13px]"} text-grayText`}>
+          <span className={`overflow-hidden text-ellipsis whitespace-nowrap ${ticker ? "text-text-xs text-grayText" : "text-[14px] text-primary"}`}>
             <Link
               to='/pool/$id'
               params={{ id: poolInfo.id }}

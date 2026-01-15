@@ -26,6 +26,24 @@ export interface SafetyLinkModalProps {
    * />
    */
   onClose: () => void;
+
+  /**
+   * Warning message displayed before the URL
+   * @default "You are switching to an external, unmoderated url: "
+   */
+  warningText?: string;
+
+  /**
+   * Label for the "Go back" button
+   * @default "Go back"
+   */
+  goBackLabel?: string;
+
+  /**
+   * Label for the "Visit" button/link
+   * @default "Visit"
+   */
+  visitLabel?: string;
 }
 
 /**
@@ -87,7 +105,13 @@ export interface SafetyLinkModalProps {
  * @param {() => void} props.onClose - Callback when modal should close
  * @returns {JSX.Element} A modal dialog with external link safety warning
  */
-export const SafetyLinkModal: FC<SafetyLinkModalProps> = ({ url, onClose }) => {
+export const SafetyLinkModal: FC<SafetyLinkModalProps> = ({
+  url,
+  onClose,
+  warningText = "You are switching to an external, unmoderated url: ",
+  goBackLabel = "Go back",
+  visitLabel = "Visit",
+}) => {
   return (
     <Modal
       minHeight='auto'
@@ -96,14 +120,12 @@ export const SafetyLinkModal: FC<SafetyLinkModalProps> = ({ url, onClose }) => {
       maxHeight='80vh'
       onClose={onClose}
     >
-      <p className='mt-2 font-medium'>
-        You are switching to an external, unmoderated url:{" "}
-      </p>
+      <p className='mt-2 font-medium'>{warningText}</p>
       <p className='overflow-wrap-anywhere mb-2 mt-1 max-h-32 max-w-full overflow-y-auto break-all text-text-sm'>
         {url}
       </p>
       <div className='flex justify-between gap-1'>
-        <Button onClick={onClose} variant='red' size='md' label='Go back' />
+        <Button onClick={onClose} variant='red' size='md' label={goBackLabel} />
         <a
           onClick={onClose}
           href={url}
@@ -111,7 +133,7 @@ export const SafetyLinkModal: FC<SafetyLinkModalProps> = ({ url, onClose }) => {
           rel='noreferrer noopener nofollow'
           className='box-border flex min-w-fit max-w-fit items-center justify-center rounded-[8px] border-2 border-darkBlue bg-darkBlue px-2 py-1 text-text-sm font-medium text-white duration-150 hover:scale-[101%] hover:text-white active:scale-[98%] disabled:cursor-not-allowed disabled:opacity-50'
         >
-          Visit
+          {visitLabel}
         </a>
       </div>
     </Modal>
