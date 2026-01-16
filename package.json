@@ -1,6 +1,6 @@
 {
   "name": "@vellumlabs/cexplorer-sdk",
-  "version": "1.1.15",
+  "version": "1.1.16",
   "description": "Cexplorer UI Component Library with theme system",
   "author": "Vellum Labs",
   "main": "dist/index.js",
@@ -1085,7 +1085,6 @@
     "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
     "react-helmet": "^6.1.0",
     "sonner": "^1.5.0",
-    "tailwind-merge": "^2.3.0",
     "zustand": "^4.5.2",
     "bech32": "^2.0.0",
     "@emurgo/cip14-js": "^3.0.1",
@@ -1123,9 +1122,6 @@
       "optional": false
     },
     "clsx": {
-      "optional": false
-    },
-    "tailwind-merge": {
       "optional": false
     },
     "zustand": {
