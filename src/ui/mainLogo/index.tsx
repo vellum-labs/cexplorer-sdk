@@ -57,7 +57,8 @@ export interface MainLogoProps {
    * <MainLogo network="preview" />
    * ```
    */
-  network: string;
+  network?: string;
+  mini?: boolean;
 }
 
 /**
@@ -152,6 +153,7 @@ export const MainLogo: FC<MainLogoProps> = ({
   onClick,
   className,
   network,
+  mini = false,
 }) => {
   const { theme } = useThemeStore();
   const [isOnline, setIsOnline] = useState<boolean>(true);
@@ -184,7 +186,7 @@ export const MainLogo: FC<MainLogoProps> = ({
 
   return (
     <Link to='/' className='shrink-0' onClick={onClick}>
-      <div className='relative'>
+      <div className={`${mini ? "flex items-center" : "relative"}`}>
         {isOnline ? (
           <img
             className={className}
@@ -202,11 +204,11 @@ export const MainLogo: FC<MainLogoProps> = ({
         )}
         <Badge
           color='blue'
-          className='absolute left-[36px] top-[31px] h-5 w-5 !px-[6px] !py-[2px] !text-[10px] !font-bold'
+          className={`h-5 w-5 !px-[6px] !py-[2px] !text-[10px] !font-bold ${mini ? "-translate-x-[10px]" : "absolute left-[36px] top-[31px]"}`}
         >
-          beta
+          {mini ? "mini" : "beta"}
         </Badge>
-        <EnvironmentBadge network={network} />
+        {network && <EnvironmentBadge network={network} />}
       </div>
     </Link>
   );
