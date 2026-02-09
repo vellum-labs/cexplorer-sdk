@@ -201,7 +201,7 @@ export const MainLogo: FC<MainLogoProps> = ({
             alt='Cexplorer logo'
           />
         )}
-        <EnvironmentBadge network={network} />
+        {network && <EnvironmentBadge network={network} />}
       </div>
     </Link>
   );
