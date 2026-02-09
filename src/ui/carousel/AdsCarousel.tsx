@@ -123,7 +123,7 @@ export const AdsCarousel: FC<AdsCarouselProps> = ({
   miscBasicQuery,
   generateImageUrl,
 }) => {
-  const basicAds = miscBasicQuery.data?.data.ads.filter(
+  const basicAds = miscBasicQuery.data?.data?.ads?.filter(
     ad => ad.type === "promo_panel" && ad.data,
   );
 

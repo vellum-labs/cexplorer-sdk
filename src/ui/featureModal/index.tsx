@@ -66,6 +66,30 @@ export interface FeatureModalProps {
    * />
    */
   walletApi: WalletApi | undefined;
+
+  /**
+   * Title text for the modal (supports JSX for "PRO" highlighting)
+   * @default "Cexplorer PRO feature"
+   */
+  title?: string;
+
+  /**
+   * Cancel button label (shown when wallet is connected)
+   * @default "Cancel"
+   */
+  cancelLabel?: string;
+
+  /**
+   * Connect wallet button label
+   * @default "Connect wallet"
+   */
+  connectWalletLabel?: string;
+
+  /**
+   * Get PRO button label
+   * @default "Get a PRO"
+   */
+  getProLabel?: string;
 }
 
 /**
@@ -137,6 +161,10 @@ export const FeatureModal: FC<FeatureModalProps> = ({
   setShowConnectWallet,
   address,
   walletApi,
+  title = "Cexplorer PRO feature",
+  cancelLabel = "Cancel",
+  connectWalletLabel = "Connect wallet",
+  getProLabel = "Get a PRO",
 }) => {
   const [isWalletConnected, setWalletConected] = useState<boolean>(false);
 
@@ -155,10 +183,7 @@ export const FeatureModal: FC<FeatureModalProps> = ({
   return (
     <Modal minWidth='95%' maxWidth='400px' maxHeight='95%' onClose={onClose}>
       <div className='flex h-full w-full flex-col gap-3'>
-        <span className='text-text-lg font-semibold'>
-          Cexplorer <span className='font-bold text-[#3c53ed]'>PRO</span>{" "}
-          feature
-        </span>
+        <span className='text-text-lg font-semibold'>{title}</span>
         <p className='max-w-[320px] text-text-sm'>{subTitle}</p>
         <div className='flex items-center justify-between gap-1.5'>
           <button
@@ -166,12 +191,12 @@ export const FeatureModal: FC<FeatureModalProps> = ({
             onClick={handleCancel}
           >
             {isWalletConnected ? (
-              <span className='text-text-md font-semibold'>Cancel</span>
+              <span className='text-text-md font-semibold'>{cancelLabel}</span>
             ) : (
               <div className='flex items-center gap-1'>
                 <WalletMinimal size={15} />
                 <span className='text-text-md font-semibold'>
-                  Connect wallet
+                  {connectWalletLabel}
                 </span>
               </div>
             )}
@@ -184,7 +209,7 @@ export const FeatureModal: FC<FeatureModalProps> = ({
           >
             <Link to='/pro'>
               <span className='text-text-md font-semibold text-white'>
-                Get a PRO
+                {getProLabel}
               </span>
             </Link>
             <ArrowRight color='white' size={15} />

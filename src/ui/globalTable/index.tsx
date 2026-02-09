@@ -101,6 +101,10 @@ export type Column<T> = {
     onReset?: () => void;
     /** Handler for applying filter */
     onFilter?: () => void;
+    /** Custom label for the reset button (for i18n) */
+    resetLabel?: string;
+    /** Custom label for the filter button (for i18n) */
+    filterLabel?: string;
   };
 };
 
@@ -130,6 +134,10 @@ type PropsBase<T> = {
   disableDrag?: boolean;
   /** Height of each table row in pixels */
   rowHeight?: number;
+  /** Custom render function for display text (for i18n). Receives count and total, returns formatted string */
+  renderDisplayText?: (count: number, total: number) => string;
+  /** Custom label for "no items" text (for i18n) */
+  noItemsLabel?: string;
 };
 
 /**
@@ -308,6 +316,8 @@ export const GlobalTable = <T extends Record<string, any>>({
   disableDrag = false,
   rowHeight = 60,
   type,
+  renderDisplayText,
+  noItemsLabel,
   ...props
 }: Props<T>) => {
   const defaultQueryPagination =
@@ -558,6 +568,8 @@ export const GlobalTable = <T extends Record<string, any>>({
                             onFilter={filter.onFilter}
                             disabled={filter.filterButtonDisabled}
                             width={filter?.width}
+                            resetLabel={filter.resetLabel}
+                            filterLabel={filter.filterLabel}
                           >
                             {filter.filterContent}
                           </FunnelFilter>
@@ -721,8 +733,10 @@ export const GlobalTable = <T extends Record<string, any>>({
         (type === "infinite" && !!items?.length && (
           <span className='mt-1 flex w-full justify-center text-text-sm text-grayTextPrimary'>
             {totalItems > 0 && items?.length
-              ? `Displaying ${items.length > totalItems ? totalItems : items.length} out of ${totalItems} items`
-              : "No items for displaying"}
+              ? (renderDisplayText
+                  ? renderDisplayText(items.length > totalItems ? totalItems : items.length, totalItems)
+                  : `Displaying ${items.length > totalItems ? totalItems : items.length} out of ${totalItems} items`)
+              : (noItemsLabel ?? "No items for displaying")}
           </span>
         ))}
     </>

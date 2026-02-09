@@ -9,7 +9,6 @@ import DarkLogo from "@/resources/images/preloader_logo_dark.svg";
 import LightLogo from "@/resources/images/preloader_logo_light.svg";
 
 import { useThemeStore } from "@/stores/themeStore";
-import { Badge } from "../badge";
 import { EnvironmentBadge } from "../environmentBadge";
 
 /**
@@ -57,7 +56,8 @@ export interface MainLogoProps {
    * <MainLogo network="preview" />
    * ```
    */
-  network: string;
+  network?: string;
+  mini?: boolean;
 }
 
 /**
@@ -152,6 +152,7 @@ export const MainLogo: FC<MainLogoProps> = ({
   onClick,
   className,
   network,
+  mini = false,
 }) => {
   const { theme } = useThemeStore();
   const [isOnline, setIsOnline] = useState<boolean>(true);
@@ -184,7 +185,7 @@ export const MainLogo: FC<MainLogoProps> = ({
 
   return (
     <Link to='/' className='shrink-0' onClick={onClick}>
-      <div className='relative'>
+      <div className={`${mini ? "flex items-center" : "relative"}`}>
         {isOnline ? (
           <img
             className={className}
@@ -200,12 +201,6 @@ export const MainLogo: FC<MainLogoProps> = ({
             alt='Cexplorer logo'
           />
         )}
-        <Badge
-          color='blue'
-          className='absolute left-[36px] top-[31px] h-5 w-5 !px-[6px] !py-[2px] !text-[10px] !font-bold'
-        >
-          beta
-        </Badge>
         <EnvironmentBadge network={network} />
       </div>
     </Link>

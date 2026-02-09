@@ -46,6 +46,51 @@ export interface DisplayVoteModalProps {
     },
     Error
   >;
+  /**
+   * Placeholder text for the search input
+   * @default "Search governance action ID..."
+   */
+  placeholder?: string;
+  /**
+   * Message shown when no search query is entered
+   * @default "Looks like you're missing a Gov Action ID. Enter one to find results!"
+   */
+  emptyStateMessage?: string;
+  /**
+   * Message shown when search returns no results
+   * @default "No results. Check your input and try again."
+   */
+  noResultsMessage?: string;
+  /**
+   * Label for the "Type" field
+   * @default "Type"
+   */
+  typeLabel?: string;
+  /**
+   * Label for the "Title" field
+   * @default "Title"
+   */
+  titleLabel?: string;
+  /**
+   * Label for the "ID" field
+   * @default "ID"
+   */
+  idLabel?: string;
+  /**
+   * Label for the "Ident" field
+   * @default "Ident"
+   */
+  identLabel?: string;
+  /**
+   * Cancel button label
+   * @default "Cancel"
+   */
+  cancelLabel?: string;
+  /**
+   * Add governance action button label
+   * @default "Add governance action"
+   */
+  addActionLabel?: string;
 }
 
 /**
@@ -114,6 +159,15 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
   onClose,
   onDisplay,
   useFetchMiscSearch,
+  placeholder = "Search governance action ID...",
+  emptyStateMessage = "Looks like you're missing a Gov Action ID. Enter one to find results!",
+  noResultsMessage = "No results. Check your input and try again.",
+  typeLabel = "Type",
+  titleLabel = "Title",
+  idLabel = "ID",
+  identLabel = "Ident",
+  cancelLabel = "Cancel",
+  addActionLabel = "Add governance action",
 }) => {
   const { locale } = useLocaleStore();
   const { theme } = useThemeStore();
@@ -155,7 +209,7 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
       <TextInput
         value={search}
         onchange={value => setSearch(value)}
-        placeholder='Search governance action ID...'
+        placeholder={placeholder}
         showSearchIcon={!focused}
         inputClassName={`w-full bg-background`}
         onFocus={() => setFocused(true)}
@@ -167,8 +221,7 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
       >
         {!search && (
           <span className='px-1.5 py-1.5 text-center text-text-sm'>
-            Looks like you're missing a Gov Action ID. Enter one to find
-            results!
+            {emptyStateMessage}
           </span>
         )}
         {search && !data && (
@@ -180,13 +233,13 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
         )}
         {noResult && (
           <span className='px-1.5 py-1.5 text-center text-text-sm'>
-            No results. Check your input and try again.
+            {noResultsMessage}
           </span>
         )}
         {!!hasData && (
           <div className='flex h-full w-full flex-col'>
             <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-text-sm text-text'>
-              <div>Type</div>
+              <div>{typeLabel}</div>
               {data[0]?.extra?.type ? (
                 <ActionTypes title={data[0]?.extra?.type as any} />
               ) : (
@@ -194,7 +247,7 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
               )}
             </div>
             <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-text-sm text-text'>
-              <div>Title</div>
+              <div>{titleLabel}</div>
               {data[0]?.title ? (
                 <div className='flex items-center gap-2'>
                   <Link
@@ -219,7 +272,7 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
               )}
             </div>
             <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-text-sm text-text'>
-              <div>ID</div>
+              <div>{idLabel}</div>
               {(data[0]?.extra as any)?.id ? (
                 <div className='flex items-center gap-1'>
                   <Link
@@ -242,7 +295,7 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
               )}
             </div>
             <div className='flex h-full w-full justify-between gap-1.5 border-b border-border p-1.5 text-text-sm text-text'>
-              <span>Ident</span>
+              <span>{identLabel}</span>
               {data[0]?.ident ? (
                 <div className='flex items-center gap-1'>
                   <span>{formatString(data[0]?.ident, "longer")}</span>
@@ -259,11 +312,11 @@ export const DisplayVoteModal: FC<DisplayVoteModalProps> = ({
         )}
       </div>
       <div className='flex w-full items-center justify-end gap-1'>
-        <Button variant='tertiary' size='md' label='Cancel' onClick={onClose} />
+        <Button variant='tertiary' size='md' label={cancelLabel} onClick={onClose} />
         <Button
           variant='primary'
           size='md'
-          label='Add governance action'
+          label={addActionLabel}
           disabled={!hasData}
           onClick={() => {
             if (onDisplay) {

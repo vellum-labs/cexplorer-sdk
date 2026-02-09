@@ -28,6 +28,41 @@ export interface ExportTableModalProps {
    * Current page number for export metadata
    */
   currentPage?: number;
+  /**
+   * Modal title text
+   * @default "Export table"
+   */
+  title?: string;
+  /**
+   * CSV option label
+   * @default "CSV"
+   */
+  csvLabel?: string;
+  /**
+   * CSV option description
+   * @default "Great for easy viewing in spreadsheet tools."
+   */
+  csvDescription?: string;
+  /**
+   * JSON option label
+   * @default "JSON"
+   */
+  jsonLabel?: string;
+  /**
+   * JSON option description
+   * @default "Best for structured data and app integration."
+   */
+  jsonDescription?: string;
+  /**
+   * Cancel button label
+   * @default "Cancel"
+   */
+  cancelLabel?: string;
+  /**
+   * Export button label
+   * @default "Export"
+   */
+  exportLabel?: string;
 }
 
 /**
@@ -92,6 +127,13 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
   columns,
   items,
   currentPage,
+  title = "Export table",
+  csvLabel = "CSV",
+  csvDescription = "Great for easy viewing in spreadsheet tools.",
+  jsonLabel = "JSON",
+  jsonDescription = "Best for structured data and app integration.",
+  cancelLabel = "Cancel",
+  exportLabel = "Export",
 }) => {
   const [selectedItem, setSelectedItem] = useState<"csv" | "json">();
 
@@ -128,7 +170,7 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
     <Modal minWidth='95%' maxWidth='400px' maxHeight='95%' onClose={onClose}>
       <div className='flex flex-col gap-3'>
         <div className='flex h-full w-full flex-col gap-3'>
-          <span className='text-text-lg font-semibold'>Export table</span>
+          <span className='text-text-lg font-semibold'>{title}</span>
         </div>
         <div className='flex flex-col gap-2'>
           <div className='flex items-start gap-1/2'>
@@ -140,9 +182,9 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
               onChange={() => setSelectedItem("csv")}
             />
             <div className='flex h-full flex-col'>
-              <span className='text-text-sm font-medium'>CSV</span>
+              <span className='text-text-sm font-medium'>{csvLabel}</span>
               <span className='text-text-sm text-grayTextPrimary'>
-                Great for easy viewing in spreadsheet tools.
+                {csvDescription}
               </span>
             </div>
           </div>
@@ -155,9 +197,9 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
               onChange={() => setSelectedItem("json")}
             />
             <div className='flex h-full flex-col'>
-              <span className='text-text-sm font-medium'>JSON</span>
+              <span className='text-text-sm font-medium'>{jsonLabel}</span>
               <span className='text-text-sm text-grayTextPrimary'>
-                Best for structured data and app integration.
+                {jsonDescription}
               </span>
             </div>
           </div>
@@ -167,7 +209,7 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
             className='flex h-[40px] w-full max-w-[170px] flex-1 cursor-pointer items-center justify-center rounded-s border border-border'
             onClick={onClose}
           >
-            <span className='text-text-md font-semibold'>Cancel</span>
+            <span className='text-text-md font-semibold'>{cancelLabel}</span>
           </button>
           <button
             className={`flex h-[40px] w-full max-w-[170px] flex-1 items-center justify-center gap-1/2 rounded-s border border-border transition-all duration-100 ${selectedItem ? "cursor-pointer" : "text-grayTextPrimary"}`}
@@ -175,7 +217,7 @@ export const ExportTableModal: FC<ExportTableModalProps> = ({
             onClick={exportData}
           >
             <Download size={20} className='text-inherit' />
-            <span className='text-text-sm font-medium'>Export</span>
+            <span className='text-text-sm font-medium'>{exportLabel}</span>
           </button>
         </div>
       </div>

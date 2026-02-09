@@ -3,6 +3,18 @@ import { ChevronRight } from "lucide-react";
 import { PaginationLink } from "./PaginationLink";
 
 /**
+ * Props for PaginationNext component
+ */
+export interface PaginationNextProps
+  extends React.ComponentProps<typeof PaginationLink> {
+  /**
+   * Accessible label for screen readers
+   * @default "Go to next page"
+   */
+  ariaLabel?: string;
+}
+
+/**
  * PaginationNext is a button to navigate to the next page.
  *
  * This component renders a "Next" button with a right chevron icon
@@ -39,18 +51,20 @@ import { PaginationLink } from "./PaginationLink";
  * </PaginationContent>
  * ```
  *
- * @param {React.ComponentProps<typeof PaginationLink>} props - PaginationLink props
+ * @param {PaginationNextProps} props - Component props
  * @param {string} [props.className] - Additional CSS classes
+ * @param {string} [props.ariaLabel="Go to next page"] - Accessible label
  * @param {() => void} [props.onClick] - Click handler for next page navigation
  * @param {boolean} [props.disabled] - Whether button is disabled (last page)
  * @returns {JSX.Element} Next page button with chevron icon
  */
 export const PaginationNext = ({
   className,
+  ariaLabel = "Go to next page",
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
+}: PaginationNextProps) => (
   <PaginationLink
-    aria-label='Go to next page'
+    aria-label={ariaLabel}
     size='default'
     className={cn("gap-1/2", className)}
     {...props}
