@@ -6,7 +6,27 @@ import { useGlobalSearch } from "@/providers/GlobalSearchContext";
 import { useEffect } from "react";
 import { formatString } from "@/utils/format";
 
-export const GlobalSearchRecent: FC = () => {
+/**
+ * Props for the GlobalSearchRecent component
+ */
+export interface GlobalSearchRecentProps {
+  /**
+   * Label text for the "Recently searched" header
+   * @default "Recently searched"
+   */
+  recentlySearchedLabel?: string;
+
+  /**
+   * Message displayed when there are no recent searches
+   * @default "You don't have recent searches"
+   */
+  noRecentSearchesLabel?: string;
+}
+
+export const GlobalSearchRecent: FC<GlobalSearchRecentProps> = ({
+  recentlySearchedLabel = "Recently searched",
+  noRecentSearchesLabel = "You don't have recent searches",
+}) => {
   const {
     handleSearchChange,
     handleSearchRecentDelete,
@@ -30,7 +50,7 @@ export const GlobalSearchRecent: FC = () => {
         <>
           <div className='w-full border-b py-[1px]'>
             <span className='text-text-xs font-medium text-grayTextPrimary'>
-              Recently searched
+              {recentlySearchedLabel}
             </span>
           </div>
           <div className='flex w-full flex-col pb-1'>
@@ -60,7 +80,7 @@ export const GlobalSearchRecent: FC = () => {
         </>
       ) : (
         <div className='py-1.5 text-text-sm font-medium text-grayTextPrimary'>
-          <span>You don't have recent searches</span>
+          <span>{noRecentSearchesLabel}</span>
         </div>
       )}
     </div>

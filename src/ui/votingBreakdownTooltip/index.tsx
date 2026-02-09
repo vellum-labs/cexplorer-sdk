@@ -76,6 +76,30 @@ export interface VotingBreakdownTooltipProps {
    * <VotingBreakdownTooltip voters={30} delegators={45} voterType="spo" />
    */
   voterType?: "drep" | "spo";
+
+  /**
+   * Custom labels for text in the tooltip
+   */
+  labels?: {
+    /** @default "voter" */
+    voterSingular?: string;
+    /** @default "voters" */
+    voterPlural?: string;
+    /** @default "Represented by" */
+    representedBy?: string;
+    /** @default "stake pool" */
+    stakePoolSingular?: string;
+    /** @default "stake pools" */
+    stakePoolPlural?: string;
+    /** @default "delegator" */
+    delegatorSingular?: string;
+    /** @default "delegators" */
+    delegatorPlural?: string;
+    /** @default "Auto stake:" */
+    autoStake?: string;
+    /** @default "Manual stake:" */
+    manualStake?: string;
+  };
 }
 
 /**
@@ -166,6 +190,18 @@ export interface VotingBreakdownTooltipProps {
  * @param {"drep" | "spo"} [props.voterType="drep"] - Type of voter (DRep or SPO)
  * @returns {JSX.Element} Info icon with voting breakdown tooltip
  */
+const defaultLabels = {
+  voterSingular: "voter",
+  voterPlural: "voters",
+  representedBy: "Represented by",
+  stakePoolSingular: "stake pool",
+  stakePoolPlural: "stake pools",
+  delegatorSingular: "delegator",
+  delegatorPlural: "delegators",
+  autoStake: "Auto stake:",
+  manualStake: "Manual stake:",
+};
+
 export const VotingBreakdownTooltip: FC<VotingBreakdownTooltipProps> = ({
   voters,
   delegators,
@@ -173,22 +209,30 @@ export const VotingBreakdownTooltip: FC<VotingBreakdownTooltipProps> = ({
   manualStake,
   type,
   voterType = "drep",
+  labels,
 }) => {
+  const l = { ...defaultLabels, ...labels };
+
   return (
     <Tooltip
       content={
         <div className='flex flex-col gap-1/2 text-text-sm text-text'>
           {voters !== undefined && (
             <span>
-              <b>{voters}</b> {voters === 1 ? "voter" : "voters"}
+              <b>{voters}</b>{" "}
+              {voters === 1 ? l.voterSingular : l.voterPlural}
             </span>
           )}
           {delegators !== undefined && (
             <span>
-              Represented by <b>{delegators}</b>{" "}
+              {l.representedBy} <b>{delegators}</b>{" "}
               {voterType === "spo"
-                ? `stake pool${delegators !== 1 ? "s" : ""}`
-                : `delegator${delegators !== 1 ? "s" : ""}`}
+                ? delegators !== 1
+                  ? l.stakePoolPlural
+                  : l.stakePoolSingular
+                : delegators !== 1
+                  ? l.delegatorPlural
+                  : l.delegatorSingular}
             </span>
           )}
           {type === "Abstain" &&
@@ -196,10 +240,10 @@ export const VotingBreakdownTooltip: FC<VotingBreakdownTooltipProps> = ({
             manualStake !== undefined && (
               <>
                 <span>
-                  Auto stake: <b>{autoStake}</b>
+                  {l.autoStake} <b>{autoStake}</b>
                 </span>
                 <span>
-                  Manual stake: <b>{manualStake}</b>
+                  {l.manualStake} <b>{manualStake}</b>
                 </span>
               </>
             )}

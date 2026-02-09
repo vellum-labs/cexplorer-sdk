@@ -5,14 +5,57 @@ import { Dropdown } from "@/ui/dropdown";
 
 import { useGlobalSearch } from "@/providers/GlobalSearchContext";
 
+/**
+ * Category label configuration for GlobalSearchDropdown
+ */
+export interface CategoryLabels {
+  all?: string;
+  tx?: string;
+  block?: string;
+  pool?: string;
+  asset?: string;
+  policy?: string;
+  address?: string;
+  stake?: string;
+  adahandle?: string;
+  user?: string;
+  article?: string;
+  page?: string;
+  gov?: string;
+  drep?: string;
+}
+
 interface GlobalSearchDropdownProps {
   isHomepage?: boolean;
+  /**
+   * Custom labels for search categories
+   */
+  categoryLabels?: CategoryLabels;
 }
+
+const defaultCategoryLabels: Required<CategoryLabels> = {
+  all: "All",
+  tx: "Tx",
+  block: "Block",
+  pool: "Pool",
+  asset: "Asset",
+  policy: "Policy",
+  address: "Address",
+  stake: "Stake",
+  adahandle: "Adahandle",
+  user: "User",
+  article: "Article",
+  page: "Page",
+  gov: "Gov",
+  drep: "DRep",
+};
 
 export const GlobalSearchDropdown: FC<GlobalSearchDropdownProps> = ({
   isHomepage,
+  categoryLabels,
 }) => {
   const { searchCategory, setSearchCategory } = useGlobalSearch();
+  const labels = { ...defaultCategoryLabels, ...categoryLabels };
 
   return (
     <div
@@ -43,59 +86,59 @@ export const GlobalSearchDropdown: FC<GlobalSearchDropdownProps> = ({
         triggerClassName={`text-sm ${isHomepage ? "text-grayTextSecondary bg-cardBg border border-border h-8 px-1 rounded-m hover:bg-grayHover transition-colors flex items-center gap-1/2 whitespace-nowrap" : "text-grayTextPrimary w-[100px] h-[35px] px-1.5"}`}
         options={[
           {
-            label: "All",
+            label: labels.all,
             onClick: () => setSearchCategory("all"),
           },
           {
-            label: "Tx",
+            label: labels.tx,
             onClick: () => setSearchCategory("tx"),
           },
           {
-            label: "Block",
+            label: labels.block,
             onClick: () => setSearchCategory("block"),
           },
           {
-            label: "Pool",
+            label: labels.pool,
             onClick: () => setSearchCategory("pool"),
           },
           {
-            label: "Asset",
+            label: labels.asset,
             onClick: () => setSearchCategory("asset"),
           },
           {
-            label: "Policy",
+            label: labels.policy,
             onClick: () => setSearchCategory("policy"),
           },
           {
-            label: "Address",
+            label: labels.address,
             onClick: () => setSearchCategory("address"),
           },
           {
-            label: "Stake",
+            label: labels.stake,
             onClick: () => setSearchCategory("stake"),
           },
           {
-            label: "Adahandle",
+            label: labels.adahandle,
             onClick: () => setSearchCategory("adahandle"),
           },
           {
-            label: "User",
+            label: labels.user,
             onClick: () => setSearchCategory("user"),
           },
           {
-            label: "Article",
+            label: labels.article,
             onClick: () => setSearchCategory("article"),
           },
           {
-            label: "Page",
+            label: labels.page,
             onClick: () => setSearchCategory("page"),
           },
           {
-            label: "Gov",
+            label: labels.gov,
             onClick: () => setSearchCategory("gov_action_proposal"),
           },
           {
-            label: "DRep",
+            label: labels.drep,
             onClick: () => setSearchCategory("drep"),
           },
         ]}

@@ -56,7 +56,8 @@ export interface MainLogoProps {
    * <MainLogo network="preview" />
    * ```
    */
-  network: string;
+  network?: string;
+  mini?: boolean;
 }
 
 /**
@@ -151,6 +152,7 @@ export const MainLogo: FC<MainLogoProps> = ({
   onClick,
   className,
   network,
+  mini = false,
 }) => {
   const { theme } = useThemeStore();
   const [isOnline, setIsOnline] = useState<boolean>(true);
@@ -183,7 +185,7 @@ export const MainLogo: FC<MainLogoProps> = ({
 
   return (
     <Link to='/' className='shrink-0' onClick={onClick}>
-      <div className='relative'>
+      <div className={`${mini ? "flex items-center" : "relative"}`}>
         {isOnline ? (
           <img
             className={className}

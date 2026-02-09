@@ -51,6 +51,18 @@ export interface SensitiveContentWarningProps {
    * />
    */
   description?: string;
+
+  /**
+   * Label for the "Remember this setting" checkbox
+   * @default "Remember this setting"
+   */
+  rememberLabel?: string;
+
+  /**
+   * Label for the Display button
+   * @default "Display"
+   */
+  displayLabel?: string;
 }
 
 /**
@@ -140,6 +152,8 @@ export const SensitiveContentWarning = ({
   localStorageKey = "showSensitiveContent",
   title = "User-generated content",
   description = "Following content is user-generated and unmoderated by the Cexplorer team.",
+  rememberLabel = "Remember this setting",
+  displayLabel = "Display",
 }: SensitiveContentWarningProps) => {
   const [rememberChoice, setRememberChoice] = useState(false);
 
@@ -170,13 +184,13 @@ export const SensitiveContentWarning = ({
           onChange={e => setRememberChoice(e.target.checked)}
           className='rounded h-4 w-4 cursor-pointer border-border bg-background accent-darkBlue'
         />
-        Remember this setting
+        {rememberLabel}
       </label>
 
       <Button
         size='md'
         variant='primary'
-        label='Display'
+        label={displayLabel}
         leftIcon={<Eye size={16} />}
         onClick={handleDisplay}
       />

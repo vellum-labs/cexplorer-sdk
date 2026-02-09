@@ -8,7 +8,7 @@ import { useState } from "react";
 import type { BreadCrumbItem } from "../breadcrumbs";
 import { Breadcrumb } from "../breadcrumbs";
 import { BreadcrumbSeparator } from "../breadcrumbs/components/BreadcrumbSeparator";
-import { GlobalSearch } from "../globalSearch";
+import { GlobalSearch, type GlobalSearchProps } from "../globalSearch";
 import { LoadingSkeleton } from "../loadingSkeleton";
 import { ShareButton } from "../shareButton";
 import { TruncatedText } from "../truncatedText";
@@ -93,6 +93,24 @@ export interface HeaderProps {
    * Removes ShareButton
    */
   shareButton?: boolean;
+  /**
+   * Label for the featured ad text
+   * @default "Featured:"
+   */
+  featuredLabel?: string;
+  /**
+   * Label for the ad badge
+   * @default "Ad"
+   */
+  adLabel?: string;
+  /**
+   * Labels for GlobalSearch component
+   * Pass through to configure GlobalSearch text (placeholders, labels, categories)
+   */
+  globalSearchLabels?: Pick<
+    GlobalSearchProps,
+    "recentLabels" | "categoryLabels" | "homepagePlaceholder" | "placeholder" | "notFoundLabel"
+  >;
 }
 
 /**
@@ -171,6 +189,9 @@ export const Header = ({
   icon,
   withoutSearch = false,
   shareButton = true,
+  featuredLabel = "Featured:",
+  adLabel = "Ad",
+  globalSearchLabels,
 }: HeaderProps) => {
   const [hasImage, setHasImage] = useState(false);
   const headingAd = miscBasicQuery
@@ -228,7 +249,7 @@ export const Header = ({
                   useFetchMiscSearch={useFetchMiscSearch}
                   locale={locale}
                 >
-                  <GlobalSearch isHomepage />
+                  <GlobalSearch isHomepage {...globalSearchLabels} />
                 </GlobalSearchProvider>
               )}
             </div>
@@ -241,7 +262,7 @@ export const Header = ({
               {headingAd && (
                 <div className='flex gap-[4px] pt-1.5'>
                   <span className='text-text-sm font-semibold text-text'>
-                    Featured:
+                    {featuredLabel}
                   </span>
                   <p
                     dangerouslySetInnerHTML={{
@@ -264,7 +285,7 @@ export const Header = ({
                   useFetchMiscSearch={useFetchMiscSearch}
                   locale={locale}
                 >
-                  <GlobalSearch />
+                  <GlobalSearch {...globalSearchLabels} />
                 </GlobalSearchProvider>
               </div>
             )}
@@ -272,7 +293,7 @@ export const Header = ({
               <div className='relative h-[100px] w-[320px] overflow-hidden rounded-m border border-border bg-cardBg'>
                 {homepageAd}
                 <div className='absolute right-2 top-1.5 flex h-[24px] w-[32px] items-center justify-center rounded-xs border border-border bg-background text-text-xs font-medium text-text'>
-                  <span>Ad</span>
+                  <span>{adLabel}</span>
                 </div>
               </div>
             )}
@@ -283,7 +304,7 @@ export const Header = ({
             <div className='relative h-[100px] w-[320px] overflow-hidden rounded-m border border-border bg-cardBg'>
               {homepageAd}
               <div className='absolute right-2 top-1.5 flex h-[24px] w-[32px] items-center justify-center rounded-xs border border-border bg-background text-text-xs font-medium text-text'>
-                <span>Ad</span>
+                <span>{adLabel}</span>
               </div>
             </div>
           )
