@@ -61,9 +61,10 @@ export type TableSettingsDropdownProps = {
    */
   customStyles?: CSSProperties;
   /**
-   * Custom label for "Rows:" text (for i18n)
-   * @default "Rows:"
+   * Custom row options for the rows per page selector
+   * @default [10, 20, 30, 40, 50]
    */
+  rowOptions?: number[];
   rowsLabel?: string;
 };
 
@@ -132,6 +133,7 @@ export type TableSettingsDropdownProps = {
  * @param {boolean} [props.visibleRows=true] - Show rows selector
  * @param {ReactNode} [props.customContent] - Custom trigger content
  * @param {CSSProperties} [props.customStyles] - Custom dropdown styles
+ * @param {number[]} [props.rowOptions=[10, 20, 30, 40, 50]] - Custom row options
  * @returns {JSX.Element} Table settings dropdown with rows and column controls
  */
 export const TableSettingsDropdown: FC<TableSettingsDropdownProps> = ({
@@ -141,6 +143,7 @@ export const TableSettingsDropdown: FC<TableSettingsDropdownProps> = ({
   visibleRows = true,
   customContent,
   customStyles,
+  rowOptions = [10, 20, 30, 40, 50],
   rowsLabel = "Rows:",
 }) => {
   columnsOptions = columnsOptions.filter(
@@ -193,17 +196,15 @@ export const TableSettingsDropdown: FC<TableSettingsDropdownProps> = ({
                   </div>
                 )}
                 <SelectContent align='end'>
-                  {Array.from({ length: 50 }, (_, i) => i + 1)
-                    .filter(item => item % 10 === 0)
-                    .map(i => (
-                      <SelectItem
-                        className='flex w-full cursor-pointer justify-between px-1'
-                        key={i}
-                        value={String(i)}
-                      >
-                        <span>{i}</span>
-                      </SelectItem>
-                    ))}
+                  {rowOptions.map(i => (
+                    <SelectItem
+                      className='flex w-full cursor-pointer justify-between px-1'
+                      key={i}
+                      value={String(i)}
+                    >
+                      <span>{i}</span>
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
