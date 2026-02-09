@@ -72,7 +72,7 @@ export const EnvironmentBadge = ({ network }: EnvironmentBadgeProps) => {
 
   return (
     <div
-      className={`absolute left-[75px] top-[31px] flex w-fit items-center rounded-xl border ${styles.border} ${styles.bg} h-5 px-[6px] py-[2px]`}
+      className={`absolute left-[36px] top-[31px] flex w-fit items-center rounded-xl border ${styles.border} ${styles.bg} h-5 px-[6px] py-[2px]`}
     >
       <span
         className={`text-[10px] font-medium ${styles.text} whitespace-nowrap`}

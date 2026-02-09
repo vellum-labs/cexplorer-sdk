@@ -9,7 +9,6 @@ import DarkLogo from "@/resources/images/preloader_logo_dark.svg";
 import LightLogo from "@/resources/images/preloader_logo_light.svg";
 
 import { useThemeStore } from "@/stores/themeStore";
-import { Badge } from "../badge";
 import { EnvironmentBadge } from "../environmentBadge";
 
 /**
@@ -202,13 +201,7 @@ export const MainLogo: FC<MainLogoProps> = ({
             alt='Cexplorer logo'
           />
         )}
-        <Badge
-          color='blue'
-          className={`h-5 w-5 !px-[6px] !py-[2px] !text-[10px] !font-bold ${mini ? "-translate-x-[10px]" : "absolute left-[36px] top-[31px]"}`}
-        >
-          {mini ? "mini" : "beta"}
-        </Badge>
-        {network && <EnvironmentBadge network={network} />}
+        <EnvironmentBadge network={network} />
       </div>
     </Link>
   );
