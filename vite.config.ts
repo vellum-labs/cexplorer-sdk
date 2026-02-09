@@ -69,7 +69,9 @@ export default defineConfig({
       output: [
         {
           format: "es",
-          entryFileNames: "index.es.js",
+          preserveModules: true,
+          preserveModulesRoot: "src",
+          entryFileNames: "[name].js",
           plugins: [
             terser({
               compress: {

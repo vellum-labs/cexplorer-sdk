@@ -7,8 +7,14 @@ import { useNavigate } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { TextInput } from "../textInput";
 import { GlobalSearchCell } from "./components/GlobalSearchCell";
-import { GlobalSearchDropdown } from "./components/GlobalSearchDropdown";
-import { GlobalSearchRecent } from "./components/GlobalSearchRecent";
+import {
+  type CategoryLabels,
+  GlobalSearchDropdown,
+} from "./components/GlobalSearchDropdown";
+import {
+  GlobalSearchRecent,
+  type GlobalSearchRecentProps,
+} from "./components/GlobalSearchRecent";
 
 /**
  * Props for the GlobalSearch component.
@@ -24,6 +30,37 @@ export interface GlobalSearchProps {
    * @default false
    */
   isHomepage?: boolean;
+
+  /**
+   * Props to pass to GlobalSearchRecent component
+   */
+  recentLabels?: Pick<
+    GlobalSearchRecentProps,
+    "recentlySearchedLabel" | "noRecentSearchesLabel"
+  >;
+
+  /**
+   * Props to pass to GlobalSearchDropdown component
+   */
+  categoryLabels?: CategoryLabels;
+
+  /**
+   * Placeholder text for homepage search input
+   * @default "Search by Address / Tx hash / Block hash / $Handle / Pool name..."
+   */
+  homepagePlaceholder?: string;
+
+  /**
+   * Placeholder text for regular search input
+   * @default "Search blocks, transactions, asset IDs..."
+   */
+  placeholder?: string;
+
+  /**
+   * Text displayed when no results are found
+   * @default "Not Found"
+   */
+  notFoundLabel?: string;
 }
 
 /**
@@ -64,7 +101,14 @@ export interface GlobalSearchProps {
  * @param {GlobalSearchProps} props - Component props
  * @returns {JSX.Element} Rendered global search component
  */
-export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
+export const GlobalSearch: FC<GlobalSearchProps> = ({
+  isHomepage,
+  recentLabels,
+  categoryLabels,
+  homepagePlaceholder = "Search by Address / Tx hash / Block hash / $Handle / Pool name...",
+  placeholder = "Search blocks, transactions, asset IDs...",
+  notFoundLabel = "Not Found",
+}) => {
   const { theme } = useThemeStore();
 
   const navigate = useNavigate();
@@ -122,11 +166,11 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
         <div
           className={`relative h-12 w-full max-w-[750px] border border-border bg-background ${focused ? "rounded-b-none rounded-t-l" : "rounded-l"} flex items-center`}
         >
-          <GlobalSearchDropdown isHomepage />
+          <GlobalSearchDropdown isHomepage categoryLabels={categoryLabels} />
           <input
             value={search}
             onChange={e => handleSearchChange(e.currentTarget.value)}
-            placeholder='Search by Address / Tx hash / Block hash / $Handle / Pool name...'
+            placeholder={homepagePlaceholder}
             className='h-full flex-1 bg-transparent pl-1 pr-6 text-text-sm outline-none'
             onFocus={() => handleInput("focus")}
             autoCapitalize='off'
@@ -149,9 +193,13 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
         <TextInput
           value={search}
           onchange={handleSearchChange}
-          placeholder='Search blocks, transactions, asset IDs...'
+          placeholder={placeholder}
           showSearchIcon={!focused}
-          prefixContent={focused ? <GlobalSearchDropdown /> : undefined}
+          prefixContent={
+            focused ? (
+              <GlobalSearchDropdown categoryLabels={categoryLabels} />
+            ) : undefined
+          }
           inputClassName={`${focused ? "rounded-b-none pl-[105px]" : ""}`}
           onFocus={() => handleInput("focus")}
           autoCapitalize='off'
@@ -178,12 +226,14 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({ isHomepage }) => {
                 ></div>
               </div>
             )}
-            {!categories && search.length === 0 && <GlobalSearchRecent />}
+            {!categories && search.length === 0 && (
+              <GlobalSearchRecent {...recentLabels} />
+            )}
             {categories && (
               <>
                 {categories.all === 0 ? (
                   <div className='px-1.5 py-1.5 text-center text-text-sm'>
-                    Not Found
+                    {notFoundLabel}
                   </div>
                 ) : (
                   <>
