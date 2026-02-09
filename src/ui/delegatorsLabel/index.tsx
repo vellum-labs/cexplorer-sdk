@@ -15,6 +15,18 @@ export interface DelegatorsLabelProps {
    * @example "1000"
    */
   minDelegationAda: string;
+
+  /**
+   * Label text displayed next to the tooltip
+   * @default "Delegators"
+   */
+  label?: string;
+
+  /**
+   * Tooltip text template. Use {minDelegationAda} as placeholder for the value.
+   * @default "Only delegations above {minDelegationAda} ADA are counted."
+   */
+  tooltipText?: string;
 }
 
 /**
@@ -55,13 +67,20 @@ export interface DelegatorsLabelProps {
  * @param {string} props.minDelegationAda - Minimum delegation amount in ADA
  * @returns {JSX.Element} Label with "Delegators" text and info tooltip
  */
-export const DelegatorsLabel: FC<DelegatorsLabelProps> = ({ minDelegationAda }) => {
+export const DelegatorsLabel: FC<DelegatorsLabelProps> = ({
+  minDelegationAda,
+  label = "Delegators",
+  tooltipText = "Only delegations above {minDelegationAda} ADA are counted.",
+}) => {
+  const formattedTooltip = tooltipText.replace(
+    "{minDelegationAda}",
+    minDelegationAda,
+  );
+
   return (
     <span className='flex items-center gap-1'>
-      Delegators
-      <Tooltip
-        content={`Only delegations above ${minDelegationAda} ADA are counted.`}
-      >
+      {label}
+      <Tooltip content={formattedTooltip}>
         <Info size={14} className='text-grayTextPrimary' />
       </Tooltip>
     </span>

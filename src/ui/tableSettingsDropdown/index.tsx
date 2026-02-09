@@ -65,6 +65,7 @@ export type TableSettingsDropdownProps = {
    * @default [10, 20, 30, 40, 50]
    */
   rowOptions?: number[];
+  rowsLabel?: string;
 };
 
 /**
@@ -143,6 +144,7 @@ export const TableSettingsDropdown: FC<TableSettingsDropdownProps> = ({
   customContent,
   customStyles,
   rowOptions = [10, 20, 30, 40, 50],
+  rowsLabel = "Rows:",
 }) => {
   columnsOptions = columnsOptions.filter(
     item => typeof item.isVisible !== "undefined",
@@ -181,7 +183,7 @@ export const TableSettingsDropdown: FC<TableSettingsDropdownProps> = ({
               >
                 {visibleRows && (
                   <div className='flex h-14 w-full items-center justify-between border-b border-border px-1.5'>
-                    <span>Rows:</span>
+                    <span>{rowsLabel}</span>
                     <SelectTrigger className='w-[60px]'>
                       <SelectValue
                         placeholder={

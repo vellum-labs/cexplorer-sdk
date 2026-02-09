@@ -3,6 +3,18 @@ import { ChevronLeft } from "lucide-react";
 import { PaginationLink } from "./PaginationLink";
 
 /**
+ * Props for PaginationPrevious component
+ */
+export interface PaginationPreviousProps
+  extends React.ComponentProps<typeof PaginationLink> {
+  /**
+   * Accessible label for screen readers
+   * @default "Go to previous page"
+   */
+  ariaLabel?: string;
+}
+
+/**
  * PaginationPrevious is a button to navigate to the previous page.
  *
  * This component renders a "Previous" button with a left chevron icon
@@ -39,18 +51,20 @@ import { PaginationLink } from "./PaginationLink";
  * </PaginationContent>
  * ```
  *
- * @param {React.ComponentProps<typeof PaginationLink>} props - PaginationLink props
+ * @param {PaginationPreviousProps} props - Component props
  * @param {string} [props.className] - Additional CSS classes
+ * @param {string} [props.ariaLabel="Go to previous page"] - Accessible label
  * @param {() => void} [props.onClick] - Click handler for previous page navigation
  * @param {boolean} [props.disabled] - Whether button is disabled (first page)
  * @returns {JSX.Element} Previous page button with chevron icon
  */
 export const PaginationPrevious = ({
   className,
+  ariaLabel = "Go to previous page",
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
+}: PaginationPreviousProps) => (
   <PaginationLink
-    aria-label='Go to previous page'
+    aria-label={ariaLabel}
     size='default'
     className={cn("gap-1/2", className)}
     {...props}
