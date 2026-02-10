@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import { mkdirSync, readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { defineConfig } from "vite";
+import compression from "vite-plugin-compression";
 import dts from "vite-plugin-dts";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
@@ -45,6 +46,10 @@ export default defineConfig({
         writeFileSync("dist/style.css", minified);
       },
     },
+    compression({
+      algorithm: "gzip",
+      threshold: 1024,
+    }),
   ],
   resolve: {
     alias: {
