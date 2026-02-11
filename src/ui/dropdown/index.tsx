@@ -10,6 +10,7 @@ import {
   useLayoutEffect,
   useState,
 } from "react";
+import { createPortal } from "react-dom";
 
 /**
  * Props for the Dropdown component.
@@ -192,12 +193,9 @@ export const Dropdown: FC<DropdownProps> = ({
   const [disabledClick, setDisabledClick] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(0);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
-  const [verticalPosition, setVerticalPosition] = useState<"down" | "up">(
-    forceVerticalPosition ?? "down",
+  const [portalStyle, setPortalStyle] = useState<{ top: number; left: number }>(
+    { top: 0, left: 0 },
   );
-  const [horizontalPosition, setHorizontalPosition] = useState<
-    "left" | "right"
-  >("left");
   const wrapperRef = createRef<HTMLDivElement>();
   const contentRef = createRef<HTMLDivElement>();
   const triggerRef = createRef<HTMLButtonElement>();
@@ -210,23 +208,30 @@ export const Dropdown: FC<DropdownProps> = ({
     const dropdownRect = contentRef.current.getBoundingClientRect();
     const triggerRect = triggerRef.current.getBoundingClientRect();
     const viewportHeight = window.innerHeight;
-    const leftOverflow = dropdownRect.width > dropdownRect.left;
+    const leftOverflow = dropdownRect.width > triggerRect.left;
     const bottomOverflow =
       viewportHeight < triggerRect.bottom + dropdownRect.height;
 
-    if (forceHorizontalPosition) {
-      setHorizontalPosition(forceHorizontalPosition);
-    } else if (leftOverflow) {
-      setHorizontalPosition("right");
-    } else {
-      setHorizontalPosition("left");
-    }
+    const newHorizontal = forceHorizontalPosition
+      ? forceHorizontalPosition
+      : leftOverflow
+        ? "right"
+        : "left";
 
-    if (bottomOverflow && !forceVerticalPosition) {
-      setVerticalPosition("up");
-    } else {
-      setVerticalPosition("down");
-    }
+    const newVertical =
+      bottomOverflow && !forceVerticalPosition ? "up" : "down";
+
+    const top =
+      newVertical === "up"
+        ? triggerRect.top - dropdownRect.height - 3
+        : triggerRect.bottom + 3;
+
+    const left =
+      newHorizontal === "left"
+        ? triggerRect.right - dropdownRect.width
+        : triggerRect.left;
+
+    setPortalStyle({ top, left });
   };
 
   const toggleDropdown = () => {
@@ -349,6 +354,17 @@ export const Dropdown: FC<DropdownProps> = ({
   }, [isOpen, contentRef, triggerRef, wrapperRef, closeOnSelect]);
 
   useEffect(() => {
+    if (!isOpen) return;
+    const handleScroll = () => {
+      setIsOpen(false);
+      setIsClicked(false);
+    };
+    window.addEventListener("scroll", handleScroll, { capture: true });
+    return () =>
+      window.removeEventListener("scroll", handleScroll, { capture: true });
+  }, [isOpen]);
+
+  useEffect(() => {
     if (openId && openId !== id) {
       setIsOpen(false);
     }
@@ -380,107 +396,113 @@ export const Dropdown: FC<DropdownProps> = ({
           </span>
         )}
       </button>
-      {isOpen && (
-        <div
-          ref={contentRef}
-          className={`animate-in absolute bg-cardBg ${horizontalPosition === "left" ? "right-0" : "left-0"} ${verticalPosition === "down" ? "top-[calc(100%+3px)]" : "bottom-[calc(100%+3px)]"} z-20 rounded-m bg-background p-1 text-text-sm shadow-md ${withBorder ? "border border-border" : ""} ${poppoverClassname || ""}`}
-          style={{
-            width: `${width}`,
-          }}
-        >
-          {options
-            .filter(option => option)
-            .map((option, index) => (
-              <Fragment key={index}>
-                {option?.href && option.href.includes("http") ? (
-                  <a
-                    href={option.href}
-                    target='_blank'
-                    className={`first:rounded-t-lg last:rounded-b-lg z-50 border-b border-border last:border-b-0 hover:bg-darker hover:text-primary ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""}`}
-                    style={{
-                      display: "block",
-                      padding: "10px",
-                    }}
-                    role='menuitem'
-                    aria-label='Menu item'
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {option.label}
-                  </a>
-                ) : option?.href ? (
-                  <Link
-                    to={option.href}
-                    search={option?.params ?? undefined}
-                    className={`relative rounded-m hover:bg-darker hover:text-primary ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""}`}
-                    style={{
-                      display: "block",
-                      padding: "10px",
-                    }}
-                    role='menuitem'
-                    aria-label='Menu item'
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {option.label}
-                  </Link>
-                ) : (
-                  <div
-                    className={`relative flex w-full justify-between rounded-m p-1.5 ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""} hover:bg-darker hover:text-primary`}
-                    onClick={option?.onClick}
-                    style={{
-                      //   padding: "10px",
-                      cursor: "pointer",
-                    }}
-                    role='menuitem'
-                    aria-label='Menu item'
-                  >
-                    {option?.nestedOptions ? (
-                      <div
-                        onMouseOver={() => openSubmenu(String(option.label))}
-                        onMouseLeave={closeSubmenu}
-                        className='relative flex w-full items-center justify-between'
-                      >
-                        {option.label}
-                        {option.nestedOptions && <ChevronRight size={15} />}
-                        {activeSubmenu === option.label && (
-                          <div
-                            className={`absolute left-[110%] top-0 z-50 rounded-l border border-border bg-cardBg p-1 shadow-md`}
-                            style={{
-                              width: width,
-                            }}
-                          >
-                            {option.nestedOptions.map((nestedOption, index) => (
-                              <Link
-                                to={nestedOption?.href as any}
-                                key={index}
-                                className={`relative flex w-full justify-between rounded-m text-text hover:bg-darker hover:text-primary ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""}`}
-                                style={{
-                                  padding: "10px",
-                                  cursor: "pointer",
-                                }}
-                                role='menuitem'
-                                aria-label='Menu item'
-                                onClick={() => {
-                                  nestedOption?.onClick &&
-                                    nestedOption?.onClick();
-                                  setIsOpen(false);
-                                  setActiveSubmenu(null);
-                                }}
-                              >
-                                {nestedOption?.label}
-                              </Link>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <>{option?.label}</>
-                    )}
-                  </div>
-                )}
-              </Fragment>
-            ))}
-        </div>
-      )}
+      {isOpen &&
+        createPortal(
+          <div
+            ref={contentRef}
+            className={`animate-in fixed z-50 rounded-m bg-background p-1 text-text-sm shadow-md ${withBorder ? "border border-border" : ""} ${poppoverClassname || ""}`}
+            style={{
+              width,
+              top: `${portalStyle.top}px`,
+              left: `${portalStyle.left}px`,
+            }}
+          >
+            {options
+              .filter(option => option)
+              .map((option, index) => (
+                <Fragment key={index}>
+                  {option?.href && option.href.includes("http") ? (
+                    <a
+                      href={option.href}
+                      target='_blank'
+                      className={`first:rounded-t-lg last:rounded-b-lg z-50 border-b border-border last:border-b-0 hover:bg-darker hover:text-primary ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""}`}
+                      style={{
+                        display: "block",
+                        padding: "10px",
+                      }}
+                      role='menuitem'
+                      aria-label='Menu item'
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {option.label}
+                    </a>
+                  ) : option?.href ? (
+                    <Link
+                      to={option.href}
+                      search={option?.params ?? undefined}
+                      className={`relative rounded-m hover:bg-darker hover:text-primary ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""}`}
+                      style={{
+                        display: "block",
+                        padding: "10px",
+                      }}
+                      role='menuitem'
+                      aria-label='Menu item'
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {option.label}
+                    </Link>
+                  ) : (
+                    <div
+                      className={`relative flex w-full justify-between rounded-m p-1.5 ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""} hover:bg-darker hover:text-primary`}
+                      onClick={option?.onClick}
+                      style={{
+                        //   padding: "10px",
+                        cursor: "pointer",
+                      }}
+                      role='menuitem'
+                      aria-label='Menu item'
+                    >
+                      {option?.nestedOptions ? (
+                        <div
+                          onMouseOver={() => openSubmenu(String(option.label))}
+                          onMouseLeave={closeSubmenu}
+                          className='relative flex w-full items-center justify-between'
+                        >
+                          {option.label}
+                          {option.nestedOptions && <ChevronRight size={15} />}
+                          {activeSubmenu === option.label && (
+                            <div
+                              className={`absolute left-[110%] top-0 z-50 rounded-l border border-border bg-cardBg p-1 shadow-md`}
+                              style={{
+                                width: width,
+                              }}
+                            >
+                              {option.nestedOptions.map(
+                                (nestedOption, index) => (
+                                  <Link
+                                    to={nestedOption?.href as any}
+                                    key={index}
+                                    className={`relative flex w-full justify-between rounded-m text-text hover:bg-darker hover:text-primary ${option.divider ? "after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:bg-border" : ""}`}
+                                    style={{
+                                      padding: "10px",
+                                      cursor: "pointer",
+                                    }}
+                                    role='menuitem'
+                                    aria-label='Menu item'
+                                    onClick={() => {
+                                      nestedOption?.onClick &&
+                                        nestedOption?.onClick();
+                                      setIsOpen(false);
+                                      setActiveSubmenu(null);
+                                    }}
+                                  >
+                                    {nestedOption?.label}
+                                  </Link>
+                                ),
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <>{option?.label}</>
+                      )}
+                    </div>
+                  )}
+                </Fragment>
+              ))}
+          </div>,
+          document.body,
+        )}
     </div>
   );
 };

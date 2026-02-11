@@ -1,9 +1,9 @@
 import { Facebook } from "@/resources/Facebook";
 import { Twitter } from "@/resources/Twitter";
+import { useThemeStore } from "@/stores/themeStore";
 import { Copy, Share2, X } from "lucide-react";
 import { toast } from "sonner";
 import { Dropdown } from "../dropdown";
-import { useThemeStore } from "@/stores/themeStore";
 
 /**
  * Props for the ShareButton component.
@@ -123,7 +123,7 @@ export const ShareButton = ({ isHeader = false }: ShareButtonProps) => {
           ? `!justify-center h-[20px] w-[20px] rounded-[4px] border shadow-xs border-border hover:bg-darker ${theme === "light" ? "bg-white" : "bg-cexdark-800"}`
           : `!justify-center h-10 w-10 rounded-s border border-border hover:bg-darker  ${theme === "light" ? "bg-white" : "bg-cexdark-800"}`
       }
-      forceHorizontalPosition={isHeader ? "left" : undefined}
+      forceHorizontalPosition='right'
       wrapperClassname='z-0'
       width='200px'
     />
