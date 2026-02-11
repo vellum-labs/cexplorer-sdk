@@ -18,7 +18,7 @@ import type {
 } from "@tanstack/react-query";
 import { Funnel, HelpCircle } from "lucide-react";
 import type { MouseEventHandler, ReactNode, RefObject } from "react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { FunnelFilter } from "../funnelFilter";
 import { LoadingSkeleton } from "../loadingSkeleton";
 import { NoResultsFound } from "../noResultsFound";
@@ -68,9 +68,7 @@ export type Column<T> = {
   /** If true, shows row ranking number instead of rendered content */
   standByRanking?: boolean;
   /** Function to render cell content for each row item */
-  render: (item: T) => React.ReactNode | null;
-  /** Additional content to display in the column header */
-  extraContent?: React.ReactNode;
+  render: (item: T, toggle?: () => void) => React.ReactNode | null;
   /** Fixed width in pixels for the column */
   widthPx?: number;
   /** Controls column visibility */
@@ -106,6 +104,8 @@ export type Column<T> = {
     /** Custom label for the filter button (for i18n) */
     filterLabel?: string;
   };
+  /** Toggle extra row cell */
+  toggleCell?: boolean;
 };
 
 /**
@@ -138,6 +138,8 @@ type PropsBase<T> = {
   renderDisplayText?: (count: number, total: number) => string;
   /** Custom label for "no items" text (for i18n) */
   noItemsLabel?: string;
+  /** Additional content to display in the column row */
+  extraContent?: (item: T) => ReactNode;
 };
 
 /**
@@ -318,6 +320,7 @@ export const GlobalTable = <T extends Record<string, any>>({
   type,
   renderDisplayText,
   noItemsLabel,
+  extraContent,
   ...props
 }: Props<T>) => {
   const defaultQueryPagination =
@@ -352,6 +355,22 @@ export const GlobalTable = <T extends Record<string, any>>({
   const [firstClickedColumnIndex, setFirstClickedColumnIndex] = useState<
     number | null
   >(null);
+
+  const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
+
+  const toggleRow = (index: number) => {
+    setExpandedRows(prev => {
+      const next = new Set(prev);
+
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
+
+      return next;
+    });
+  };
 
   const handleColumnClick = (index: number) => {
     if (!isMobileDevice()) return;
@@ -513,72 +532,79 @@ export const GlobalTable = <T extends Record<string, any>>({
             className={`${infiniteScrolling ? "sticky" : "relative"} ${scrolled && infiniteScrolling ? "shadow-md" : ""} top-0 z-10 ${isEmpty && !isLoading ? "border-none" : ""} ${disableDrag && "pointer-events-none"}`}
           >
             <tr className=''>
-              {columns.map(({ title, widthPx, visible, filter, helper }, index) => (
-                <React.Fragment key={index + "head"}>
-                  {visible && (
-                    <TableHead
-                      key={index + "header"}
-                      draggable
-                      onDragStart={
-                        onOrderChange ? () => handleDragStart(index) : undefined
-                      }
-                      onDragOver={
-                        onOrderChange
-                          ? e => handleDragOver(e, index)
-                          : undefined
-                      }
-                      onDrop={
-                        onOrderChange ? e => handleDrop(e, index) : undefined
-                      }
-                      onClick={() => handleColumnClick(index)}
-                      style={{
-                        maxWidth: `${widthPx || 200}px`,
-                        width: `${widthPx}px`,
-                        filter:
-                          firstClickedColumnIndex !== null &&
-                          firstClickedColumnIndex !== index
-                            ? `hue-rotate(${index * 20}deg)`
-                            : "none",
-                      }}
-                      className={`relative box-border rounded-t-xl ${isEmpty && !isLoading ? "first:rounded-bl-xl last:rounded-br-xl" : "border-b border-border"} bg-darker font-semibold ${isMobileDevice() || !onOrderChange ? "cursor-pointer" : "cursor-move"} last:pr-4 ${firstClickedColumnIndex !== null && firstClickedColumnIndex !== index && `bg-yellow-200/20 border border-dashed border-yellow-400`} table-cell first:pl-4 ${firstClickedColumnIndex !== null && "text-text [&>p]:text-text"} ${firstClickedColumnIndex === index || (isDragging && draggedIndex === index && "border border-dashed border-text text-grayTextPrimary [&>p]:text-grayTextPrimary")} ${overIndex === index && "bg-border"}`}
-                    >
-                      <div className='flex items-center gap-1/2'>
-                        {title}
-                        {helper && (
-                          <Tooltip content={helper}>
-                            <HelpCircle
+              {columns.map((item, index) => {
+                const { title, widthPx, visible, filter, helper } =
+                  item as Column<any>;
+
+                return (
+                  <React.Fragment key={index + "head"}>
+                    {visible && (
+                      <TableHead
+                        key={index + "header"}
+                        draggable
+                        onDragStart={
+                          onOrderChange
+                            ? () => handleDragStart(index)
+                            : undefined
+                        }
+                        onDragOver={
+                          onOrderChange
+                            ? e => handleDragOver(e, index)
+                            : undefined
+                        }
+                        onDrop={
+                          onOrderChange ? e => handleDrop(e, index) : undefined
+                        }
+                        onClick={() => handleColumnClick(index)}
+                        style={{
+                          maxWidth: `${widthPx || 200}px`,
+                          width: `${widthPx}px`,
+                          filter:
+                            firstClickedColumnIndex !== null &&
+                            firstClickedColumnIndex !== index
+                              ? `hue-rotate(${index * 20}deg)`
+                              : "none",
+                        }}
+                        className={`relative box-border rounded-t-xl ${isEmpty && !isLoading ? "first:rounded-bl-xl last:rounded-br-xl" : "border-b border-border"} bg-darker font-semibold ${isMobileDevice() || !onOrderChange ? "cursor-pointer" : "cursor-move"} last:pr-4 ${firstClickedColumnIndex !== null && firstClickedColumnIndex !== index && `bg-yellow-200/20 border border-dashed border-yellow-400`} table-cell first:pl-4 ${firstClickedColumnIndex !== null && "text-text [&>p]:text-text"} ${firstClickedColumnIndex === index || (isDragging && draggedIndex === index && "border border-dashed border-text text-grayTextPrimary [&>p]:text-grayTextPrimary")} ${overIndex === index && "bg-border"}`}
+                      >
+                        <div className='flex items-center gap-1/2'>
+                          {title}
+                          {helper && (
+                            <Tooltip content={helper}>
+                              <HelpCircle
+                                size={15}
+                                className='inline min-w-[15px] cursor-help text-grayTextPrimary hover:text-text'
+                                onMouseDown={e => e.stopPropagation()}
+                              />
+                            </Tooltip>
+                          )}
+                          {filter && (
+                            <Funnel
                               size={15}
-                              className='inline min-w-[15px] cursor-help text-grayTextPrimary hover:text-text'
+                              className={`inline min-w-[20px] cursor-pointer ${filter?.activeFunnel ? "text-primary" : ""}`}
+                              onClick={filter.onShow}
                               onMouseDown={e => e.stopPropagation()}
                             />
-                          </Tooltip>
-                        )}
-                        {filter && (
-                          <Funnel
-                            size={15}
-                            className={`inline min-w-[20px] cursor-pointer ${filter?.activeFunnel ? "text-primary" : ""}`}
-                            onClick={filter.onShow}
-                            onMouseDown={e => e.stopPropagation()}
-                          />
-                        )}
-                        {filter?.filterOpen && (
-                          <FunnelFilter
-                            anchorRef={filter.anchorRef}
-                            onReset={filter.onReset}
-                            onFilter={filter.onFilter}
-                            disabled={filter.filterButtonDisabled}
-                            width={filter?.width}
-                            resetLabel={filter.resetLabel}
-                            filterLabel={filter.filterLabel}
-                          >
-                            {filter.filterContent}
-                          </FunnelFilter>
-                        )}
-                      </div>
-                    </TableHead>
-                  )}
-                </React.Fragment>
-              ))}
+                          )}
+                          {filter?.filterOpen && (
+                            <FunnelFilter
+                              anchorRef={filter.anchorRef}
+                              onReset={filter.onReset}
+                              onFilter={filter.onFilter}
+                              disabled={filter.filterButtonDisabled}
+                              width={filter?.width}
+                              resetLabel={filter.resetLabel}
+                              filterLabel={filter.filterLabel}
+                            >
+                              {filter.filterContent}
+                            </FunnelFilter>
+                          )}
+                        </div>
+                      </TableHead>
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </tr>
           </TableHeader>
           <TableBody className='text-grayTextPrimary'>
@@ -596,7 +622,7 @@ export const GlobalTable = <T extends Record<string, any>>({
                     }}
                     key={"loaderTr" + index}
                   >
-                    {columns.map(({ widthPx, visible, className }, i) => (
+                    {columns.map(({ widthPx, visible }, i) => (
                       <React.Fragment key={"loaderTh" + i}>
                         {visible && (
                           <TableCell
@@ -607,7 +633,7 @@ export const GlobalTable = <T extends Record<string, any>>({
                               height: `${rowHeight}px`,
                               maxHeight: `${rowHeight}px`,
                             }}
-                            className={`${index % 2 !== 0 ? "bg-darker" : ""} ${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-1 text-left first:pl-4 last:pr-4 [&>a]:text-primary ${className}`}
+                            className={`${index % 2 !== 0 ? "bg-darker" : ""} ${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-1 text-left first:pl-4 last:pr-4 [&>a]:text-primary`}
                           >
                             <LoadingSkeleton height='20px' />
                           </TableCell>
@@ -619,52 +645,70 @@ export const GlobalTable = <T extends Record<string, any>>({
               </>
             ) : (
               <>
-                {items?.map((item, index) => (
-                  <TableRow
-                    style={{
-                      height: `${rowHeight}px`,
-                      maxHeight: `${rowHeight}px`,
-                    }}
-                    key={`tr${index}`}
-                    className={`${index % 2 !== 0 ? "bg-darker" : ""} group duration-150`}
-                  >
-                    {columns.map(
-                      (
-                        {
-                          widthPx,
+                {items?.map((item, rowIndex) => (
+                  <>
+                    <TableRow
+                      style={{
+                        height: `${rowHeight}px`,
+                        maxHeight: `${rowHeight}px`,
+                      }}
+                      key={`tr${rowIndex}`}
+                      className={`${rowIndex % 2 !== 0 ? "bg-darker" : ""} group duration-150`}
+                    >
+                      {columns.map((col, i) => {
+                        const {
                           render,
-                          visible,
                           className,
-                          standByRanking,
                           rankingStart,
-                        },
-                        i,
-                      ) => (
-                        <React.Fragment key={"th" + i}>
-                          {visible && (
-                            <TableCell
-                              key={`th-${index}-${i}`}
-                              style={{
-                                maxWidth: `${widthPx || 100}px`,
-                                width: `${widthPx || 100}px`,
-                                height: `${rowHeight}px`,
-                                maxHeight: `${rowHeight}px`,
-                              }}
-                              className={`${indexToRound === index ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-1 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover ${className}`}
-                            >
-                              {!standByRanking
-                                ? item && render(item)
-                                : rankingStart === "asc"
-                                  ? (totalItems ?? 0) - index
-                                  : itemsPerPage * (currentPage - 1) +
-                                    index +
-                                    1}
-                            </TableCell>
-                          )}
-                        </React.Fragment>
-                      ),
+                          standByRanking,
+                          visible,
+                          widthPx,
+                          toggleCell,
+                        } = col as Column<any>;
+
+                        return (
+                          <Fragment key={"th" + i}>
+                            {(visible || toggleCell) && (
+                              <TableCell
+                                key={`th-${rowIndex}-${i}`}
+                                style={{
+                                  maxWidth: `${widthPx || 100}px`,
+                                  width: `${widthPx || 100}px`,
+                                  height: `${rowHeight}px`,
+                                  maxHeight: `${rowHeight}px`,
+                                }}
+                                className={`${indexToRound === rowIndex ? "first:rounded-bl-xl last:rounded-br-xl" : ""} table-cell py-1 text-left duration-200 first:pl-4 last:pr-4 group-hover:bg-tableHover ${className}`}
+                              >
+                                {!standByRanking
+                                  ? item &&
+                                    render(
+                                      item,
+                                      toggleCell
+                                        ? () => toggleRow(rowIndex)
+                                        : undefined,
+                                    )
+                                  : rankingStart === "asc"
+                                    ? (totalItems ?? 0) - rowIndex
+                                    : itemsPerPage * (currentPage - 1) +
+                                      rowIndex +
+                                      1}
+                              </TableCell>
+                            )}
+                          </Fragment>
+                        );
+                      })}
+                    </TableRow>
+                    {expandedRows.has(rowIndex) && extraContent && (
+                      <TableRow key={`extra-${rowIndex}`}>
+                        <TableCell
+                          colSpan={columns.filter(c => c.visible).length}
+                          className='!p-0'
+                        >
+                          <div className='w-full'>{extraContent(item)}</div>
+                        </TableCell>
+                      </TableRow>
                     )}
-                  </TableRow>
+                  </>
                 ))}
               </>
             )}
@@ -733,9 +777,12 @@ export const GlobalTable = <T extends Record<string, any>>({
         (type === "infinite" && !!items?.length && (
           <span className='mt-1 flex w-full justify-center text-text-sm text-grayTextPrimary'>
             {totalItems > 0 && items?.length
-              ? (renderDisplayText
-                  ? renderDisplayText(items.length > totalItems ? totalItems : items.length, totalItems)
-                  : `Displaying ${items.length > totalItems ? totalItems : items.length} out of ${totalItems} items`)
+              ? renderDisplayText
+                ? renderDisplayText(
+                    items.length > totalItems ? totalItems : items.length,
+                    totalItems,
+                  )
+                : `Displaying ${items.length > totalItems ? totalItems : items.length} out of ${totalItems} items`
               : (noItemsLabel ?? "No items for displaying")}
           </span>
         ))}

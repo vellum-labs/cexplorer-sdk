@@ -26,12 +26,26 @@ const mockTransactions: Transaction[] = Array.from({ length: 50 }, (_, i) => ({
   size: Math.floor(Math.random() * 1000) + 200,
 }));
 
+type ColumnType = Column<Transaction>[];
+
 // Column definitions
 const columns: Column<Transaction>[] = [
   {
+    key: "toggle",
+    widthPx: 100,
+    render: (_, toggle) => (
+      <span className='font-mono cursor-pointer text-primary' onClick={toggle}>
+        Toggle me
+      </span>
+    ),
+    title: "",
+    toggleCell: true,
+    visible: true,
+  },
+  {
     key: "hash",
     title: "Transaction Hash",
-    widthPx: 300,
+    widthPx: 160,
     visible: true,
     render: tx => (
       <span className='font-mono text-primary'>{tx.hash.slice(0, 16)}...</span>
@@ -130,6 +144,13 @@ const DefaultTemplate: FC = () => {
       totalItems={50}
       itemsPerPage={20}
       pagination={true}
+      extraContent={tx => (
+        <div className='border border-border bg-darker p-4'>
+          <p>Full hash: {tx.hash}</p>
+          <p>Block: {tx.block}</p>
+          <p>Amount: {tx.amount}</p>
+        </div>
+      )}
     />
   );
 };
@@ -217,7 +238,7 @@ export const CustomRowHeight = {
 };
 
 const ScrollableTemplate: FC = () => {
-  const wideColumns: Column<Transaction>[] = [
+  const wideColumns: ColumnType = [
     ...columns,
     {
       key: "extra1",
@@ -258,7 +279,7 @@ export const Scrollable = {
 };
 
 const WithRankingTemplate: FC = () => {
-  const rankedColumns: Column<Transaction>[] = [
+  const rankedColumns: ColumnType = [
     {
       key: "rank",
       title: "#",
@@ -313,7 +334,7 @@ export const FewItems = {
 };
 
 const HiddenColumnsTemplate: FC = () => {
-  const columnsWithHidden: Column<Transaction>[] = columns.map((col, i) => ({
+  const columnsWithHidden: ColumnType = columns.map((col, i) => ({
     ...col,
     visible: i !== 2, // Hide "Age" column
   }));
@@ -346,9 +367,12 @@ const WithHelpersTemplate: FC = () => {
       widthPx: 300,
       visible: true,
       render: tx => (
-        <span className='font-mono text-primary'>{tx.hash.slice(0, 16)}...</span>
+        <span className='font-mono text-primary'>
+          {tx.hash.slice(0, 16)}...
+        </span>
       ),
-      helper: "Unique identifier for this transaction on the Cardano blockchain",
+      helper:
+        "Unique identifier for this transaction on the Cardano blockchain",
     },
     {
       key: "block",
@@ -380,7 +404,9 @@ const WithHelpersTemplate: FC = () => {
       title: "Amount",
       widthPx: 150,
       visible: true,
-      render: tx => <span className='font-semibold text-text'>{tx.amount}</span>,
+      render: tx => (
+        <span className='font-semibold text-text'>{tx.amount}</span>
+      ),
       helper: "Total amount of ADA transferred in this transaction",
     },
     {
