@@ -155,7 +155,6 @@ export const TableSettingsDropdown: FC<TableSettingsDropdownProps> = ({
       <NavigationMenuList className=''>
         <NavigationMenuItem className=''>
           <NavigationMenuTrigger
-            className='bg-cardBg p-0'
             onPointerMove={e => e.preventDefault()}
             onPointerLeave={e => e.preventDefault()}
             //@ts-expect-error hideChevron is not a valid prop
