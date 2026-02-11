@@ -14,6 +14,9 @@
       "ActivityBadge": [
         "dist/ui/activityBadge/index.d.ts"
       ],
+      "AdDropdown": [
+        "dist/ui/adDropdown/index.d.ts"
+      ],
       "AdaHandleBadge": [
         "dist/ui/adaHandleBadge/index.d.ts"
       ],
@@ -23,11 +26,11 @@
       "AdaWithTooltip": [
         "dist/ui/adaWithTooltip/index.d.ts"
       ],
+      "AddBookmarkModal": [
+        "dist/ui/addBookmarkModal/index.d.ts"
+      ],
       "AddressTypeInitialsBadge": [
         "dist/ui/addressTypeInitialsBadge/index.d.ts"
-      ],
-      "AdDropdown": [
-        "dist/ui/adDropdown/index.d.ts"
       ],
       "AttributeDropdown": [
         "dist/ui/attributeDropdown/index.d.ts"
@@ -37,6 +40,12 @@
       ],
       "BlockCell": [
         "dist/ui/blockCell/index.d.ts"
+      ],
+      "BookmarkButton": [
+        "dist/ui/bookmarkButton/index.d.ts"
+      ],
+      "BookmarksSideButton": [
+        "dist/ui/bookmarksSideButton/index.d.ts"
       ],
       "Breadcrumbs": [
         "dist/ui/breadcrumbs/index.d.ts"
@@ -70,6 +79,9 @@
       ],
       "Dropdown": [
         "dist/ui/dropdown/index.d.ts"
+      ],
+      "EditBookmarkModal": [
+        "dist/ui/editBookmarkModal/index.d.ts"
       ],
       "EmptyState": [
         "dist/ui/emptyState/index.d.ts"
@@ -193,6 +205,9 @@
       ],
       "RangeSlider": [
         "dist/ui/rangeSlider/index.d.ts"
+      ],
+      "RemoveBookmarkModal": [
+        "dist/ui/removeBookmarkModal/index.d.ts"
       ],
       "SafetyLinkModal": [
         "dist/ui/safetyLinkModal/index.d.ts"
@@ -454,6 +469,10 @@
       "import": "./dist/ui/activityBadge/index.js",
       "types": "./dist/ui/activityBadge/index.d.ts"
     },
+    "./AdDropdown": {
+      "import": "./dist/ui/adDropdown/index.js",
+      "types": "./dist/ui/adDropdown/index.d.ts"
+    },
     "./AdaHandleBadge": {
       "import": "./dist/ui/adaHandleBadge/index.js",
       "types": "./dist/ui/adaHandleBadge/index.d.ts"
@@ -466,13 +485,13 @@
       "import": "./dist/ui/adaWithTooltip/index.js",
       "types": "./dist/ui/adaWithTooltip/index.d.ts"
     },
+    "./AddBookmarkModal": {
+      "import": "./dist/ui/addBookmarkModal/index.js",
+      "types": "./dist/ui/addBookmarkModal/index.d.ts"
+    },
     "./AddressTypeInitialsBadge": {
       "import": "./dist/ui/addressTypeInitialsBadge/index.js",
       "types": "./dist/ui/addressTypeInitialsBadge/index.d.ts"
-    },
-    "./AdDropdown": {
-      "import": "./dist/ui/adDropdown/index.js",
-      "types": "./dist/ui/adDropdown/index.d.ts"
     },
     "./AttributeDropdown": {
       "import": "./dist/ui/attributeDropdown/index.js",
@@ -485,6 +504,14 @@
     "./BlockCell": {
       "import": "./dist/ui/blockCell/index.js",
       "types": "./dist/ui/blockCell/index.d.ts"
+    },
+    "./BookmarkButton": {
+      "import": "./dist/ui/bookmarkButton/index.js",
+      "types": "./dist/ui/bookmarkButton/index.d.ts"
+    },
+    "./BookmarksSideButton": {
+      "import": "./dist/ui/bookmarksSideButton/index.js",
+      "types": "./dist/ui/bookmarksSideButton/index.d.ts"
     },
     "./Breadcrumbs": {
       "import": "./dist/ui/breadcrumbs/index.js",
@@ -529,6 +556,10 @@
     "./Dropdown": {
       "import": "./dist/ui/dropdown/index.js",
       "types": "./dist/ui/dropdown/index.d.ts"
+    },
+    "./EditBookmarkModal": {
+      "import": "./dist/ui/editBookmarkModal/index.js",
+      "types": "./dist/ui/editBookmarkModal/index.d.ts"
     },
     "./EmptyState": {
       "import": "./dist/ui/emptyState/index.js",
@@ -693,6 +724,10 @@
     "./RangeSlider": {
       "import": "./dist/ui/rangeSlider/index.js",
       "types": "./dist/ui/rangeSlider/index.d.ts"
+    },
+    "./RemoveBookmarkModal": {
+      "import": "./dist/ui/removeBookmarkModal/index.js",
+      "types": "./dist/ui/removeBookmarkModal/index.d.ts"
     },
     "./SafetyLinkModal": {
       "import": "./dist/ui/safetyLinkModal/index.js",
