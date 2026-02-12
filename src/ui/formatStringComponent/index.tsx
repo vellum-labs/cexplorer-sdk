@@ -14,14 +14,8 @@ export const FormatStringComponent = ({
   const [isHovered, setIsHovered] = useState(false);
   const [containerWidth, setContainerWidth] = useState<number | null>(null);
   const [scrollDistance, setScrollDistance] = useState(0);
-  const textRef = useRef<HTMLSpanElement>(null);
+  const containerRef = useRef<HTMLSpanElement>(null);
   const fullTextRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    if (textRef.current && !containerWidth) {
-      setContainerWidth(textRef.current.offsetWidth);
-    }
-  }, [containerWidth]);
 
   useEffect(() => {
     if (isHovered && fullTextRef.current && containerWidth) {
@@ -33,15 +27,24 @@ export const FormatStringComponent = ({
 
   return (
     <span
-      ref={textRef}
+      ref={containerRef}
       className={className}
       style={{
         display: "inline-block",
-        overflow: "hidden",
         verticalAlign: "middle",
-        ...(containerWidth ? { width: `${containerWidth}px` } : {}),
+        ...(isHovered
+          ? {
+              overflow: "hidden",
+              width: containerWidth ? `${containerWidth}px` : undefined,
+            }
+          : {}),
       }}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => {
+        if (containerRef.current) {
+          setContainerWidth(containerRef.current.offsetWidth);
+        }
+        setIsHovered(true);
+      }}
       onMouseLeave={() => setIsHovered(false)}
     >
       {isHovered ? (
