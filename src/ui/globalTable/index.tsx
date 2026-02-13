@@ -139,9 +139,12 @@ type PropsBase<T> = {
   /** Custom label for "no items" text (for i18n) */
   noItemsLabel?: string;
   /** Additional content to display in the column row */
-  extraContent?: (item: T) => ReactNode;
-  /** Toggle key */
-  toggleKey?: (item: T) => string;
+  expand?: {
+    extraContent: (item: T) => ReactNode;
+    toggleKey: (item: T) => string;
+    expandedRows: string[];
+    setExpandedRows: (updater: (prev: string[]) => string[]) => void;
+  };
 };
 
 /**
@@ -322,8 +325,7 @@ export const GlobalTable = <T extends Record<string, any>>({
   type,
   renderDisplayText,
   noItemsLabel,
-  extraContent,
-  toggleKey,
+  expand,
   ...props
 }: Props<T>) => {
   const defaultQueryPagination =
@@ -359,17 +361,22 @@ export const GlobalTable = <T extends Record<string, any>>({
     number | null
   >(null);
 
-  const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
+  const toggleRow = (key: string) => {
+    if (!expand) {
+      return;
+    }
 
-  const toggleRow = (hash: string) => {
-    setExpandedRows(prev => {
-      const next = new Set(prev);
+    expand.setExpandedRows((prev: string[]) => {
+      const next = [...prev];
+      const index = next.indexOf(key);
 
-      if (next.has(hash)) {
-        next.delete(hash);
-      } else {
-        next.add(hash);
+      if (index !== -1) {
+        next.splice(index, 1);
+
+        return next;
       }
+
+      next.push(key);
 
       return next;
     });
@@ -686,8 +693,9 @@ export const GlobalTable = <T extends Record<string, any>>({
                                   ? item &&
                                     render(
                                       item,
-                                      toggleCell && toggleKey
-                                        ? () => toggleRow(toggleKey(item))
+                                      toggleCell && expand
+                                        ? () =>
+                                            toggleRow(expand.toggleKey(item))
                                         : undefined,
                                     )
                                   : rankingStart === "asc"
@@ -701,15 +709,16 @@ export const GlobalTable = <T extends Record<string, any>>({
                         );
                       })}
                     </TableRow>
-                    {toggleKey &&
-                      expandedRows.has(toggleKey(item)) &&
-                      extraContent && (
+                    {expand &&
+                      expand.expandedRows.includes(expand.toggleKey(item)) && (
                         <TableRow key={`extra-${rowIndex}`}>
                           <TableCell
                             colSpan={columns.filter(c => c.visible).length}
                             className='!p-0'
                           >
-                            <div className='w-full'>{extraContent(item)}</div>
+                            <div className='w-full'>
+                              {expand.extraContent(item)}
+                            </div>
                           </TableCell>
                         </TableRow>
                       )}
