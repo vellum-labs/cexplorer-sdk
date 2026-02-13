@@ -144,13 +144,6 @@ const DefaultTemplate: FC = () => {
       totalItems={50}
       itemsPerPage={20}
       pagination={true}
-      extraContent={tx => (
-        <div className='border border-border bg-darker p-4'>
-          <p>Full hash: {tx.hash}</p>
-          <p>Block: {tx.block}</p>
-          <p>Amount: {tx.amount}</p>
-        </div>
-      )}
     />
   );
 };
