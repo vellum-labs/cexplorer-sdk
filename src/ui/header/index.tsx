@@ -10,6 +10,7 @@ import { Breadcrumb } from "../breadcrumbs";
 import { BreadcrumbSeparator } from "../breadcrumbs/components/BreadcrumbSeparator";
 import { GlobalSearch, type GlobalSearchProps } from "../globalSearch";
 import { LoadingSkeleton } from "../loadingSkeleton";
+import { BookmarkButton } from "../bookmarkButton";
 import { ShareButton } from "../shareButton";
 import { TruncatedText } from "../truncatedText";
 
@@ -93,6 +94,22 @@ export interface HeaderProps {
    * Removes ShareButton
    */
   shareButton?: boolean;
+  /**
+   * Show BookmarkButton next to ShareButton.
+   * @default true
+   */
+  bookmarkButton?: boolean;
+  /**
+   * Callback when BookmarkButton is clicked.
+   * FE should handle opening the appropriate modal (add/edit/remove).
+   */
+  onBookmarkClick?: () => void;
+  /**
+   * Whether the current page is already bookmarked.
+   * When true, the bookmark icon will be filled.
+   * @default false
+   */
+  isBookmarked?: boolean;
   /**
    * Label for the featured ad text
    * @default "Featured:"
@@ -189,6 +206,9 @@ export const Header = ({
   icon,
   withoutSearch = false,
   shareButton = true,
+  bookmarkButton = true,
+  onBookmarkClick,
+  isBookmarked = false,
   featuredLabel = "Featured:",
   adLabel = "Ad",
   globalSearchLabels,
@@ -232,9 +252,16 @@ export const Header = ({
             {!isHomepage && badge && (
               <div className={cn(!hasImage && "mt-[5px]")}>{badge}</div>
             )}
-            {shareButton && !isHomepage && (
-              <div className={cn("flex translate-y-[2px] items-center")}>
-                <ShareButton isHeader />
+            {(shareButton || bookmarkButton) && !isHomepage && (
+              <div className={cn("flex translate-y-[2px] items-center gap-1")}>
+                {shareButton && <ShareButton isHeader />}
+                {bookmarkButton && (
+                  <BookmarkButton
+                    isHeader
+                    onClick={onBookmarkClick}
+                    isBookmarked={isBookmarked}
+                  />
+                )}
               </div>
             )}
           </div>
