@@ -140,6 +140,8 @@ type PropsBase<T> = {
   noItemsLabel?: string;
   /** Additional content to display in the column row */
   extraContent?: (item: T) => ReactNode;
+  /** Toggle key */
+  toggleKey?: (item: T) => string;
 };
 
 /**
@@ -321,6 +323,7 @@ export const GlobalTable = <T extends Record<string, any>>({
   renderDisplayText,
   noItemsLabel,
   extraContent,
+  toggleKey,
   ...props
 }: Props<T>) => {
   const defaultQueryPagination =
@@ -356,16 +359,16 @@ export const GlobalTable = <T extends Record<string, any>>({
     number | null
   >(null);
 
-  const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
+  const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
 
-  const toggleRow = (index: number) => {
+  const toggleRow = (hash: string) => {
     setExpandedRows(prev => {
       const next = new Set(prev);
 
-      if (next.has(index)) {
-        next.delete(index);
+      if (next.has(hash)) {
+        next.delete(hash);
       } else {
-        next.add(index);
+        next.add(hash);
       }
 
       return next;
@@ -683,8 +686,8 @@ export const GlobalTable = <T extends Record<string, any>>({
                                   ? item &&
                                     render(
                                       item,
-                                      toggleCell
-                                        ? () => toggleRow(rowIndex)
+                                      toggleCell && toggleKey
+                                        ? () => toggleRow(toggleKey(item))
                                         : undefined,
                                     )
                                   : rankingStart === "asc"
@@ -698,16 +701,18 @@ export const GlobalTable = <T extends Record<string, any>>({
                         );
                       })}
                     </TableRow>
-                    {expandedRows.has(rowIndex) && extraContent && (
-                      <TableRow key={`extra-${rowIndex}`}>
-                        <TableCell
-                          colSpan={columns.filter(c => c.visible).length}
-                          className='!p-0'
-                        >
-                          <div className='w-full'>{extraContent(item)}</div>
-                        </TableCell>
-                      </TableRow>
-                    )}
+                    {toggleKey &&
+                      expandedRows.has(toggleKey(item)) &&
+                      extraContent && (
+                        <TableRow key={`extra-${rowIndex}`}>
+                          <TableCell
+                            colSpan={columns.filter(c => c.visible).length}
+                            className='!p-0'
+                          >
+                            <div className='w-full'>{extraContent(item)}</div>
+                          </TableCell>
+                        </TableRow>
+                      )}
                   </>
                 ))}
               </>
