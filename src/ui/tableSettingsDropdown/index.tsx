@@ -159,6 +159,7 @@ export const TableSettingsDropdown: FC<TableSettingsDropdownProps> = ({
             onPointerLeave={e => e.preventDefault()}
             //@ts-expect-error hideChevron is not a valid prop
             hideChevron
+            className='!p-0'
           >
             {customContent ? (
               customContent

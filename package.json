@@ -14,6 +14,9 @@
       "ActivityBadge": [
         "dist/ui/activityBadge/index.d.ts"
       ],
+      "AdDropdown": [
+        "dist/ui/adDropdown/index.d.ts"
+      ],
       "AdaHandleBadge": [
         "dist/ui/adaHandleBadge/index.d.ts"
       ],
@@ -25,9 +28,6 @@
       ],
       "AddressTypeInitialsBadge": [
         "dist/ui/addressTypeInitialsBadge/index.d.ts"
-      ],
-      "AdDropdown": [
-        "dist/ui/adDropdown/index.d.ts"
       ],
       "AttributeDropdown": [
         "dist/ui/attributeDropdown/index.d.ts"
@@ -454,6 +454,10 @@
       "import": "./dist/ui/activityBadge/index.js",
       "types": "./dist/ui/activityBadge/index.d.ts"
     },
+    "./AdDropdown": {
+      "import": "./dist/ui/adDropdown/index.js",
+      "types": "./dist/ui/adDropdown/index.d.ts"
+    },
     "./AdaHandleBadge": {
       "import": "./dist/ui/adaHandleBadge/index.js",
       "types": "./dist/ui/adaHandleBadge/index.d.ts"
@@ -469,10 +473,6 @@
     "./AddressTypeInitialsBadge": {
       "import": "./dist/ui/addressTypeInitialsBadge/index.js",
       "types": "./dist/ui/addressTypeInitialsBadge/index.d.ts"
-    },
-    "./AdDropdown": {
-      "import": "./dist/ui/adDropdown/index.js",
-      "types": "./dist/ui/adDropdown/index.d.ts"
     },
     "./AttributeDropdown": {
       "import": "./dist/ui/attributeDropdown/index.js",
