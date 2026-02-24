@@ -66,6 +66,7 @@ interface GlobalSearchContextProps {
   searchRef: React.RefObject<HTMLDivElement>;
   isLoading: boolean;
   data: MiscSearch[];
+  generateImageUrl?: (id: string, size: string, type: string) => string;
   setRecentSearch: Dispatch<SetStateAction<string[]>>;
   setSearchCategory: Dispatch<SetStateAction<Category>>;
   handleSearchChange: (value: string) => void;
@@ -115,6 +116,16 @@ interface GlobalSearchProviderProps {
    * @example "es"
    */
   locale: Locales;
+  /**
+   * Function to generate image URLs for search result entities.
+   * Used to display pool logos, asset icons, DRep avatars, etc.
+   *
+   * @param id - Entity identifier (pool ID, asset fingerprint, etc.)
+   * @param size - Image size variant ("ico", "sm", "md", "lg")
+   * @param type - Entity type ("pool", "token", "drep", etc.)
+   * @returns Image URL string
+   */
+  generateImageUrl?: (id: string, size: string, type: string) => string;
 }
 
 /**
@@ -168,6 +179,7 @@ export const GlobalSearchProvider: React.FC<GlobalSearchProviderProps> = ({
   children,
   useFetchMiscSearch,
   locale,
+  generateImageUrl,
 }) => {
   const [focused, setFocused] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
@@ -299,6 +311,7 @@ export const GlobalSearchProvider: React.FC<GlobalSearchProviderProps> = ({
     categoriesRef,
     isLoading,
     searchRef,
+    generateImageUrl,
     data: Array.isArray(data?.data)
       ? data.data
       : typeof data === "undefined"

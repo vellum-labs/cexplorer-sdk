@@ -86,6 +86,7 @@ export { default as TwitterLogo } from "@/resources/images/icons/twitter.svg";
 export { default as FacebookLogo } from "@/resources/images/icons/facebook.svg";
 export { default as TwitchLogo } from "@/resources/images/icons/twitch.svg";
 export { default as YoutubeLogo } from "@/resources/images/icons/youtube.svg";
+export { default as AssetFallback } from "@/resources/images/fallbacks/assetFallback.svg";
 export { default as DrepFallback } from "@/resources/images/fallbacks/drepFallback.svg";
 export { default as PoolFallback } from "@/resources/images/fallbacks/poolFallback.svg";
 export { default as DollarIcon } from "@/resources/images/dollar.svg";
