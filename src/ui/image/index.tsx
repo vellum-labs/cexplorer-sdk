@@ -1,3 +1,4 @@
+import AssetFallback from "@/resources/images/fallbacks/assetFallback.svg";
 import DrepFallback from "@/resources/images/fallbacks/drepFallback.svg";
 import PoolFallback from "@/resources/images/fallbacks/poolFallback.svg";
 
@@ -220,7 +221,7 @@ export const Image: React.FC<ImageProps> = props => {
   const returnFallback = () => {
     switch (props.type) {
       case "asset":
-        return null;
+        return AssetFallback;
       case "pool":
         return PoolFallback;
       case "user":

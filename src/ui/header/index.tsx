@@ -111,6 +111,16 @@ export interface HeaderProps {
     GlobalSearchProps,
     "recentLabels" | "categoryLabels" | "homepagePlaceholder" | "placeholder" | "notFoundLabel"
   >;
+  /**
+   * Function to generate image URLs for search result entities.
+   * Used to display pool logos, asset icons, DRep avatars in search results.
+   *
+   * @param id - Entity identifier (pool ID, asset fingerprint, etc.)
+   * @param size - Image size variant ("ico", "sm", "md", "lg")
+   * @param type - Entity type ("pool", "token", "drep", etc.)
+   * @returns Image URL string
+   */
+  generateImageUrl?: (id: string, size: string, type: string) => string;
 }
 
 /**
@@ -192,6 +202,7 @@ export const Header = ({
   featuredLabel = "Featured:",
   adLabel = "Ad",
   globalSearchLabels,
+  generateImageUrl,
 }: HeaderProps) => {
   const [hasImage, setHasImage] = useState(false);
   const headingAd = miscBasicQuery
@@ -248,6 +259,7 @@ export const Header = ({
                 <GlobalSearchProvider
                   useFetchMiscSearch={useFetchMiscSearch}
                   locale={locale}
+                  generateImageUrl={generateImageUrl}
                 >
                   <GlobalSearch isHomepage {...globalSearchLabels} />
                 </GlobalSearchProvider>
@@ -284,6 +296,7 @@ export const Header = ({
                 <GlobalSearchProvider
                   useFetchMiscSearch={useFetchMiscSearch}
                   locale={locale}
+                  generateImageUrl={generateImageUrl}
                 >
                   <GlobalSearch {...globalSearchLabels} />
                 </GlobalSearchProvider>
