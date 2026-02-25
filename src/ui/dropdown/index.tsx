@@ -355,7 +355,9 @@ export const Dropdown: FC<DropdownProps> = ({
 
   useEffect(() => {
     if (!isOpen) return;
-    const handleScroll = () => {
+    const dropdownContent = contentRef.current;
+    const handleScroll = (e: Event) => {
+      if (dropdownContent && dropdownContent.contains(e.target as Node)) return;
       setIsOpen(false);
       setIsClicked(false);
     };
@@ -400,7 +402,7 @@ export const Dropdown: FC<DropdownProps> = ({
         createPortal(
           <div
             ref={contentRef}
-            className={`animate-in fixed z-50 rounded-m bg-background p-1 text-text-sm shadow-md ${withBorder ? "border border-border" : ""} ${poppoverClassname || ""}`}
+            className={`animate-in fixed z-50 max-h-[300px] overflow-y-auto rounded-m bg-background p-1 text-text-sm shadow-md ${withBorder ? "border border-border" : ""} ${poppoverClassname || ""}`}
             style={{
               width,
               top: `${portalStyle.top}px`,

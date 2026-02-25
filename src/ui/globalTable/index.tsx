@@ -134,8 +134,8 @@ type PropsBase<T> = {
   disableDrag?: boolean;
   /** Height of each table row in pixels */
   rowHeight?: number;
-  /** Custom render function for display text (for i18n). Receives count and total, returns formatted string */
-  renderDisplayText?: (count: number, total: number) => string;
+  /** Custom render function for display text (for i18n). Receives count and total, returns formatted string. For paginated default queries, also receives from and to (page range). */
+  renderDisplayText?: (count: number, total: number, from?: number, to?: number) => string;
   /** Custom label for "no items" text (for i18n) */
   noItemsLabel?: string;
   /** Additional content to display in the column row */
@@ -787,19 +787,36 @@ export const GlobalTable = <T extends Record<string, any>>({
             totalPages={totalPages}
           />
         )}
-      {(type === "default" && defaultQueryPagination && !!items?.length) ||
-        (type === "infinite" && !!items?.length && (
-          <span className='mt-1 flex w-full justify-center text-text-sm text-grayTextPrimary'>
-            {totalItems > 0 && items?.length
-              ? renderDisplayText
-                ? renderDisplayText(
-                    items.length > totalItems ? totalItems : items.length,
+      {((type === "default" && defaultQueryPagination && !!items?.length) ||
+        (type === "infinite" && !!items?.length)) && (
+        <span className='mt-1 flex w-full justify-center text-text-sm text-grayTextPrimary'>
+          {totalItems > 0 && items?.length
+            ? (() => {
+                if (type === "default" && defaultQueryPagination) {
+                  const firstItem =
+                    (defaultQueryCurrentPage - 1) * itemsPerPage + 1;
+                  const lastItem = Math.min(
+                    defaultQueryCurrentPage * itemsPerPage,
                     totalItems,
-                  )
-                : `Displaying ${items.length > totalItems ? totalItems : items.length} out of ${totalItems} items`
-              : (noItemsLabel ?? "No items for displaying")}
-          </span>
-        ))}
+                  );
+                  return renderDisplayText
+                    ? renderDisplayText(
+                        items.length,
+                        totalItems,
+                        firstItem,
+                        lastItem,
+                      )
+                    : `Displaying ${firstItem}–${lastItem} of ${totalItems} items`;
+                }
+                const displayedCount =
+                  items.length > totalItems ? totalItems : items.length;
+                return renderDisplayText
+                  ? renderDisplayText(displayedCount, totalItems)
+                  : `Displaying ${displayedCount} out of ${totalItems} items`;
+              })()
+            : (noItemsLabel ?? "No items for displaying")}
+        </span>
+      )}
     </>
   );
 };

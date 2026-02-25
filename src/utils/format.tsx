@@ -69,7 +69,11 @@ export const formatString = (
   else if (type === "longer") endChars = 11;
   else endChars = 8;
 
-  const truncated = `${text.slice(startFromIndex, startFromIndex + startChars)}...${text.slice(-endChars)}`;
+  const minLengthToTruncate = startChars + endChars + 3;
+  const truncated =
+    text.length <= minLengthToTruncate
+      ? text
+      : `${text.slice(startFromIndex, startFromIndex + startChars)}...${text.slice(-endChars)}`;
 
   return (
     <FormatStringComponent

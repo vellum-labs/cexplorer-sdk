@@ -233,6 +233,41 @@ export const Tooltip: FC<TooltipProps> = ({
     else if (fitsLeft) setDirection("left");
   }, [visible, coords, forceDirection]);
 
+  // Clamp tooltip position to stay within viewport bounds after render
+  useLayoutEffect(() => {
+    if (!visible || !tooltipRef.current) return;
+
+    const tooltipEl = tooltipRef.current;
+    const rect = tooltipEl.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const MARGIN = 8;
+
+    let adjustX = 0;
+    let adjustY = 0;
+
+    if (rect.left < MARGIN) {
+      adjustX = MARGIN - rect.left;
+    } else if (rect.right > vw - MARGIN) {
+      adjustX = vw - MARGIN - rect.right;
+    }
+
+    if (rect.top < MARGIN) {
+      adjustY = MARGIN - rect.top;
+    } else if (rect.bottom > vh - MARGIN) {
+      adjustY = vh - MARGIN - rect.bottom;
+    }
+
+    if (adjustX !== 0) {
+      tooltipEl.style.left = `${parseFloat(tooltipEl.style.left) + adjustX}px`;
+    }
+    if (adjustY !== 0) {
+      tooltipEl.style.top = `${parseFloat(tooltipEl.style.top) + adjustY}px`;
+    }
+  }, [visible, direction, coords]);
+
   const getFixedPosition = () => {
     const { top, left, width, height } = coords;
 
@@ -274,6 +309,7 @@ export const Tooltip: FC<TooltipProps> = ({
           style={{
             position: "fixed",
             width: widthRef?.current?.offsetWidth || "auto",
+            maxWidth: "calc(100vw - 16px)",
             ...fixedPos,
             zIndex: 9999,
           }}

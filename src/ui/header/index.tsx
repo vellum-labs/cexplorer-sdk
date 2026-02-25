@@ -224,7 +224,7 @@ export const Header = ({
               {icon && <span className='flex-shrink-0'>{icon}</span>}
               <TruncatedText
                 onHasImageChange={setHasImage}
-                className='text-nowrap text-display-sm'
+                className={cn('text-display-sm', !isHomepage && 'text-nowrap')}
               >
                 {title}
               </TruncatedText>
