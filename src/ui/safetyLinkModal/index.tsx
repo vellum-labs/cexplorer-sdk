@@ -115,7 +115,7 @@ export const SafetyLinkModal: FC<SafetyLinkModalProps> = ({
   return (
     <Modal
       minHeight='auto'
-      minWidth='400px'
+      minWidth='360px'
       maxWidth='600px'
       maxHeight='80vh'
       onClose={onClose}
