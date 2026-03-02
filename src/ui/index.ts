@@ -36,6 +36,12 @@ export { Loading, type LoadingProps } from "./loadingSpinner";
 export { PulseDot, type PulseDotProps } from "./pulseDot";
 export { ShareButton } from "./shareButton";
 
+export { BookmarkButton, type BookmarkButtonProps } from "./bookmarkButton";
+export { AddBookmarkModal, type AddBookmarkModalProps } from "./addBookmarkModal";
+export { EditBookmarkModal, type EditBookmarkModalProps } from "./editBookmarkModal";
+export { RemoveBookmarkModal, type RemoveBookmarkModalProps } from "./removeBookmarkModal";
+export { BookmarksSideButton, type BookmarksSideButtonProps } from "./bookmarksSideButton";
+
 export { Tooltip } from "./tooltip";
 export { TruncatedText } from "./truncatedText";
 
