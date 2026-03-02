@@ -122,6 +122,13 @@ export interface DropdownProps {
    * @default false
    */
   withBorder?: boolean;
+  /**
+   * Disable scroll inside the dropdown menu.
+   *
+   * @optional
+   * @default false
+   */
+  disableScroll?: boolean;
 }
 
 /**
@@ -186,6 +193,7 @@ export const Dropdown: FC<DropdownProps> = ({
   poppoverClassname,
   wrapperClassname,
   withBorder = false,
+  disableScroll = false,
 }) => {
   const { openId, setOpenId } = useDropdownState();
   const [isOpen, setIsOpen] = useState(false);
@@ -402,7 +410,7 @@ export const Dropdown: FC<DropdownProps> = ({
         createPortal(
           <div
             ref={contentRef}
-            className={`animate-in fixed z-50 max-h-[300px] overflow-y-auto rounded-m bg-background p-1 text-text-sm shadow-md ${withBorder ? "border border-border" : ""} ${poppoverClassname || ""}`}
+            className={`animate-in fixed z-50 rounded-m bg-background p-1 text-text-sm shadow-md ${disableScroll ? "" : "max-h-[300px] overflow-y-auto"} ${withBorder ? "border border-border" : ""} ${poppoverClassname || ""}`}
             style={{
               width,
               top: `${portalStyle.top}px`,
