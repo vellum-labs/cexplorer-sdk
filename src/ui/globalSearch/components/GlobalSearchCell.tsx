@@ -71,7 +71,7 @@ const SearchResultImage: FC<{
     };
     const imgTypeMap: Record<string, string> = {
       pool: "pool",
-      asset: "token",
+      asset: "nft",
       drep: "drep",
       user: "user",
     };
