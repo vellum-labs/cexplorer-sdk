@@ -17,11 +17,12 @@ export type MiscBasicResponse = {
       data: {
         content: string;
         icon: keyof typeof dynamicIconImports;
+        img?: string;
         section: string;
         title: string;
         type: string;
         link: string;
-        text: string;
+        text: string | null;
       };
       type: string;
     }[];

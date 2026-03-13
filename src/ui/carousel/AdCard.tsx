@@ -27,7 +27,7 @@ type AdCardProps = {
    * @example
    * generateImageUrl("pool1abc...", "ico", "pool") // Returns pool icon URL
    */
-  generateImageUrl: (
+  generateImageUrl?: (
     ident: string,
     size: "ico" | "sm" | "md" | "lg",
     type?: "nft" | "pool" | "drep" | "token" | "cc",
@@ -84,12 +84,29 @@ export const AdCard: FC<AdCardProps> = ({
   className,
   generateImageUrl,
 }) => {
+  if (data.img) {
+    return (
+      <a
+        href={data.link}
+        target='_blank'
+        rel='noreferrer noopener nofollow'
+        className={`relative block h-full w-full overflow-hidden rounded-m border border-border bg-cardBg ${className || "shadow-md"}`}
+      >
+        <img
+          src={data.img}
+          alt={data.title}
+          className='h-full w-full object-cover'
+        />
+      </a>
+    );
+  }
+
   let img: ReactNode | null = null;
   const ident = String(data.link.split("/").pop());
   const identArr = String(ident.split(""));
   const titleArr = String(data.title.split(""));
 
-  if (data.type === "pool") {
+  if (generateImageUrl && data.type === "pool") {
     img = (
       <Image
         src={generateImageUrl(ident, "ico", "pool")}
@@ -99,7 +116,7 @@ export const AdCard: FC<AdCardProps> = ({
         className='rounded-max'
       />
     );
-  } else if (data.type === "asset" && data.text) {
+  } else if (generateImageUrl && data.type === "asset" && data.text) {
     img = (
       <Image
         src={generateImageUrl(ident, "ico", "token")}
@@ -122,7 +139,7 @@ export const AdCard: FC<AdCardProps> = ({
       className={`z-2 relative flex h-[110px] w-full flex-col gap-1/2 rounded-l border border-border bg-cardBg px-2 py-1.5 hover:text-text ${className ? className : "shadow-md"}`}
     >
       <p className='w-fit rounded-l border border-border px-1 text-text-xs font-medium'>
-        {data?.type.slice(0, 1).toUpperCase() + data?.type.slice(1)}
+        {data?.type ? data.type.slice(0, 1).toUpperCase() + data.type.slice(1) : ""}
       </p>
       <div className='flex items-center gap-1'>
         {img}
@@ -134,7 +151,7 @@ export const AdCard: FC<AdCardProps> = ({
       </div>
 
       <p className='block w-full overflow-hidden text-ellipsis text-text-xs leading-tight text-grayTextPrimary'>
-        {parse(data?.text)}
+        {parse(data?.text || "")}
       </p>
     </a>
   );

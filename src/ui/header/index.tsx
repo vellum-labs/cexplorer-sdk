@@ -11,7 +11,9 @@ import { BreadcrumbSeparator } from "../breadcrumbs/components/BreadcrumbSeparat
 import { GlobalSearch, type GlobalSearchProps } from "../globalSearch";
 import { LoadingSkeleton } from "../loadingSkeleton";
 import { BookmarkButton } from "../bookmarkButton";
+import { ButtonAd } from "../buttonAd";
 import { ShareButton } from "../shareButton";
+import { TextAd } from "../textAd";
 import { TruncatedText } from "../truncatedText";
 
 /**
@@ -121,12 +123,18 @@ export interface HeaderProps {
    */
   adLabel?: string;
   /**
+   * Hide the TextAd below the header title.
+   * Useful for footer/info pages that shouldn't show text ads.
+   * @default false
+   */
+  hideTextAd?: boolean;
+  /**
    * Labels for GlobalSearch component
    * Pass through to configure GlobalSearch text (placeholders, labels, categories)
    */
   globalSearchLabels?: Pick<
     GlobalSearchProps,
-    "recentLabels" | "categoryLabels" | "homepagePlaceholder" | "placeholder" | "notFoundLabel"
+    "recentLabels" | "categoryLabels" | "homepagePlaceholder" | "placeholder" | "notFoundLabel" | "adSlot"
   >;
   /**
    * Function to generate image URLs for search result entities.
@@ -221,6 +229,7 @@ export const Header = ({
   isBookmarked = false,
   featuredLabel = "Featured:",
   adLabel = "Ad",
+  hideTextAd = false,
   globalSearchLabels,
   generateImageUrl,
 }: HeaderProps) => {
@@ -228,6 +237,12 @@ export const Header = ({
   const headingAd = miscBasicQuery
     ? miscBasicQuery.data?.data.ads.find(ad => ad.type === "heading_featured")
     : undefined;
+  const buttonAds = miscBasicQuery?.data?.data.ads.filter(
+    ad => ad.type === "button",
+  );
+  const textAd = miscBasicQuery?.data?.data.ads.find(
+    ad => ad.type === "text_ad",
+  );
 
   return (
     <header className='flex min-h-[110px] w-full justify-center bg-gradient-to-b from-bannerGradient to-darker'>
@@ -235,7 +250,7 @@ export const Header = ({
         className={`flex w-full max-w-desktop flex-wrap justify-between gap-3 p-mobile md:px-desktop md:py-0 ${isHomepage ? "items-center" : ""} ${customPage ? "items-center justify-center" : ""}`}
       >
         <div
-          className={`flex flex-col pt-2 ${isHomepage ? "w-full max-w-[750px]" : ""} ${customPage ? "w-full items-center text-center" : ""}`}
+          className={`flex min-w-0 flex-1 flex-col pt-2 ${isHomepage ? "w-full max-w-[750px]" : ""} ${customPage ? "w-full items-center text-center" : ""}`}
         >
           {breadcrumbItems && (
             <Breadcrumb
@@ -307,16 +322,32 @@ export const Header = ({
                     dangerouslySetInnerHTML={{
                       __html: headingAd?.data.text || "",
                     }}
-                    className='text-text-sm text-grayTextPrimary [&>a]:font-semibold [&>a]:text-brand-600'
+                    onClick={e => {
+                      const target = e.target as HTMLElement;
+                      const anchor = target.closest("a");
+                      if (anchor) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.open(anchor.href, "_blank", "noopener,noreferrer");
+                      }
+                    }}
+                    className='text-text-sm text-grayTextPrimary [&>a]:cursor-pointer [&>a]:font-semibold [&>a]:text-brand-600'
                   ></p>
                 </div>
               )}
             </>
           )}
+          {textAd && !hideTextAd && (
+            <TextAd
+              ad={textAd}
+              featuredLabel={featuredLabel}
+              className='pt-1.5'
+            />
+          )}
         </div>
         {!isHomepage && !customPage ? (
           <div
-            className={`flex pt-2 ${homepageAd ? "basis-[385px] flex-col" : "basis-[385px] pt-4"}`}
+            className={`flex pt-2 ${homepageAd || (buttonAds && buttonAds.length > 0) ? "basis-[385px] flex-col" : "basis-[385px] pt-4"}`}
           >
             {useFetchMiscSearch && locale && !withoutSearch && (
               <div className={"flex w-full shrink flex-col gap-1.5 pb-1.5"}>
@@ -329,13 +360,8 @@ export const Header = ({
                 </GlobalSearchProvider>
               </div>
             )}
-            {homepageAd && (
-              <div className='relative h-[100px] w-[320px] overflow-hidden rounded-m border border-border bg-cardBg'>
-                {homepageAd}
-                <div className='absolute right-2 top-1.5 flex h-[24px] w-[32px] items-center justify-center rounded-xs border border-border bg-background text-text-xs font-medium text-text'>
-                  <span>{adLabel}</span>
-                </div>
-              </div>
+            {buttonAds && buttonAds.length > 0 && (
+              <ButtonAd ads={buttonAds} featuredLabel={featuredLabel} />
             )}
           </div>
         ) : (
