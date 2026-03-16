@@ -240,9 +240,12 @@ export const Header = ({
   const buttonAds = miscBasicQuery?.data?.data.ads.filter(
     ad => ad.type === "button",
   );
-  const textAd = miscBasicQuery?.data?.data.ads.find(
+  const textAds = miscBasicQuery?.data?.data.ads.filter(
     ad => ad.type === "text_ad",
   );
+  const textAd = textAds?.length
+    ? textAds[Math.floor(Math.random() * textAds.length)]
+    : undefined;
 
   return (
     <header className='flex min-h-[110px] w-full justify-center bg-gradient-to-b from-bannerGradient to-darker'>
@@ -347,7 +350,7 @@ export const Header = ({
         </div>
         {!isHomepage && !customPage ? (
           <div
-            className={`flex pt-2 ${homepageAd || (buttonAds && buttonAds.length > 0) ? "basis-[385px] flex-col" : "basis-[385px] pt-4"}`}
+            className={`flex w-full pt-2 md:w-auto ${homepageAd || (buttonAds && buttonAds.length > 0) ? "md:basis-[385px] flex-col" : "md:basis-[385px] pt-4"}`}
           >
             {useFetchMiscSearch && locale && !withoutSearch && (
               <div className={"flex w-full shrink flex-col gap-1.5 pb-1.5"}>
