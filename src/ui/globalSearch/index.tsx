@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, ReactNode } from "react";
 import { useEffect } from "react";
 
 import { useGlobalSearch } from "@/providers/GlobalSearchContext";
@@ -61,6 +61,12 @@ export interface GlobalSearchProps {
    * @default "Not Found"
    */
   notFoundLabel?: string;
+
+  /**
+   * Optional ad slot rendered inside the search dropdown above results.
+   * Typically used with TextAd component for text_ad type ads.
+   */
+  adSlot?: ReactNode;
 }
 
 /**
@@ -108,6 +114,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
   homepagePlaceholder = "Search by Address / Tx hash / Block hash / $Handle / Pool name...",
   placeholder = "Search blocks, transactions, asset IDs...",
   notFoundLabel = "Not Found",
+  adSlot,
 }) => {
   const { theme } = useThemeStore();
 
@@ -219,6 +226,7 @@ export const GlobalSearch: FC<GlobalSearchProps> = ({
           <div
             className={`absolute z-[25] flex w-full ${isHomepage ? "max-w-[750px]" : ""} select-none flex-col gap-1.5 rounded-b-m border-x border-b border-border bg-background`}
           >
+            {adSlot && <div className='px-1.5 pt-1.5'>{adSlot}</div>}
             {!categories && search.length !== 0 && (
               <div className='flex h-[150px] w-full items-center justify-center'>
                 <div

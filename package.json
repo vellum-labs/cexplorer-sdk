@@ -56,6 +56,9 @@
       "Button": [
         "dist/ui/button/index.d.ts"
       ],
+      "ButtonAd": [
+        "dist/ui/buttonAd/index.d.ts"
+      ],
       "Command": [
         "dist/ui/command/index.d.ts"
       ],
@@ -253,6 +256,9 @@
       ],
       "Tabs": [
         "dist/ui/tabs/index.d.ts"
+      ],
+      "TextAd": [
+        "dist/ui/textAd/index.d.ts"
       ],
       "TextDisplay": [
         "dist/ui/textDisplay/index.d.ts"
@@ -525,6 +531,10 @@
       "import": "./dist/ui/button/index.js",
       "types": "./dist/ui/button/index.d.ts"
     },
+    "./ButtonAd": {
+      "import": "./dist/ui/buttonAd/index.js",
+      "types": "./dist/ui/buttonAd/index.d.ts"
+    },
     "./Command": {
       "import": "./dist/ui/command/index.js",
       "types": "./dist/ui/command/index.d.ts"
@@ -788,6 +798,10 @@
     "./Tabs": {
       "import": "./dist/ui/tabs/index.js",
       "types": "./dist/ui/tabs/index.d.ts"
+    },
+    "./TextAd": {
+      "import": "./dist/ui/textAd/index.js",
+      "types": "./dist/ui/textAd/index.d.ts"
     },
     "./TextDisplay": {
       "import": "./dist/ui/textDisplay/index.js",

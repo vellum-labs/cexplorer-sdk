@@ -323,3 +323,7 @@ export { ConstLabelBadge, type ConstLabelBadgeProps } from "./constLabelBadge";
 export { EpochCell, type EpochCellProps } from "./epochCell";
 
 export { BlockCell, type BlockCellProps } from "./blockCell";
+
+export { ButtonAd, type ButtonAdProps } from "./buttonAd";
+
+export { TextAd, type TextAdProps } from "./textAd";
