@@ -4,7 +4,8 @@ import { generateUrlWithParams } from "@/utils/generateUrlWithParams";
 import { Link } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import type { ReactNode } from "react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 /**
  * Props for the ScreenDropdown component
@@ -86,9 +87,7 @@ export interface ScreenDropdownProps {
   card?: ReactNode;
 
   /**
-   * Optional prop to add space for top ad
-   *
-   *
+   * @deprecated No longer needed - positioning is now calculated dynamically
    */
   randomTopAd?: boolean;
 }
@@ -173,17 +172,29 @@ export const ScreenDropdown: React.FC<ScreenDropdownProps> = ({
   wrapperClassname,
   disableHover = false,
   closeOnSelect = false,
-  randomTopAd,
   card,
 }) => {
   const { openId, setOpenId } = useDropdownState();
   const [isOpen, setIsOpen] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [disabledClick, setDisabledClick] = useState(false);
+  const [portalTop, setPortalTop] = useState(0);
   const wrapperRef = React.createRef<HTMLDivElement>();
   const contentRef = React.createRef<HTMLDivElement>();
   const triggerRef = React.createRef<HTMLButtonElement>();
   let timeout;
+
+  const calculatePosition = () => {
+    if (!wrapperRef.current) return;
+    const nav = wrapperRef.current.closest("nav");
+    if (nav) {
+      const navRect = nav.getBoundingClientRect();
+      setPortalTop(navRect.bottom);
+    } else {
+      const triggerRect = wrapperRef.current.getBoundingClientRect();
+      setPortalTop(triggerRect.bottom);
+    }
+  };
 
   const toggleDropdown = () => {
     if (disabledClick) return;
@@ -222,6 +233,12 @@ export const ScreenDropdown: React.FC<ScreenDropdownProps> = ({
       setOpenId(id);
     }
   };
+
+  useLayoutEffect(() => {
+    if (isOpen) {
+      calculatePosition();
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     const handleClickOutside = event => {
@@ -288,46 +305,51 @@ export const ScreenDropdown: React.FC<ScreenDropdownProps> = ({
           </span>
         )}
       </button>
-      {isOpen && (
-        <div
-          ref={contentRef}
-          className={`absolute left-1/2 z-20 flex w-full max-w-[1410px] -translate-x-1/2 rounded-b-l border border-border border-t-primary bg-cardBg p-2 text-text-sm shadow-lg ${randomTopAd ? "top-[150px]" : "top-[75px]"}`}
-        >
-          {card}
-          <section className='flex w-[max(800px,95%)] justify-around gap-1'>
-            {Object.keys(options).map(key => (
-              <div
-                key={key}
-                className='flex flex-col items-start gap-1 font-medium'
-                role='menuitem'
-                aria-label='Menu item'
-              >
-                <div className='flex min-h-[1.5rem] items-start pb-1'>
-                  {options[key].labelHref ? (
+      {isOpen &&
+        createPortal(
+          <div
+            ref={contentRef}
+            className='fixed left-1/2 z-50 flex w-full max-w-[1410px] -translate-x-1/2 rounded-b-l border border-border border-t-primary bg-cardBg p-2 text-text-sm shadow-lg'
+            style={{ top: `${portalTop}px` }}
+            onMouseEnter={handleOpen}
+            onMouseLeave={handleClose}
+          >
+            {card}
+            <section className='flex w-[max(800px,95%)] justify-around gap-1'>
+              {Object.keys(options).map(key => (
+                <div
+                  key={key}
+                  className='flex flex-col items-start gap-1 font-medium'
+                  role='menuitem'
+                  aria-label='Menu item'
+                >
+                  <div className='flex min-h-[1.5rem] items-start pb-1'>
+                    {options[key].labelHref ? (
+                      <Link
+                        to={options[key].labelHref}
+                        className='text-primary hover:underline'
+                      >
+                        {options[key].label}
+                      </Link>
+                    ) : (
+                      <p className='text-primary'>{options[key].label}</p>
+                    )}
+                  </div>
+                  {options[key].options.map(option => (
                     <Link
-                      to={options[key].labelHref}
-                      className='text-primary hover:underline'
+                      key={String(option?.href) + option?.params?.tab}
+                      to={generateUrlWithParams(option.href, option.params)}
+                      className='text-text-sm'
                     >
-                      {options[key].label}
+                      {option.label}
                     </Link>
-                  ) : (
-                    <p className='text-primary'>{options[key].label}</p>
-                  )}
+                  ))}
                 </div>
-                {options[key].options.map(option => (
-                  <Link
-                    key={String(option?.href) + option?.params?.tab}
-                    to={generateUrlWithParams(option.href, option.params)}
-                    className='text-text-sm'
-                  >
-                    {option.label}
-                  </Link>
-                ))}
-              </div>
-            ))}
-          </section>
-        </div>
-      )}
+              ))}
+            </section>
+          </div>,
+          document.body,
+        )}
     </div>
   );
 };
